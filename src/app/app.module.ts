@@ -7,18 +7,19 @@ import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule } from "@angular/common/http";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { APP_BASE_HREF } from '@angular/common';
-import { ThemesModule } from './client/component/themes.module';
-import { HomeComponent } from './client/pages/home/home.component';
-import { ProductDetailComponent } from './client/pages/product-detail/product-detail.component';
-import { CheckoutComponent } from './client/pages/checkout/checkout.component';
+import { ThemesModule } from './views/client/component/themes.module';
+import { HomeComponent } from './views/client/pages/home/home.component';
+import { ProductDetailComponent } from './views/client/pages/product-detail/product-detail.component';
+import { CheckoutComponent } from './views/client/pages/checkout/checkout.component';
+import { LoginComponent } from './views/client/pages/authen/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ProductDetailComponent,
     CheckoutComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
