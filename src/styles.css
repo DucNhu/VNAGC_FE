@@ -3,7 +3,17 @@
   padding-bottom: 0px !important;
 }
 
-/* Admin */
-/* #admin .navigation {
-  display: block !important;
-} */
+/* Form */
+/* Show err */
+.woocommerce-form {
+  position: relative
+}
+.woocommerce-form .errorInput {
+  right: 1.25em;
+  top: 10px;
+  color: var(--danger)
+}
+/* END Show err */
+:root{
+    --danger: #a94442;
+}

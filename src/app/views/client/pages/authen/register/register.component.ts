@@ -6,13 +6,13 @@ import { AuthenService } from 'src/app/core/_service/authen/authen.service';
 import { MustMatch } from 'src/app/_helpers/authen/must-match.validator';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   loading = false;
-  loginForm: FormGroup;
+  registerForm: FormGroup;
   errorName = false;
 
   private toasterService: ToasterService;
@@ -34,10 +34,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initLoginForm();
+    this.initRegisterForm();
   }
-  initLoginForm() {
-    this.loginForm = this.fb.group({
+  initRegisterForm() {
+    this.registerForm = this.fb.group({
       name: ['', Validators.compose([
         Validators.required,
       ])],
@@ -56,28 +56,28 @@ export class LoginComponent implements OnInit {
       validator: [MustMatch('password', 'confirmPassword')]
     });
   }
-  f = (controlName: string) => this.loginForm.controls[controlName];
+  f = (controlName: string) => this.registerForm.controls[controlName];
   isInvalid = (controlName: string) => {
     let c = this.f(controlName);
     return c && c.invalid && (c.dirty || c.touched);
   }
   submitForm() {
-    const validateName = this.loginForm.controls.name.value.trimEnd();
+    const validateName = this.registerForm.controls.name.value.trimEnd();
     if (validateName == "") {
       this.errorName = true;
       return;
     } else {
       this.errorName = false
     }
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
       return;
     }
 
     let data = {
-      "fullName": this.loginForm.controls.name.value,
-      "email": this.loginForm.controls.email.value,
-      "password": this.loginForm.controls.password.value,
+      "fullName": this.registerForm.controls.name.value,
+      "email": this.registerForm.controls.email.value,
+      "password": this.registerForm.controls.password.value,
       "isAdmin": false,
       "isShipper": false,
       "isActive": false,

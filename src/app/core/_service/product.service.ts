@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HelperService } from 'src/app/_helpers/helper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,10 +8,10 @@ import { Injectable } from '@angular/core';
 export class ProductService {
 
   constructor(
-    private http: HttpClient
+    private helperService: HelperService
   ) { }
 
   getAllProduct() {
-    return this.http.get('http://localhost:8080/api/Product/getAll')
+    return this.helperService.get("Products");
   }
 }
