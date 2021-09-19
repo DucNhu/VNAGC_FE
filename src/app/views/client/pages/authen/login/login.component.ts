@@ -38,9 +38,6 @@ export class LoginComponent implements OnInit {
   }
   initLoginForm() {
     this.loginForm = this.fb.group({
-      name: ['', Validators.compose([
-        Validators.required,
-      ])],
       email: ['', Validators.compose([
         Validators.required,
         Validators.pattern('[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,}')
@@ -48,12 +45,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.compose([
         Validators.required,
         Validators.pattern('[A-Za-z0-9._%-]{6,30}')
-      ])],
-      confirmPassword: ['', Validators.compose([
-        Validators.required,
       ])]
-    }, {
-      validator: [MustMatch('password', 'confirmPassword')]
     });
   }
   f = (controlName: string) => this.loginForm.controls[controlName];
@@ -62,33 +54,26 @@ export class LoginComponent implements OnInit {
     return c && c.invalid && (c.dirty || c.touched);
   }
   submitForm() {
-    const validateName = this.loginForm.controls.name.value.trimEnd();
-    if (validateName == "") {
-      this.errorName = true;
-      return;
-    } else {
-      this.errorName = false
-    }
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
     }
 
     let data = {
-      "fullName": this.loginForm.controls.name.value,
       "email": this.loginForm.controls.email.value,
       "password": this.loginForm.controls.password.value,
-      "isAdmin": false,
-      "isShipper": false,
-      "isActive": false,
-      "type": 0,
-      "status": false
     }
     this.loading = true;
-    this.authenservice.register(data).subscribe(
+    this.authenservice.login(data).subscribe(
       (dt: any) => {
-        console.log(data, dt)
-        this.sendMaillaAccNotActive(data, dt.Infor.Id);
+        if (dt.Infor.Value.status) {
+          localStorage.setItem("user", JSON.stringify(dt.Infor.Value));
+          this.router.navigate(["/"])
+        }
+        else {
+          this.showError("The account has not been activated, please check your email to activate the account");
+          this.loading = false;
+        }
       },
       err => {
         err.error.Errors.forEach(element => {
@@ -99,34 +84,6 @@ export class LoginComponent implements OnInit {
     )
   }
 
-  sendMaillaAccNotActive(e, id) {
-    let val = {
-      "ToEmail": `${e.email}`,
-      "Body": `
-        <h1 style='color:#26ae61'>Congratulations on successful account registration</h1>
-        <p>
-        Hello Mr.${e.fullName} <br>
-        Our admin has confirmed you are a ${e.isActive}, you can now login with your account: <br>
-        Nik name: <span style='color: green'>${e.email}</span> <br>
-        You can login using the link below <br>
-        </p>
-        <a href='http://localhost:4200/activeAccount/${id}'>http://localhost:4200/login</a>
-        `,
-      "Subject": "Welcome Dink and Milk"
-    }
-    this.authenservice.sendMail(val).subscribe(
-      data => {
-        this.router.navigate(["/"])
-        this.loading = false;
-      },
-      err => {
-        err.error.Errors.forEach(element => {
-          this.showError(element)
-        });
-        this.loading = false;
-      }
-    )
-  }
   showSuccess(mess) {
     this.toasterService.pop('success', this.modal_info_title, mess);
   }

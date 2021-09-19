@@ -13,7 +13,7 @@ export class ActiveAccountComponent implements OnInit {
   public toasterconfig: ToasterConfig =
     new ToasterConfig({
       tapToDismiss: true,
-      timeout: 5000
+      timeout: 55000
     });
   loading = false;
   modal_info_title = 'Success';
@@ -30,8 +30,9 @@ export class ActiveAccountComponent implements OnInit {
   ngOnInit(): void {
     const userId = this.activatedRoute.snapshot.paramMap.get("id")
     this.authenservice.activeAcc(userId).subscribe(
-      dt => {
+      (dt:any) => {
         this.loading = false;
+        localStorage.setItem("user", JSON.stringify(dt.Infor.Value));
         this.router.navigate(["/"])
       },
       err => {
@@ -45,5 +46,8 @@ export class ActiveAccountComponent implements OnInit {
   }
   showError(mess) {
     this.toasterService.pop('error', this.modal_error_title, mess);
+  }
+  click() {
+    this.showError("Something went wrong, please try again later")
   }
 }

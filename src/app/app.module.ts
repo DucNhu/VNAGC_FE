@@ -19,6 +19,7 @@ import { RegisterComponent } from './views/client/pages/authen/register/register
 import { ActiveAccountComponent } from './views/client/pages/authen/active-account/active-account.component';
 import { LoadModule } from './core/component/load/load.module';
 import { ToasterModule } from 'angular2-toaster';
+import { ToasteModule } from './core/component/toaster/toaster.module';
 export function initializeApp(AppConfig: AppConfig) {
   return () => AppConfig.load()
 }
@@ -41,7 +42,8 @@ export function initializeApp(AppConfig: AppConfig) {
     ThemesModule,
     FormsModule, ReactiveFormsModule,
     LoadModule,
-    ToasterModule
+    ToasterModule,
+    ToasteModule
   ],
   providers: [AppConfig,
     {

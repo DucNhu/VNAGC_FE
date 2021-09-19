@@ -11,6 +11,7 @@
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
+    text-decoration: none !important;
 }
 .vertical-layout.vertical-menu-modern .main-menu .navigation > li > a i,
 .vertical-layout.vertical-menu-modern .main-menu .navigation > li > a svg {
