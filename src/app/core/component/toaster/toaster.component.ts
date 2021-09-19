@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { PrimeNGConfig } from 'primeng/api';
+// import { PrimeNGConfig } from 'primeng/api';
 @Component({
   selector: 'app-toaster',
   templateUrl: './toaster.component.html',
@@ -8,7 +8,7 @@ import { PrimeNGConfig } from 'primeng/api';
 })
 export class ToasterComponent implements OnInit {
   constructor(
-    private messageService: MessageService, private primengConfig: PrimeNGConfig
+    // private messageService: MessageService, private primengConfig: PrimeNGConfig
     ) {
    }
   @Input() isLoading = false;

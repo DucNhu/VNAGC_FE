@@ -10,7 +10,7 @@ const routes: Routes = [
     path: '', component: DashboardComponent,
     children: [
       { path: '', component: BaseDashboardComponent },
-      { path: 'product-list', loadChildren: () => import('./product/base-product.module').then(m => m.baseProductModule) },
+      { path: 'product', loadChildren: () => import('./product/base-product.module').then(m => m.baseProductModule) },
     ]
   },
 ];

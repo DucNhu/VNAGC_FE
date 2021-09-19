@@ -7,9 +7,13 @@ import { NavigationComponent } from '../../component/navigation/navigation.compo
 import { FooterComponent } from '../../component/footer/footer.component';
 import { HeaderComponent } from '../../component/header/header.component';
 
-
 @NgModule({
-  declarations: [DashboardComponent, NavigationComponent, FooterComponent, HeaderComponent,  ],
+  declarations: [
+    DashboardComponent,
+     NavigationComponent,
+     FooterComponent,
+     HeaderComponent,
+    ],
   imports: [
     CommonModule,
     DashboardRoutingModule

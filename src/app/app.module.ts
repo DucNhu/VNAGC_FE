@@ -19,7 +19,10 @@ import { RegisterComponent } from './views/client/pages/authen/register/register
 import { ActiveAccountComponent } from './views/client/pages/authen/active-account/active-account.component';
 import { LoadModule } from './core/component/load/load.module';
 import { ToasterModule } from 'angular2-toaster';
-import { ToasteModule } from './core/component/toaster/toaster.module';
+
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+
 export function initializeApp(AppConfig: AppConfig) {
   return () => AppConfig.load()
 }
@@ -43,7 +46,8 @@ export function initializeApp(AppConfig: AppConfig) {
     FormsModule, ReactiveFormsModule,
     LoadModule,
     ToasterModule,
-    ToasteModule
+    MatMenuModule,
+MatButtonModule
   ],
   providers: [AppConfig,
     {
