@@ -11,7 +11,23 @@ export class ProductService {
     private helperService: HelperService
   ) { }
 
-  getAllProduct() {
-    return this.helperService.get("Products");
+  getAllProducts() {
+    return this.helperService.getAll("Products");
+  }
+
+  getProduct(id) {
+    return this.helperService.get("Products", id);
+  }
+
+  create(data) {
+    return this.helperService.post("Products", data);
+  }
+
+  update(data) {
+    return this.helperService.put("Products", data);
+  }
+
+  delete(id) {
+    return this.helperService.delete("Products", id);
   }
 }

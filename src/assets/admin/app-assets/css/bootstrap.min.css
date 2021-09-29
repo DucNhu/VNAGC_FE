@@ -394,6 +394,7 @@ fieldset {
     padding: 0;
     margin: 0;
 }
+
 legend {
     float: left;
     width: 100%;
@@ -2424,7 +2425,7 @@ summary {
     width: 100%;
     padding: 0.571rem 1rem;
     font-size: 1rem;
-    line-height: 1.45;
+    line-height: 2.45;
     background-clip: padding-box;
     border: 1px solid #d8d6de;
     appearance: none;

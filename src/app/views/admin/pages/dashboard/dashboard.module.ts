@@ -16,7 +16,7 @@ import { HeaderComponent } from '../../component/header/header.component';
     ],
   imports: [
     CommonModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
   ]
 })
 export class DashboardModule { }

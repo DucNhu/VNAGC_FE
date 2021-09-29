@@ -7,18 +7,28 @@ import { ProductService } from 'src/app/core/_service/product.service';
   styleUrls: ['./list.component.css']
 })
 export class ListProductComponent implements OnInit {
-
+  listProduct: any = [];
+  load = true;
   constructor(
     private productService: ProductService
   ) { }
 
   ngOnInit(): void {
-    this.productService.getAllProduct().subscribe( 
-      dt => {
-        console.log(dt);
-        
+    this.productService.getAllProducts().subscribe(
+      (dt: any) => {
+        this.listProduct = dt;
+        this.load = false;
       }
     )
   }
 
+  deleteProduct(id) {
+    if (confirm("a u ok?")) {
+      this.productService.delete(id).subscribe(
+        dt => {
+          window.location.reload()
+        }
+      )
+    }
+  }
 }

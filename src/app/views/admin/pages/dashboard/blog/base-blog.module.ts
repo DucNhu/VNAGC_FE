@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ListProductComponent } from './list/list.component';
 import { RouterModule, Routes } from '@angular/router';
-import { BaseProductComponent } from './base.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { LoadModule } from 'src/app/core/component/load/load.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,47 +9,57 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatButtonModule } from '@angular/material/button';
 
-import { ProductCreateComponent } from './create/product-create.component';
-import { UpdateProductComponent } from './update/update.component';
+import { DragDropModule } from "@angular/cdk/drag-drop";
+
+// bootstr
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { BlogComponent } from './blog.component';
+import { ListBlogComponent } from './list/list.component';
+import { CreateBlogComponent } from './create/create.component';
 
 const routes: Routes = [
     {
-        path: '', component: BaseProductComponent,
+        path: '', component: BlogComponent,
         children: [
-            { path: '', component: ListProductComponent },
-            { path: 'list', component: ListProductComponent },
+            { path: '', component: ListBlogComponent },
+            { path: 'list', component: ListBlogComponent },
             {
                 path: 'create',
-                component: ProductCreateComponent
+                component: CreateBlogComponent
             },
             {
                 path: 'update',
-                component: UpdateProductComponent
+                component: CreateBlogComponent
             }
         ]
     },
 ];
 @NgModule({
     declarations: [
-        ListProductComponent,
-        BaseProductComponent,
-        ProductCreateComponent,
-        UpdateProductComponent
+        ListBlogComponent,
+        BlogComponent,
+        CreateBlogComponent
     ],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
         ReactiveFormsModule,
-        LoadModule,
-
+        FormsModule,
+        
         MatMenuModule,
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
         MatSlideToggleModule,
         MatStepperModule,
+        MatButtonModule,
+        DragDropModule,
+// bootstr
+        NgbModule
     ],
     exports: [RouterModule]
 })
-export class baseProductModule { }
+export class baseBlogModule { }

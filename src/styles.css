@@ -64,3 +64,18 @@
 
 /* END List product Admin */
 
+/* Create product */
+.price_box .mat-input-element  {
+  text-align: right;
+}
+
+
+/* .mat-step-icon .mat-icon {
+    display: none
+} */
+/* Blogger page */
+fieldset .box-content{
+    border: 1px dashed rgba(128, 128, 128, 0.585);
+    margin-bottom: 1rem;
+}
+/* End Blogger page */

@@ -1,0 +1,291 @@
+<app-load [isLoading]="loading"></app-load>
+<div class="app-content content ">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper container-xxl p-0">
+        <div class="content-header row">
+            <div class="content-header-left col-md-9 col-12 mb-2">
+                <div class="row breadcrumbs-top">
+                    <div class="col-12">
+                        <h2 class="content-header-title float-start mb-0">Form Layouts</h2>
+                        <div class="breadcrumb-wrapper">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="#">Forms</a>
+                                </li>
+                                <li class="breadcrumb-item active"><a href="#">Form Layouts</a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
+                <div class="mb-1 breadcrumb-right">
+                    <div class="dropdown">
+                        <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="app-todo.html"><i
+                                    class="me-1" data-feather="check-square"></i><span
+                                    class="align-middle">Todo</span></a><a class="dropdown-item" href="app-chat.html"><i
+                                    class="me-1" data-feather="message-square"></i><span
+                                    class="align-middle">Chat</span></a><a class="dropdown-item"
+                                href="app-email.html"><i class="me-1" data-feather="mail"></i><span
+                                    class="align-middle">Email</span></a><a class="dropdown-item"
+                                href="app-calendar.html"><i class="me-1" data-feather="calendar"></i><span
+                                    class="align-middle">Calendar</span></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+
+            <section id="basic-horizontal-layouts">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- <form class="form form-horizontal"> -->
+                                <div class="row">
+                                    <mat-horizontal-stepper linear #stepper>
+                                        <mat-step [stepControl]="formInfor" [editable]="isEditable">
+                                            <form [formGroup]="formInfor" autocomplete="true">
+                                                <ng-template matStepLabel>Infor</ng-template>
+                                                <div class="col-12">
+                                                    <div class="mb-1 row">
+                                                        <div class="col-sm-3">
+                                                            <label class="col-form-label" for="fname-icon">product
+                                                                name</label>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="input-group input-group-merge">
+                                                                <mat-form-field appearance="fill">
+                                                                    <input type="text" id="fname-icon"
+                                                                        class="form-control" formControlName="name"
+                                                                        matInput />
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field appearance="fill" class="w-100">
+                                                                <mat-label>Category</mat-label>
+                                                                <mat-select formControlName="category">
+                                                                    <mat-option *ngFor="let i of listCategory"
+                                                                        [value]="i">{{i}}</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 price_box">
+                                                    <div class="row">
+                                                        <div class="col-sm-3">
+                                                            <label class="col-form-label" for="email-icon">Price</label>
+                                                        </div>
+                                                        <div class="col-sm-5">
+                                                            <mat-form-field appearance="fill" floatLabel="always"
+                                                                class="w-100">
+                                                                <input matInput type="number"
+                                                                    class="example-right-align" formControlName="price">
+                                                                <span matPrefix>$&nbsp;</span>
+                                                                <span matSuffix>.00</span>
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <mat-form-field appearance="fill" class="w-100">
+                                                                <mat-label>Sale</mat-label>
+                                                                <mat-select formControlName="sale">
+                                                                    <mat-option *ngFor="let i of listSale" [value]="i">
+                                                                        {{i}}%</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="col-1">
+                                                            <!-- <p>{{money}}</p> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mb-1 row">
+                                                        <div class="col-sm-3">
+                                                            <label class="col-form-label"
+                                                                for="Description">Description</label>
+                                                        </div>
+                                                        <div class="col-sm-9">
+                                                            <div class="input-group input-group-merge">
+                                                                <textarea class="form-control" id="Description"
+                                                                    formControlName="description" rows="3"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mb-1 row">
+                                                        <div class="col-sm-3">
+                                                            <label class="col-form-label" for="pass-icon">Unit</label>
+                                                        </div>
+                                                        <div class="col-sm-9">
+                                                            <div class="input-group input-group-merge">
+                                                                <mat-form-field appearance="fill" class="w-100">
+                                                                    <mat-select [(value)]="listUnit[0]">
+                                                                        <mat-option *ngFor="let i of listUnit"
+                                                                            [value]="i">{{i}}</mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mb-1 row">
+                                                        <div class="col-sm-3">
+                                                            <label class="col-form-label"
+                                                                for="storage_instructions">Storage Instructions</label>
+                                                        </div>
+                                                        <div class="col-sm-9">
+                                                            <div class="input-group input-group-merge">
+                                                                <textarea class="form-control" id="storage_instructions"
+                                                                    formControlName="storage_instructions"
+                                                                    rows="3"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-9 offset-sm-3">
+                                                    <div class="mb-1">
+                                                        <div class="form-check">
+                                                            <mat-slide-toggle formControlName="active">Public
+                                                            </mat-slide-toggle>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <button class="btn btn-primary me-1 float-end"
+                                                        matStepperNext>Next</button>
+                                                </div>
+                                            </form>
+                                        </mat-step>
+                                        <mat-step [stepControl]="formImg" [editable]="isEditable">
+                                            <div [formGroup]="formImg">
+                                                <ng-template matStepLabel>Avatar & Feature</ng-template>
+                                                <div class="col-12">
+                                                    <div class="mb-1 row">
+                                                        <div class="col-sm-3">
+                                                            <label class="col-form-label" for="pass-icon">Avatar &
+                                                                Cover</label>
+                                                        </div>
+                                                        <div class="col-sm-9 d-flex justify-content-around">
+                                                            <div class="col-sm-6">
+                                                                <div action="#"
+                                                                    class="dropzone dropzone-area dz-clickable"
+                                                                    id="dpz-single-file">
+                                                                    <label class="dz-message"
+                                                                        for="avatar">Avatar</label>
+                                                                    <input type="file" hidden id="avatar"
+                                                                        formControlName="avatar">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div action="#"
+                                                                    class="dropzone dropzone-area dz-clickable"
+                                                                    id="dpz-single-file">
+                                                                    <label class="dz-message" for="avatar_cover">Avatar
+                                                                        cover</label>
+                                                                    <input type="file" hidden id="avatar_cover"
+                                                                        formControlName="avatar_cover">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mb-1 row">
+                                                        <div class="col-sm-3">
+                                                            <label class="col-form-label" for="pass-icon">List img
+                                                                other</label>
+                                                        </div>
+                                                        <div class="col-sm-9 row list_img--feature">
+                                                            <div class="col-sm-4">
+                                                                <div action="#"
+                                                                    class="dropzone dropzone-area dz-clickable"
+                                                                    id="dpz-single-file">
+                                                                    <label class="dz-message"
+                                                                        for="avatar">Avatar</label>
+                                                                    <input type="file" hidden id="avatar">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div action="#"
+                                                                    class="dropzone dropzone-area dz-clickable"
+                                                                    id="dpz-single-file">
+                                                                    <label class="dz-message" for="avatar_cover">Avatar
+                                                                        cover</label>
+                                                                    <input type="file" hidden id="avatar_cover">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div action="#"
+                                                                    class="dropzone dropzone-area dz-clickable"
+                                                                    id="dpz-single-file">
+                                                                    <label class="dz-message" for="avatar_cover">Avatar
+                                                                        cover</label>
+                                                                    <input type="file" hidden id="avatar_cover">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div action="#"
+                                                                    class="dropzone dropzone-area dz-clickable"
+                                                                    id="dpz-single-file">
+                                                                    <label class="dz-message"
+                                                                        for="avatar">Avatar</label>
+                                                                    <input type="file" hidden id="avatar">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div action="#"
+                                                                    class="dropzone dropzone-area dz-clickable"
+                                                                    id="dpz-single-file">
+                                                                    <label class="dz-message" for="avatar_cover">Avatar
+                                                                        cover</label>
+                                                                    <input type="file" hidden id="avatar_cover">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div action="#"
+                                                                    class="dropzone dropzone-area dz-clickable"
+                                                                    id="dpz-single-file">
+                                                                    <label class="dz-message" for="avatar_cover">Avatar
+                                                                        cover</label>
+                                                                    <input type="file" hidden id="avatar_cover">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <button class="btn btn-primary me-1"
+                                                        matStepperPrevious>Back</button>
+                                                    <button class="btn btn-primary me-1" matStepperNext>Next</button>
+                                                </div>
+                                            </div>
+                                        </mat-step>
+                                        <mat-step>
+                                            <ng-template matStepLabel>Done</ng-template>
+                                            <p>You are now done.</p>
+                                            <div>
+                                                <button class="btn btn-primary me-1" matStepperPrevious>Back</button>
+                                                <button class="btn btn-primary me-1"
+                                                    (click)="updateProduct()">Complete</button>
+                                            </div>
+                                        </mat-step>
+                                    </mat-horizontal-stepper>
+                                </div>
+                                <!-- </form> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

@@ -1,30 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/core/_service/product.service';
 
 @Component({
-  selector: 'app-product-create',
-  templateUrl: './product-create.component.html',
-  styleUrls: ['./product-create.component.css']
+  selector: 'app-update-product',
+  templateUrl: './update.component.html',
+  styleUrls: ['./update.component.css']
 })
-export class ProductCreateComponent implements OnInit {
+export class UpdateProductComponent implements OnInit {
+
 
   loading = false;
   listSale = [10, 20, 30, 40]
-  listUnit = ["boxes", "package", "Bottle"]
+  listUnit = ["Hộp", "Gói", "Chai"]
   listCategory = ["Fruit", "Drink", "Cake"]
   money = 0;
   // Step bar
   isEditable = true;
   // End Step bar
-
+  load = true;
   formInfor: FormGroup;
   formImg: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private prductService: ProductService,
-    private route: Router
+    private productService: ProductService,
+    private route: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     this.formInfor = this.fb.group({
       name: ['', Validators.required],
@@ -34,7 +36,9 @@ export class ProductCreateComponent implements OnInit {
       description: [''],
       active: [false, Validators.required],
 
-      storage_instructions: ['', Validators.required],
+      storage_instructions: [false, Validators.required],
+      "create_at": [''],
+      "update_at": [''],
     });
 
     this.formImg = this.fb.group({
@@ -45,9 +49,15 @@ export class ProductCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-  }
-  createProduct() {
+    this.productService.getProduct(this.activatedRoute.snapshot.paramMap.get('id')).subscribe(
+      (dt: any) => {
+        this.load = false;
+        console.log(dt);
+        this.setDataforForm(dt);
+      }
+    )
+    }
+  updateProduct() {
     let form = this.formInfor;
     let nowDate = new Date().toLocaleDateString();
     let nowTime = new Date().toLocaleTimeString();
@@ -63,12 +73,26 @@ export class ProductCreateComponent implements OnInit {
     }
     this.loading = true;
 
-    this.prductService.create(data).subscribe(
+    this.productService.update(data).subscribe(
       dt => {
-        console.log(dt)
         this.loading = false;
         this.route.navigate(["/admin/product/list"])
       }
     )
+  }
+
+  setDataforForm(dt) {
+    this.formInfor.setValue({
+      name: [dt.name],
+      category: [dt.category],
+      price: [dt.price],
+      sale: [dt.sale],
+      description: [dt.description],
+      active: [dt.status],
+
+      storage_instructions: [dt.storage_instructions],
+      create_at: [dt.create_at],
+      update_at: [dt.update_at]
+    })
   }
 }

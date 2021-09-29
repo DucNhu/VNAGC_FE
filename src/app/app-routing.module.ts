@@ -7,6 +7,8 @@ import { CheckoutComponent } from './views/client/pages/checkout/checkout.compon
 import { HomeComponent } from './views/client/pages/home/home.component';
 import { ProductDetailComponent } from './views/client/pages/product-detail/product-detail.component';
 import { ActiveAccountComponent } from './views/client/pages/authen/active-account/active-account.component';
+import { CartComponent } from './views/client/pages/cart/cart.component';
+import { BlogDetailComponent } from './views/client/pages/blog-detail/blog-detail.component';
 
 const routes: Routes = [
   {
@@ -22,12 +24,20 @@ const routes: Routes = [
         component: HomeComponent
       },
       {
+        path: 'blog-detail',
+        component: BlogDetailComponent
+      },
+      {
         path: 'product-detail',
         component: ProductDetailComponent
       },
       {
         path: 'checkout',
         component: CheckoutComponent
+      },
+      {
+        path: 'cart',
+        component: CartComponent
       },
       {
         path: 'login',

@@ -15,9 +15,59 @@ export class HelperService {
     private router: Router
   ) { }
 
-  get(uri: string) {
-    console.log(AppConfig.settings.WhiteServer + uri)
+  getAll(uri: string) {
     return this.http.get<any>(AppConfig.settings.WhiteServer + uri).pipe(
+      catchError(this.handleError),
+      map(data => {
+        console.log(data)
+        if (data.code == "HWE999") {
+          this.router.navigateByUrl('/error-page');
+        }
+        return data;
+      })
+    )
+  }
+
+  get(uri: string, id) {
+    return this.http.get<any>(AppConfig.settings.WhiteServer + uri + "/" + id).pipe(
+      catchError(this.handleError),
+      map(data => {
+        console.log(data)
+        if (data.code == "HWE999") {
+          this.router.navigateByUrl('/error-page');
+        }
+        return data;
+      })
+    )
+  }
+
+  post(uri: string, data) {
+    return this.http.post<any>(AppConfig.settings.WhiteServer + uri, data).pipe(
+      catchError(this.handleError),
+      map(data => {
+        if (data.code == "HWE999") {
+          this.router.navigateByUrl('/error-page');
+        }
+        return data;
+      })
+    )
+  }
+
+  put(uri: string, data) {
+    return this.http.put<any>(AppConfig.settings.WhiteServer + uri, data).pipe(
+      catchError(this.handleError),
+      map(data => {
+        if (data.code == "HWE999") {
+          this.router.navigateByUrl('/error-page');
+        }
+        return data;
+      })
+    )
+  }
+
+
+  delete(uri: string, id) {
+    return this.http.delete<any>(AppConfig.settings.WhiteServer + uri + "/" + id).pipe(
       catchError(this.handleError),
       map(data => {
         if (data.code == "HWE999") {

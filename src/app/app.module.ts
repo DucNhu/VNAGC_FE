@@ -20,8 +20,11 @@ import { ActiveAccountComponent } from './views/client/pages/authen/active-accou
 import { LoadModule } from './core/component/load/load.module';
 import { ToasterModule } from 'angular2-toaster';
 
-import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CartComponent } from './views/client/pages/cart/cart.component';
+import { BlogDetailComponent } from './views/client/pages/blog-detail/blog-detail.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { SwiperModule } from "swiper/angular";
 
 export function initializeApp(AppConfig: AppConfig) {
   return () => AppConfig.load()
@@ -35,6 +38,8 @@ export function initializeApp(AppConfig: AppConfig) {
     LoginComponent,
     RegisterComponent,
     ActiveAccountComponent,
+    CartComponent,
+    BlogDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,8 +51,10 @@ export function initializeApp(AppConfig: AppConfig) {
     FormsModule, ReactiveFormsModule,
     LoadModule,
     ToasterModule,
-    MatMenuModule,
-MatButtonModule
+    NgbModule,
+    // SwiperModule,
+    // MatFormFieldModule,
+    // MatInputModule
   ],
   providers: [AppConfig,
     {
@@ -55,7 +62,7 @@ MatButtonModule
       useFactory: initializeApp,
       deps: [AppConfig], multi: true
     }
-    ,{ provide: APP_BASE_HREF, useValue: '' }],
+    , { provide: APP_BASE_HREF, useValue: '' }],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
