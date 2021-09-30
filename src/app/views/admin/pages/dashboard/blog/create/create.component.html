@@ -19,17 +19,17 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-1">
-                                                <label class="form-label" for="foodName">Food Name</label>
-                                                <input type="text" class="form-control" placeholder="Food Name"
-                                                    name="foodName" id="foodaName" />
+                                                <label class="form-label" for="blogName">Food Name</label>
+                                                <input type="text" class="form-control" placeholder="Blog Name"
+                                                    formControlName="name" id="blogName" />
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="mb-1">
-                                                <label class="form-label" for="foodName">Category</label>
+                                                <label class="form-label">Category</label>
                                                 <mat-form-field appearance="fill" class="w-100">
                                                     <mat-label>Select</mat-label>
-                                                    <mat-select>
+                                                    <mat-select formControlName="category">
                                                         <mat-option *ngFor="let i of listCategory" [value]="i">{{i}}
                                                         </mat-option>
                                                     </mat-select>
@@ -37,11 +37,12 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <label class="form-label" for="foodName">Hashtag</label>
+                                            <label class="form-label">Hashtag</label>
                                             <mat-form-field appearance="fill" class="w-100">
                                                 <mat-label>Select</mat-label>
                                                 <mat-select placeholder="hashtags" name="hashtag" class="filter-select"
                                                     [(ngModel)]="selectedHastags" [compareWith]="equals" multiple
+                                                    formControlName="hashTag"
                                                     #hashtagSelect>
                                                     <mat-option *ngFor="let hashtag of hastags" [value]="hashtag">
                                                         {{hashtag.viewValue}}
@@ -62,7 +63,7 @@
                                         <div class="col-md-12">
                                             <div class="mb-1">
                                                 <label class="form-label" for="summary">Summary</label>
-                                                <textarea type="text" rows="3" class="form-control" name="description"
+                                                <textarea type="text" rows="3" class="form-control" formControlName="summary"
                                                     id="summary"></textarea>
                                             </div>
                                         </div>
@@ -73,7 +74,7 @@
                                                 aria-controls="collapseExample">Metarial</legend>
                                             <div #metarialC="ngbCollapse" [(ngbCollapse)]="isCollapsed.metarial">
                                                 <ng-container formGroupName="metarial">
-                                                    <div class="col-12 p-0 box-content"
+                                                    <div class="col-12 p-0 box-metarial"
                                                         *ngFor="let item of listMetarial(); let i = index"
                                                         [formGroupName]="i">
                                                         <div class="row m-0">
@@ -81,7 +82,7 @@
                                                                 <div class="mb-1">
                                                                     <label class="form-label" for="price">Name</label>
                                                                     <input type="text" class="form-control"
-                                                                        placeholder="Ration" formControlName="milk"
+                                                                        placeholder="milk" formControlName="name"
                                                                         id="ration" />
                                                                 </div>
                                                             </div>
@@ -131,8 +132,8 @@
                                                 aria-controls="collapseExample">
                                                 Step</legend>
                                             <div #stepC="ngbCollapse" [(ngbCollapse)]="isCollapsed.step">
-                                                <ng-container formArrayName="content">
-                                                    <div class="col-md-12 box-content"
+                                                <ng-container formArrayName="step">
+                                                    <div class="col-md-12 box-step"
                                                         *ngFor="let item of listContent(); let i = index"
                                                         [formGroupName]="i">
                                                         <h2 class="h2_title">
@@ -154,21 +155,21 @@
                                                         </h2>
                                                         <div class="mb-1">
                                                             <label class="form-label"
-                                                                [for]="'content_title'+i">name</label>
+                                                                [for]="'content_name'+i">name</label>
                                                             <input type="text" class="form-control" placeholder="Ration"
-                                                                name="ration" [id]="'content_title'+i"
-                                                                formControlName="title" />
+                                                                name="ration" [id]="'content_name'+i"
+                                                                formControlName="name" />
                                                         </div>
                                                         <div class="mb-1">
                                                             <label class="form-label"
-                                                                [for]="'content_des'+i">name</label>
+                                                                [for]="'content_des'+i">description</label>
                                                             <textarea type="text" rows="3" class="form-control"
                                                                 name="description" [id]="'content_des'+i"
                                                                 formControlName="description"></textarea>
                                                         </div>
                                                         <div class="mb-1">
                                                             <label class="form-label"
-                                                                [for]="'content_title'+i">Banner</label>
+                                                                [for]="'content_name'+i">Banner</label>
                                                             <div class="col-sm-12">
                                                                 <div action="#"
                                                                     class="dropzone dropzone-area dz-clickable"
@@ -233,7 +234,7 @@
                                                         </div>
                                                         <div class="mb-1">
                                                             <label class="form-label"
-                                                                [for]="'content_des'+i">name</label>
+                                                                [for]="'content_des'+i">description</label>
                                                             <textarea type="text" rows="3" class="form-control"
                                                                 name="description" [id]="'content_des'+i"
                                                                 formControlName="description"></textarea>
@@ -283,7 +284,7 @@
                                                                 </span>
                                                             </label>
                                                             <input type="text" class="form-control"
-                                                                placeholder="url youtube" name="ration"
+                                                                placeholder="url youtube" formControlName="url_youtube"
                                                                 [id]="'content_url'+i" />
                                                         </div>
                                                     </div>
@@ -305,6 +306,18 @@
                                             </div>
 
                                         </fieldset>
+
+                                        <div class="col-md-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="des">Description</label>
+                                                <textarea type="text" rows="3" class="form-control" formControlName="description" id="des"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 d-flex flex-sm-row flex-column mt-2">
+                                            <button type="submit" class="btn btn-primary mb-1 mb-sm-0 me-0 me-sm-1 waves-effect waves-float waves-light">Save
+                                                Changes</button>
+                                        </div>
                                     </div>
                                 </form>
                                 <!-- users edit account form ends -->

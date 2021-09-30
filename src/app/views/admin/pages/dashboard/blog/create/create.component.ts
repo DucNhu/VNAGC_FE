@@ -47,9 +47,17 @@ export class CreateBlogComponent implements OnInit {
   registerFormBlog() {
     this.formBlog = this.fb.group(
       {
-        // name: ['', Validators.compose([
-        //   Validators.required
-        // ])],
+        name: ['', Validators.compose([
+          Validators.required
+        ])],
+        category: ['', Validators.compose([
+          Validators.required
+        ])],
+        hashTag: ['', Validators.compose([
+          Validators.required
+        ])],
+        summary: [''],
+        description: [''],
         metarial: this.fb.array([]),
         step: this.fb.array([]),
         content: this.fb.array([])
@@ -110,7 +118,8 @@ export class CreateBlogComponent implements OnInit {
         title: ['', Validators.compose(
           [Validators.required]
         )],
-        description: ['']
+        description: [''],
+        url_youtube: ['']
       })
     )
   }
