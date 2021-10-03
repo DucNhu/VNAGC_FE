@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { LoadModule } from 'src/app/core/component/load/load.module';
 
 import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -48,6 +49,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         ReactiveFormsModule,
         FormsModule,
+        LoadModule,
         
         MatMenuModule,
         MatFormFieldModule,

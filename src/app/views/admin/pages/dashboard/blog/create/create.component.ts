@@ -11,6 +11,8 @@ import {
   moveItemInArray
 } from "@angular/cdk/drag-drop";
 import { ViewportRuler } from "@angular/cdk/overlay";
+import { BlogService } from 'src/app/core/_service/blog/blog.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create',
@@ -40,8 +42,12 @@ export class CreateBlogComponent implements OnInit {
   avatar_cover;
   list_img_step: any = [{ data: '' }];
   list_img_content: any = [{ data: '' }];
+
+  loading = false;
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private blogService: BlogService,
+    private route: Router
   ) { }
 
   ngOnInit(): void {
@@ -61,11 +67,14 @@ export class CreateBlogComponent implements OnInit {
         hashTag: ['', Validators.compose([
           Validators.required
         ])],
+        cooking_time: [''],
         summary: [''],
         description: [''],
+        url_video_utube: [''],
+
         metarial: this.fb.array([]),
         step: this.fb.array([]),
-        content: this.fb.array([])
+        content: this.fb.array([]),
       }
     )
     this.addContent();
@@ -225,12 +234,55 @@ export class CreateBlogComponent implements OnInit {
     this.avatar_cover = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
   }
 
-
-  sendImg() {
+  createBlog() {
+    let form = this.formBlog;
+    let nowDate = new Date().toLocaleDateString();
+    let nowTime = new Date().toLocaleTimeString();
     let data = {
-      // list
+      "name": form.get('name'),
+      "banner_img": this.avatar,
+      "cover_img": this.avatar_cover,
+      "cooking_time": form.get('cooking_time'),
+      "summary": form.get('summary'),
+      "description": form.get('desciption'),
+      "url_video_utube": form.get('url_video_utube'),
+      "view": 0,
+      "status": 0,
+      "user_id": '1',
+      "category_id": 0,
+
+      "create_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
+      "update_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
     }
-    console.log(this.formBlog.value)
+    this.loading = true;
+
+    this.blogService.create(data).subscribe(
+      dt => {
+        // this.sendImg(dt)
+        this.route.navigate(["/admin/blog/list"])
+      },
+      err => {
+        this.loading = false;
+      }
+    )
+  }
+
+  sendImg(val) {
+    // this.list_img_feature.forEach(item => {
+    //   let data = {
+    //     "product_id": val.id,
+    //     "avatar_feature": item.data
+    //   }
+    //   this.prductService.createImgFeature(data).subscribe(
+    //     dt => {
+    //       this.loading = false;
+    //       this.route.navigate(["/admin/product/list"])
+    //     },
+    //     err => {
+    //       this.loading = false;
+    //     }
+    //   )
+    // });
   }
   // End Logic Image
 }

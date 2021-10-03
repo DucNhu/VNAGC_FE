@@ -190,12 +190,12 @@
                             <div class="col-sm-3">
                               <label class="col-form-label" for="pass-icon">List img other</label>
                             </div>
-                            <div class="col-sm-9 row list_img--feature">
+                            <div class="col-sm-9 row list_img_product--feature">
                               <div class="col-sm-4" *ngFor="let item of list_img_feature; let i = index">
                                 <div action="#" class="dropzone dropzone-area dz-clickable" id="dpz-single-file-feature">
                                   <label class="dz-message" [for]="'feature'+i">Avatar</label>
                                   <input type="file" hidden [id]="'feature'+i" (change)="updateListFile($event, i)">
-                                  <img [src]="item.data" alt="avatar cover" *ngIf="item.data" class="img-avatar">
+                                  <img [src]="item.data" alt="avatar feature" *ngIf="item.data" class="img-avatar">
                                 </div>
                               </div>
                               <div class="col-sm-4" *ngIf="list_img_feature.length < 6">

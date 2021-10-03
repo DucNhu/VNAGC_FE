@@ -18,6 +18,9 @@ export class ListProductComponent implements OnInit {
       (dt: any) => {
         this.listProduct = dt;
         this.load = false;
+      },
+      err => {
+        this.load = false;
       }
     )
   }
@@ -27,6 +30,9 @@ export class ListProductComponent implements OnInit {
       this.productService.delete(id).subscribe(
         dt => {
           window.location.reload()
+        },
+        err => {
+          this.load = false;
         }
       )
     }

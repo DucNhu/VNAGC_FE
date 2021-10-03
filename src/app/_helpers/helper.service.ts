@@ -19,8 +19,7 @@ export class HelperService {
     return this.http.get<any>(AppConfig.settings.WhiteServer + uri).pipe(
       catchError(this.handleError),
       map(data => {
-        console.log(data)
-        if (data.code == "HWE999") {
+        if (data==null) {
           this.router.navigateByUrl('/error-page');
         }
         return data;
@@ -32,8 +31,7 @@ export class HelperService {
     return this.http.get<any>(AppConfig.settings.WhiteServer + uri + "/" + id).pipe(
       catchError(this.handleError),
       map(data => {
-        console.log(data)
-        if (data.code == "HWE999") {
+        if (data==null) {
           this.router.navigateByUrl('/error-page');
         }
         return data;
@@ -42,10 +40,11 @@ export class HelperService {
   }
 
   post(uri: string, data) {
+    console.log(AppConfig.settings.WhiteServer + uri)
     return this.http.post<any>(AppConfig.settings.WhiteServer + uri, data).pipe(
       catchError(this.handleError),
       map(data => {
-        if (data.code == "HWE999") {
+        if (data==null) {
           this.router.navigateByUrl('/error-page');
         }
         return data;
@@ -57,9 +56,9 @@ export class HelperService {
     return this.http.put<any>(AppConfig.settings.WhiteServer + uri, data).pipe(
       catchError(this.handleError),
       map(data => {
-        if (data.code == "HWE999") {
-          this.router.navigateByUrl('/error-page');
-        }
+        // if (data==null) {
+        //   this.router.navigateByUrl('/error-page');
+        // }
         return data;
       })
     )
@@ -70,7 +69,7 @@ export class HelperService {
     return this.http.delete<any>(AppConfig.settings.WhiteServer + uri + "/" + id).pipe(
       catchError(this.handleError),
       map(data => {
-        if (data.code == "HWE999") {
+        if (data==null) {
           this.router.navigateByUrl('/error-page');
         }
         return data;

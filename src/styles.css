@@ -49,6 +49,18 @@
     left: 0;
     object-fit: cover;
 }
+.list_img_product--feature {
+    margin: 0px !important;
+}
+.list_img_product--feature .dropzone {
+    min-height: 150px;
+}
+.list_img_product--feature .col-sm-4 {
+    margin: 1rem 0rem;
+}
+.list_img_product--feature .dz-message::before {
+    background: none;
+}
 
 /* END Img */
 

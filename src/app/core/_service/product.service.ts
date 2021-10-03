@@ -24,14 +24,23 @@ export class ProductService {
   }
 
   update(data) {
-    return this.helperService.put("Products", data);
+    return this.helperService.put("Products/" + data.id, data);
   }
 
   delete(id) {
     return this.helperService.delete("Products", id);
   }
 
+  GetImgProductFeature(id) {
+    return this.helperService.get("Products/GetImgProductFeature", id);
+  }
+
   createImgFeature(data) {
     return this.helperService.post("ImgProductFeatures", data);
+  }
+
+  updateImgFeature(data) {
+    console.log("ImgProductFeatures/" + data.id)
+    return this.helperService.put("ImgProductFeatures/" + data.id, data);
   }
 }

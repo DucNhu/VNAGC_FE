@@ -65,6 +65,8 @@ export class ProductCreateComponent implements OnInit {
       "sale": form.get('sale').value,
       "description": form.get('description').value,
       "unit": form.get('unit').value,
+      "storage_instructions": form.get('storage_instructions').value,
+
       "active": form.get('active').value,
       "create_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
       "update_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
@@ -134,9 +136,12 @@ export class ProductCreateComponent implements OnInit {
   }
 
   addSlotImgFeature() {
-    if (this.list_img_feature[this.list_img_feature.length - 1].data) {
-      this.list_img_feature.push({})
+    if (this.list_img_feature.length != 0) {
+      if (this.list_img_feature[this.list_img_feature.length - 1].avatar_feature) {
+        this.list_img_feature.push({ data: '' })
+      }
     }
+    else { this.list_img_feature.push({ data: '' }) }
   }
 
   sendImg(val) {
