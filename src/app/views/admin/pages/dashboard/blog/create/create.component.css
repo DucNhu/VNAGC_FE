@@ -1,0 +1,11 @@
+.h2_title {
+    position: relative;
+}
+.btn-trash {
+    position: absolute;
+    right: 10px
+}
+
+.dropzone {
+    min-height: 150px;
+}

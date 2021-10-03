@@ -30,4 +30,8 @@ export class ProductService {
   delete(id) {
     return this.helperService.delete("Products", id);
   }
+
+  createImgFeature(data) {
+    return this.helperService.post("ImgProductFeatures", data);
+  }
 }

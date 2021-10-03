@@ -42,8 +42,7 @@
                                                 <mat-label>Select</mat-label>
                                                 <mat-select placeholder="hashtags" name="hashtag" class="filter-select"
                                                     [(ngModel)]="selectedHastags" [compareWith]="equals" multiple
-                                                    formControlName="hashTag"
-                                                    #hashtagSelect>
+                                                    formControlName="hashTag" #hashtagSelect>
                                                     <mat-option *ngFor="let hashtag of hastags" [value]="hashtag">
                                                         {{hashtag.viewValue}}
                                                     </mat-option>
@@ -60,11 +59,34 @@
                                                 </mat-select>
                                             </mat-form-field>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="mb-1">
+                                        <div class="mb-1 row mx-0">
+                                            <div class="col-md-6 p-0">
                                                 <label class="form-label" for="summary">Summary</label>
-                                                <textarea type="text" rows="3" class="form-control" formControlName="summary"
-                                                    id="summary"></textarea>
+                                                <textarea type="text" rows="3" class="form-control"
+                                                    formControlName="summary" id="summary"></textarea>
+                                            </div>
+                                            <div class="col-md-6 d-flex p-0">
+                                                <div class="col-sm-6 align-self-end">
+                                                    <div action="#" class="dropzone dropzone-area dz-clickable"
+                                                        id="dpz-single-file">
+                                                        <label class="dz-message" for="avatar">Avatar</label>
+                                                        <input type="file" hidden id="avatar"
+                                                            (change)="updateFile($event, 1)">
+                                                        <img [src]="avatar" alt="avatar" *ngIf="avatar"
+                                                            class="img-avatar">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 align-self-end">
+                                                    <div action="#" class="dropzone dropzone-area dz-clickable"
+                                                        id="dpz-single-file-coverr">
+                                                        <label class="dz-message" for="avatar_cover">Avatar
+                                                            cover</label>
+                                                        <input type="file" hidden id="avatar_cover"
+                                                            (change)="updateFile($event, 0)">
+                                                        <img [src]="avatar_cover" alt="avatar cover"
+                                                            *ngIf="avatar_cover" class="img-avatar">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <!-- Metarial -->
@@ -77,6 +99,23 @@
                                                     <div class="col-12 p-0 box-metarial"
                                                         *ngFor="let item of listMetarial(); let i = index"
                                                         [formGroupName]="i">
+                                                        <h2 class="h2_title">
+                                                            <button mat-button class="btn-trash"
+                                                                (click)="removeContent(i)">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    class="feather feather-trash-2">
+                                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                                    <path
+                                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                                    </path>
+                                                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                                </svg>
+                                                            </button>
+                                                        </h2>
                                                         <div class="row m-0">
                                                             <div class="col-md-6">
                                                                 <div class="mb-1">
@@ -134,10 +173,10 @@
                                             <div #stepC="ngbCollapse" [(ngbCollapse)]="isCollapsed.step">
                                                 <ng-container formArrayName="step">
                                                     <div class="col-md-12 box-step"
-                                                        *ngFor="let item of listContent(); let i = index"
+                                                        *ngFor="let item of listStep(); let i = index"
                                                         [formGroupName]="i">
                                                         <h2 class="h2_title">
-                                                            <button mat-button class="float-end"
+                                                            <button mat-button class="btn-trash"
                                                                 (click)="removeContent(i)">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                     height="24" viewBox="0 0 24 24" fill="none"
@@ -154,29 +193,34 @@
                                                             </button>
                                                         </h2>
                                                         <div class="mb-1">
-                                                            <label class="form-label"
-                                                                [for]="'content_name'+i">name</label>
-                                                            <input type="text" class="form-control" placeholder="Ration"
-                                                                name="ration" [id]="'content_name'+i"
-                                                                formControlName="name" />
+                                                            <label class="form-label" [for]="'step_name'+i">name</label>
+                                                            <input type="text" class="form-control" placeholder="Step1"
+                                                                [id]="'step_name'+i" formControlName="name" />
                                                         </div>
-                                                        <div class="mb-1">
-                                                            <label class="form-label"
-                                                                [for]="'content_des'+i">description</label>
-                                                            <textarea type="text" rows="3" class="form-control"
-                                                                name="description" [id]="'content_des'+i"
-                                                                formControlName="description"></textarea>
-                                                        </div>
-                                                        <div class="mb-1">
-                                                            <label class="form-label"
-                                                                [for]="'content_name'+i">Banner</label>
-                                                            <div class="col-sm-12">
-                                                                <div action="#"
-                                                                    class="dropzone dropzone-area dz-clickable"
-                                                                    id="dpz-single-file">
-                                                                    <label class="dz-message"
-                                                                        for="avatar">Avatar</label>
-                                                                    <input type="file" hidden id="avatar">
+                                                        <div class="mb-1 row mx-0">
+                                                            <div class="col-md-6 p-0">
+                                                                <label class="form-label"
+                                                                    [for]="'step_des'+i">description</label>
+                                                                <textarea type="text" rows="3" class="form-control"
+                                                                    name="description" [id]="'step_des'+i"
+                                                                    formControlName="description"></textarea>
+                                                            </div>
+                                                            <div class="col-md-6 p-0">
+                                                                <label class="form-label"
+                                                                    [for]="'step_name'+i">Banner</label>
+                                                                <div class="col-sm-12 mb-1">
+                                                                    <div action="#"
+                                                                        class="dropzone dropzone-area dz-clickable"
+                                                                        id="dpz-single-file">
+                                                                        <label class="dz-message notBefore"
+                                                                            [for]="'step_avatar'+i">Select
+                                                                            banner</label>
+                                                                        <input type="file" hidden [id]="'step_avatar'+i"
+                                                                            (change)="updateListFile($event, i, 1)">
+                                                                        <img [src]="item.value.avatar" alt="avatar"
+                                                                            *ngIf="item.value.avatar"
+                                                                            class="img-avatar">
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -209,7 +253,7 @@
                                                         *ngFor="let item of listContent(); let i = index"
                                                         [formGroupName]="i">
                                                         <h2 class="h2_title">
-                                                            <button mat-button class="float-end"
+                                                            <button mat-button class="btn-trash"
                                                                 (click)="removeContent(i)">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                     height="24" viewBox="0 0 24 24" fill="none"
@@ -248,8 +292,14 @@
                                                                         class="dropzone dropzone-area dz-clickable"
                                                                         id="dpz-single-file">
                                                                         <label class="dz-message"
+                                                                            [for]="'content_avatar'+i"
                                                                             for="avatar">Avatar</label>
-                                                                        <input type="file" hidden id="avatar">
+                                                                        <input type="file" hidden
+                                                                            [id]="'content_avatar'+i"
+                                                                            (change)="updateListFile($event, i, 0, 0)">
+                                                                        <img [src]="item.value.avatar" alt="avatar"
+                                                                            *ngIf="item.value.avatar"
+                                                                            class="img-avatar">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-6">
@@ -257,9 +307,15 @@
                                                                         class="dropzone dropzone-area dz-clickable"
                                                                         id="dpz-single-file">
                                                                         <label class="dz-message"
-                                                                            for="avatar_cover">Avatar
+                                                                            [for]="'content_avatar_cover'+i">Avatar
                                                                             cover</label>
-                                                                        <input type="file" hidden id="avatar_cover">
+                                                                        <input type="file" hidden
+                                                                            [id]="'content_avatar_cover'+i"
+                                                                            (change)="updateListFile($event, i, 0, 1)">
+                                                                        <img [src]="item.value.avatar_cover"
+                                                                            alt="avatar cover"
+                                                                            *ngIf="item.value.avatar_cover"
+                                                                            class="img-avatar">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -309,13 +365,16 @@
 
                                         <div class="col-md-12">
                                             <div class="mb-1">
-                                                <label class="form-label" for="des">Description</label>
-                                                <textarea type="text" rows="3" class="form-control" formControlName="description" id="des"></textarea>
+                                                <label class="form-label" for="des">The end</label>
+                                                <textarea type="text" rows="3" class="form-control"
+                                                    formControlName="description" id="des"></textarea>
                                             </div>
                                         </div>
 
                                         <div class="col-12 d-flex flex-sm-row flex-column mt-2">
-                                            <button type="submit" class="btn btn-primary mb-1 mb-sm-0 me-0 me-sm-1 waves-effect waves-float waves-light">Save
+                                            <button type="submit"
+                                                class="btn btn-primary mb-1 mb-sm-0 me-0 me-sm-1 waves-effect waves-float waves-light"
+                                                (click)="sendImg()">Save
                                                 Changes</button>
                                         </div>
                                     </div>
@@ -328,152 +387,18 @@
                 </div>
             </section>
             <!-- END: Content-->
-
-
-            <!-- BEGIN: Customizer-->
-            <div class="customizer d-none d-md-block"><a
-                    class="customizer-toggle d-flex align-items-center justify-content-center"
-                    href="javascript:void(0)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="feather feather-eye">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                        <circle cx="12" cy="12" r="3"></circle>
-                    </svg></a>
-                <div class="customizer-content">
-                    <!-- Customizer header -->
-                    <div class="customizer-header px-2 pt-1 pb-0 position-relative">
-                        <h4 class="mb-0">Theme Customizer</h4>
-                        <p class="m-0">Customize & Preview in Real Time</p>
-
-                        <a class="customizer-close" href="#"><i data-feather="x"></i></a>
-                    </div>
-
-                    <hr />
-
-                    <!-- Styling & Text Direction -->
-                    <div class="customizer-styling-direction px-2">
-                        <p class="fw-bold">Skin</p>
-                        <div class="d-flex">
-                            <div class="form-check me-1">
-                                <input type="radio" id="skinlight" name="skinradio" class="form-check-input layout-name"
-                                    checked data-layout="" />
-                                <label class="form-check-label" for="skinlight">Light</label>
-                            </div>
-                            <div class="form-check me-1">
-                                <input type="radio" id="skinbordered" name="skinradio"
-                                    class="form-check-input layout-name" data-layout="bordered-layout" />
-                                <label class="form-check-label" for="skinbordered">Bordered</label>
-                            </div>
-                            <div class="form-check me-1">
-                                <input type="radio" id="skindark" name="skinradio" class="form-check-input layout-name"
-                                    data-layout="dark-layout" />
-                                <label class="form-check-label" for="skindark">Dark</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="radio" id="skinsemidark" name="skinradio"
-                                    class="form-check-input layout-name" data-layout="semi-dark-layout" />
-                                <label class="form-check-label" for="skinsemidark">Semi Dark</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr />
-
-                    <!-- Menu -->
-                    <div class="customizer-menu px-2">
-                        <div id="customizer-menu-collapsible" class="d-flex">
-                            <p class="fw-bold me-auto m-0">Menu Collapsed</p>
-                            <div class="form-check form-check-primary form-switch">
-                                <input type="checkbox" class="form-check-input" id="collapse-sidebar-switch" />
-                                <label class="form-check-label" for="collapse-sidebar-switch"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <hr />
-
-                    <!-- Layout Width -->
-                    <div class="customizer-footer px-2">
-                        <p class="fw-bold">Layout Width</p>
-                        <div class="d-flex">
-                            <div class="form-check me-1">
-                                <input type="radio" id="layout-width-full" name="layoutWidth" class="form-check-input"
-                                    checked />
-                                <label class="form-check-label" for="layout-width-full">Full Width</label>
-                            </div>
-                            <div class="form-check me-1">
-                                <input type="radio" id="layout-width-boxed" name="layoutWidth"
-                                    class="form-check-input" />
-                                <label class="form-check-label" for="layout-width-boxed">Boxed</label>
-                            </div>
-                        </div>
-                    </div>
-                    <hr />
-
-                    <!-- Navbar -->
-                    <div class="customizer-navbar px-2">
-                        <div id="customizer-navbar-colors">
-                            <p class="fw-bold">Navbar Color</p>
-                            <ul class="list-inline unstyled-list">
-                                <li class="color-box bg-white border selected" data-navbar-default=""></li>
-                                <li class="color-box bg-primary" data-navbar-color="bg-primary"></li>
-                                <li class="color-box bg-secondary" data-navbar-color="bg-secondary"></li>
-                                <li class="color-box bg-success" data-navbar-color="bg-success"></li>
-                                <li class="color-box bg-danger" data-navbar-color="bg-danger"></li>
-                                <li class="color-box bg-info" data-navbar-color="bg-info"></li>
-                                <li class="color-box bg-warning" data-navbar-color="bg-warning"></li>
-                                <li class="color-box bg-dark" data-navbar-color="bg-dark"></li>
-                            </ul>
-                        </div>
-
-                        <p class="navbar-type-text fw-bold">Navbar Type</p>
-                        <div class="d-flex">
-                            <div class="form-check me-1">
-                                <input type="radio" id="nav-type-floating" name="navType" class="form-check-input"
-                                    checked />
-                                <label class="form-check-label" for="nav-type-floating">Floating</label>
-                            </div>
-                            <div class="form-check me-1">
-                                <input type="radio" id="nav-type-sticky" name="navType" class="form-check-input" />
-                                <label class="form-check-label" for="nav-type-sticky">Sticky</label>
-                            </div>
-                            <div class="form-check me-1">
-                                <input type="radio" id="nav-type-static" name="navType" class="form-check-input" />
-                                <label class="form-check-label" for="nav-type-static">Static</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="radio" id="nav-type-hidden" name="navType" class="form-check-input" />
-                                <label class="form-check-label" for="nav-type-hidden">Hidden</label>
-                            </div>
-                        </div>
-                    </div>
-                    <hr />
-
-                    <!-- Footer -->
-                    <div class="customizer-footer px-2">
-                        <p class="fw-bold">Footer Type</p>
-                        <div class="d-flex">
-                            <div class="form-check me-1">
-                                <input type="radio" id="footer-type-sticky" name="footerType"
-                                    class="form-check-input" />
-                                <label class="form-check-label" for="footer-type-sticky">Sticky</label>
-                            </div>
-                            <div class="form-check me-1">
-                                <input type="radio" id="footer-type-static" name="footerType" class="form-check-input"
-                                    checked />
-                                <label class="form-check-label" for="footer-type-static">Static</label>
-                            </div>
-                            <div class="form-check me-1">
-                                <input type="radio" id="footer-type-hidden" name="footerType"
-                                    class="form-check-input" />
-                                <label class="form-check-label" for="footer-type-hidden">Hidden</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <!-- End: Customizer-->
         </div>
     </div>
 </div>
+
+<!-- BEGIN: Customizer-->
+<div class="customizer d-none d-md-block"><a class="customizer-toggle d-flex align-items-center justify-content-center"
+        href="javascript:void(0)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-eye">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+        </svg></a>
+</div>
+<!-- End: Customizer-->

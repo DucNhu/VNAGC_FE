@@ -36,6 +36,20 @@
   transform: scale(1.5);
   transition: .5s;
 }
+
+
+.dropzone {
+    position: relative;
+}
+.img-avatar {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+}
+
 /* END Img */
 
 .icon-menu__box {
@@ -62,6 +76,7 @@
   vertical-align: text-top;
 }
 
+
 /* END List product Admin */
 
 /* Create product */
@@ -74,7 +89,9 @@
     display: none
 } */
 /* Blogger page */
-fieldset .box-content{
+fieldset .box-metarial,
+fieldset .box-content,
+fieldset .box-step {
     border: 1px dashed rgba(128, 128, 128, 0.585);
     margin-bottom: 1rem;
 }

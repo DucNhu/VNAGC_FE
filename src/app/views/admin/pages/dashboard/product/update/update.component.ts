@@ -13,7 +13,7 @@ export class UpdateProductComponent implements OnInit {
 
   loading = false;
   listSale = [10, 20, 30, 40]
-  listUnit = ["Hộp", "Gói", "Chai"]
+  listUnit = ["boxes", "package", "Bottle"]
   listCategory = ["Fruit", "Drink", "Cake"]
   money = 0;
   // Step bar
@@ -22,6 +22,11 @@ export class UpdateProductComponent implements OnInit {
   load = true;
   formInfor: FormGroup;
   formImg: FormGroup;
+
+
+  avatar;
+  avatar_cover;
+  list_img_feature: any = [{ data: '' }];
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
@@ -42,9 +47,9 @@ export class UpdateProductComponent implements OnInit {
     });
 
     this.formImg = this.fb.group({
-      avatar: ['',],
-      avatar_cover: ['',],
-      listImg_feature: new FormArray([]),
+      // avatar: ['',],
+      // avatar_cover: ['',],
+      // listImg_feature: new FormArray([]),
     });
   }
 
@@ -94,5 +99,80 @@ export class UpdateProductComponent implements OnInit {
       create_at: [dt.create_at],
       update_at: [dt.update_at]
     })
+  }
+
+  permitFile;
+  indexOflist_img_feature = 0;
+  updateFile(event, type) {
+    let fileList: FileList = event.target.files;
+    const file: File = fileList[0];
+    this.permitFile = file;
+    this.handleInputChange(file, type, 0); //turn into base64
+  }
+
+  updateListFile(event, index) {
+    let fileList: FileList = event.target.files;
+    const file: File = fileList[0];
+    this.permitFile = file;
+    this.handleInputChange(file, index, 1); //turn into base64
+  }
+  handleInputChange(files, type, isListImgFeature) {
+    var file = files;
+    var pattern = /image-*/;
+    var reader = new FileReader();
+    if (!file.type.match(pattern)) {
+      alert('invalid format');
+      return;
+    }
+    if (isListImgFeature) {
+      reader.onloadend = this.setImgFeature.bind(this);
+      this.indexOflist_img_feature = type;
+    }
+    else {
+      if (type) {
+        reader.onloadend = this.setValueAvatar.bind(this);
+      }
+      else {
+        reader.onloadend = this.setValueAvatarCover.bind(this);
+      }
+    }
+
+    reader.readAsDataURL(file);
+  }
+  setValueAvatar(e) {
+    let reader = e.target;
+    this.avatar = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+  }
+  setValueAvatarCover(e) {
+    let reader = e.target;
+    this.avatar_cover = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+  }
+  setImgFeature(e) {
+    let reader = e.target;
+    this.list_img_feature[this.indexOflist_img_feature].data = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+  }
+
+  addSlotImgFeature() {
+    if (this.list_img_feature[this.list_img_feature.length - 1].data) {
+      this.list_img_feature.push({})
+    }
+  }
+
+  sendImg(val) {
+    this.list_img_feature.forEach(item => {
+      let data = {
+        "product_id": val.id,
+        "avatar_feature": item.data
+      }
+      this.productService.createImgFeature(data).subscribe(
+        dt => {
+          this.loading = false;
+          this.route.navigate(["/admin/product/list"])
+        },
+        err => {
+          this.loading = false;
+        }
+      )
+    });
   }
 }
