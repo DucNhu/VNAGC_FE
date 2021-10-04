@@ -137,7 +137,7 @@ export class ProductCreateComponent implements OnInit {
 
   addSlotImgFeature() {
     if (this.list_img_feature.length != 0) {
-      if (this.list_img_feature[this.list_img_feature.length - 1].avatar_feature) {
+      if (this.list_img_feature[this.list_img_feature.length - 1].data) {
         this.list_img_feature.push({ data: '' })
       }
     }

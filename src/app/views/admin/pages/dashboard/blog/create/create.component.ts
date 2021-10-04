@@ -42,6 +42,7 @@ export class CreateBlogComponent implements OnInit {
   avatar_cover;
   list_img_step: any = [{ data: '' }];
   list_img_content: any = [{ data: '' }];
+  blogId = null;
 
   loading = false;
   constructor(
@@ -135,8 +136,7 @@ export class CreateBlogComponent implements OnInit {
         )],
         avatar: [''],
         avatar_cover: [''],
-        description: [''],
-        url_youtube: ['']
+        description: ['']
       })
     )
   }
@@ -233,19 +233,18 @@ export class CreateBlogComponent implements OnInit {
     let reader = e.target;
     this.avatar_cover = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
   }
-
   createBlog() {
     let form = this.formBlog;
     let nowDate = new Date().toLocaleDateString();
     let nowTime = new Date().toLocaleTimeString();
     let data = {
-      "name": form.get('name'),
+      "name": form.get('name').value,
       "banner_img": this.avatar,
       "cover_img": this.avatar_cover,
-      "cooking_time": form.get('cooking_time'),
-      "summary": form.get('summary'),
-      "description": form.get('desciption'),
-      "url_video_utube": form.get('url_video_utube'),
+      "cooking_time": form.get('cooking_time').value,
+      "summary": form.get('summary').value,
+      "description": form.get('description').value,
+      "url_video_utube": form.get('url_video_utube').value,
       "view": 0,
       "status": 0,
       "user_id": '1',
@@ -255,11 +254,14 @@ export class CreateBlogComponent implements OnInit {
       "update_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
     }
     this.loading = true;
-
+    console.log(data)
     this.blogService.create(data).subscribe(
       dt => {
-        // this.sendImg(dt)
-        this.route.navigate(["/admin/blog/list"])
+        this.loading = false;
+        this.blogId = dt.id;
+        this.createMetarial();
+        this.createContent();
+        this.createStep()
       },
       err => {
         this.loading = false;
@@ -267,6 +269,72 @@ export class CreateBlogComponent implements OnInit {
     )
   }
 
+  createMetarial() {
+    this.listMetarial().forEach(e => {
+      console.log(e)
+      let value=e.value;
+      let data = {
+        "title": value.name,
+        "unit": value.unit,
+        "mass": value.content,
+        "order": 0,
+        "blog_id": this.blogId
+      }
+      console.log(data)
+      this.blogService.createMetarial(data).subscribe(
+      dt => {
+        this.loading = false;
+      },
+        err => {
+          this.loading = false;
+        }
+    )
+    })
+  }
+
+  createStep() {
+    this.listStep().forEach(e => {
+      let value = e.value;
+      let data = {
+        "name": value.name,
+        "description": value.description,
+        "banner_img": value.avatar,
+        "order": 0,
+        "blog_id": this.blogId
+      }
+      console.log(data)
+      this.blogService.createStep(data).subscribe(
+        dt => {
+          this.loading = false;
+        },
+        err => {
+          this.loading = false;
+        }
+      )
+    })
+  }
+  
+  createContent() {
+    this.listContent().forEach(e => {
+      let value = e.value;
+      let data = {
+        "name": value.title,
+        "content": value.description,
+        "banner_img": value.avatar,
+        "banner_cover": value.avatar_cover,
+        "blog_id": this.blogId
+      }
+      console.log(data)
+      this.blogService.createContent(data).subscribe(
+        dt => {
+          this.loading = false;
+        },
+        err => {
+          this.loading = false;
+        }
+      )
+    })
+  }
   sendImg(val) {
     // this.list_img_feature.forEach(item => {
     //   let data = {
