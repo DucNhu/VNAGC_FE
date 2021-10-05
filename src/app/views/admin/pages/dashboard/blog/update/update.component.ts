@@ -1,25 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
-import {
-  CdkDrag,
-  CdkDragStart,
-  CdkDropList,
-  CdkDropListGroup,
-  CdkDragMove,
-  CdkDragEnter,
-  moveItemInArray
-} from "@angular/cdk/drag-drop";
-import { ViewportRuler } from "@angular/cdk/overlay";
-import { BlogService } from 'src/app/core/_service/blog/blog.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BlogService } from 'src/app/core/_service/blog/blog.service';
+import { ProductService } from 'src/app/core/_service/product.service';
 
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css']
+  selector: 'app-update',
+  templateUrl: './update.component.html',
+  styleUrls: ['./update.component.css']
 })
-export class CreateBlogComponent implements OnInit {
+export class UpdateComponent implements OnInit {
   listCategory = ["Tea", "Coffe", "Coca"];
   time = { hour: 13, minute: 30 };
   selectedHastags: any[];
@@ -51,13 +42,48 @@ export class CreateBlogComponent implements OnInit {
     private blogService: BlogService,
     private route: Router,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) {
+    this.registerFormBlog();
+  }
+  blockId = this.activatedRoute.snapshot.paramMap.get('id');
 
   ngOnInit(): void {
-    this.registerFormBlog();
-    console.log(this.activatedRoute.snapshot.paramMap.get('id'))
+    Promise.all([
+      this.getBlog(),
+      this.getMetarial(),
+      this.getContents(),
+      this.getStep()
+    ]).then(
+      dt => {
+        if (dt[0]) {
+          this.setFormBlog(dt[0])
+        }
+        console.log(dt[1]);
+        console.log(dt[2]);
+        console.log(dt[3]);
+      }
+    )
   }
 
+  setFormBlog(val) {
+    console.log(val);
+    this.formBlog.patchValue(
+      {
+        name: val.name,
+        category: 'Tea',
+        hashTag: [''],
+        cooking_time: val.cooking_time,
+        summary: val.summary,
+        description: val.description,
+        url_video_utube: val.cooking_time,
+        metarial: val.cooking_time,
+        step: val.cooking_time,
+        content: [''],
+        status: val.status
+      }
+    )
+    this.avatar = val.banner_img;
+  }
   registerFormBlog() {
     this.formBlog = this.fb.group(
       {
@@ -78,11 +104,50 @@ export class CreateBlogComponent implements OnInit {
         metarial: this.fb.array([]),
         step: this.fb.array([]),
         content: this.fb.array([]),
+        status: [false]
       }
     )
     this.addContent();
     this.addMetarial();
     this.addStep();
+  }
+
+
+
+  getBlog(): Promise<any> {
+    return new Promise(
+      async (resolve) => {
+        const dt = this.blogService.getBlog(this.activatedRoute.snapshot.paramMap.get('id')).toPromise();
+        return resolve(dt)
+      }
+    )
+
+  }
+  getMetarial(): Promise<any> {
+    return new Promise(
+      async (resolve) => {
+        const dt = this.blogService.getMetarial(this.activatedRoute.snapshot.paramMap.get('id')).toPromise();
+        return resolve(dt)
+      }
+    )
+  }
+
+  getContents(): Promise<any> {
+    return new Promise(
+      async (resolve) => {
+        const dt = this.blogService.getContents(this.activatedRoute.snapshot.paramMap.get('id')).toPromise();
+        return resolve(dt)
+      }
+    )
+  }
+
+  getStep(): Promise<any> {
+    return new Promise(
+      async (resolve) => {
+        const dt = this.blogService.getStep(this.activatedRoute.snapshot.paramMap.get('id')).toPromise();
+        return resolve(dt)
+      }
+    )
   }
 
   listStep = () => {
@@ -165,7 +230,7 @@ export class CreateBlogComponent implements OnInit {
   permitFile;
   indexOflist_img_feature = 0;
   isListStep = 0;
-  isAvatarCover=false;
+  isAvatarCover = false;
   updateFile(event, type) {
     let fileList: FileList = event.target.files;
     const file: File = fileList[0];
@@ -274,7 +339,7 @@ export class CreateBlogComponent implements OnInit {
   createMetarial() {
     this.listMetarial().forEach(e => {
       console.log(e)
-      let value=e.value;
+      let value = e.value;
       let data = {
         "title": value.name,
         "unit": value.unit,
@@ -284,13 +349,13 @@ export class CreateBlogComponent implements OnInit {
       }
       console.log(data)
       this.blogService.createMetarial(data).subscribe(
-      dt => {
-        this.loading = false;
-      },
+        dt => {
+          this.loading = false;
+        },
         err => {
           this.loading = false;
         }
-    )
+      )
     })
   }
 
@@ -315,7 +380,7 @@ export class CreateBlogComponent implements OnInit {
       )
     })
   }
-  
+
   createContent() {
     this.listContent().forEach(e => {
       let value = e.value;

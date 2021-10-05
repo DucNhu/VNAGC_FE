@@ -29,7 +29,7 @@ export class BlogService {
 
   // Metarial
   getMetarial(id) {
-    return this.helperService.get("Metarials", id);
+    return this.helperService.get("Metarials/GetMetarial", id);
   }
 
   createMetarial(data) {
@@ -46,7 +46,7 @@ export class BlogService {
 
   // Step
   getStep(id) {
-    return this.helperService.get("Steps", id);
+    return this.helperService.get("Steps/GetStep", id);
   }
 
   createStep(data) {
@@ -62,7 +62,7 @@ export class BlogService {
   }
   // Content orther
   getContents(id) {
-    return this.helperService.get("Contents", id);
+    return this.helperService.get("Contents/GetContent", id);
   }
 
   createContent(data) {

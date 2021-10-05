@@ -8,7 +8,7 @@ import { BlogService } from 'src/app/core/_service/blog/blog.service';
   styleUrls: ['./list.component.css']
 })
 export class ListBlogComponent implements OnInit {
-
+  loading = true;
   constructor(
     private blogService: BlogService,
     private route: Router
@@ -17,16 +17,18 @@ export class ListBlogComponent implements OnInit {
   listBlog = [{}];
   ngOnInit(): void {
     this.blogService.getAllBlogeres().subscribe(
-      (dt:any) => {
+      (dt: any) => {
         this.listBlog = dt;
-        console.log(this.listBlog)
+        this.loading = false;
+      },
+      err => {
+        this.loading = false;
       }
     )
   }
 
   routerUpdate(id) {
-    console.log(this.route.url.split('/')[1] + this.route.url.split('/')[2])
-    this.route.navigate(["/" + this.route.url.split('/')[1] + "/" + this.route.url.split('/')[2] + "/update"])
+    this.route.navigateByUrl("/" + this.route.url.split('/')[1] + "/" + this.route.url.split('/')[2] + "/update", { state: id })
   }
 
 }

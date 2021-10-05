@@ -20,6 +20,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BlogComponent } from './blog.component';
 import { ListBlogComponent } from './list/list.component';
 import { CreateBlogComponent } from './create/create.component';
+import { UpdateComponent } from './update/update.component';
 
 const routes: Routes = [
     {
@@ -33,7 +34,7 @@ const routes: Routes = [
             },
             {
                 path: 'update',
-                component: CreateBlogComponent
+                component: UpdateComponent
             }
         ]
     },
@@ -42,7 +43,8 @@ const routes: Routes = [
     declarations: [
         ListBlogComponent,
         BlogComponent,
-        CreateBlogComponent
+        CreateBlogComponent,
+        UpdateComponent
     ],
     imports: [
         CommonModule,
