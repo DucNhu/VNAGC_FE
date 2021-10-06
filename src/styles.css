@@ -37,6 +37,9 @@
   transition: .5s;
 }
 
+.backdrop, .sk-cube-grid{
+    position: fixed !important;
+}
 
 .dropzone {
     position: relative;
@@ -108,3 +111,15 @@ fieldset .box-step {
     margin-bottom: 1rem;
 }
 /* End Blogger page */
+
+/* Lisst product */
+.woocommerce-loop-product__title {
+  display: inline-block;
+    word-wrap: break-word;
+    overflow: hidden;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+/* End lít Product */

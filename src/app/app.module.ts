@@ -24,6 +24,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CartComponent } from './views/client/pages/cart/cart.component';
 import { BlogDetailComponent } from './views/client/pages/blog-detail/blog-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ShopComponent } from './views/client/pages/shop/shop.component';
 // import { SwiperModule } from "swiper/angular";
 
 export function initializeApp(AppConfig: AppConfig) {
@@ -40,6 +41,7 @@ export function initializeApp(AppConfig: AppConfig) {
     ActiveAccountComponent,
     CartComponent,
     BlogDetailComponent,
+    ShopComponent,
   ],
   imports: [
     BrowserModule,

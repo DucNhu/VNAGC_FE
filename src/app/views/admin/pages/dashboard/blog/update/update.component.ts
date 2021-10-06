@@ -34,8 +34,9 @@ export class UpdateComponent implements OnInit {
   list_img_step: any = [{ data: '' }];
   list_img_content: any = [{ data: '' }];
 
-  loading = false;
+  loading = true;
   isSuccess = false;
+  checkUpdateSuccess = false;
   constructor(
     private fb: FormBuilder,
     private blogService: BlogService,
@@ -54,7 +55,7 @@ export class UpdateComponent implements OnInit {
       this.getStep()
     ]).then(
       dt => {
-        console.log(dt[1].length)
+        this.loading = false;
         this.setFormBlog(dt[0])
 
         this.setFormMetarial(dt[1])
@@ -66,6 +67,7 @@ export class UpdateComponent implements OnInit {
 
 
   createBlog() {
+    this.loading = true;
     let form = this.formBlog;
     let nowDate = new Date().toLocaleDateString();
     let nowTime = new Date().toLocaleTimeString();
@@ -86,11 +88,13 @@ export class UpdateComponent implements OnInit {
       "create_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
       "update_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
     }
-    this.loading = true;
-    console.log(data)
+
     this.blogService.update(data).subscribe(
       dt => {
-        this.loading = false;
+        setTimeout(() => {
+          this.checkUpdateSuccess = false;
+          window.location.reload()
+        }, 1500);
         this.createMetarial();
         this.createContent();
         this.createStep()
@@ -262,7 +266,24 @@ export class UpdateComponent implements OnInit {
     )
   }
   removeStep(i) {
-    return (this.formBlog.get('step') as FormArray).removeAt(i)
+    console.log(i)
+    if (i.id != 0) {
+      this.loading = true;
+      this.blogService.deleteStep(i.id).subscribe(
+        dt => {
+          this.loading = false;
+         return (this.formBlog.get('step') as FormArray).removeAt(i)
+        },
+        err => {
+          this.loading = false;
+          return false
+        }
+      )
+    }
+    else {
+     return (this.formBlog.get('step') as FormArray).removeAt(i)
+    }
+    
   }
 
   listMetarial = () => {
@@ -277,7 +298,7 @@ export class UpdateComponent implements OnInit {
         name: ['', Validators.compose(
           [Validators.required]
         )],
-        content: ['', Validators.compose(
+        content: [0, Validators.compose(
           [Validators.required]
         )],
         unit: ['', Validators.compose(
@@ -287,7 +308,22 @@ export class UpdateComponent implements OnInit {
     )
   }
   removeMetarial(i) {
-    return (this.formBlog.get('metarial') as FormArray).removeAt(i)
+    if (i.id != 0) {
+      this.loading = true;
+      this.blogService.deleteMetarial(i.id).subscribe(
+        dt => {
+          this.loading = false;
+          return (this.formBlog.get('metarial') as FormArray).removeAt(i)
+        },
+        err => {
+          this.loading = false;
+          return false
+        }
+      )
+    }
+    else {
+      return (this.formBlog.get('metarial') as FormArray).removeAt(i)
+    }
   }
 
   listContent = () => {
@@ -309,7 +345,24 @@ export class UpdateComponent implements OnInit {
     )
   }
   removeContent(i) {
-    return (this.formBlog.get('content') as FormArray).removeAt(i)
+    console.log(i)
+    if (i.id != 0) {
+      this.loading = true;
+      this.blogService.deleteStep(i.id).subscribe(
+        dt => {
+          this.loading = false;
+          return (this.formBlog.get('content') as FormArray).removeAt(i)
+        },
+        err => {
+          this.loading = false;
+          return false
+        }
+      )
+    }
+    else {
+      return (this.formBlog.get('content') as FormArray).removeAt(i)
+    }
+    
   }
   equals(objOne, objTwo) {
     if (typeof objOne !== 'undefined' && typeof objTwo !== 'undefined') {
@@ -413,17 +466,18 @@ export class UpdateComponent implements OnInit {
         "order": 0,
         "blog_id": this.blogId
       }
-      
+
       if (value.id != 0) {
         this.updatMetarial(data)
       }
       else {
         this.blogService.createMetarial(data).subscribe(
           dt => {
-            this.loading = false;
+            // this.loading = false;
+            console.log(dt)
           },
           err => {
-            this.loading = false;
+            // this.loading = false;
           }
         )
       }
@@ -447,10 +501,9 @@ export class UpdateComponent implements OnInit {
       else {
         this.blogService.createStep(data).subscribe(
           dt => {
-            this.loading = false;
+            console.log(dt)
           },
           err => {
-            this.loading = false;
           }
         )
       }
@@ -475,14 +528,13 @@ export class UpdateComponent implements OnInit {
       else {
         this.blogService.createContent(data).subscribe(
           dt => {
-            this.loading = false;
+            console.log(dt)
           },
           err => {
-            this.loading = false;
           }
         )
       }
-      
+
     })
   }
 
@@ -490,49 +542,31 @@ export class UpdateComponent implements OnInit {
   updatMetarial(data) {
     this.blogService.updateMetarial(data).subscribe(
       dt => {
-        this.loading = false;
+        console.log(dt)
       },
       err => {
-        this.loading = false;
       }
     )
   }
   updateContent(data) {
     this.blogService.updateContent(data).subscribe(
       dt => {
-        this.loading = false;
+        console.log(dt)
       },
       err => {
-        this.loading = false;
       }
     )
   }
   updateStep(data) {
     this.blogService.updateStep(data).subscribe(
       dt => {
-        this.loading = false;
+        // this.loading = false;
+
       },
       err => {
-        this.loading = false;
       }
     )
   }
-  sendImg(val) {
-    // this.list_img_feature.forEach(item => {
-    //   let data = {
-    //     "product_id": val.id,
-    //     "avatar_feature": item.data
-    //   }
-    //   this.prductService.createImgFeature(data).subscribe(
-    //     dt => {
-    //       this.loading = false;
-    //       this.route.navigate(["/admin/product/list"])
-    //     },
-    //     err => {
-    //       this.loading = false;
-    //     }
-    //   )
-    // });
-  }
+
   // End Logic Image
 }

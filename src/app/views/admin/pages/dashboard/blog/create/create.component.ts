@@ -114,7 +114,7 @@ export class CreateBlogComponent implements OnInit {
         name: ['', Validators.compose(
           [Validators.required]
         )],
-        content: ['', Validators.compose(
+        content: [0, Validators.compose(
           [Validators.required]
         )],
         unit: ['', Validators.compose(

@@ -10,8 +10,6 @@ import { ProductService } from 'src/app/core/_service/product.service';
   styleUrls: ['./update.component.css']
 })
 export class UpdateProductComponent implements OnInit {
-
-
   loading = true;
   listSale = [10, 20, 30, 40]
   listUnit = ["boxes", "package", "Bottle"]
@@ -110,11 +108,8 @@ export class UpdateProductComponent implements OnInit {
       "update_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
     }
     this.loading = true;
-    console.log(data);
     this.productService.update(data).subscribe(
       dt => {
-        console.log("OK");
-        
         this.sendImg()
       },
       err => {
@@ -191,12 +186,12 @@ export class UpdateProductComponent implements OnInit {
   }
 
   addSlotImgFeature() {
-    if (this.list_img_feature.length!=0) {
+    if (this.list_img_feature.length != 0) {
       if (this.list_img_feature[this.list_img_feature.length - 1].avatar_feature) {
         this.list_img_feature.push({ dataByDb: false })
       }
     }
-    else { this.list_img_feature.push({ dataByDb: false })}
+    else { this.list_img_feature.push({ dataByDb: false }) }
   }
 
   sendImg() {

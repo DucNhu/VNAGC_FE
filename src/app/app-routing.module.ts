@@ -9,6 +9,7 @@ import { ProductDetailComponent } from './views/client/pages/product-detail/prod
 import { ActiveAccountComponent } from './views/client/pages/authen/active-account/active-account.component';
 import { CartComponent } from './views/client/pages/cart/cart.component';
 import { BlogDetailComponent } from './views/client/pages/blog-detail/blog-detail.component';
+import { ShopComponent } from './views/client/pages/shop/shop.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
       {
         path: 'checkout',
         component: CheckoutComponent
+      },
+      {
+        path: 'shop',
+        component: ShopComponent
       },
       {
         path: 'cart',

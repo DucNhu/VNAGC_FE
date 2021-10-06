@@ -14,15 +14,26 @@ export class ListProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.productService.getAllProducts().subscribe(
+    Promise.all(
+      [
+        this.getProduct()
+      ]
+    ).then(
       (dt: any) => {
-        this.listProduct = dt;
+        this.listProduct = dt[0];
         this.load = false;
       },
       err => {
         this.load = false;
       }
     )
+  }
+
+  getProduct(): Promise<any> {
+    return new Promise(async (resolve) => {
+      const dt = await this.productService.getAllProducts().toPromise();
+      resolve(dt);
+    });
   }
 
   deleteProduct(id) {

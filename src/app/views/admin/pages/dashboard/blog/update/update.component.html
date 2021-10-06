@@ -62,12 +62,12 @@
                                         </div>
                                         <div class="mb-1 row mx-0">
                                             <div class="col-md-6 p-0">
-                                                <div>
+                                                <div class="mb-3">
                                                     <label class="form-label" for="summary">Summary</label>
                                                     <textarea type="text" rows="3" class="form-control" formControlName="summary" id="summary"></textarea>
                                                 </div>
                                                 <div>
-                                                    <label class="form-label d-block" >Summary</label>
+                                                    <label class="form-label d-block" >Status</label>
                                                     <mat-slide-toggle formControlName="status">status</mat-slide-toggle>
                                                 </div>
                                             </div>
@@ -121,7 +121,7 @@
                                                         [formGroupName]="i">
                                                         <h2 class="h2_title">
                                                             <button mat-button class="btn-trash"
-                                                                (click)="removeContent(i)">
+                                                                (click)="removeMetarial(item.value)">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                     height="24" viewBox="0 0 24 24" fill="none"
                                                                     stroke="currentColor" stroke-width="2"
@@ -197,7 +197,7 @@
                                                         [formGroupName]="i">
                                                         <h2 class="h2_title">
                                                             <button mat-button class="btn-trash"
-                                                                (click)="removeContent(i)">
+                                                                (click)="removeStep(item.value)">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                     height="24" viewBox="0 0 24 24" fill="none"
                                                                     stroke="currentColor" stroke-width="2"
@@ -274,7 +274,7 @@
                                                         [formGroupName]="i">
                                                         <h2 class="h2_title">
                                                             <button mat-button class="btn-trash"
-                                                                (click)="removeContent(i)">
+                                                                (click)="removeContent(item.value)">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                     height="24" viewBox="0 0 24 24" fill="none"
                                                                     stroke="currentColor" stroke-width="2"
@@ -371,7 +371,7 @@
                                         <div class="col-12 d-flex flex-sm-row flex-column mt-2">
                                             <button type="submit"
                                                 class="btn btn-primary mb-1 mb-sm-0 me-0 me-sm-1 waves-effect waves-float waves-light"
-                                                (click)="createBlog()">Save
+                                                (click)="createBlog();">Save
                                             </button>
                                         </div>
                                     </div>
