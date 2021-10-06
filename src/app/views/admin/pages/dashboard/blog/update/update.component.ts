@@ -33,7 +33,6 @@ export class UpdateComponent implements OnInit {
   avatar_cover;
   list_img_step: any = [{ data: '' }];
   list_img_content: any = [{ data: '' }];
-  blogId = null;
 
   loading = false;
   isSuccess = false;
@@ -45,7 +44,7 @@ export class UpdateComponent implements OnInit {
   ) {
     this.registerFormBlog();
   }
-  blockId = this.activatedRoute.snapshot.paramMap.get('id');
+  blogId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
 
   ngOnInit(): void {
     Promise.all([
@@ -55,30 +54,126 @@ export class UpdateComponent implements OnInit {
       this.getStep()
     ]).then(
       dt => {
-        if (dt[0]) {
-          this.setFormBlog(dt[0])
-        }
-        console.log(dt[1]);
-        console.log(dt[2]);
-        console.log(dt[3]);
+        console.log(dt[1].length)
+        this.setFormBlog(dt[0])
+
+        this.setFormMetarial(dt[1])
+        this.setFormContent(dt[2])
+        this.setFormSteps(dt[3])
       }
     )
   }
 
+
+  createBlog() {
+    let form = this.formBlog;
+    let nowDate = new Date().toLocaleDateString();
+    let nowTime = new Date().toLocaleTimeString();
+    let data = {
+      "id": this.blogId,
+      "name": form.get('name').value,
+      "banner_img": this.avatar,
+      "cover_img": this.avatar_cover,
+      "cooking_time": form.get('cooking_time').value,
+      "summary": form.get('summary').value,
+      "description": form.get('description').value,
+      "url_video_utube": form.get('url_video_utube').value,
+      "view": 0,
+      "status": 0,
+      "user_id": '1',
+      "category_id": 0,
+
+      "create_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
+      "update_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
+    }
+    this.loading = true;
+    console.log(data)
+    this.blogService.update(data).subscribe(
+      dt => {
+        this.loading = false;
+        this.createMetarial();
+        this.createContent();
+        this.createStep()
+      },
+      err => {
+        this.loading = false;
+      }
+    )
+  }
+
+  setFormContent(val) {
+    console.log(val)
+    val.forEach(e => {
+      this.listContent().push(
+        this.fb.group({
+          id: [e.id, Validators.compose(
+            [Validators.required]
+          )],
+          title: [e.name, Validators.compose(
+            [Validators.required]
+          )],
+          avatar: [e.banner_img],
+          avatar_cover: [e.banner_cover],
+          description: [e.content]
+        })
+      )
+    });
+  }
+
+  setFormSteps(val) {
+    val.forEach(e => {
+      this.listStep().push(
+        this.fb.group({
+          id: [e.id, Validators.compose(
+            [Validators.required]
+          )],
+          name: [e.name, Validators.compose(
+            [Validators.required]
+          )],
+          description: [e.desciption, Validators.compose(
+            [Validators.required]
+          )],
+          avatar: [e.banner_img, Validators.compose(
+            [Validators.required]
+          )]
+        })
+      )
+    });
+  }
+
+  setFormMetarial(val) {
+    val.forEach(e => {
+      this.listMetarial().push(
+        this.fb.group({
+          id: [e.id, Validators.compose(
+            [Validators.required]
+          )],
+          name: [e.title, Validators.compose(
+            [Validators.required]
+          )],
+          content: [e.mass, Validators.compose(
+            [Validators.required]
+          )],
+          unit: [e.unit, Validators.compose(
+            [Validators.required]
+          )]
+        })
+      )
+    });
+  }
+
   setFormBlog(val) {
-    console.log(val);
     this.formBlog.patchValue(
       {
         name: val.name,
         category: 'Tea',
-        hashTag: [''],
+        hashTag: '',
         cooking_time: val.cooking_time,
         summary: val.summary,
         description: val.description,
         url_video_utube: val.cooking_time,
-        metarial: val.cooking_time,
-        step: val.cooking_time,
-        content: [''],
+        // metarial: val.cooking_time,
+        // step: val.cooking_time,
         status: val.status
       }
     )
@@ -107,9 +202,6 @@ export class UpdateComponent implements OnInit {
         status: [false]
       }
     )
-    this.addContent();
-    this.addMetarial();
-    this.addStep();
   }
 
 
@@ -156,6 +248,9 @@ export class UpdateComponent implements OnInit {
   addStep() {
     return this.listStep().push(
       this.fb.group({
+        id: [0, Validators.compose(
+          [Validators.required]
+        )],
         name: ['', Validators.compose(
           [Validators.required]
         )],
@@ -176,6 +271,9 @@ export class UpdateComponent implements OnInit {
   addMetarial() {
     return this.listMetarial().push(
       this.fb.group({
+        id: [0, Validators.compose(
+          [Validators.required]
+        )],
         name: ['', Validators.compose(
           [Validators.required]
         )],
@@ -198,6 +296,9 @@ export class UpdateComponent implements OnInit {
   addContent() {
     return this.listContent().push(
       this.fb.group({
+        id: [0, Validators.compose(
+          [Validators.required]
+        )],
         title: ['', Validators.compose(
           [Validators.required]
         )],
@@ -300,62 +401,32 @@ export class UpdateComponent implements OnInit {
     let reader = e.target;
     this.avatar_cover = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
   }
-  createBlog() {
-    let form = this.formBlog;
-    let nowDate = new Date().toLocaleDateString();
-    let nowTime = new Date().toLocaleTimeString();
-    let data = {
-      "name": form.get('name').value,
-      "banner_img": this.avatar,
-      "cover_img": this.avatar_cover,
-      "cooking_time": form.get('cooking_time').value,
-      "summary": form.get('summary').value,
-      "description": form.get('description').value,
-      "url_video_utube": form.get('url_video_utube').value,
-      "view": 0,
-      "status": 0,
-      "user_id": '1',
-      "category_id": 0,
-
-      "create_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
-      "update_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
-    }
-    this.loading = true;
-    console.log(data)
-    this.blogService.create(data).subscribe(
-      dt => {
-        this.loading = false;
-        this.blogId = dt.id;
-        this.createMetarial();
-        this.createContent();
-        this.createStep()
-      },
-      err => {
-        this.loading = false;
-      }
-    )
-  }
 
   createMetarial() {
     this.listMetarial().forEach(e => {
-      console.log(e)
       let value = e.value;
       let data = {
+        "id": value.id,
         "title": value.name,
         "unit": value.unit,
         "mass": value.content,
         "order": 0,
         "blog_id": this.blogId
       }
-      console.log(data)
-      this.blogService.createMetarial(data).subscribe(
-        dt => {
-          this.loading = false;
-        },
-        err => {
-          this.loading = false;
-        }
-      )
+      
+      if (value.id != 0) {
+        this.updatMetarial(data)
+      }
+      else {
+        this.blogService.createMetarial(data).subscribe(
+          dt => {
+            this.loading = false;
+          },
+          err => {
+            this.loading = false;
+          }
+        )
+      }
     })
   }
 
@@ -363,21 +434,26 @@ export class UpdateComponent implements OnInit {
     this.listStep().forEach(e => {
       let value = e.value;
       let data = {
+        "id": value.id,
         "name": value.name,
         "description": value.description,
         "banner_img": value.avatar,
         "order": 0,
         "blog_id": this.blogId
       }
-      console.log(data)
-      this.blogService.createStep(data).subscribe(
-        dt => {
-          this.loading = false;
-        },
-        err => {
-          this.loading = false;
-        }
-      )
+      if (value.id != 0) {
+        this.updateStep(data)
+      }
+      else {
+        this.blogService.createStep(data).subscribe(
+          dt => {
+            this.loading = false;
+          },
+          err => {
+            this.loading = false;
+          }
+        )
+      }
     })
   }
 
@@ -385,6 +461,7 @@ export class UpdateComponent implements OnInit {
     this.listContent().forEach(e => {
       let value = e.value;
       let data = {
+        "id": value.id,
         "name": value.title,
         "content": value.description,
         "banner_img": value.avatar,
@@ -392,15 +469,53 @@ export class UpdateComponent implements OnInit {
         "blog_id": this.blogId
       }
       console.log(data)
-      this.blogService.createContent(data).subscribe(
-        dt => {
-          this.loading = false;
-        },
-        err => {
-          this.loading = false;
-        }
-      )
+      if (value.id != 0) {
+        this.updateContent(data)
+      }
+      else {
+        this.blogService.createContent(data).subscribe(
+          dt => {
+            this.loading = false;
+          },
+          err => {
+            this.loading = false;
+          }
+        )
+      }
+      
     })
+  }
+
+
+  updatMetarial(data) {
+    this.blogService.updateMetarial(data).subscribe(
+      dt => {
+        this.loading = false;
+      },
+      err => {
+        this.loading = false;
+      }
+    )
+  }
+  updateContent(data) {
+    this.blogService.updateContent(data).subscribe(
+      dt => {
+        this.loading = false;
+      },
+      err => {
+        this.loading = false;
+      }
+    )
+  }
+  updateStep(data) {
+    this.blogService.updateStep(data).subscribe(
+      dt => {
+        this.loading = false;
+      },
+      err => {
+        this.loading = false;
+      }
+    )
   }
   sendImg(val) {
     // this.list_img_feature.forEach(item => {
