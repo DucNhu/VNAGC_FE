@@ -20,12 +20,11 @@ import { ActiveAccountComponent } from './views/client/pages/authen/active-accou
 import { LoadModule } from './core/component/load/load.module';
 import { ToasterModule } from 'angular2-toaster';
 
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 import { CartComponent } from './views/client/pages/cart/cart.component';
 import { BlogDetailComponent } from './views/client/pages/blog-detail/blog-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ShopComponent } from './views/client/pages/shop/shop.component';
-// import { SwiperModule } from "swiper/angular";
 
 export function initializeApp(AppConfig: AppConfig) {
   return () => AppConfig.load()
@@ -54,9 +53,7 @@ export function initializeApp(AppConfig: AppConfig) {
     LoadModule,
     ToasterModule,
     NgbModule,
-    // SwiperModule,
-    // MatFormFieldModule,
-    // MatInputModule
+    CarouselModule
   ],
   providers: [AppConfig,
     {
