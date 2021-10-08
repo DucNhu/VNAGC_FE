@@ -11471,7 +11471,6 @@ header[class*="header-layout-menu-below-header-center"] .social-icons-wrapper {
 }
 .home header:not(.fixed)[class*="-border"] .mainmenu .navbar {
       border-top: 1px solid var(--color-border-grey);
-      border-bottom: 2px solid var(--color-black);
 }
 .home header.header-layout-menu-above-header-border .mainmenu .navbar {
       border-top: none !important;
