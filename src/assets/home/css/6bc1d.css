@@ -17948,6 +17948,7 @@ body.woocommerce div.product .woocommerce-tabs ul.tabs *::after {
       display: block;
       text-align: center;
       margin-top: -1px;
+      width: 100%
 }
 .shopping-cart-product-remove a.remove {
       margin-top: 2px;

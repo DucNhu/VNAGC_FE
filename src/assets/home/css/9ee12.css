@@ -10515,7 +10515,10 @@ html.swipebox-html.swipebox-touch {
 .woocommerce table.cart img,
 .woocommerce-page #content table.cart img,
 .woocommerce-page table.cart img {
-  height: auto;
+  height: 32px;
+  width: 32px;
+  display: block;
+  margin: auto
 }
 .woocommerce #content table.cart td.actions,
 .woocommerce table.cart td.actions,

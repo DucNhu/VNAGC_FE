@@ -4,6 +4,7 @@ import KeenSlider from "keen-slider"
 import { ProductService } from 'src/app/core/_service/product.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { product } from 'src/app/models/product';
+import { AddToCartService } from 'src/app/core/_service/addToCart/add-to-cart.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -17,6 +18,7 @@ export class ProductDetailComponent implements OnInit {
   avatar
   avatar_cover;
   listAvatar_feature;
+  quantity=0;
   customOptions: OwlOptions = {
     margin: 25,
     loop: false,
@@ -54,7 +56,8 @@ export class ProductDetailComponent implements OnInit {
   avatarSelect;
   constructor(
     private productService: ProductService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private addToCart: AddToCartService
   ) { }
  
   listProduct;
@@ -87,5 +90,12 @@ export class ProductDetailComponent implements OnInit {
       const dt = await this.productService.GetImgProductFeature(this.activatedRoute.snapshot.paramMap.get('id')).toPromise();
       resolve(dt);
     });
+  }
+
+  addtoCart() {
+    this.product.quantity = this.quantity;
+    this.addToCart.setCart(
+      this.product
+    );
   }
 }

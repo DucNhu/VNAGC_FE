@@ -22,43 +22,36 @@
                                 </thead>
                                 <tbody>
 
-                                    <tr class="woocommerce-cart-form__cart-item cart_item">
+                                    <tr class="woocommerce-cart-form__cart-item cart_item"
+                                        *ngFor="let item of listCart; let i = index">
 
                                         <td class="product-remove">
-                                            <a href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/cart/?remove_item=cfbce4c1d7c425baf21d6b6f2babe6be&amp;_wpnonce=ef31e322b5"
-                                                class="remove" aria-label="Remove this item" data-product_id="891"
-                                                data-product_sku="43473">×</a>
+                                            <button (click)="deleteCartByIdProduct(item.id, i)" class="btn remove">×</button>
                                         </td>
 
                                         <td class="product-thumbnail">
-                                            <a
-                                                href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/product/beanie-with-logo/"><img
-                                                    width="300" height="300"
-                                                    src="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-8-300x300.jpg"
+                                            <a [routerLink]="['product-detail', {id: item.id}]"><img width="300"
+                                                    height="300"
                                                     class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-                                                    alt="" loading="lazy"
-                                                    srcset="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-8-300x300.jpg 300w, https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-8-150x150.jpg 150w, https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-8-768x768.jpg 768w, https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-8-360x360.jpg 360w, https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-8-600x600.jpg 600w, https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-8.jpg 800w"
-                                                    sizes="(max-width: 300px) 100vw, 300px"></a>
+                                                    alt="avatar" loading="lazy" [src]="item.banner_img"></a>
                                         </td>
 
                                         <td class="product-name" data-title="Product">
-                                            <a
-                                                href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/product/beanie-with-logo/">Beanie
-                                                with Logo</a>
+                                            <a [routerLink]="['product-detail', {id: item.id}]">{{item.name}}</a>
                                         </td>
 
                                         <td class="product-price" data-title="Price">
                                             <span class="woocommerce-Price-amount amount"><bdi><span
-                                                        class="woocommerce-Price-currencySymbol">$</span>18.00</bdi></span>
+                                                        class="woocommerce-Price-currencySymbol mr-3">$</span>{{item.price}}</bdi>
+                                                <del>{{'$' + item.sale}}</del></span>
                                         </td>
 
                                         <td class="product-quantity" data-title="Quantity">
                                             <div class="quantity">
-                                                <label class="screen-reader-text" for="quantity_614d1b52aacfa">Beanie
-                                                    with Logo quantity</label>
                                                 <input type="number" id="quantity_614d1b52aacfa"
-                                                    class="input-text qty text" step="1" min="0" max=""
-                                                    name="cart[cfbce4c1d7c425baf21d6b6f2babe6be][qty]" value="6"
+                                                    class="input-text qty text" step="1" min="0" max="" #quantity_i
+                                                    onkeyup="this.value = Math.abs(this.value)"
+                                                    (keyup)="setQuantity(i, quantity_i.value)" [value]="item.quantity"
                                                     title="Qty" size="4" placeholder="" inputmode="numeric">
                                             </div>
                                         </td>
@@ -68,143 +61,6 @@
                                                         class="woocommerce-Price-currencySymbol">$</span>108.00</bdi></span>
                                         </td>
                                     </tr>
-                                    <tr class="woocommerce-cart-form__cart-item cart_item">
-
-                                        <td class="product-remove">
-                                            <a href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/cart/?remove_item=9bf31c7ff062936a96d3c8bd1f8f2ff3&amp;_wpnonce=ef31e322b5"
-                                                class="remove" aria-label="Remove this item" data-product_id="15"
-                                                data-product_sku="43434">×</a>
-                                        </td>
-
-                                        <td class="product-thumbnail">
-                                            <a
-                                                href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/product/hoodie-with-zipper/"><img
-                                                    width="300" height="300"
-                                                    src="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-4-300x300.jpg"
-                                                    class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-                                                    alt="" loading="lazy"
-                                                    srcset="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-4-300x300.jpg 300w, https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-4-150x150.jpg 150w, https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-4-768x768.jpg 768w, https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-4-360x360.jpg 360w, https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-4-600x600.jpg 600w, https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-4.jpg 800w"
-                                                    sizes="(max-width: 300px) 100vw, 300px"></a>
-                                        </td>
-
-                                        <td class="product-name" data-title="Product">
-                                            <a
-                                                href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/product/hoodie-with-zipper/">Hoodie
-                                                with Zipper</a>
-                                        </td>
-
-                                        <td class="product-price" data-title="Price">
-                                            <span class="woocommerce-Price-amount amount"><bdi><span
-                                                        class="woocommerce-Price-currencySymbol">$</span>45.00</bdi></span>
-                                        </td>
-
-                                        <td class="product-quantity" data-title="Quantity">
-                                            <div class="quantity">
-                                                <label class="screen-reader-text" for="quantity_614d1b52ab13c">Hoodie
-                                                    with Zipper quantity</label>
-                                                <input type="number" id="quantity_614d1b52ab13c"
-                                                    class="input-text qty text" step="1" min="0" max=""
-                                                    name="cart[9bf31c7ff062936a96d3c8bd1f8f2ff3][qty]" value="1"
-                                                    title="Qty" size="4" placeholder="" inputmode="numeric">
-                                            </div>
-                                        </td>
-
-                                        <td class="product-subtotal" data-title="Subtotal">
-                                            <span class="woocommerce-Price-amount amount"><bdi><span
-                                                        class="woocommerce-Price-currencySymbol">$</span>45.00</bdi></span>
-                                        </td>
-                                    </tr>
-                                    <tr class="woocommerce-cart-form__cart-item cart_item">
-
-                                        <td class="product-remove">
-                                            <a href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/cart/?remove_item=704afe073992cbe4813cae2f7715336f&amp;_wpnonce=ef31e322b5"
-                                                class="remove" aria-label="Remove this item" data-product_id="886"
-                                                data-product_sku="5453">×</a>
-                                        </td>
-
-                                        <td class="product-thumbnail">
-                                            <a href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/product/polo/"><img
-                                                    width="300" height="300"
-                                                    src="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-2-300x300.jpg"
-                                                    class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-                                                    alt="" loading="lazy"
-                                                    srcset="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-2-300x300.jpg 300w, https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-2-150x150.jpg 150w, https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-2-768x768.jpg 768w, https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-2-360x360.jpg 360w, https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-2-600x600.jpg 600w, https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-2.jpg 800w"
-                                                    sizes="(max-width: 300px) 100vw, 300px"></a>
-                                        </td>
-
-                                        <td class="product-name" data-title="Product">
-                                            <a
-                                                href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/product/polo/">Polo</a>
-                                        </td>
-
-                                        <td class="product-price" data-title="Price">
-                                            <span class="woocommerce-Price-amount amount"><bdi><span
-                                                        class="woocommerce-Price-currencySymbol">$</span>20.00</bdi></span>
-                                        </td>
-
-                                        <td class="product-quantity" data-title="Quantity">
-                                            <div class="quantity">
-                                                <label class="screen-reader-text" for="quantity_614d1b52ab4e9">Polo
-                                                    quantity</label>
-                                                <input type="number" id="quantity_614d1b52ab4e9"
-                                                    class="input-text qty text" step="1" min="0" max=""
-                                                    name="cart[704afe073992cbe4813cae2f7715336f][qty]" value="1"
-                                                    title="Qty" size="4" placeholder="" inputmode="numeric">
-                                            </div>
-                                        </td>
-
-                                        <td class="product-subtotal" data-title="Subtotal">
-                                            <span class="woocommerce-Price-amount amount"><bdi><span
-                                                        class="woocommerce-Price-currencySymbol">$</span>20.00</bdi></span>
-                                        </td>
-                                    </tr>
-                                    <tr class="woocommerce-cart-form__cart-item cart_item">
-
-                                        <td class="product-remove">
-                                            <a href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/cart/?remove_item=c74d97b01eae257e44aa9d5bade97baf&amp;_wpnonce=ef31e322b5"
-                                                class="remove" aria-label="Remove this item" data-product_id="16"
-                                                data-product_sku="ertert">×</a>
-                                        </td>
-
-                                        <td class="product-thumbnail">
-                                            <a
-                                                href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/product/long-sleeve-tee/"><img
-                                                    width="300" height="300"
-                                                    src="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-5-300x300.jpg"
-                                                    class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-                                                    alt="" loading="lazy"
-                                                    srcset="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-5-300x300.jpg 300w, https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-5-150x150.jpg 150w, https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-5-768x768.jpg 768w, https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-5-360x360.jpg 360w, https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-5-600x600.jpg 600w, https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2019/01/shop-5.jpg 800w"
-                                                    sizes="(max-width: 300px) 100vw, 300px"></a>
-                                        </td>
-
-                                        <td class="product-name" data-title="Product">
-                                            <a
-                                                href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/product/long-sleeve-tee/">Long
-                                                Sleeve Tee</a>
-                                        </td>
-
-                                        <td class="product-price" data-title="Price">
-                                            <span class="woocommerce-Price-amount amount"><bdi><span
-                                                        class="woocommerce-Price-currencySymbol">$</span>25.00</bdi></span>
-                                        </td>
-
-                                        <td class="product-quantity" data-title="Quantity">
-                                            <div class="quantity">
-                                                <label class="screen-reader-text" for="quantity_614d1b52ab891">Long
-                                                    Sleeve Tee quantity</label>
-                                                <input type="number" id="quantity_614d1b52ab891"
-                                                    class="input-text qty text" step="1" min="0" max=""
-                                                    name="cart[c74d97b01eae257e44aa9d5bade97baf][qty]" value="1"
-                                                    title="Qty" size="4" placeholder="" inputmode="numeric">
-                                            </div>
-                                        </td>
-
-                                        <td class="product-subtotal" data-title="Subtotal">
-                                            <span class="woocommerce-Price-amount amount"><bdi><span
-                                                        class="woocommerce-Price-currencySymbol">$</span>25.00</bdi></span>
-                                        </td>
-                                    </tr>
-
 
                                     <tr>
                                         <td colspan="6" class="actions">

@@ -34,38 +34,38 @@
                     </div>
                     <div class="col-md-6">
                         <div class="summary entry-summary">
-                            <h1 class="product_title entry-title">{{product.name}}</h1>
+                            <h1 class="product_title entry-title">{{product?.name}}</h1>
                             <p class="price">
                                 <ins><span class="woocommerce-Price-amount amount"><bdi><span
-                                                class="woocommerce-Price-currencySymbol">$</span>{{product.price}}</bdi></span></ins>
+                                                class="woocommerce-Price-currencySymbol">$</span>{{product?.price}}</bdi></span></ins>
                                 <del aria-hidden="true"><span
                                         class="woocommerce-Price-amount amount"><bdi><span
-                                                class="woocommerce-Price-currencySymbol">$</span>{{product.sale}}</bdi></span>
+                                                class="woocommerce-Price-currencySymbol">$</span>{{product?.sale}}</bdi></span>
                                             </del>
                                 
                             </p>
                             <div class="woocommerce-product-details__short-description">
-                                <p>{{product.description}}</p>
+                                <p>{{product?.description}}</p>
                             </div>
 
 
-                            <form class="cart"
+                            <div class="cart"
                                 action="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/product/beanie-with-logo/"
                                 method="post" enctype="multipart/form-data">
 
                                 <div class="quantity">
                                     <label class="screen-reader-text" for="quantity_613430137367f">Beanie with Logo
                                         quantity</label>
-                                    <input type="number" id="quantity_613430137367f" class="input-text qty text"
-                                        step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4"
-                                        placeholder="" inputmode="numeric">
+                                    <input type="number" class="input-text qty text"
+                                        step="1" min="1" max="" [(ngModel)]="quantity" >
+                                        {{quantity}}
                                 </div>
 
                                 <button type="submit" name="add-to-cart" value="891"
-                                    class="single_add_to_cart_button button alt">Add to
+                                    class="single_add_to_cart_button button alt" (click)="addtoCart()">Add to
                                     cart</button>
 
-                            </form>
+                            </div>
 
 
                             <div class="product_meta">
