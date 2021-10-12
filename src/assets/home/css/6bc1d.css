@@ -12625,7 +12625,7 @@ header:not(.fixed).header-layout-menu-above-header-border
 .single-post .container-page-item-title.with-bg .page-item-title-single .cookandmeal-post .post-date,
 .single-post .container-page-item-title.with-bg .page-item-title-single .cookandmeal-post .post-read-time,
 .container-page-item-title.with-bg .page-item-title-single .page-title {
-      color: #fff;
+      color: #fff !important;
 }
 .single-post .container-page-item-title.with-bg .page-item-title-single .cookandmeal-post .post-categories a:hover {
       text-decoration: none;
@@ -13691,7 +13691,7 @@ header + .content-block .page-container {
 .cookandmeal-post .post-title {
       font-size: var(--fontsize-post-title-regular);
       display: block;
-      color: var(--color-black);
+      color: var(--wc-primary-text);
       margin-top: 0;
       margin-bottom: 5px;
       word-wrap: break-word;
@@ -13807,7 +13807,7 @@ header + .content-block .page-container {
 }
 .cookandmeal-post .post-date {
       display: inline-block;
-      color: var(--color-grey);
+      color: var(--wc-primary-text);
       font-size: var(--fontsize-details);
       font-weight: normal !important;
       font-style: italic;
@@ -13815,7 +13815,7 @@ header + .content-block .page-container {
 }
 .cookandmeal-post .post-read-time {
       display: inline-block;
-      color: var(--color-grey);
+      color: var(--wc-primary-text);
       font-size: var(--fontsize-details);
       font-weight: normal !important;
       font-style: italic;

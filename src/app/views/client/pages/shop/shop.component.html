@@ -90,11 +90,9 @@
                                         </span>
                                     </del>
                                 </span>
-                            </a><a href="/" data-quantity="1"
-                                class="button product_type_simple add_to_cart_button ajax_add_to_cart"
-                                data-product_id="891" data-product_sku="43473"
-                                aria-label="Add &ldquo;Beanie with Logo&rdquo; to your cart" rel="nofollow">Add
-                                to cart</a>
+                            </a><button type="submit" name="add-to-cart" value="891" class="button product_type_simple add_to_cart_button ajax_add_to_cart"
+                                (click)="addtoCart(item)">Add to
+                                cart</button>
                         </li>
                     </ul>
 

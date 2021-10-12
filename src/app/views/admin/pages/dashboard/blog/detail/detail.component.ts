@@ -4,17 +4,17 @@ import { BlogService } from 'src/app/core/_service/blog/blog.service';
 import { blog } from 'src/app/models/blog';
 
 @Component({
-  selector: 'app-blog-detail',
-  templateUrl: './blog-detail.component.html',
-  styleUrls: ['./blog-detail.component.css']
+  selector: 'app-detail',
+  templateUrl: './detail.component.html',
+  styleUrls: ['./detail.component.css']
 })
-export class BlogDetailComponent implements OnInit {
+export class DetailComponent implements OnInit {
   blog: blog;
+  loading=true;
   constructor(
     private blogService: BlogService,
     private activatedRoute: ActivatedRoute
   ) { }
-
 
   ngOnInit(): void {
     Promise.all([
@@ -24,7 +24,8 @@ export class BlogDetailComponent implements OnInit {
       this.getStep()
     ]).then(
       dt => {
-        this.blog=dt[0];
+        this.loading = false;
+        this.blog = dt[0];
         this.blog.metarial = dt[1];
         this.blog.content = dt[2];
         this.blog.step = dt[3];
@@ -33,12 +34,12 @@ export class BlogDetailComponent implements OnInit {
     )
   }
 
-  getBlog():Promise<any> {
+  getBlog(): Promise<any> {
     return new Promise(
-      async (resolve )=> {
+      async (resolve) => {
         const dt = await this.blogService.getBlog(this.activatedRoute.snapshot.paramMap.get("id")).toPromise();
         return resolve(dt)
-     }) 
+      })
   }
 
   getMetarial(): Promise<any> {
@@ -67,4 +68,5 @@ export class BlogDetailComponent implements OnInit {
       }
     )
   }
+
 }

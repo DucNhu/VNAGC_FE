@@ -134,6 +134,11 @@ fieldset .box-step {
   border: 1px dashed rgba(128, 128, 128, 0.585);
   margin-bottom: 1rem;
 }
+
+.admin .container-page-item-title.container {
+  width: auto !important;
+  margin-top: 30px
+}
 /* End Blogger page */
 
 /* Lisst product */

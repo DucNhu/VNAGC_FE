@@ -13,7 +13,6 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 
 import { DragDropModule } from "@angular/cdk/drag-drop";
-
 // bootstr
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -21,6 +20,7 @@ import { BlogComponent } from './blog.component';
 import { ListBlogComponent } from './list/list.component';
 import { CreateBlogComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
+import { DetailComponent } from './detail/detail.component';
 
 const routes: Routes = [
     {
@@ -36,6 +36,11 @@ const routes: Routes = [
                 path: 'update',
                 component: UpdateComponent
             }
+            ,
+            {
+                path: 'blog-detail',
+                component: DetailComponent
+            }
         ]
     },
 ];
@@ -44,7 +49,8 @@ const routes: Routes = [
         ListBlogComponent,
         BlogComponent,
         CreateBlogComponent,
-        UpdateComponent
+        UpdateComponent,
+        DetailComponent
     ],
     imports: [
         CommonModule,
@@ -62,7 +68,7 @@ const routes: Routes = [
         MatButtonModule,
         DragDropModule,
 // bootstr
-        NgbModule
+        NgbModule,
     ],
     exports: [RouterModule]
 })

@@ -1,6 +1,6 @@
 <app-load [isLoading]="loading"></app-load>
 
-<div class="app-content content ecommerce-application">
+<div class=" ecommerce-application">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper container-xxl p-0 list-view--product">
@@ -37,8 +37,7 @@
                                     <td>
                                         <div class=" d-flex align-items-center">
                                             <div class="nav-item">
-                                                <a class="nav-link" href="app-blog-view.html" data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
-                                                    data-bs-original-title="View">
+                                                <a class="nav-link" [routerLink]="['/admin/blog/blog-detail/', {id: i.id}]">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                                         class="feather feather-eye ficon list-status" style="margin-right: 10px;">
