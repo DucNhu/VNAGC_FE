@@ -20,7 +20,7 @@ export class AddToCartService {
     }
     // this.cartCurrent.next(data);
     let cartCurrent = JSON.parse(localStorage.getItem('cart'));
-    console.log(cartCurrent)
+    console.log(data)
     if (cartCurrent) {
       for (let i = 0; i < cartCurrent.length; i++) {
         const e = cartCurrent[i];
