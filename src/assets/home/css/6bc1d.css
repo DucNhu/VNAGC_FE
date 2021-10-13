@@ -17531,6 +17531,15 @@ body.woocommerce div.product .woocommerce-tabs ul.tabs *::after {
       display: block;
       font-weight: bold;
 }
+
+.product_meta {
+      margin-top: 40px;
+}
+.product_meta > span{
+      display: block;
+      font-weight: bold;
+      font-size:16px
+}
 .woocommerce .product_meta > span span {
       font-weight: normal;
 }
@@ -17791,6 +17800,14 @@ body.woocommerce div.product .woocommerce-tabs ul.tabs *::after {
       border-top: 1px solid var(--color-border-grey);
       margin-top: 15px;
       padding-top: 10px;
+}
+
+.woocommerce-Price-amount {
+      font-size:20px;
+      margin-right: 10px;
+}
+.amount-price {
+      color: #000;
 }
 .woocommerce .widget_shopping_cart .woocommerce-mini-cart__total.total .woocommerce-Price-amount.amount {
       float: right;

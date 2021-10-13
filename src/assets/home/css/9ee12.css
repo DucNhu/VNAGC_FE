@@ -4208,6 +4208,10 @@ pre.wp-block-verse {
     padding: 0.5em;
   }
 }
+
+.woocommerce-product-details__short-description > p {
+  font-size:16px
+}
 .screen-reader-text {
   border: 0;
   clip: rect(1px, 1px, 1px, 1px);
@@ -4221,7 +4225,16 @@ pre.wp-block-verse {
   padding: 0;
   position: absolute !important;
   width: 1px;
+  width:70px;
+  
 }
+
+.quantity .qty {
+  width: 70px;
+  text-align: center;
+  font-size: 16px;
+}
+
 .screen-reader-text:focus {
   background-color: #fff;
   border-radius: 3px;
@@ -4242,6 +4255,20 @@ pre.wp-block-verse {
   width: auto;
   z-index: 100000;
 }
+
+.single_add_to_cart_button {
+  width: 142px; 
+  background-color: #48494b; 
+  border-radius: 30px; 
+  border: none;
+  margin-left: 20px;
+  font-size: 16px !important;
+}
+
+.single_add_to_cart_button:hover {
+  background-color:#a58787
+}
+
 .wc-block-components-product-add-to-cart-attribute-picker {
   margin: 0;
   flex-basis: 100%;
