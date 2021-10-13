@@ -36,45 +36,40 @@
                         <div class="summary entry-summary">
                             <h1 class="product_title entry-title">{{product?.name}}</h1>
                             <p class="price">
-                                <ins><span class="woocommerce-Price-amount amount"><bdi><span
-                                                class="woocommerce-Price-currencySymbol">$</span>{{product?.price}}</bdi></span></ins>
                                 <del aria-hidden="true"><span
-                                        class="woocommerce-Price-amount amount"><bdi><span
-                                                class="woocommerce-Price-currencySymbol">$</span>{{product?.sale}}</bdi></span>
-                                            </del>
+                                    class="woocommerce-Price-amount amount"><bdi><span
+                                        class="woocommerce-Price-currencySymbol">$</span>{{product?.sale}}</bdi></span>
+                                    </del>
+                                    <ins><span class="woocommerce-Price-amount amount amount-price"><bdi><span
+                                                    class="woocommerce-Price-currencySymbol">$</span>{{product?.price}}</bdi></span></ins>
                                 
                             </p>
                             <div class="woocommerce-product-details__short-description">
-                                <p>{{product?.description}}</p>
+                                <p >{{product?.description}}</p>
                             </div>
 
 
                             <div class="cart"
                                 action="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/product/beanie-with-logo/"
-                                method="post" enctype="multipart/form-data">
+                                method="post" enctype="multipart/form-data"
+                                style="display: flex">
 
                                 <div class="quantity">
                                     <label class="screen-reader-text" for="quantity_613430137367f">Beanie with Logo
                                         quantity</label>
-                                    <input type="number" class="input-text qty text"
-                                        step="1" min="1" max="" [(ngModel)]="quantity" >
-                                        {{quantity}}
+                                    <input type="number" class="input-text qty text" value="1"
+                                        step="1" min="1" max="" [(ngModel)]="quantity"  size="4">
                                 </div>
 
                                 <button type="submit" name="add-to-cart" value="891"
-                                    class="single_add_to_cart_button button alt" (click)="addtoCart()">Add to
-                                    cart</button>
+                                    class="single_add_to_cart_button button alt" (click)="addtoCart()">
+                                    Add tocart</button>
 
                             </div>
 
 
                             <div class="product_meta">
-
-
-
-                                <span class="sku_wrapper">SKU: <span class="sku">43473</span></span>
-
-
+                                <span class="sku_wrapper">SKU: <span class="sku">43473</span></span><br/>
                                 <span class="posted_in">Category: <a
                                         href="../../product-category/accessories/index.html"
                                         rel="tag">Accessories</a></span>
