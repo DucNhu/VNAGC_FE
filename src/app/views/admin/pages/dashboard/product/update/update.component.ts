@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { rejects } from 'assert';
 import { ProductService } from 'src/app/core/_service/product.service';
+import { product } from 'src/app/models/product';
 
 @Component({
   selector: 'app-update-product',
@@ -25,7 +26,7 @@ export class UpdateProductComponent implements OnInit {
   avatar;
   avatar_cover;
   list_img_feature: any = [{ data: '' }];
-
+  product: product;
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
@@ -59,8 +60,9 @@ export class UpdateProductComponent implements OnInit {
     ).then(
       dt => {
         this.loading = false;
-        console.log(dt);
         this.setDataforForm(dt[0]);
+        this.product = dt[0];
+        console.log(this.product)
         this.avatar = dt[0].banner_img;
         this.avatar_cover = dt[0].cover_img;
 
@@ -90,7 +92,7 @@ export class UpdateProductComponent implements OnInit {
   }
   updateProduct() {
     let form = this.formInfor;
-    let nowDate = new Date().toLocaleDateString();
+    let nowDate = new Date();
     let nowTime = new Date().toLocaleTimeString();
     let data = {
       "id": this.productId,
@@ -104,8 +106,8 @@ export class UpdateProductComponent implements OnInit {
       "unit": "boxes",
       "storage_instructions": form.get('storage_instructions').value,
       "status": 0,
-      "create_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
-      "update_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
+      "create_at": this.product.create_at,
+      "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "T" + nowTime,
     }
     this.loading = true;
     this.productService.update(data).subscribe(

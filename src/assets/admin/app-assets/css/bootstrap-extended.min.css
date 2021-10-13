@@ -549,7 +549,7 @@ textarea:-webkit-autofill {
     box-shadow: none !important;
 }
 .btn .feather {
-    vertical-align: bottom;
+    vertical-align: text-top;
 }
 .btn-check:active + [class*="btn-"],
 .btn-check:checked + [class*="btn-"] {

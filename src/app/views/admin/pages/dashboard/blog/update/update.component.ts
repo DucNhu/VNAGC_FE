@@ -14,6 +14,7 @@ export class UpdateComponent implements OnInit {
   listCategory = ["Tea", "Coffe", "Coca"];
   time = { hour: 13, minute: 30 };
   selectedHastags: any[];
+  unitTimeCook="mins";
   hastags: any[] = [
     { id: 1, viewValue: "material saving" },
     { id: 2, viewValue: "easy" },
@@ -21,7 +22,7 @@ export class UpdateComponent implements OnInit {
     { id: 4, viewValue: "sweet things" },
     { id: 5, viewValue: "Appetizer" }
   ];
-  listUnit = ["gam", "liter", "ml"]
+  listUnit = ["gam", "liter", "ml", "bottle"]
   formBlog: FormGroup;
   isCollapsed = {
     metarial: false,
@@ -37,6 +38,7 @@ export class UpdateComponent implements OnInit {
   loading = true;
   isSuccess = false;
   checkUpdateSuccess = false;
+  // userID = localStorage.getItem("")
   constructor(
     private fb: FormBuilder,
     private blogService: BlogService,
@@ -67,42 +69,43 @@ export class UpdateComponent implements OnInit {
 
 
   createBlog() {
-    this.loading = true;
     let form = this.formBlog;
-    let nowDate = new Date().toLocaleDateString();
+    let nowDate = new Date();
     let nowTime = new Date().toLocaleTimeString();
     let data = {
       "id": this.blogId,
       "name": form.get('name').value,
       "banner_img": this.avatar,
       "cover_img": this.avatar_cover,
-      "cooking_time": form.get('cooking_time').value,
+      "cooking_time": form.get('cooking_time').value + form.get('unitTimeCook').value,
       "summary": form.get('summary').value,
       "description": form.get('description').value,
       "url_video_utube": form.get('url_video_utube').value,
       "view": 0,
-      "status": 0,
+      "status": form.get('status').value ? 1 : 0,
       "user_id": '1',
       "category_id": 0,
 
-      "create_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
-      "update_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
+      "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "T" + nowTime,
+      "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "T" + nowTime,
     }
 
-    this.blogService.update(data).subscribe(
-      dt => {
-        setTimeout(() => {
-          this.checkUpdateSuccess = false;
-          window.location.reload()
-        }, 1500);
-        this.createMetarial();
-        this.createContent();
-        this.createStep()
-      },
-      err => {
-        this.loading = false;
-      }
-    )
+    console.log(data)
+    // this.loading = true;
+    // this.blogService.update(data).subscribe(
+    //   dt => {
+    //     setTimeout(() => {
+    //       this.checkUpdateSuccess = false;
+    //       window.location.reload()
+    //     }, 1500);
+    //     this.createMetarial();
+    //     this.createContent();
+    //     this.createStep()
+    //   },
+    //   err => {
+    //     this.loading = false;
+    //   }
+    // )
   }
 
   setFormContent(val) {
@@ -199,11 +202,12 @@ export class UpdateComponent implements OnInit {
         summary: [''],
         description: [''],
         url_video_utube: [''],
+        status: [false],
+        unitTimeCook: ["mins"],
 
         metarial: this.fb.array([]),
         step: this.fb.array([]),
-        content: this.fb.array([]),
-        status: [false]
+        content: this.fb.array([])
       }
     )
   }

@@ -237,7 +237,7 @@ export class CreateBlogComponent implements OnInit {
   }
   createBlog() {
     let form = this.formBlog;
-    let nowDate = new Date().toLocaleDateString();
+    let nowDate = new Date();
     let nowTime = new Date().toLocaleTimeString();
     let data = {
       "name": form.get('name').value,
@@ -252,8 +252,8 @@ export class CreateBlogComponent implements OnInit {
       "user_id": '1',
       "category_id": 0,
 
-      "create_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
-      "update_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
+      "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "T" + nowTime,
+      "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "T" + nowTime,
     }
     this.loading = true;
     console.log(data)
