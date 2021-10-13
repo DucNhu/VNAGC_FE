@@ -107,7 +107,7 @@ export class UpdateProductComponent implements OnInit {
       "storage_instructions": form.get('storage_instructions').value,
       "status": 0,
       "create_at": this.product.create_at,
-      "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "T" + nowTime,
+      "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() ,
     }
     this.loading = true;
     this.productService.update(data).subscribe(

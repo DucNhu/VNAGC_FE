@@ -86,8 +86,8 @@ export class UpdateComponent implements OnInit {
       "user_id": '1',
       "category_id": 0,
 
-      "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "T" + nowTime,
-      "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "T" + nowTime,
+      "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() ,
+      "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() ,
     }
 
     console.log(data)

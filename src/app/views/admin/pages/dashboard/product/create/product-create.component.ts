@@ -67,20 +67,19 @@ export class ProductCreateComponent implements OnInit {
       "unit": form.get('unit').value,
       "storage_instructions": form.get('storage_instructions').value,
       "status": form.get('active').value ? 1 : 0,
-      "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "T" + nowTime,
-      "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "T" + nowTime,
+      "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
+      "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
     }
-    // this.loading = true;
-    console.log(nowDate, nowDate.split('/').reverse().join('-'))
-    // this.prductService.create(data).subscribe(
-    //   dt => {
-    //     this.sendImg(dt)
-    //     this.route.navigate(["/admin/product/list"])
-    //   },
-    //   err => {
-    //     this.loading = false;
-    //   }
-    // )
+    this.loading = true;
+    this.prductService.create(data).subscribe(
+      dt => {
+        this.sendImg(dt)
+        this.route.navigate(["/admin/product/list"])
+      },
+      err => {
+        this.loading = false;
+      }
+    )
   }
 
   permitFile;
