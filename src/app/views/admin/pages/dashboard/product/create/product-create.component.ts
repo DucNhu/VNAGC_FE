@@ -71,17 +71,17 @@ export class ProductCreateComponent implements OnInit {
       "create_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
       "update_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
     }
-    this.loading = true;
-
-    this.prductService.create(data).subscribe(
-      dt => {
-        this.sendImg(dt)
-        this.route.navigate(["/admin/product/list"])
-      },
-      err => {
-        this.loading = false;
-      }
-    )
+    // this.loading = true;
+    console.log(nowDate, nowDate.split('/').reverse().join('-'))
+    // this.prductService.create(data).subscribe(
+    //   dt => {
+    //     this.sendImg(dt)
+    //     this.route.navigate(["/admin/product/list"])
+    //   },
+    //   err => {
+    //     this.loading = false;
+    //   }
+    // )
   }
 
   permitFile;
