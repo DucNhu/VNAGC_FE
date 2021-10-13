@@ -105,8 +105,22 @@
                                             <label class="form-label" for="cooking_time">
                                                 cooking time
                                             </label>
-                                            <input type="number" class="form-control" formControlName="cooking_time"
-                                                id="cooking_time" />
+                                            <div class="row">
+                                                <div class="col-10">
+                                                    <input type="number" class="form-control" formControlName="cooking_time" id="cooking_time" />
+                                                </div>
+                                                <div class="col-2">
+                                                <mat-select placeholder="TimeCook" name="Time cook" class="filter-select" formControlName="unitTimeCook"
+                                                    [compareWith]="equals" #TimeCookSelect>
+                                                    <mat-option value="mins">
+                                                        Min
+                                                    </mat-option>
+                                                    <mat-option value="hours">
+                                                        hour
+                                                    </mat-option>
+                                                </mat-select>
+                                                </div>
+                                            </div>
                                         </div>
                                         <!-- Metarial -->
                                         <fieldset>

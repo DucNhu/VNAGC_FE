@@ -350,8 +350,8 @@ fieldset,
 iframe {
     border: 0;
 }
-button:focus:not(:focus-visible) {
-    outline: 0;
+button:focus {
+    outline: 0 !important; border: 0 !important;
 }
 button,
 input,

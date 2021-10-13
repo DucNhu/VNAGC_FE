@@ -31,4 +31,7 @@ export class ListBlogComponent implements OnInit {
     this.route.navigateByUrl("/" + this.route.url.split('/')[1] + "/" + this.route.url.split('/')[2] + "/update", { state: id })
   }
 
+  routerCreateBlog() {
+    this.route.navigateByUrl("/" + this.route.url.split('/')[1] + "/" + this.route.url.split('/')[2] + "/create")
+  }
 }

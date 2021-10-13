@@ -54,7 +54,7 @@ export class ProductCreateComponent implements OnInit {
   }
   createProduct() {
     let form = this.formInfor;
-    let nowDate = new Date().toLocaleDateString();
+    let nowDate = new Date();
     let nowTime = new Date().toLocaleTimeString();
     let data = {
       "name": form.get('name').value,
@@ -66,10 +66,9 @@ export class ProductCreateComponent implements OnInit {
       "description": form.get('description').value,
       "unit": form.get('unit').value,
       "storage_instructions": form.get('storage_instructions').value,
-
-      "active": form.get('active').value,
-      "create_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
-      "update_at": nowDate.split('/').reverse().join('-') + "T" + nowTime,
+      "status": form.get('active').value ? 1 : 0,
+      "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "T" + nowTime,
+      "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "T" + nowTime,
     }
     this.loading = true;
 
