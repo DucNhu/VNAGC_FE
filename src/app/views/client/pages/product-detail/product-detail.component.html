@@ -8,7 +8,7 @@
                     <div class="col-md-6 d-block">
                         <div 
                             class="woocommerce-product-gallery__image flex-active-slide"
-                            style="width: 451.2px; margin-right: 0px; display: block; position: relative; overflow: hidden;">
+                            style="height:460px; width: 460x; margin-right: 0px; display: block; position: relative; overflow: hidden;">
                             <a href="../../wp-content/uploads/2019/01/shop-4.jpg">
                                 <img width="600" height="600"
                                     [src]="avatarSelect" class="" alt=""
@@ -17,14 +17,19 @@
                                 class="zoomImg"
                                 style="position: absolute; top: 0px; left: 0px; opacity: 0; width: 800px; height: 800px; border: none; max-width: none; max-height: none;">
                         </div>
-                        <div>
+                        <div 
+                        style="height: 142px">
                             <owl-carousel-o #carousel [options]="customOptions" class="property-slide">
-                                <ng-template carouselSlide *ngFor="let item of listAvatar_feature;let i = index">
-                                    <div class="slide">
-                                        <div class="card mb-4 p-10px pb-0 bg-blue-celestia">
-                                            <div class="cover-image" 
+                                <ng-template carouselSlide *ngFor="let item of listAvatar_feature;let i = index" style="height:140px ; width: 140px">
+                                    <div class="slide" style="height:140px; width: 140px; margin-right:0">
+                                        <div class="card mb-4 p-10px pb-0 bg-blue-celestia" style="height:140px; width: 140px;" >
+                                            <div 
+                                                style="width: 140px; height: 140px"
+                                                class="cover-image" 
                                                 #myPhotoSliide>
-                                                <img class="img-fluid card-img-top" [src]="item.avatar_feature" alt="banner" (click)="avatarSelect = item.avatar_feature" />
+                                                <img 
+                                                style="width: 140px; height: 140px; margin-left: 0"
+                                                class="img-fluid card-img-top" [src]="item.avatar_feature" alt="banner" (click)="avatarSelect = item.avatar_feature" />
                                             </div>
                                         </div>
                                     </div>

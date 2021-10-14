@@ -10158,6 +10158,8 @@ button.close {
       display: none;
 }
 .owl-carousel .owl-item {
+      width: 142px !important;
+      margin-right: 0 !important;
       position: relative;
       min-height: 1px;
       float: left;
@@ -10168,6 +10170,12 @@ button.close {
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
+}
+.woocommerce-product-gallery__image {
+      border-radius: 5px;
+}
+.cover-image img {
+      border-radius: none !important;
 }
 .owl-carousel .owl-item img {
       display: block;
