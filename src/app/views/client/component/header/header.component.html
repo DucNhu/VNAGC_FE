@@ -24,21 +24,34 @@
                 </div>
 
                 <div class="header-right">
-                    <div class="search-toggle-wrapper closed-search search-enable">
-                        <a class="search-toggle-btn" aria-label="Search toggle"><i class="fa fa-search"
-                                aria-hidden="true"></i></a>
-                        <div class="header-center-search-form">
-                            <form method="get" role="search" class="searchform"
-                                action="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/">
-                                <input type="search" aria-label="Search" class="field" name="s" value=""
-                                    placeholder="Type keyword(s) here&hellip;" /><input type="submit" class="submit btn"
-                                    value="Search" />
-                            </form>
-                        </div>
+                    <div class="search-toggle-wrapper closed-search search-enable w-auto">
+
+                        <ng-container *ngIf="!isLogin">
+                            <div class="d-flex">
+                                <a class="me-25" routerLink="login">
+                                    login |
+                                </a>
+                                <a class="" routerLink="register">
+                                    register
+                                </a>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="isLogin">
+                            <a class="search-toggle-btn" aria-label="Search toggle" [matMenuTriggerFor]="menu">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                    <path fill-rule="evenodd"
+                                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                </svg>
+                                <mat-menu #menu="matMenu">
+                                    <button mat-menu-item routerLink="/profile">Profile</button>
+                                    <button mat-menu-item (click)="logout()">Log out</button>
+                                </mat-menu>
+                            </a>
+                        </ng-container>
                     </div>
-
                 </div>
-
             </div>
         </div>
 
@@ -56,6 +69,12 @@
                         <div class="navbar-center-wrapper">
                             <div class="navbar-collapse collapse">
                                 <ul id="menu-main-menu-2" class="nav">
+                                    <li id="mgt-menu-item-510" class="menu-item menu-item-type-post_type menu-item-object-page"><a
+                                            routerLink="/blogs">blogs</a></li>
+                                    <li id="mgt-menu-item-510" class="menu-item menu-item-type-post_type menu-item-object-page"><a
+                                            routerLink="about">About</a></li>
+                                    <li id="mgt-menu-item-911" class="menu-item menu-item-type-post_type menu-item-object-page"><a
+                                            routerLink="/shop">Shop</a></li>
                                     <!-- <li id="mgt-menu-item-404"
                                         class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home current-menu-ancestor menu-item-has-children">
                                         <a href="index.html">Demos</a>
@@ -581,12 +600,7 @@
                                             </li>
                                         </ul>
                                     </li> -->
-                                    <li id="mgt-menu-item-510"
-                                        class="menu-item menu-item-type-post_type menu-item-object-page"><a
-                                            href="about/index.html">About</a></li>
-                                    <li id="mgt-menu-item-911"
-                                        class="menu-item menu-item-type-post_type menu-item-object-page"><a
-                                            routerLink="/shop">Shop</a></li>
+                                    
                                 </ul>
                             </div>
                         </div>

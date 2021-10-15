@@ -12,6 +12,7 @@ import { AddToCartService } from 'src/app/core/_service/addToCart/add-to-cart.se
   styleUrls: ['./product-detail.component.css', '../../../../../../node_modules/keen-slider/keen-slider.min.css']
 })
 export class ProductDetailComponent implements OnInit {
+  load = true;
   thumbsSwiper: any;
   slider;
   loading=false;
@@ -69,10 +70,10 @@ export class ProductDetailComponent implements OnInit {
       ]
     ).then(
       dt => {
+        this.load = false;
         this.loading = false;
         this.product = dt[0];
         this.avatar = dt[0].banner_img;
-        console.log(this.product)
         this.avatar_cover = dt[0].cover_img;
         this.listAvatar_feature = dt[1];
         this.avatarSelect = this.listAvatar_feature[0].avatar_feature

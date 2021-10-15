@@ -69,6 +69,7 @@ export class LoginComponent implements OnInit {
         if (dt.Infor.Value.status) {
           localStorage.setItem("user", JSON.stringify(dt.Infor.Value));
           this.router.navigate(["/"])
+          this.authenservice.currentUserSubject.next(dt.Infor.Value);
         }
         else {
           this.showError("The account has not been activated, please check your email to activate the account");

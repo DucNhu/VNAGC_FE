@@ -35,7 +35,7 @@ export class BlogDetailComponent implements OnInit {
 
   getBlog():Promise<any> {
     return new Promise(
-      async (resolve )=> {
+      async (resolve)=> {
         const dt = await this.blogService.getBlog(this.activatedRoute.snapshot.paramMap.get("id")).toPromise();
         return resolve(dt)
      }) 

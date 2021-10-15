@@ -15,7 +15,7 @@ export class ActiveAccountComponent implements OnInit {
       tapToDismiss: true,
       timeout: 55000
     });
-  loading = false;
+  loading = true;
   modal_info_title = 'Success';
   modal_error_title = 'Error'
   constructor(
@@ -32,8 +32,7 @@ export class ActiveAccountComponent implements OnInit {
     this.authenservice.activeAcc(userId).subscribe(
       (dt:any) => {
         this.loading = false;
-        localStorage.setItem("user", JSON.stringify(dt.Infor.Value));
-        this.router.navigate(["/"])
+        this.router.navigate(["/login"]);
       },
       err => {
         this.showError("Something went wrong, please try again later")

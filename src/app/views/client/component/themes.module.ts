@@ -5,6 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { BaseComponent } from './base/base.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { RouterModule, Routes } from '@angular/router';
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule
+    RouterModule,
+    MatMenuModule
     ]
 })
 export class ThemesModule { }

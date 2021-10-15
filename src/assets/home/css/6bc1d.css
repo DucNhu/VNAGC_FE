@@ -11407,11 +11407,11 @@ header .header-center-custom-content p {
       margin-bottom: 0;
 }
 header[class*="header-layout-menu-below-header"] {
-      margin-bottom: 20px;
+      /* margin-bottom: 20px; */
 }
-header[class*="-border"] {
+/* header[class*="-border"] {
       margin-bottom: 45px;
-}
+} */
 header.header-layout-menu-above-header-border {
       margin-bottom: 0;
 }
@@ -17295,7 +17295,6 @@ body #catapult-cookie-bar a {
 }
 .woocommerce-shop {
       margin-bottom: 30px;
-      margin-top: 30px;
 }
 .woocommerce span.onsale,
 .woocommerce ul.products li.product .onsale {
@@ -19120,9 +19119,9 @@ header + .content-block .cookandmeal-blog-block-wrapper .cookandmeal-post .post-
             margin-top: 20px;
             margin-bottom: 20px;
       }
-      .home header:not(.fixed)[class*="-border"] .mainmenu .navbar {
+      /* .home header:not(.fixed)[class*="-border"] .mainmenu .navbar {
             border: none;
-      }
+      } */
       .home header:not(.fixed)[class*="header-layout-menu-below-header"] .mainmenu.mainmenu-dark .navbar {
             margin-bottom: 0;
       }

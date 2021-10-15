@@ -88,7 +88,7 @@ export class RegisterComponent implements OnInit {
     this.authenservice.register(data).subscribe(
       (dt: any) => {
         console.log(data, dt)
-        this.sendMaillaAccNotActive(data, dt.Infor.Id);
+        this.sendMaillaAccNotActive(data, dt.Infor.Value.Id);
       },
       err => {
         err.error.Errors.forEach(element => {
@@ -112,7 +112,7 @@ export class RegisterComponent implements OnInit {
         </p>
         <a href='http://localhost:4200/activeAccount/${id}'>http://localhost:4200/login</a>
         `,
-      "Subject": "Welcome Dink and Milk"
+      "Subject": "Welcome Bartending Drink"
     }
     this.authenservice.sendMail(val).subscribe(
       data => {

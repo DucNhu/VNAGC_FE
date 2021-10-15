@@ -8,11 +8,12 @@ import { HomeComponent } from './views/client/pages/home/home.component';
 import { ProductDetailComponent } from './views/client/pages/product-detail/product-detail.component';
 import { ActiveAccountComponent } from './views/client/pages/authen/active-account/active-account.component';
 import { CartComponent } from './views/client/pages/cart/cart.component';
-import { BlogDetailComponent } from './views/client/pages/blog-detail/blog-detail.component';
 import { ShopComponent } from './views/client/pages/shop/shop.component';
+import { AuthenGuard } from './core/guard/authen.guard';
 
 const routes: Routes = [
   {
+    canActivate: [AuthenGuard],
     path: 'admin',
     loadChildren: () => import('./views/admin/pages/dashboard/dashboard.module').then(m => m.DashboardModule)
   },
@@ -25,10 +26,6 @@ const routes: Routes = [
         component: HomeComponent
       },
       {
-        path: 'blog-detail',
-        component: BlogDetailComponent
-      },
-      {
         path: 'product-detail',
         component: ProductDetailComponent
       },
@@ -39,6 +36,10 @@ const routes: Routes = [
       {
         path: 'shop',
         component: ShopComponent
+      },
+      {
+        path: 'blogs',
+        loadChildren: () => import('./views/client/pages/blogs/blogs.module').then(m => m.BlogsModule),
       },
       {
         path: 'cart',

@@ -90,22 +90,21 @@ export class UpdateComponent implements OnInit {
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() ,
     }
 
-    console.log(data)
-    // this.loading = true;
-    // this.blogService.update(data).subscribe(
-    //   dt => {
-    //     setTimeout(() => {
-    //       this.checkUpdateSuccess = false;
-    //       window.location.reload()
-    //     }, 1500);
-    //     this.createMetarial();
-    //     this.createContent();
-    //     this.createStep()
-    //   },
-    //   err => {
-    //     this.loading = false;
-    //   }
-    // )
+    this.loading = true;
+    this.blogService.update(data).subscribe(
+      dt => {
+        setTimeout(() => {
+          this.checkUpdateSuccess = false;
+          window.location.reload()
+        }, 1500);
+        this.createMetarial();
+        this.createContent();
+        this.createStep()
+      },
+      err => {
+        this.loading = false;
+      }
+    )
   }
 
   setFormContent(val) {
