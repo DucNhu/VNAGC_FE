@@ -155,7 +155,7 @@
 
                                 <h4>Ingredients</h4>
                                 <ul>
-                                    <li *ngIf="let item of blog?.metarial">
+                                    <li *ngFor="let item of blog?.metarial">
                                         <i class="fa fa-check" aria-hidden="true"></i>
                                         <p property="recipeIngredient">
                                             {{item.mass}}&nbsp;{{item.unit}}&nbsp;{{item?.title}}</p>

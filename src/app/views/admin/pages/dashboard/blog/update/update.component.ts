@@ -95,7 +95,7 @@ export class UpdateComponent implements OnInit {
       dt => {
         setTimeout(() => {
           this.checkUpdateSuccess = false;
-          window.location.reload()
+          this.route.navigate(["/admin/blog/blog-detail", { id: this.blogId}]);
         }, 1500);
         this.createMetarial();
         this.createContent();

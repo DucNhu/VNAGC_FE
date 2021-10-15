@@ -1,13 +1,48 @@
 /* bs */
 .mr-3 {
-  margin-right:1rem!important}
+  margin-right: 1rem !important;
+}
 
 /* /bs */
 /* Home */
 #homePage .navigation {
   padding-bottom: 0px !important;
 }
-/* Form */
+
+.clamp-1,
+.clamp-2,
+.clamp-3,
+.clamp-4 {
+  display: inline-block;
+  word-wrap: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+.clamp-2 {
+  -webkit-line-clamp: 2;
+}
+.clamp-3 {
+  -webkit-line-clamp: 3;
+}
+.clamp-4 {
+  -webkit-line-clamp: 4;
+}
+
+/* Blog */
+.home .blog-post .cookandmeal-post .post-date,
+.home .blog-post .cookandmeal-post .post-read-time,
+.home .blog-post .cookandmeal-post .post-title,
+.blog-posts-list .cookandmeal-post .post-date,
+.blog-posts-list .cookandmeal-post .post-read-time {
+    color: var(--color-grey);
+}
+/* End Blog */
+
+/* End Home */
+
 /* Show err */
 .woocommerce-form {
   position: relative;
@@ -21,6 +56,17 @@
 :root {
   --danger: #a94442;
 }
+/* Admin */
+.breadcrumbs-top .col-12 {
+  display: -webkit-box !important;
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+
+  align-items: center;
+}
+/* ENd Admin */
+
 /* List product Admin */
 /* Img */
 
@@ -49,18 +95,18 @@
   transition: 0.5s;
 }
 .home .ecommerce-card .item-img a img:hover {
-  all: unset
+  all: unset;
 }
 .home .ecommerce-card .item-img a img:last-child,
 .home .ecommerce-card .item-img a:hover img:first-child {
   /* display: none; */
-  transition: .5s;
+  transition: 0.5s;
   opacity: 0;
 }
 .home .ecommerce-card .item-img a:hover img:last-child {
   /* display: block; */
   opacity: 1;
-  transition: .5s;
+  transition: 0.5s;
 }
 .backdrop,
 .sk-cube-grid {
@@ -137,7 +183,7 @@ fieldset .box-step {
 
 .admin .container-page-item-title.container {
   width: auto !important;
-  margin-top: 30px
+  margin-top: 30px;
 }
 /* End Blogger page */
 

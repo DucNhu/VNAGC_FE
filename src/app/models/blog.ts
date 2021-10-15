@@ -14,30 +14,30 @@ export class blog {
     "create_at": string;
     "update_at": string;
 
-    "metarial": {
+    "metarial": [{
         "id": number;
         "title": string;
         "mass": number;
         "unit": string;
         "order": number;
         "blog_id": number;
-    }
+    }];
 
-    "content": {
+    "content": [{
         "id": number;
         "name": string;
         "content": string;
         "banner_img": string;
         "banner_cover": string;
         "blog_id": number;
-    }
+    }];
 
-    "step": {
+    "step": [{
         "id": number;
         "name": string;
         "banner_img": string;
         "description": string;
         "order": number;
         "blog_id": number;
-    }
+    }];
 }

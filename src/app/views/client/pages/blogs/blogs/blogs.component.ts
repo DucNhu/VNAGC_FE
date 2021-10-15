@@ -8,6 +8,7 @@ import { BlogService } from 'src/app/core/_service/blog/blog.service';
 })
 export class BlogsComponent implements OnInit {
   listBlog:any=[];
+  loading=true;
   constructor(
     private blogService: BlogService,
   ) { }
@@ -15,6 +16,7 @@ export class BlogsComponent implements OnInit {
   ngOnInit(): void {
     Promise.all([this.getAllBlogeres()]).then(
       dt => {
+        this.loading=false;
         this.listBlog = dt[0]
         console.log(this.listBlog)
       }

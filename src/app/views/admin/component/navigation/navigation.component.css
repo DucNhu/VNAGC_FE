@@ -20,3 +20,7 @@
     -webkit-transition: all 0.2s ease-out;
     transition: all 0.2s ease-out;
 }
+
+.main-menu.menu-light .navigation > li > a svg {
+    top: -3px;
+}

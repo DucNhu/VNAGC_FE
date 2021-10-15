@@ -10,6 +10,7 @@ import { blog } from 'src/app/models/blog';
 })
 export class BlogDetailComponent implements OnInit {
   blog: blog;
+  loading=true;
   constructor(
     private blogService: BlogService,
     private activatedRoute: ActivatedRoute
@@ -24,6 +25,7 @@ export class BlogDetailComponent implements OnInit {
       this.getStep()
     ]).then(
       dt => {
+        this.loading= false;
         this.blog=dt[0];
         this.blog.metarial = dt[1];
         this.blog.content = dt[2];
