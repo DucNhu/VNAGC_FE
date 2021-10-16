@@ -263,7 +263,10 @@ export class CreateBlogComponent implements OnInit {
         this.blogId = dt.id;
         this.createMetarial();
         this.createContent();
-        this.createStep()
+        this.createStep();
+        setTimeout(() => {
+          this.route.navigate(["/admin/blog/list"]);
+        }, 1500);
       },
       err => {
         this.loading = false;
