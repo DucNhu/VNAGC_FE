@@ -42,6 +42,10 @@ const routes: Routes = [
         loadChildren: () => import('./views/client/pages/blogs/blogs.module').then(m => m.BlogsModule),
       },
       {
+        path: 'profile',
+        loadChildren: () => import('./views/client/pages/profile/profile.module').then(m => m.ProfileModule),
+      },
+      {
         path: 'cart',
         component: CartComponent
       },
