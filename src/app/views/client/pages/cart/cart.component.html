@@ -9,24 +9,23 @@
                             action="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/cart/" method="post">
 
                             <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents"
-                                style="border: none"
-                                cellspacing="0">
+                                style="border: none" cellspacing="0">
                                 <thead>
-                                    <tr >
-                                        <th class="product-remove" >&nbsp;</th>
+                                    <tr>
+                                        <th class="product-remove">&nbsp;</th>
                                         <th class="product-name">Product</th>
                                         <th class="product-price">Price</th>
                                         <th class="product-quantity">Quantity</th>
                                         <th class="product-subtotal">Subtotal</th>
                                         <th class="product-thumbnail">&nbsp;</th>
-                                    </tr>   
+                                    </tr>
                                 </thead>
                                 <tbody>
 
                                     <tr class="woocommerce-cart-form__cart-item cart_item"
                                         *ngFor="let item of listCart; let i = index">
 
-                                        
+
                                         <td class="product-thumbnail">
                                             <a [routerLink]="['product-detail', {id: item.id}]"><img width="300"
                                                     height="300"
@@ -44,9 +43,8 @@
                                         <td class="product-price" data-title="Price">
                                             <span class="woocommerce-Price-amount amount">
                                                 <del style="margin-right: 15px">{{'$' + item.sale}}</del>
-                                                <bdi class="mr-3" >
-                                                    <span
-                                                        class="woocommerce-Price-currencySymbol">$
+                                                <bdi class="mr-3">
+                                                    <span class="woocommerce-Price-currencySymbol">$
                                                     </span>{{item.price}}
                                                 </bdi>
                                             </span>
@@ -64,10 +62,12 @@
 
                                         <td class="product-subtotal" data-title="Subtotal">
                                             <span class="woocommerce-Price-amount amount"><bdi><span
-                                                        class="woocommerce-Price-currencySymbol">$</span>108.00</bdi></span>
+                                                        class="woocommerce-Price-currencySymbol">$</span>{{item.subtotal
+                                                    | number:"1.0-0"}}</bdi></span>
                                         </td>
                                         <td class="product-remove">
-                                            <button (click)="deleteCartByIdProduct(item.id, i)" class="btn remove">×</button>
+                                            <button (click)="deleteCartByIdProduct(item.id, i)"
+                                                class="btn remove">×</button>
                                         </td>
 
                                     </tr>
@@ -81,182 +81,30 @@
 
 
                                 <h2>Cart totals</h2>
-
-                                <table cellspacing="0" class="shop_table shop_table_responsive"
-                                    style="border: none">
-
+                                <table cellspacing="0" class="shop_table shop_table_responsive" style="border: none">
                                     <tbody>
-                                        <tr class="cart-subtotal">
-                                            <th>Subtotal</th>
-                                            <td data-title="Subtotal">
-                                                <span
-                                                    class="woocommerce-Price-amount amount">
-                                                    <bdi>
-                                                        <span
-                                                            class="woocommerce-Price-currencySymbol">$
-                                                        </span>
-                                                            198.00
-                                                    </bdi>
-                                                </span>
-                                            </td>
-                                        </tr> <tr class="order-total">
+                                        <tr class="order-total">
                                             <th>Total</th>
-                                            <td data-title="Total" style="border-top: 1px solid rgba(0,0,0,.1);"><strong><span
-                                                        class="woocommerce-Price-amount amount"><bdi><span
-                                                                class="woocommerce-Price-currencySymbol">$</span>198.00</bdi></span></strong>
+                                            <td data-title="Total" style="border-top: 1px solid rgba(0,0,0,.1);">
+                                                <strong><span class="woocommerce-Price-amount amount"><bdi><span
+                                                                class="woocommerce-Price-currencySymbol">$</span>{{total()|
+                                                            number:"1.0-0"}}</bdi></span></strong>
                                             </td>
                                         </tr>
-
-
                                     </tbody>
                                 </table>
 
                                 <div class="wc-proceed-to-checkout">
 
-                                    <a href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/checkout/"
-                                        class="checkout-button button alt wc-forward">
+                                    <a routerLink="/checkout" class="checkout-button button alt wc-forward">
                                         Proceed to checkout</a>
                                 </div>
-
-
                             </div>
                         </div>
 
                     </div>
                 </article>
             </div>
-
         </div>
-        <!-- <div class="col-md-4 page-sidebar sidebar sidebar-right" role="complementary">
-            <ul id="page-sidebar">
-                <li id="cookandmeal-text-5" class="widget widget_cookandmeal_text">
-                    <div class="cookandmeal-textwidget-wrapper ">
-                        <div class="cookandmeal-textwidget" data-style="" style=""><a
-                                href="https://magniumthemes.com/go/purchase-cookandmeal/"><img
-                                    src="https://wp.wp-preview.com/cookandmeal/cookandmeal-1/wp-content/uploads/2021/07/promo-cookandmeal-half-page-2x.jpg"
-                                    alt=""></a></div>
-                    </div>
-                </li>
-                <li id="cookandmeal-list-posts-5" class="widget widget_cookandmeal_list_entries">
-                    <h2 class="widgettitle">Latest post</h2>
-                    <ul class="template-2col-inside">
-
-                        <li class="template-2col">
-                            <div
-                                class="cookandmeal-grid-post cookandmeal-grid-short-post cookandmeal-post format-standard">
-                                <div class="cookandmeal-post-image-wrapper"><a
-                                        href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/2021/06/08/homemade-oatmeal-chocolate-chip-cookie-crisp-cereal/">
-                                        <div class="cookandmeal-post-image"
-                                            data-style="background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/05/image-from-rawpixel-id-105386-jpeg-555x360.jpg);"
-                                            style="background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/05/image-from-rawpixel-id-105386-jpeg-555x360.jpg);">
-                                        </div>
-                                    </a></div>
-                                <div class="cookandmeal-post-details">
-                                    <div class="post-categories"><a
-                                            href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/category/easy/"
-                                            data-style="background-color: #84a6e5;"
-                                            style="background-color: #84a6e5;"><i class="fa fa-tag cat-dot"></i><span
-                                                class="cat-title">Easy</span></a></div>
-                                    <h3 class="post-title entry-title"><a
-                                            href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/2021/06/08/homemade-oatmeal-chocolate-chip-cookie-crisp-cereal/">Homemade
-                                            Oatmeal Chocolate Chip Cookie Crisp Cereal</a></h3>
-                                    <div class="post-date"><time class="entry-date published updated"
-                                            datetime="2021-06-08T22:23:00+00:00">June 8, 2021</time></div>
-                                    <div class="post-info-dot"></div>
-                                    <div class="post-read-time"><i class="fa fa-clock-o" aria-hidden="true"></i>75 min
-                                        Cook</div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="template-2col">
-                            <div
-                                class="cookandmeal-grid-post cookandmeal-grid-short-post cookandmeal-post format-standard">
-                                <div class="cookandmeal-post-image-wrapper"><a
-                                        href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/2021/06/07/almond-flour-pancakes/">
-                                        <div class="cookandmeal-post-image"
-                                            data-style="background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/05/qdm6-ffkp0s-555x360.jpg);"
-                                            style="background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/05/qdm6-ffkp0s-555x360.jpg);">
-                                        </div>
-                                    </a></div>
-                                <div class="cookandmeal-post-details">
-                                    <div class="post-categories"><a
-                                            href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/category/easy/"
-                                            data-style="background-color: #84a6e5;"
-                                            style="background-color: #84a6e5;"><i class="fa fa-tag cat-dot"></i><span
-                                                class="cat-title">Easy</span></a></div>
-                                    <h3 class="post-title entry-title"><a
-                                            href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/2021/06/07/almond-flour-pancakes/">Almond
-                                            Flour Pancakes</a></h3>
-                                    <div class="post-date"><time class="entry-date published updated"
-                                            datetime="2021-06-07T11:26:50+00:00">June 7, 2021</time></div>
-                                    <div class="post-info-dot"></div>
-                                    <div class="post-read-time"><i class="fa fa-clock-o" aria-hidden="true"></i>23 min
-                                        Cook</div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="template-2col">
-                            <div
-                                class="cookandmeal-grid-post cookandmeal-grid-short-post cookandmeal-post format-standard">
-                                <div class="cookandmeal-post-image-wrapper"><a
-                                        href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/2021/06/07/spicy-serrano-pineapple-margarita-2/">
-                                        <div class="cookandmeal-post-image"
-                                            data-style="background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/06/jdazixxqvtc-555x360.jpg);"
-                                            style="background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/06/jdazixxqvtc-555x360.jpg);">
-                                        </div>
-                                    </a></div>
-                                <div class="cookandmeal-post-details">
-                                    <div class="post-categories"><a
-                                            href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/category/easy/"
-                                            data-style="background-color: #84a6e5;"
-                                            style="background-color: #84a6e5;"><i class="fa fa-tag cat-dot"></i><span
-                                                class="cat-title">Easy</span></a><a
-                                            href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/category/vegan/"
-                                            data-style="background-color: #5b8559;"
-                                            style="background-color: #5b8559;"><i class="fa fa-tag cat-dot"></i><span
-                                                class="cat-title">Vegan</span></a></div>
-                                    <h3 class="post-title entry-title"><a
-                                            href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/2021/06/07/spicy-serrano-pineapple-margarita-2/">Spicy
-                                            Serrano Pineapple Margarita.</a></h3>
-                                    <div class="post-date"><time class="entry-date published updated"
-                                            datetime="2021-06-07T11:03:59+00:00">June 7, 2021</time></div>
-                                    <div class="post-info-dot"></div>
-                                    <div class="post-read-time"><i class="fa fa-clock-o" aria-hidden="true"></i>53 min
-                                        Cook</div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="template-2col">
-                            <div
-                                class="cookandmeal-grid-post cookandmeal-grid-short-post cookandmeal-post format-standard">
-                                <div class="cookandmeal-post-image-wrapper"><a
-                                        href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/2021/06/07/spicy-serrano-pineapple-margarita/">
-                                        <div class="cookandmeal-post-image"
-                                            data-style="background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/06/uo4r-xn3kwe-555x360.jpg);"
-                                            style="background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/06/uo4r-xn3kwe-555x360.jpg);">
-                                        </div>
-                                    </a></div>
-                                <div class="cookandmeal-post-details">
-                                    <div class="post-categories"><a
-                                            href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/category/pasta/"
-                                            data-style="background-color: #e5a484;"
-                                            style="background-color: #e5a484;"><i class="fa fa-tag cat-dot"></i><span
-                                                class="cat-title">Pasta</span></a></div>
-                                    <h3 class="post-title entry-title"><a
-                                            href="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/2021/06/07/spicy-serrano-pineapple-margarita/">Broccoli
-                                            Slaw</a></h3>
-                                    <div class="post-date"><time class="entry-date published updated"
-                                            datetime="2021-06-07T11:00:10+00:00">June 7, 2021</time></div>
-                                    <div class="post-info-dot"></div>
-                                    <div class="post-read-time"><i class="fa fa-clock-o" aria-hidden="true"></i>16 min
-                                        Cook</div>
-                                </div>
-                            </div>
-                        </li>
-
-                    </ul>
-                </li>
-            </ul>
-        </div> -->
-    </div>
+</div>
 </div>

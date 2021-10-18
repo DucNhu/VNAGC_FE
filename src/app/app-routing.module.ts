@@ -10,6 +10,7 @@ import { ActiveAccountComponent } from './views/client/pages/authen/active-accou
 import { CartComponent } from './views/client/pages/cart/cart.component';
 import { ShopComponent } from './views/client/pages/shop/shop.component';
 import { AuthenGuard } from './core/guard/authen.guard';
+import { UserGuard } from './core/guard/user.guard';
 
 const routes: Routes = [
   {
@@ -30,6 +31,7 @@ const routes: Routes = [
         component: ProductDetailComponent
       },
       {
+        canActivate: [UserGuard],
         path: 'checkout',
         component: CheckoutComponent
       },
