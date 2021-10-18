@@ -1,6 +1,6 @@
 <div class="page-container container span-col-md-8">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="entry-content clearfix" role="main">
                 <article>
                     <div class="woocommerce">
@@ -9,26 +9,24 @@
                             action="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/cart/" method="post">
 
                             <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents"
+                                style="border: none"
                                 cellspacing="0">
                                 <thead>
-                                    <tr>
-                                        <th class="product-remove">&nbsp;</th>
-                                        <th class="product-thumbnail">&nbsp;</th>
+                                    <tr >
+                                        <th class="product-remove" >&nbsp;</th>
                                         <th class="product-name">Product</th>
                                         <th class="product-price">Price</th>
                                         <th class="product-quantity">Quantity</th>
                                         <th class="product-subtotal">Subtotal</th>
-                                    </tr>
+                                        <th class="product-thumbnail">&nbsp;</th>
+                                    </tr>   
                                 </thead>
                                 <tbody>
 
                                     <tr class="woocommerce-cart-form__cart-item cart_item"
                                         *ngFor="let item of listCart; let i = index">
 
-                                        <td class="product-remove">
-                                            <button (click)="deleteCartByIdProduct(item.id, i)" class="btn remove">×</button>
-                                        </td>
-
+                                        
                                         <td class="product-thumbnail">
                                             <a [routerLink]="['product-detail', {id: item.id}]"><img width="300"
                                                     height="300"
@@ -37,13 +35,21 @@
                                         </td>
 
                                         <td class="product-name" data-title="Product">
-                                            <a [routerLink]="['product-detail', {id: item.id}]">{{item.name}}</a>
+                                            <a [routerLink]="['product-detail', {id: item.id}]"
+                                                style="text-decoration: none; font-size:16px">
+                                                {{item.name}}
+                                            </a>
                                         </td>
 
                                         <td class="product-price" data-title="Price">
-                                            <span class="woocommerce-Price-amount amount"><bdi class="mr-3"><span
-                                                        class="woocommerce-Price-currencySymbol">$</span>{{item.price}}</bdi>
-                                                <del>{{'$' + item.sale}}</del></span>
+                                            <span class="woocommerce-Price-amount amount">
+                                                <del style="margin-right: 15px">{{'$' + item.sale}}</del>
+                                                <bdi class="mr-3" >
+                                                    <span
+                                                        class="woocommerce-Price-currencySymbol">$
+                                                    </span>{{item.price}}
+                                                </bdi>
+                                            </span>
                                         </td>
 
                                         <td class="product-quantity" data-title="Quantity">
@@ -60,37 +66,42 @@
                                             <span class="woocommerce-Price-amount amount"><bdi><span
                                                         class="woocommerce-Price-currencySymbol">$</span>108.00</bdi></span>
                                         </td>
+                                        <td class="product-remove">
+                                            <button (click)="deleteCartByIdProduct(item.id, i)" class="btn remove">×</button>
+                                        </td>
+
                                     </tr>
                                 </tbody>
                             </table>
                         </form>
 
 
-                        <div class="cart-collaterals">
+                        <div class="cart-collaterals d-flex">
                             <div class="cart_totals ">
 
 
                                 <h2>Cart totals</h2>
 
-                                <table cellspacing="0" class="shop_table shop_table_responsive">
+                                <table cellspacing="0" class="shop_table shop_table_responsive"
+                                    style="border: none">
 
                                     <tbody>
                                         <tr class="cart-subtotal">
                                             <th>Subtotal</th>
-                                            <td data-title="Subtotal"><span
-                                                    class="woocommerce-Price-amount amount"><bdi><span
-                                                            class="woocommerce-Price-currencySymbol">$</span>198.00</bdi></span>
+                                            <td data-title="Subtotal">
+                                                <span
+                                                    class="woocommerce-Price-amount amount">
+                                                    <bdi>
+                                                        <span
+                                                            class="woocommerce-Price-currencySymbol">$
+                                                        </span>
+                                                            198.00
+                                                    </bdi>
+                                                </span>
                                             </td>
-                                        </tr>
-
-
-
-
-
-
-                                        <tr class="order-total">
+                                        </tr> <tr class="order-total">
                                             <th>Total</th>
-                                            <td data-title="Total"><strong><span
+                                            <td data-title="Total" style="border-top: 1px solid rgba(0,0,0,.1);"><strong><span
                                                         class="woocommerce-Price-amount amount"><bdi><span
                                                                 class="woocommerce-Price-currencySymbol">$</span>198.00</bdi></span></strong>
                                             </td>
@@ -116,7 +127,7 @@
             </div>
 
         </div>
-        <div class="col-md-4 page-sidebar sidebar sidebar-right" role="complementary">
+        <!-- <div class="col-md-4 page-sidebar sidebar sidebar-right" role="complementary">
             <ul id="page-sidebar">
                 <li id="cookandmeal-text-5" class="widget widget_cookandmeal_text">
                     <div class="cookandmeal-textwidget-wrapper ">
@@ -246,6 +257,6 @@
                     </ul>
                 </li>
             </ul>
-        </div>
+        </div> -->
     </div>
 </div>
