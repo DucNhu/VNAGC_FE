@@ -13,11 +13,15 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.listCart = JSON.parse(localStorage.getItem('cart'));
+    this.listCart.forEach(e => {
+      e.totalAProduct = e.price * ((100 - e.sale)/100);
+      e.subtotal = e.totalAProduct * e.quantity;
+    });
   }
 
-  setQuantity(index, quantity) {  
+  setQuantity(index, quantity) { 
+    this.listCart[index].subtotal = this.listCart[index].totalAProduct * quantity;
     this.listCart[index].quantity = quantity;
     this.addToCartService.setCart(this.listCart[index]);
   }
@@ -26,4 +30,11 @@ export class CartComponent implements OnInit {
     this.addToCartService.deleteCartByIdProduct(id)
   }
 
+  total() {
+    let total = 0;
+    this.listCart.forEach(e => {
+      total = e.subtotal + total;
+    });
+    return total
+  }
 }
