@@ -11,6 +11,7 @@ import { CartComponent } from './views/client/pages/cart/cart.component';
 import { ShopComponent } from './views/client/pages/shop/shop.component';
 import { AuthenGuard } from './core/guard/authen.guard';
 import { UserGuard } from './core/guard/user.guard';
+import { testComponent } from './views/client/pages/testComponent.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
       {
         path: '',
         component: HomeComponent
+      },
+      {
+        path: 'test',
+        component: testComponent
       },
       {
         path: 'product-detail',

@@ -200,3 +200,9 @@ fieldset .box-step {
   -webkit-line-clamp: 1;
 }
 /* End lít Product */
+
+/* Paypal */
+#buttons-container .paypal-button-container .paypal-button-number-1 {
+  display: none
+}
+/* end paypal */
