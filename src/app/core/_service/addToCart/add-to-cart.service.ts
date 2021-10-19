@@ -50,7 +50,6 @@ export class AddToCartService {
   deleteCartByIdProduct(id) {
     let cartCurrent = JSON.parse(localStorage.getItem('cart'));
     if(cartCurrent.length == 0) {
-      console.log(cartCurrent.length)
       localStorage.removeItem("cart")
     }
     if (cartCurrent) {
