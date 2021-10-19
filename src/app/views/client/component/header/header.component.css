@@ -1,3 +1,7 @@
 .box-cart svg{
-transform: scale(1.3);
+transform: scale(2.4);
+}
+
+.nav-item-cart {
+    margin-right: 30px;
 }
