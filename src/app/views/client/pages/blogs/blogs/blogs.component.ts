@@ -17,7 +17,7 @@ export class BlogsComponent implements OnInit {
     Promise.all([this.getAllBlogeres()]).then(
       dt => {
         this.loading=false;
-        this.listBlog = dt[0]
+        this.listBlog = dt[0].Data
         console.log(this.listBlog)
       }
     )

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenService } from 'src/app/core/_service/authen/authen.service';
+import { user } from 'src/app/models/user';
 
 @Component({
   selector: 'app-header',
@@ -8,6 +9,7 @@ import { AuthenService } from 'src/app/core/_service/authen/authen.service';
 })
 export class HeaderComponent implements OnInit {
   isLogin=false;
+  user: user;
   constructor(
     private authenSv: AuthenService
   ) { }
@@ -17,6 +19,7 @@ export class HeaderComponent implements OnInit {
       dt => {
         if (dt) {
           this.isLogin = true;
+          this.user = JSON.parse(localStorage.getItem("user"))
         }
         else {
           this.isLogin = false;

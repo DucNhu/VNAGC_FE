@@ -8,23 +8,26 @@ export class BlogService {
 
   constructor(private helperService: HelperService) { }
   getAllBlogeres() {
-    return this.helperService.getAll("Blogeres");
+    return this.helperService.getAll("Blog/get-all-blog");
   }
-
+  GetBlogsActive() {
+    return this.helperService.getAll("Blog/GetBlogsActive");
+  }
+  
   getBlog(id) {
-    return this.helperService.get("Blogeres", id);
+    return this.helperService.get("Blog/detail", id);
   }
 
   create(data) {
-    return this.helperService.post("Blogeres", data);
+    return this.helperService.post("Blog", data);
   }
 
   update(data) {
-    return this.helperService.put("Blogeres/" + data.id, data);
+    return this.helperService.put("Blog" + data.id, data);
   }
 
   delete(id) {
-    return this.helperService.delete("Blogeres", id);
+    return this.helperService.delete("Blog", id);
   }
 
   // Metarial
