@@ -30,20 +30,21 @@
                                             class="required">*</span></label>
                                     <div class="position-relative">
                                         <input type="text" class="woocommerce-Input woocommerce-Input--text input-text"
+                                            style="margin-bottom: 4px;"
                                             id="email" formControlName="email">
-                                        <span class="position-absolute errorInput" *ngIf="isInvalid('email')"
-                                            style="left: 25px"
-                                        >Please fill in the correct email structure</span>
+                                        <span class=" errorInput" *ngIf="isInvalid('email')">
+                                            Please fill in the correct email structure</span>
                                     </div>
                                 </div>
                                 <div class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                     <label for="password">Password&nbsp;<span class="required">*</span></label>
                                     <div class="position-relative">
                                         <input class="woocommerce-Input woocommerce-Input--text input-text"
+                                            style="margin-bottom: 4px"
                                             type="password" autocomplete="current-password" formControlName="password"
                                             id="password">
-                                        <span class="position-absolute errorInput" *ngIf="isInvalid('password') "style="left: 25px">Invalid
-                                            password</span>
+                                        <span class=" errorInput" *ngIf="isInvalid('password') ">
+                                            Invalid password</span>
                                     </div>
                                 </div>
                                 <div class="form-row form-row-btn">
