@@ -20,10 +20,11 @@ export class ListProductComponent implements OnInit {
       ]
     ).then(
       (dt: any) => {
-        this.listProduct = dt[0];
+        this.listProduct = dt.Data;
         this.load = false;
       },
       err => {
+        console.log(err)
         this.load = false;
       }
     )

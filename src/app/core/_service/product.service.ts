@@ -12,11 +12,11 @@ export class ProductService {
   ) { }
 
   getAllProducts() {
-    return this.helperService.getAll("Products");
+    return this.helperService.getAll("Products/get-all-product");
   }
 
   getProduct(id) {
-    return this.helperService.get("Products", id);
+    return this.helperService.get("Products/detail", id);
   }
 
   create(data) {

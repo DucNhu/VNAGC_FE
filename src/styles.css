@@ -203,7 +203,8 @@ fieldset .box-step {
 /* End lít Product */
 
 /* Paypal */
-#buttons-container .paypal-button-container .paypal-button-number-1 {
-  display: none
+#paypal-button-container {
+  height: 45px;
+  overflow: hidden;
 }
 /* end paypal */

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private roue: Router
+  ) { }
   ngOnInit(): void {
     paypal.Buttons(
       {
@@ -32,6 +35,8 @@ export class CheckoutComponent implements OnInit {
               // UserID: this.idUser,
               // Duration: e.Duration
             }
+            localStorage.removeItem("cart")
+            this.roue.navigate(["/shop"])
 
             // this.packagePP.CreatePackagePP(PackagePurchased).subscribe(
             //   data => {
