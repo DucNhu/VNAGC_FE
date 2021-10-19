@@ -4,17 +4,18 @@ import { Component, OnInit } from '@angular/core';
     selector: 'app-test',
     template:
     `
-    <table class="sm-w-full mx-auto" style="font-family: 'Montserrat',Arial,sans-serif; width: 600px;" width="600" cellpadding="0"
+    <table class="sm-w-full mx-auto" style="font-family: 'Montserrat',Arial,sans-serif; width: 600px; border:none" width="600" cellpadding="0"
   cellspacing="0" role="presentation">
   <tbody>
     <tr>
       <td align="center" class="sm-px-24" style="font-family: 'Montserrat',Arial,sans-serif;">
-        <table style="font-family: 'Montserrat',Arial,sans-serif; width: 100%;" width="100%" cellpadding="0"
+        <table style="font-family: 'Montserrat',Arial,sans-serif; width: 100%; border:none!important;
+        box-shadow: 1px 1px 2px 2px #ccc;" width="100%; " cellpadding="0"
           cellspacing="0" role="presentation">
           <tbody>
             <tr>
               <td class="sm-px-24"
-                style="--bg-opacity: 1; background-color: #ffffff; background-color: rgba(255, 255, 255, var(--bg-opacity)); border-radius: 4px; font-family: Montserrat, -apple-system, 'Segoe UI', sans-serif; font-size: 14px; line-height: 24px; padding: 48px; text-align: left; --text-opacity: 1; color: #626262; color: rgba(98, 98, 98, var(--text-opacity));"
+                style="--bg-opacity: 1; background-color: #ffffff; background-color: rgba(255, 255, 255, var(--bg-opacity)); border-radius: 4px; font-family: Montserrat, -apple-system, 'Segoe UI', border: none;sans-serif; font-size: 14px; line-height: 24px; padding: 48px; text-align: left; --text-opacity: 1; color: #626262; color: rgba(98, 98, 98, var(--text-opacity));"
                 bgcolor="rgba(255, 255, 255, var(--bg-opacity))" align="left">
                 <p style="font-weight: 600; font-size: 18px; margin-bottom: 0;">Hey</p>
                 <p
@@ -79,17 +80,17 @@ import { Component, OnInit } from '@angular/core';
                 <p align="center" style="cursor: default; margin-bottom: 16px;">
                   <a href="https://www.facebook.com/4TĐs"
                     style="--text-opacity: 1; color: #263238; color: rgba(38, 50, 56, var(--text-opacity)); text-decoration: none;"><img
-                      src="images/facebook.png" width="17" alt="Facebook"
+                      src="../../../../../assets/images/portrait/social/facebook.png" width="24" alt="Facebook"
                       style="border: 0; max-width: 100%; line-height: 100%; vertical-align: middle; margin-right: 12px;"></a>
                   •
                   <a href="https://twitter.com/4TĐs"
                     style="--text-opacity: 1; color: #263238; color: rgba(38, 50, 56, var(--text-opacity)); text-decoration: none;"><img
-                      src="images/twitter.png" width="17" alt="Twitter"
+                      src="../../../../../assets/images/portrait/social/twitter.png" width="30" alt="Twitter"
                       style="border: 0; max-width: 100%; line-height: 100%; vertical-align: middle; margin-right: 12px;"></a>
                   •
                   <a href="https://www.instagram.com/4TĐs"
                     style="--text-opacity: 1; color: #263238; color: rgba(38, 50, 56, var(--text-opacity)); text-decoration: none;"><img
-                      src="images/instagram.png" width="17" alt="Instagram"
+                      src="../../../../../assets/images/portrait/social/intagram.jpg" width="30" alt="Instagram"
                       style="border: 0; max-width: 100%; line-height: 100%; vertical-align: middle; margin-right: 12px;"></a>
                 </p>
                 <p style="--text-opacity: 1; color: #263238; color: rgba(38, 50, 56, var(--text-opacity));">

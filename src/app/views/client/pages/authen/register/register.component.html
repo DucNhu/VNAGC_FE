@@ -1,7 +1,7 @@
 <app-load [isLoading]="loading"></app-load>
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
 <div class="content-block ">
-    <div class="container container-page-item-title" data-style="" data-speed="0.1" style="">
+    <!-- <div class="container container-page-item-title" data-style="" data-speed="0.1" style="">
         <div class="row">
             <div class="col-md-12 col-overlay">
                 <div class="container">
@@ -11,13 +11,13 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="page-container container span-col-md-8">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="entry-content clearfix" role="main">
-                    <article>
-                        <div class="woocommerce">
+                    <article class="d-flex align-items-center user-login-wrapper" >
+                        <div class="woocommerce user-login">
                             <div class="woocommerce-notices-wrapper"></div>
 
                             <h2>Register</h2>
@@ -64,11 +64,11 @@
                                     </div>
                                 </div>
 
-                                <div class="form-row">
+                                <div class="form-row form-row-btn">
                                     <button type="submit"
                                         class="woocommerce-button button woocommerce-form-login__submit">Sig up</button>
                                 </div>
-                                <p class="woocommerce-LostPassword lost_password">
+                                <p class="woocommerce-LostPassword lost_password" style="text-align: center">
                                     <a href="lost-password/index.html">Lost your password?</a>
                             </form>
                         </div>
@@ -76,7 +76,7 @@
                 </div>
 
             </div>
-            <div class="col-md-4 page-sidebar sidebar sidebar-right" role="complementary">
+            <!-- <div class="col-md-4 page-sidebar sidebar sidebar-right" role="complementary">
                 <ul id="page-sidebar">
                     <li id="cookandmeal-text-5" class="widget widget_cookandmeal_text">
                         <div class="cookandmeal-textwidget-wrapper ">
@@ -207,7 +207,7 @@
                         </ul>
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
