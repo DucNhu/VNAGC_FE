@@ -23,8 +23,9 @@ export class ShopComponent implements OnInit {
       ]
     ).then(
       (dt: any) => {
-        this.listProduct = dt[0];
-        console.log(this.listProduct)
+        this.listProduct = dt[0].Data;
+        console.log(dt, this.listProduct)
+
         this.load = false;
       },
       err => {
