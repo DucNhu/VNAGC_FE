@@ -53,6 +53,9 @@ export class LoginComponent implements OnInit {
     let c = this.f(controlName);
     return c && c.invalid && (c.dirty || c.touched);
   }
+
+
+
   submitForm() {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();

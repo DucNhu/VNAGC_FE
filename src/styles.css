@@ -53,6 +53,7 @@
   right: 1.25em;
   top: 10px;
   color: var(--danger);
+  padding-top: 4px;
 }
 /* END Show err */
 :root {

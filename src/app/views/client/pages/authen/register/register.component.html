@@ -27,8 +27,9 @@
                                     <label for="username">Full name&nbsp;<span class="required">*</span></label>
                                     <div class="position-relative">
                                         <input type="text" class="woocommerce-Input woocommerce-Input--text input-text"
+                                            style="margin-bottom: 4px"
                                             formControlName="name" id="username">
-                                        <span class="position-absolute errorInput"
+                                        <span class="errorInput"
                                             *ngIf="isInvalid('name') || errorName">This field cannot be ignored</span>
                                     </div>
                                 </div>
@@ -37,8 +38,9 @@
                                             class="required">*</span></label>
                                     <div class="position-relative">
                                         <input type="text" class="woocommerce-Input woocommerce-Input--text input-text"
+                                            style="margin-bottom: 4px"
                                             id="email" formControlName="email">
-                                        <span class="position-absolute errorInput" *ngIf="isInvalid('email')">Please
+                                        <span class="errorInput" *ngIf="isInvalid('email')">Please
                                             fill in the correct email structure</span>
                                     </div>
                                 </div>
@@ -46,9 +48,10 @@
                                     <label for="password">Password&nbsp;<span class="required">*</span></label>
                                     <div class="position-relative">
                                         <input class="woocommerce-Input woocommerce-Input--text input-text"
+                                            style="margin-bottom: 4px"
                                             type="password" autocomplete="current-password" formControlName="password"
                                             id="password">
-                                        <span class="position-absolute errorInput" *ngIf="isInvalid('password')">Invalid
+                                        <span class="errorInput" *ngIf="isInvalid('password')">Invalid
                                             password</span>
                                     </div>
                                 </div>
@@ -57,9 +60,10 @@
                                             class="required">*</span></label>
                                     <div class="position-relative">
                                         <input class="woocommerce-Input woocommerce-Input--text input-text"
+                                            style="margin-bottom: 4px"
                                             type="password" autocomplete="current-password"
                                             formControlName="confirmPassword" id="passwordCF">
-                                        <span class="position-absolute errorInput"
+                                        <span class="errorInput"
                                             *ngIf="isInvalid('confirmPassword')">invalid confirmation password</span>
                                     </div>
                                 </div>
