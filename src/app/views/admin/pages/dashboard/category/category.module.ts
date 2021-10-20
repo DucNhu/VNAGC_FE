@@ -10,6 +10,7 @@ import { MatTableModule } from '@angular/material/table'
 import { MatButtonModule } from '@angular/material/button';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule } from '@angular/forms';
+import { HashtagComponent } from './hashtag/hashtag.component';
 
 const routers: Routes = [
   {
@@ -19,7 +20,7 @@ const routers: Routes = [
 ]
 
 @NgModule({
-  declarations: [CategoryComponent],
+  declarations: [CategoryComponent, HashtagComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routers),

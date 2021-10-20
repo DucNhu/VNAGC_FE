@@ -13,6 +13,8 @@ import {
 import { ViewportRuler } from "@angular/cdk/overlay";
 import { BlogService } from 'src/app/core/_service/blog/blog.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CategoryService } from 'src/app/core/_service/category/category.service';
+import { HashtagService } from 'src/app/core/_service/hashtag/hashtag.service';
 
 @Component({
   selector: 'app-create',
@@ -20,7 +22,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./create.component.css']
 })
 export class CreateBlogComponent implements OnInit {
-  listCategory = ["Tea", "Coffe", "Coca"];
+  listCategory = [];
   time = { hour: 13, minute: 30 };
   selectedHastags: any[];
   hastags: any[] = [
@@ -50,12 +52,43 @@ export class CreateBlogComponent implements OnInit {
     private fb: FormBuilder,
     private blogService: BlogService,
     private route: Router,
-    private activatedRoute: ActivatedRoute
-  ) { }
+    private activatedRoute: ActivatedRoute,
+    private categoryService: CategoryService,
+    private hashtagService: HashtagService
+  ) { this.registerFormBlog();}
 
   ngOnInit(): void {
-    this.registerFormBlog();
-    console.log(this.activatedRoute.snapshot.paramMap.get('id'))
+    Promise.all(
+      [
+        this.getCategory(),
+        this.getHashtag()
+      ]
+    ).then(
+      (dt: any) => {
+        console.log(dt[1])
+        this.listCategory = dt[0].Data;
+        this.hastags = dt[1].Data;
+        this.loading = false;
+      },
+      err => {
+        this.loading = false;
+      }
+    )
+    
+  }
+
+  getCategory(): Promise<any> {
+    return new Promise(async (resolve) => {
+      const dt = await this.categoryService.getCategorys().toPromise();
+      resolve(dt);
+    });
+  }
+
+  getHashtag(): Promise<any> {
+    return new Promise(async (resolve) => {
+      const dt = await this.hashtagService.getHashtags().toPromise();
+      resolve(dt);
+    });
   }
 
   registerFormBlog() {

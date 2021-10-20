@@ -1,23 +1,21 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { CategoryService } from 'src/app/core/_service/category/category.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { HashtagService } from 'src/app/core/_service/hashtag/hashtag.service';
 
 export interface PeriodicElement {
   name: string;
   position: number;
   countBlog: number;
 }
-
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+  selector: 'app-hashtag',
+  templateUrl: './hashtag.component.html',
+  styleUrls: ['./hashtag.component.css']
 })
 
-export class CategoryComponent implements OnInit {
+export class HashtagComponent implements OnInit {
   listCategory = [
-    { id: null, name: "null", countBlog: null, createdDate: null, action: 1, index: 0 }
   ];
 
   displayedColumns: string[] = ['id', 'name', 'countBlog', 'createdDate', 'action'];
@@ -26,14 +24,14 @@ export class CategoryComponent implements OnInit {
   load = false;
   modalRef?: BsModalRef;
   newCategory = '';
-  editNameCategory='';
+  editNameCategory = '';
   Category_delete = {
     id: 0,
     index: 0
   }
   editId = 0;
   constructor(
-    private categoryService: CategoryService,
+    private hashtagService: HashtagService,
     private modalService: BsModalService,
   ) {
   }
@@ -41,7 +39,7 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
     Promise.all(
       [
-        this.getCategory()
+        this.getHashtag()
       ]
     ).then(
       (dt: any) => {
@@ -57,16 +55,16 @@ export class CategoryComponent implements OnInit {
       }
     )
   }
-  isEdit=false;
+  isEdit = false;
   editCategory(id) {
-    this.isEdit=true;
+    this.isEdit = true;
     this.editId = id;
-    this.editNameCategory=''
+    this.editNameCategory = ''
   }
 
-  getCategory(): Promise<any> {
+  getHashtag(): Promise<any> {
     return new Promise(async (resolve) => {
-      const dt = await this.categoryService.getCategorys().toPromise();
+      const dt = await this.hashtagService.getHashtags().toPromise();
       resolve(dt);
     });
   }
@@ -74,8 +72,8 @@ export class CategoryComponent implements OnInit {
   addNewCategory() {
     this.load = true;
     let name = this.newCategory;
-    this.newCategory='';
-    this.categoryService.createCategory(name).subscribe(
+    this.newCategory = '';
+    this.hashtagService.createHashtag(name).subscribe(
       dt => {
         this.load = false;
         this.listCategory.unshift({
@@ -104,7 +102,7 @@ export class CategoryComponent implements OnInit {
       "name": this.editNameCategory
     };
     this.newCategory = '';
-    this.categoryService.updateCategory(name).subscribe(
+    this.hashtagService.updateHashtag(name).subscribe(
       dt => {
         this.load = false;
         this.editId = 0; this.isEdit = false;
@@ -119,7 +117,7 @@ export class CategoryComponent implements OnInit {
 
   deleteCategory() {
     this.load = true;
-    this.categoryService.deleteCategory(this.Category_delete.id).subscribe(
+    this.hashtagService.deleteHashtag(this.Category_delete.id).subscribe(
       dt => {
         if (dt.Data) {
           this.listCategory.splice(this.Category_delete.index, 1);
