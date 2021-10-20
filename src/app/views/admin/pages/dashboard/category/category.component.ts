@@ -17,19 +17,21 @@ export interface PeriodicElement {
 
 export class CategoryComponent implements OnInit {
   listCategory = [
-    { id: null, name: null, countBlog: null, createdDate: null, action: 1, index: 0 }
+    { id: null, name: "null", countBlog: null, createdDate: null, action: 1, index: 0 }
   ];
 
   displayedColumns: string[] = ['id', 'name', 'countBlog', 'createdDate', 'action'];
   dataSource = new MatTableDataSource(this.listCategory);
 
-  load = true;
+  load = false;
   modalRef?: BsModalRef;
   newCategory = '';
+  editNameCategory='';
   Category_delete = {
     id: 0,
     index: 0
   }
+  editId = 0;
   constructor(
     private categoryService: CategoryService,
     private modalService: BsModalService,
@@ -55,9 +57,11 @@ export class CategoryComponent implements OnInit {
       }
     )
   }
-
+  isEdit=false;
   editCategory(id) {
-    alert(id)
+    this.isEdit=true;
+    this.editId = id;
+    this.editNameCategory=''
   }
 
   getProduct(): Promise<any> {
@@ -71,7 +75,7 @@ export class CategoryComponent implements OnInit {
     this.load = true;
     let name = this.newCategory;
     this.newCategory='';
-    this.categoryService.CreateCategory(name).subscribe(
+    this.categoryService.createCategory(name).subscribe(
       dt => {
         this.load = false;
         this.listCategory.unshift({
@@ -89,20 +93,44 @@ export class CategoryComponent implements OnInit {
       },
       err => {
         this.load = false;
-        console.log(err)
       }
     )
   }
+
+  saveEditCategory(index) {
+    this.load = true;
+    let name = {
+      "id": this.editId,
+      "name": this.editNameCategory
+    };
+    this.newCategory = '';
+    this.categoryService.updateCategory(name).subscribe(
+      dt => {
+        this.load = false;
+        this.editId = 0; this.isEdit = false;
+        this.listCategory[index].name = this.editNameCategory;
+        this.dataSource = new MatTableDataSource(this.listCategory)
+      },
+      err => {
+        this.load = false;
+      }
+    )
+  }
+
   deleteCategory() {
-    
+    this.load = true;
     this.categoryService.deleteCategory(this.Category_delete.id).subscribe(
       dt => {
         if (dt.Data) {
           this.listCategory.splice(this.Category_delete.index, 1);
-          this.dataSource = new MatTableDataSource(this.listCategory)
+          this.listCategory.forEach((e, i) => {
+            this.listCategory[i].index = i;
+          });
+          this.dataSource = new MatTableDataSource(this.listCategory);
+          this.closeModal();
         }
         else {
-
+          this.load = false;
         }
       },
       err => {
@@ -123,5 +151,9 @@ export class CategoryComponent implements OnInit {
     this.Category_delete.index = element.index;
 
     this.modalRef = this.modalService.show(template);
+  }
+  closeModal() {
+    this.modalService.hide();
+    this.load = false;
   }
 }

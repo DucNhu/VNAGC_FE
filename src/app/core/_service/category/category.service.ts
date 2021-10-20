@@ -12,10 +12,16 @@ export class CategoryService {
         return this.helperService.getAll("Category/get-all-category");
     }
 
-    CreateCategory(name) {
+    createCategory(name) {
         let param='';
         param += '?name=' + name;
         return this.helperService.postUrl("Category/create", name, param);
+    }
+
+    updateCategory(data) {
+        let param = '';
+        param += '?name=' + data;
+        return this.helperService.put("Category/edit", data);
     }
 
     deleteCategory(id) {
