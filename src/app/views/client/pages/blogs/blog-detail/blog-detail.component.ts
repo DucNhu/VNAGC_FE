@@ -25,6 +25,7 @@ export class BlogDetailComponent implements OnInit {
       this.getStep()
     ]).then(
       dt => {
+        console.log(dt)
         this.loading= false;
         this.blog=dt[0].Data;
         this.blog.metarial = dt[1];

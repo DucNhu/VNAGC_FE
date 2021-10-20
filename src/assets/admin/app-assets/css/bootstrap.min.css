@@ -4281,7 +4281,7 @@ fieldset:disabled .btn {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
     color: #fff;
-    background-color: #7367f0;
+    background-color: #7367f0 !important;
 }
 .nav-fill .nav-item,
 .nav-fill > .nav-link {
@@ -5700,16 +5700,17 @@ fieldset:disabled .btn {
     border-color: #2d2d2d;
 }
 .btn-close {
-    box-sizing: content-box;
-    width: 0.75rem;
-    height: 0.75rem;
-    padding: 0.25em;
-    color: currentColor;
+    box-sizing: content-box !important;
+    width: 0.75rem !important;
+    height: 0.75rem !important;
+    padding: 0.25em !important;
+    color: currentColor !important;
     background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='currentColor'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e")
-        center/.75rem auto no-repeat;
-    border: 0;
-    border-radius: 0.357rem;
-    opacity: 0.4;
+        center/.75rem auto no-repeat !important;
+    border: 0 !important;
+    border-radius: 0.357rem !important;
+       background-color: #fff !important;
+    opacity: 1 !important;
 }
 .btn-close:hover {
     color: currentColor;

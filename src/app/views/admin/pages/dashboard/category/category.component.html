@@ -1,0 +1,109 @@
+<app-load [isLoading]="load"></app-load>
+<div class="app-content content ecommerce-application">
+    <div class="content-wrapper container-xxl p-0 list-view--product">
+        <mat-tab-group>
+            <mat-tab label="First">
+                <div class="row m-0 mb-2">
+                    <div class="col-md-6">
+                        <mat-form-field appearance="standard">
+                            <mat-label>Filter <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-search ficon">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                </span></mat-label>
+                            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6 pe-0">
+                        <div class="demo-button-container mt-2">
+                            <form class=" d-flex justify-content-end">
+                                <input type="text" class="form-control" [(ngModel)]="newCategory" name="name">
+                                <button class="demo-button btn btn-outline-primary mr-3" (click)="addNewCategory()">
+                                    Create new category
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                    <!-- id Column -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> No. </th>
+                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> Name </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.name}}
+                        </td>
+                    </ng-container>
+
+                    <!-- count blg Column -->
+                    <ng-container matColumnDef="countBlog">
+                        <th mat-header-cell *matHeaderCellDef> Count Blog </th>
+                        <td mat-cell *matCellDef="let element"> 100 </td>
+                    </ng-container>
+
+                    <!-- Time Create -->
+                    <ng-container matColumnDef="createdDate">
+                        <th mat-header-cell *matHeaderCellDef> Create at </th>
+                        <td mat-cell *matCellDef="let element"> {{element.createdDate | date:"yyyy/MM/dd HH:mm"}} </td>
+                    </ng-container>
+
+                    <!-- Action -->
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef class="width-150">
+                            <div class="text-right pe-5">Action</div>
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <div class="d-flex">
+                                <button class="demo-button edit-btn btn btn-outline-primary mr-3"
+                                    (click)="editCategory(element.id)">
+                                    Edit
+                                </button>
+                                <button class="demo-button delete-btn btn btn-outline-primary mr-3"
+                                    (click)="openModal(template, element); ">
+                                    Delete
+                                </button>
+                            </div>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                    </tr>
+                </table>
+
+
+            </mat-tab>
+            <mat-tab label="Second"> HashTag </mat-tab>
+        </mat-tab-group>
+
+    </div>
+</div>
+<ng-template #template>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Delete Category</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <p>
+            Related data like blogs containing this category will also be affected, are you sure about this?
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button class="demo-button delete-btn btn btn-outline-primary mr-3" (click)="deleteCategory();">
+            Delete
+        </button>
+    </div>
+</ng-template>

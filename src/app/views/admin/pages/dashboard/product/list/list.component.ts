@@ -20,7 +20,7 @@ export class ListProductComponent implements OnInit {
       ]
     ).then(
       (dt: any) => {
-        this.listProduct = dt.Data;
+        this.listProduct = dt[0].Data;
         this.load = false;
       },
       err => {

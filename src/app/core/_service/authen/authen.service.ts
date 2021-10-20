@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AppConfig } from 'src/app/app.config';
 import { user } from 'src/app/models/user';
@@ -14,7 +15,7 @@ export class AuthenService {
   public get currenUserValue(): user {
     return this.currentUserSubject.value;
   }
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private route: Router) { }
   
   
   login(data) {
@@ -36,5 +37,6 @@ export class AuthenService {
   logout() {
     this.currentUserSubject.next(null);
     localStorage.removeItem('user');
+    this.route.navigate(["/login"])
   }
 }

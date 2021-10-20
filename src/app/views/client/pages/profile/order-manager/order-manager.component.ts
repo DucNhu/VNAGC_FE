@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { AddToCartService } from 'src/app/core/_service/addToCart/add-to-cart.service';
-import { ProductService } from 'src/app/core/_service/product.service';
+import { OrderService } from 'src/app/core/_service/profile/order.service';
 
 @Component({
-  selector: 'app-shop',
-  templateUrl: './shop.component.html',
-  styleUrls: ['./shop.component.css']
+  selector: 'app-order-manager',
+  templateUrl: './order-manager.component.html',
+  styleUrls: ['./order-manager.component.css']
 })
-export class ShopComponent implements OnInit {
-  listProduct: any = [];
+export class OrderManagerComponent implements OnInit {
+  listOrder: any = [];
   load = true;
   constructor(
-    private productService: ProductService,
+    private orderService: OrderService,
     private addToCart: AddToCartService
   ) { }
 
@@ -22,7 +22,8 @@ export class ShopComponent implements OnInit {
       ]
     ).then(
       (dt: any) => {
-        this.listProduct = dt[0].Data;
+        this.listOrder = dt.Data;
+        console.log(dt, this.listOrder)
 
         this.load = false;
       },
@@ -34,15 +35,8 @@ export class ShopComponent implements OnInit {
 
   getProduct(): Promise<any> {
     return new Promise(async (resolve) => {
-      const dt = await this.productService.getAllProducts().toPromise();
+      const dt = await this.orderService.getOrders().toPromise();
       resolve(dt);
     });
-  }
-
-  addtoCart(product) {
-    product.quantity = 1;
-    this.addToCart.setCart(
-      product
-    );
   }
 }

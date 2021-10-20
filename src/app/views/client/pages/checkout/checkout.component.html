@@ -42,7 +42,7 @@
                             class="optional">(optional)</span></label><span class="woocommerce-input-wrapper"><input
                             type="text" class="input-text " name="billing_company" id="billing_company" placeholder=""
                             value="" autocomplete="organization"></span></p>
-                  
+
                       <p class="form-row address-field validate-required form-row-wide" id="billing_address_1_field"
                         data-priority="50"><label for="billing_address_1" class="">Street address&nbsp;<abbr
                             class="required" title="required">*</abbr></label><span
@@ -50,14 +50,14 @@
                             name="billing_address_1" id="billing_address_1" placeholder="House number and street name"
                             value="" autocomplete="address-line1"
                             data-placeholder="House number and street name"></span></p>
-                    
+
                       <p class="form-row address-field validate-required form-row-wide" id="billing_city_field"
                         data-priority="70" data-o_class="form-row form-row-wide address-field validate-required"><label
                           for="billing_city" class="">Town / City&nbsp;<abbr class="required"
                             title="required">*</abbr></label><span class="woocommerce-input-wrapper"><input type="text"
                             class="input-text " name="billing_city" id="billing_city" placeholder="" value=""
                             autocomplete="address-level2"></span></p>
-                     
+
                       <p class="form-row form-row-wide validate-required validate-phone" id="billing_phone_field"
                         data-priority="100"><label for="billing_phone" class="">Phone&nbsp;<abbr class="required"
                             title="required">*</abbr></label><span class="woocommerce-input-wrapper"><input type="tel"
@@ -120,32 +120,26 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="cart_item">
+            <tr class="cart_item" *ngFor="let item of listCart; let i = index">
               <td class="product-name">
-                Beanie with Logo&nbsp; <strong class="product-quantity">×&nbsp;1</strong> </td>
+                {{item.name}}&nbsp; <strong class="product-quantity">×&nbsp;{{item.quantity}}</strong> </td>
               <td class="product-total">
-                <span class="woocommerce-Price-amount amount"><bdi><span
-                      class="woocommerce-Price-currencySymbol">$</span>18.00</bdi></span>
+                <span class="woocommerce-Price-amount amount">
+                  <bdi>
+                    <span class="woocommerce-Price-currencySymbol">$</span>
+                    {{item.subtotal
+                    | number:"1.0-0"}}
+                  </bdi>
+                </span>
               </td>
             </tr>
           </tbody>
           <tfoot>
-
-            <tr class="cart-subtotal">
-              <th>Subtotal</th>
-              <td><span class="woocommerce-Price-amount amount"><bdi><span
-                      class="woocommerce-Price-currencySymbol">$</span>18.00</bdi></span></td>
-            </tr>
-
-
-
-
-
-
             <tr class="order-total">
-              <th>Total</th>
+              <td>Total</td>
               <td><strong><span class="woocommerce-Price-amount amount"><bdi><span
-                        class="woocommerce-Price-currencySymbol">$</span>18.00</bdi></span></strong> </td>
+                        class="woocommerce-Price-currencySymbol">$</span>{{total() |
+                      number:"1.0-0"}}</bdi></span></strong> </td>
             </tr>
 
 
@@ -154,10 +148,10 @@
 
         <div id="payment" class="woocommerce-checkout-payment">
 
-            <!-- <button type="submit" class="btn checkout-button button alt wc-forward"  
+          <!-- <button type="submit" class="btn checkout-button button alt wc-forward"  
               >Place order</button> -->
-          <div  id="paypal-button-container"></div>
-           
+          <div id="paypal-button-container"></div>
+
         </div>
 
       </div>
@@ -165,4 +159,3 @@
     </div>
   </div>
 </div>
-

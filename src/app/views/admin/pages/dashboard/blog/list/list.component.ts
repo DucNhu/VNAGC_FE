@@ -14,11 +14,11 @@ export class ListBlogComponent implements OnInit {
     private route: Router
   ) { }
 
-  listBlog = [{}];
+  listBlog = [];
   ngOnInit(): void {
     this.blogService.getAllBlogeres().subscribe(
-      (dt: any) => {
-        this.listBlog = dt;
+      dt=> {
+        this.listBlog = dt.Data;
         this.loading = false;
       },
       err => {

@@ -7,11 +7,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
-
+  listCart = [];
   constructor(
     private roue: Router
   ) { }
   ngOnInit(): void {
+    this.listCart = JSON.parse(localStorage.getItem('cart'));
+    this.listCart.forEach(e => {
+      e.totalAProduct = e.price * ((100 - e.sale) / 100);
+      e.subtotal = e.totalAProduct * e.quantity;
+    });
+
     paypal.Buttons(
       {
         style: {
@@ -35,8 +41,9 @@ export class CheckoutComponent implements OnInit {
               // UserID: this.idUser,
               // Duration: e.Duration
             }
-            localStorage.removeItem("cart")
-            this.roue.navigate(["/shop"])
+
+            // localStorage.removeItem("cart")
+            // this.roue.navigate(["/shop"])
 
             // this.packagePP.CreatePackagePP(PackagePurchased).subscribe(
             //   data => {
@@ -56,5 +63,11 @@ export class CheckoutComponent implements OnInit {
       }
     ).render('#paypal-button-container');
   }
-
+  total() {
+    let total = 0;
+    this.listCart.forEach(e => {
+      total = e.subtotal + total;
+    });
+    return total
+  }
 }

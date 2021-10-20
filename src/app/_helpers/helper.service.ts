@@ -52,6 +52,19 @@ export class HelperService {
     )
   }
 
+  postUrl(uri: string, data, url?) {
+    console.log(AppConfig.settings.WhiteServer + uri)
+    return this.http.post<any>(AppConfig.settings.WhiteServer + uri + url, data).pipe(
+      catchError(this.handleError),
+      map(data => {
+        if (data == null) {
+          this.router.navigateByUrl('/error-page');
+        }
+        return data;
+      })
+    )
+  }
+
   put(uri: string, data) {
     return this.http.put<any>(AppConfig.settings.WhiteServer + uri, data).pipe(
       catchError(this.handleError),

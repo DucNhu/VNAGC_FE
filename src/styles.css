@@ -5,6 +5,10 @@
   margin-right: 1rem !important;
 }
 
+/* Model */
+.modal .modal-content { transform: translateY(100%)}
+/* End Model */
+
 /* /bs */
 /* Home */
 #homePage .navigation {
