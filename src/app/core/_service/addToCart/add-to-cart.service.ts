@@ -8,19 +8,16 @@ import { product } from 'src/app/models/product';
 export class AddToCartService {
   listCart=[];
   constructor() { }
-  // cartCurrent = new BehaviorSubject<any>(localStorage.getItem("cart"));
-  // cartCurrentValue = this.cartCurrent.value;
-  // cartObservable = this.cartCurrent.asObservable();
-  getCart() {
-
-  }
+  cartCurrent = new BehaviorSubject<any>(localStorage.getItem("cart"));
+  cartCurrentValue = this.cartCurrent.value;
+  cartObservable = this.cartCurrent.asObservable();
+  
   setCart(data) {
     if(data.quantity==0) {
       return
     }
-    // this.cartCurrent.next(data);
+    
     let cartCurrent = JSON.parse(localStorage.getItem('cart'));
-    console.log(data)
     if (cartCurrent) {
       for (let i = 0; i < cartCurrent.length; i++) {
         const e = cartCurrent[i];
@@ -46,12 +43,11 @@ export class AddToCartService {
       this.listCart.push(data)
       localStorage.setItem('cart', JSON.stringify(this.listCart));
     }
+    this.cartCurrent.next(this.listCart);
   }
   deleteCartByIdProduct(id) {
     let cartCurrent = JSON.parse(localStorage.getItem('cart'));
-    if(cartCurrent.length == 0) {
-      localStorage.removeItem("cart")
-    }
+    
     if (cartCurrent) {
       for (let i = 0; i < cartCurrent.length; i++) {
         const e = cartCurrent[i];
@@ -61,6 +57,10 @@ export class AddToCartService {
             localStorage.setItem('cart', JSON.stringify(cartCurrent));
         }
       }
+    }
+    this.cartCurrent.next(cartCurrent);
+    if(cartCurrent.length == 0) {
+      localStorage.removeItem("cart")
     }
   }
 }

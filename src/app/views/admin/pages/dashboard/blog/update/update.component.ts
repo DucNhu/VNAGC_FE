@@ -58,7 +58,8 @@ export class UpdateComponent implements OnInit {
     ]).then(
       dt => {
         this.loading = false;
-        this.setFormBlog(dt[0])
+        console.log(dt)
+        this.setFormBlog(dt[0].Data)
 
         this.setFormMetarial(dt[1])
         this.setFormContent(dt[2])
@@ -80,7 +81,7 @@ export class UpdateComponent implements OnInit {
       "cooking_time": form.get('cooking_time').value + form.get('unitTimeCook').value,
       "summary": form.get('summary').value,
       "description": form.get('description').value,
-      "url_video_utube": form.get('url_video_utube').value,
+      "url_video_youtube": form.get('url_video_youtube').value,
       "view": 0,
       "status": form.get('status').value ? 1 : 0,
       "user_id": '1',
@@ -177,7 +178,7 @@ export class UpdateComponent implements OnInit {
         cooking_time: val.cooking_time,
         summary: val.summary,
         description: val.description,
-        url_video_utube: val.cooking_time,
+        url_video_youtube: val.cooking_time,
         // metarial: val.cooking_time,
         // step: val.cooking_time,
         status: val.status
@@ -194,13 +195,11 @@ export class UpdateComponent implements OnInit {
         category: ['', Validators.compose([
           Validators.required
         ])],
-        hashTag: ['', Validators.compose([
-          Validators.required
-        ])],
+        hashTag: [''],
         cooking_time: [''],
         summary: [''],
         description: [''],
-        url_video_utube: [''],
+        url_video_youtube: [''],
         status: [false],
         unitTimeCook: ["mins"],
 

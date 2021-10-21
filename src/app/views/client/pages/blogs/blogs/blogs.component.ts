@@ -14,18 +14,17 @@ export class BlogsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    Promise.all([this.getAllBlogeres()]).then(
+    Promise.all([this.GetBlogsActive()]).then(
       dt => {
         this.loading=false;
-        this.listBlog = dt[0].Data
-        console.log(this.listBlog)
+        this.listBlog = dt[0]
       }
     )
   }
 
-  getAllBlogeres():Promise<any> {
+  GetBlogsActive():Promise<any> {
     return new Promise((resolve)=> {
-      const dt = this.blogService.getAllBlogeres().toPromise();
+      const dt = this.blogService.GetBlogsActive().toPromise();
       return resolve(dt)
     })
   }

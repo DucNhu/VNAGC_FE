@@ -15,7 +15,6 @@ export class ProductDetailComponent implements OnInit {
   load = true;
   thumbsSwiper: any;
   slider;
-  loading=false;
   avatar
   avatar_cover;
   listAvatar_feature;
@@ -71,12 +70,13 @@ export class ProductDetailComponent implements OnInit {
     ).then(
       dt => {
         this.load = false;
-        this.loading = false;
-        this.product = dt[0];
-        this.avatar = dt[0].banner_img;
-        this.avatar_cover = dt[0].cover_img;
+        console.log(dt)
+        let data = dt[0].Data;
+        this.product = data;
+        this.avatar = data.banner_img;
+        this.avatar_cover = data.cover_img;
         this.listAvatar_feature = dt[1];
-        this.avatarSelect = this.listAvatar_feature[0].avatar_feature
+        this.avatarSelect = data.banner_img
       }
     )
   }

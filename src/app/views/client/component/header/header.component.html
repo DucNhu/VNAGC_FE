@@ -39,8 +39,8 @@
                         <ng-container *ngIf="isLogin">
                             <ul class="nav navbar-nav align-items-center ms-auto d-flex flex-row justify-content-end">
                                 <li class="nav-item nav-item-cart dropdown dropdown-cart">
-                                    <div class="nav-link show box-cart" href="javascript:void(0)" [matMenuTriggerFor]="order">
-                                        <svg
+                                    <div class="nav-link show box-cart" [matMenuTriggerFor]="order">
+                                        <a  routerLink="/cart"><svg
                                             xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round"
@@ -49,8 +49,8 @@
                                             <circle cx="20" cy="21" r="1"></circle>
                                             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6">
                                             </path>
-                                        </svg><span
-                                            class="badge rounded-pill bg-primary badge-up cart-item-count">6</span></div>
+                                        </svg></a><span
+                                            class="badge rounded-pill bg-primary badge-up cart-item-count">{{countProduct}}</span></div>
                                     <mat-menu #order="matMenu">
                                         <ul class="dropdown-menu dropdown-menu-media dropdown-menu-end show"
                                             data-bs-popper="none">
@@ -351,10 +351,12 @@
                                                                     </a> -->
                                     <div class="search-toggle-btn d-flex" aria-label="Search toggle" [matMenuTriggerFor]="menu">
                                         <div class="user-nav d-sm-flex d-none flex-column">
-                                            <span class="user-name fw-bolder">DUcNHu</span><span class="user-status">Cooker</span>
+                                            <span class="user-name fw-bolder">{{user.fullName}}</span><span class="user-status">
+                                                <!-- Cooker -->
+                                            </span>
                                         </div>
                                         <span class="avatar">
-                                            <img class="round" src="assets/images/portrait/small/avatar-s-2.jpg"
+                                            <img class="round" [src]="user.avatar ? user.avatar : 'assets/images/portrait/small/avatar-s-2.jpg'"
                                                 alt="avatar" height="40" width="40"><span class="avatar-status-online">
                                             </span>
                                         </span>
@@ -369,13 +371,9 @@
                                                 </svg>
                                                 Profile</button>
                                             <button mat-menu-item (click)="logout()">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="feather feather-power me-50">
-                                                    <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
-                                                    <line x1="12" y1="2" x2="12" y2="12"></line>
-                                                </svg>
+                                                <span>
+                            <svg _ngcontent-vpb-c150="" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path _ngcontent-vpb-c150="" d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline _ngcontent-vpb-c150="" points="16 17 21 12 16 7"></polyline><line _ngcontent-vpb-c150="" x1="21" y1="12" x2="9" y2="12"></line></svg>
+                        </span>
                                                 Log out</button>
                                         </mat-menu>
                                     </div>

@@ -100,9 +100,7 @@ export class CreateBlogComponent implements OnInit {
         category: ['', Validators.compose([
           Validators.required
         ])],
-        hashTag: ['', Validators.compose([
-          Validators.required
-        ])],
+        hashTag: [''],
         cooking_time: [''],
         summary: [''],
         description: [''],

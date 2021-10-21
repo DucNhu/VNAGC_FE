@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard.component';
 import { NavigationComponent } from '../../component/navigation/navigation.component';
 import { FooterComponent } from '../../component/footer/footer.component';
 import { HeaderComponent } from '../../component/header/header.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { HeaderComponent } from '../../component/header/header.component';
     ],
   imports: [
     CommonModule,
+    MatMenuModule,
     DashboardRoutingModule,
   ]
 })

@@ -24,7 +24,7 @@ export class ProductCreateComponent implements OnInit {
 
   avatar;
   avatar_cover;
-  list_img_feature: any = [{ data: '' }];
+  list_img_feature: any = [];
   constructor(
     private fb: FormBuilder,
     private prductService: ProductService,
@@ -143,7 +143,7 @@ export class ProductCreateComponent implements OnInit {
   }
 
   sendImg(val) {
-    this.list_img_feature.forEach(item => {
+    this.list_img_feature.forEach((item, i) => {
       let data = {
         "product_id": val.id,
         "avatar_feature": item.data
@@ -151,7 +151,7 @@ export class ProductCreateComponent implements OnInit {
       this.prductService.createImgFeature(data).subscribe(
         dt => {
           this.loading = false;
-          this.route.navigate(["/admin/product/list"])
+          if (i == this.list_img_feature - 1) { this.route.navigate(["/admin/product/list"])}
         },
         err => {
           this.loading = false;

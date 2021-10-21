@@ -23,7 +23,7 @@ export class BlogService {
   }
 
   update(data) {
-    return this.helperService.put("Blog" + data.id, data);
+    return this.helperService.put("Blog/" + data.id, data);
   }
 
   delete(id) {

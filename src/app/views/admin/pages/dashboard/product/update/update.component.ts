@@ -60,8 +60,8 @@ export class UpdateProductComponent implements OnInit {
     ).then(
       dt => {
         this.loading = false;
-        this.setDataforForm(dt[0]);
-        this.product = dt[0];
+        this.setDataforForm(dt[0].Data);
+        this.product = dt[0].Data;
         console.log(this.product)
         this.avatar = dt[0].banner_img;
         this.avatar_cover = dt[0].cover_img;
