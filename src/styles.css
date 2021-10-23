@@ -1,4 +1,5 @@
 .home { background: #fff}
+
 /* bs */
 
 .mr-3 {
@@ -122,6 +123,9 @@
 
 .dropzone {
   position: relative;
+}
+.dropzone.error {
+  border-color: #ea5455 !important
 }
 .img-avatar {
   height: 100%;

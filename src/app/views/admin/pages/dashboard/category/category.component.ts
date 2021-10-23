@@ -17,7 +17,6 @@ export interface PeriodicElement {
 
 export class CategoryComponent implements OnInit {
   listCategory = [
-    { id: null, name: "null", countBlog: null, createdDate: null, action: 1, index: 0 }
   ];
 
   displayedColumns: string[] = ['id', 'name', 'countBlog', 'createdDate', 'action'];
@@ -25,7 +24,7 @@ export class CategoryComponent implements OnInit {
 
   load = false;
   modalRef?: BsModalRef;
-  newCategory = '';
+  newCategory = null;
   editNameCategory='';
   Category_delete = {
     id: 0,
@@ -72,10 +71,15 @@ export class CategoryComponent implements OnInit {
   }
 
   addNewCategory() {
+    let aname = this.newCategory;
+    this.newCategory = '';
+    if (aname.trim()=='') {
+      return
+    }
+    let data = new FormData();
+    data.append('name', aname);
     this.load = true;
-    let name = this.newCategory;
-    this.newCategory='';
-    this.categoryService.createCategory(name).subscribe(
+    this.categoryService.createCategory(data).subscribe(
       dt => {
         this.load = false;
         this.listCategory.unshift({

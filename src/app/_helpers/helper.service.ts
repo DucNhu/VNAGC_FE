@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppConfig } from '../app.config';
@@ -40,7 +40,6 @@ export class HelperService {
   }
 
   post(uri: string, data) {
-    console.log(AppConfig.settings.WhiteServer + uri)
     return this.http.post<any>(AppConfig.settings.WhiteServer + uri, data).pipe(
       catchError(this.handleError),
       map(data => {
@@ -53,8 +52,9 @@ export class HelperService {
   }
 
   postUrl(uri: string, data, url?) {
-    console.log(AppConfig.settings.WhiteServer + uri)
-    return this.http.post<any>(AppConfig.settings.WhiteServer + uri + url, data).pipe(
+    let header = new HttpHeaders();
+    header.append('Content-Type', 'multipart/form-data');
+    return this.http.post<any>(AppConfig.settings.WhiteServer + uri + url, data, { headers: header }).pipe(
       catchError(this.handleError),
       map(data => {
         if (data == null) {

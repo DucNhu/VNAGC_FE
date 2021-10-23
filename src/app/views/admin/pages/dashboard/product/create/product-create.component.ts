@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoryService } from 'src/app/core/_service/category/category.service';
 import { ProductService } from 'src/app/core/_service/product.service';
+import { productContent } from 'src/app/models/listSale';
 
 @Component({
   selector: 'app-product-create',
@@ -11,10 +12,10 @@ import { ProductService } from 'src/app/core/_service/product.service';
 })
 export class ProductCreateComponent implements OnInit {
 
-  loading = true;
-  listSale = [0, 10, 20, 30, 40, 50]
-  listUnit = ["boxes", "package", "Bottle", "Orther"]
-  listCategory = []
+  loading = false;
+  listSale = productContent.listSale;
+  listUnit = productContent.listUnit;
+  listCategory = ['y']
   // Step bar
   isEditable = true;
   // End Step bar
@@ -22,7 +23,7 @@ export class ProductCreateComponent implements OnInit {
   formInfor: FormGroup;
   formImg: FormGroup;
 
-  avatar;
+  avatar=null;
   avatar_cover;
   list_img_feature: any = [];
   constructor(
@@ -44,7 +45,7 @@ export class ProductCreateComponent implements OnInit {
     });
 
     this.formImg = this.fb.group({
-      // avatar: ['',],
+      avatar: [null, Validators.required],
       // avatar_cover: ['',],
       // listImg_feature: new FormArray([]),
     });
@@ -83,16 +84,16 @@ export class ProductCreateComponent implements OnInit {
       "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
     }
-    // this.loading = true;
-    // this.prductService.create(data).subscribe(
-    //   dt => {
-    //     this.sendImg(dt)
-    //     this.route.navigate(["/admin/product/list"])
-    //   },
-    //   err => {
-    //     this.loading = false;
-    //   }
-    // )
+    this.loading = true;
+    this.prductService.create(data).subscribe(
+      dt => {
+        this.sendImg(dt)
+        this.route.navigate(["/admin/product/list"])
+      },
+      err => {
+        this.loading = false;
+      }
+    )
   }
 
   getCategory(): Promise<any> {
@@ -146,7 +147,12 @@ export class ProductCreateComponent implements OnInit {
   }
   setValueAvatarCover(e) {
     let reader = e.target;
-    this.avatar_cover = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    if (this.avatar=='') {
+      this.avatar = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    }
+    else {
+      this.avatar_cover = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    }
   }
   setImgFeature(e) {
     let reader = e.target;

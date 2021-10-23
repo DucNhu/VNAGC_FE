@@ -24,7 +24,7 @@ export class ProductService {
   }
 
   update(data) {
-    return this.helperService.put("Products/edit" + data.id, data);
+    return this.helperService.put("Products/edit/" + data.id, data);
   }
 
   delete(id) {
