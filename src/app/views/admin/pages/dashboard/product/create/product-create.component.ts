@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CategoryService } from 'src/app/core/_service/category/category.service';
 import { ProductService } from 'src/app/core/_service/product.service';
 
 @Component({
@@ -10,11 +11,10 @@ import { ProductService } from 'src/app/core/_service/product.service';
 })
 export class ProductCreateComponent implements OnInit {
 
-  loading = false;
-  listSale = [10, 20, 30, 40]
-  listUnit = ["boxes", "package", "Bottle"]
-  listCategory = ["Fruit", "Drink", "Cake"]
-  money = 0;
+  loading = true;
+  listSale = [0, 10, 20, 30, 40, 50]
+  listUnit = ["boxes", "package", "Bottle", "Orther"]
+  listCategory = []
   // Step bar
   isEditable = true;
   // End Step bar
@@ -28,16 +28,17 @@ export class ProductCreateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private prductService: ProductService,
-    private route: Router
+    private route: Router,
+    private categoryService: CategoryService
   ) {
     this.formInfor = this.fb.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
-      price: [0, Validators.required],
+      price: [null, Validators.required],
       sale: [0],
       description: [''],
-      unit: [''],
-      active: [false],
+      unit: ['', Validators.required],
+      active: [true],
 
       storage_instructions: [''],
     });
@@ -50,7 +51,19 @@ export class ProductCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    Promise.all(
+      [
+        this.getCategory()
+      ]
+    ).then(
+      (dt: any) => {
+        this.listCategory = dt[0].Data;
+        this.loading = false;
+      },
+      err => {
+        this.loading = false;
+      }
+    )
   }
   createProduct() {
     let form = this.formInfor;
@@ -70,16 +83,23 @@ export class ProductCreateComponent implements OnInit {
       "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
     }
-    this.loading = true;
-    this.prductService.create(data).subscribe(
-      dt => {
-        this.sendImg(dt)
-        this.route.navigate(["/admin/product/list"])
-      },
-      err => {
-        this.loading = false;
-      }
-    )
+    // this.loading = true;
+    // this.prductService.create(data).subscribe(
+    //   dt => {
+    //     this.sendImg(dt)
+    //     this.route.navigate(["/admin/product/list"])
+    //   },
+    //   err => {
+    //     this.loading = false;
+    //   }
+    // )
+  }
+
+  getCategory(): Promise<any> {
+    return new Promise(async (resolve) => {
+      const dt = await this.categoryService.getCategorys().toPromise();
+      resolve(dt);
+    });
   }
 
   permitFile;

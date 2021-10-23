@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { rejects } from 'assert';
+import { CategoryService } from 'src/app/core/_service/category/category.service';
 import { ProductService } from 'src/app/core/_service/product.service';
 import { product } from 'src/app/models/product';
 
@@ -31,7 +31,8 @@ export class UpdateProductComponent implements OnInit {
     private fb: FormBuilder,
     private productService: ProductService,
     private route: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private categoryService: CategoryService
   ) {
     this.formInfor = this.fb.group({
       name: ['', Validators.required],
@@ -56,13 +57,14 @@ export class UpdateProductComponent implements OnInit {
       [
         this.getProduct(),
         this.getProductImgFeature(),
+        this.getCategory()
       ]
     ).then(
       dt => {
         this.loading = false;
         this.setDataforForm(dt[0].Data);
         this.product = dt[0].Data;
-        console.log(this.product)
+        this.listCategory = dt[2].Data;
         this.avatar = dt[0].banner_img;
         this.avatar_cover = dt[0].cover_img;
 
@@ -78,6 +80,14 @@ export class UpdateProductComponent implements OnInit {
         }
       )
   }
+
+  getCategory(): Promise<any> {
+    return new Promise(async (resolve) => {
+      const dt = await this.categoryService.getCategorys().toPromise();
+      resolve(dt);
+    });
+  }
+
   getProduct(): Promise<any> {
     return new Promise(async (resolve) => {
       const dt = await this.productService.getProduct(this.productId).toPromise();

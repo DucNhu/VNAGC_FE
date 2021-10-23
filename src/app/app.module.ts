@@ -24,7 +24,6 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { CartComponent } from './views/client/pages/cart/cart.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ShopComponent } from './views/client/pages/shop/shop.component';
-
 export function initializeApp(AppConfig: AppConfig) {
   return () => AppConfig.load()
 }

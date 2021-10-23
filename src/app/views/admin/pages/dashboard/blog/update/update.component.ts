@@ -3,6 +3,8 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlogService } from 'src/app/core/_service/blog/blog.service';
+import { CategoryService } from 'src/app/core/_service/category/category.service';
+import { HashtagService } from 'src/app/core/_service/hashtag/hashtag.service';
 import { ProductService } from 'src/app/core/_service/product.service';
 
 @Component({
@@ -43,7 +45,9 @@ export class UpdateComponent implements OnInit {
     private fb: FormBuilder,
     private blogService: BlogService,
     private route: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private categoryService: CategoryService,
+    private hashtagService: HashtagService
   ) {
     this.registerFormBlog();
   }
@@ -54,11 +58,14 @@ export class UpdateComponent implements OnInit {
       this.getBlog(),
       this.getMetarial(),
       this.getContents(),
-      this.getStep()
+      this.getStep(),
+      this.getCategory(),
+      this.getHashtag()
     ]).then(
       dt => {
         this.loading = false;
-        console.log(dt)
+        this.listCategory = dt[0].Data;
+        this.hastags = dt[1].Data;
         this.setFormBlog(dt[0].Data)
 
         this.setFormMetarial(dt[1])
@@ -68,6 +75,19 @@ export class UpdateComponent implements OnInit {
     )
   }
 
+  getCategory(): Promise<any> {
+    return new Promise(async (resolve) => {
+      const dt = await this.categoryService.getCategorys().toPromise();
+      resolve(dt);
+    });
+  }
+
+  getHashtag(): Promise<any> {
+    return new Promise(async (resolve) => {
+      const dt = await this.hashtagService.getHashtags().toPromise();
+      resolve(dt);
+    });
+  }
 
   createBlog() {
     let form = this.formBlog;

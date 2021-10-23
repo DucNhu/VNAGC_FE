@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PaymentService } from 'src/app/core/_service/payment/payment.service';
 
 @Component({
   selector: 'app-checkout',
@@ -8,9 +9,11 @@ import { Router } from '@angular/router';
 })
 export class CheckoutComponent implements OnInit {
   listCart = [];
+
   constructor(
-    private roue: Router
-  ) { }
+    private roue: Router,
+    private paymentService: PaymentService
+    ) { }
   ngOnInit(): void {
     this.listCart = JSON.parse(localStorage.getItem('cart'));
     this.listCart.forEach(e => {
@@ -37,19 +40,27 @@ export class CheckoutComponent implements OnInit {
 
           return actions.order.capture().then((details) => {
             // This function shows a transaction success message to your buyer.
-            let PackagePurchased = {
-              // UserID: this.idUser,
-              // Duration: e.Duration
+            let order = {
+              "quantity": 0,
+              "payment_method": true,
+              "total": this.total(),
+              "returned": 0,
+              "status": 0,
+              "user_id": "string",
+              "order_detail_id": 0,
+              "delivery_date": "2021-10-21",
+              "confirmation_date": "2021-10-21",
+              "create_at": "2021-10-21",
+              "update_at": "2021-10-21"
             }
 
             // localStorage.removeItem("cart")
             // this.roue.navigate(["/shop"])
 
-            // this.packagePP.CreatePackagePP(PackagePurchased).subscribe(
+            // this.paymentService.createPayment(order).subscribe(
             //   data => {
             //   }
             // );
-            // upgrade packadeID in User table
             // this.userService.putUserUpgradePackageID(this.idUser, e.PackageID).subscribe(
             //   data => {
             //     alert(`Thank ${details.payer.name.given_name} for supporting the site, you have ${e.Duration} days free`);
