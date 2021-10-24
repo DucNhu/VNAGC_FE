@@ -23,10 +23,10 @@ import { productContent } from 'src/app/models/listSale';
   styleUrls: ['./create.component.css']
 })
 export class CreateBlogComponent implements OnInit {
-  listCategory = [{id: 1, name: 'dc'}];
+  listCategory = [];
   time = { hour: 13, minute: 30 };
   selectedHastags: any[];
-  hastags = [{ id: 1, name: 'dc' }];
+  hastags = [];
   listUnit = productContent.listUnit;
   formBlog: FormGroup;
   isCollapsed = {
@@ -43,7 +43,7 @@ export class CreateBlogComponent implements OnInit {
 
   loading = false;
   isSuccess = false;
-  c1 = false;
+  userId;
   constructor(
     private fb: FormBuilder,
     private blogService: BlogService,
@@ -51,7 +51,9 @@ export class CreateBlogComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private categoryService: CategoryService,
     private hashtagService: HashtagService
-  ) { this.registerFormBlog(); }
+  ) { this.registerFormBlog();
+    this.userId = JSON.parse(localStorage.getItem("user")).id;
+   }
 
   ngOnInit(): void {
     Promise.all(
@@ -98,6 +100,7 @@ export class CreateBlogComponent implements OnInit {
         ])],
         hashTag: [null],
         cooking_time: [null],
+        unitTimeCook: ['mins'],
         summary: [null],
         description: [null],
         url_video_utube: [null],
@@ -348,45 +351,42 @@ export class CreateBlogComponent implements OnInit {
       return
     }
     let nowDate = new Date();
-    let nowTime = new Date().toLocaleTimeString();
     let data = {
       "name": form.get('name').value,
       "banner_img": this.avatar,
       "cover_img": this.avatar_cover,
-      "cooking_time": form.get('cooking_time').value,
+      "cooking_time": form.get('cooking_time').value + form.get('unitTimeCook').value,
       "summary": form.get('summary').value,
       "description": form.get('description').value,
       "url_video_utube": form.get('url_video_utube').value,
       "view": 0,
-      "status": 0,
-      "user_id": '1',
-      "category_id": 0,
+      "status": 1,
+      "user_id": this.userId,
+      "category_id": form.get('category').value,
 
       "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
     }
-    console.log(data)
-    // this.loading = true;
-    // this.blogService.create(data).subscribe(
-    //   dt => {
-    //     this.loading = false;
-    //     this.blogId = dt.id;
-    //     this.createMetarial();
-    //     this.createContent();
-    //     this.createStep();
-    //     setTimeout(() => {
-    //       this.route.navigate(["/admin/blog/list"]);
-    //     }, 1500);
-    //   },
-    //   err => {
-    //     this.loading = false;
-    //   }
-    // )
+    this.loading = true;
+    this.blogService.create(data).subscribe(
+      dt => {
+        this.loading = false;
+        this.blogId = dt.id;
+        this.createMetarial();
+        this.createContent();
+        this.createStep();
+        setTimeout(() => {
+          this.route.navigate(["/admin/blog/list"]);
+        }, 1500);
+      },
+      err => {
+        this.loading = false;
+      }
+    )
   }
 
   createMetarial() {
     this.listMetarial().forEach(e => {
-      console.log(e)
       let value = e.value;
       let data = {
         "title": value.name,
@@ -395,7 +395,6 @@ export class CreateBlogComponent implements OnInit {
         "order": 0,
         "blog_id": this.blogId
       }
-      console.log(data)
       this.blogService.createMetarial(data).subscribe(
         dt => {
           this.loading = false;

@@ -16,7 +16,6 @@ export class UpdateComponent implements OnInit {
   listCategory = ["Tea", "Coffe", "Coca"];
   time = { hour: 13, minute: 30 };
   selectedHastags: any[];
-  unitTimeCook="mins";
   hastags: any[] = [
     { id: 1, viewValue: "material saving" },
     { id: 2, viewValue: "easy" },
@@ -40,7 +39,7 @@ export class UpdateComponent implements OnInit {
   loading = true;
   isSuccess = false;
   checkUpdateSuccess = false;
-  // userID = localStorage.getItem("")
+  userId
   constructor(
     private fb: FormBuilder,
     private blogService: BlogService,
@@ -50,6 +49,8 @@ export class UpdateComponent implements OnInit {
     private hashtagService: HashtagService
   ) {
     this.registerFormBlog();
+
+    this.userId = JSON.parse(localStorage.getItem("user")).id;
   }
   blogId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
 
@@ -64,8 +65,9 @@ export class UpdateComponent implements OnInit {
     ]).then(
       dt => {
         this.loading = false;
-        this.listCategory = dt[0].Data;
-        this.hastags = dt[1].Data;
+        console.log(dt)
+        this.listCategory = dt[4].Data;
+        this.hastags = dt[5].Data;
         this.setFormBlog(dt[0].Data)
 
         this.setFormMetarial(dt[1])
@@ -92,7 +94,6 @@ export class UpdateComponent implements OnInit {
   createBlog() {
     let form = this.formBlog;
     let nowDate = new Date();
-    let nowTime = new Date().toLocaleTimeString();
     let data = {
       "id": this.blogId,
       "name": form.get('name').value,
@@ -103,12 +104,12 @@ export class UpdateComponent implements OnInit {
       "description": form.get('description').value,
       "url_video_youtube": form.get('url_video_youtube').value,
       "view": 0,
-      "status": form.get('status').value ? 1 : 0,
-      "user_id": '1',
-      "category_id": 0,
+      "status": 1,
+      "user_id": this.userId,
+      "category_id": form.get('category').value,
 
-      "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() ,
-      "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() ,
+      "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
+      "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
     }
 
     this.loading = true;
@@ -116,7 +117,7 @@ export class UpdateComponent implements OnInit {
       dt => {
         setTimeout(() => {
           this.checkUpdateSuccess = false;
-          this.route.navigate(["/admin/blog/blog-detail", { id: this.blogId}]);
+          this.route.navigate(["/admin/blog/blog-detail", { id: this.blogId }]);
         }, 1500);
         this.createMetarial();
         this.createContent();
@@ -189,39 +190,22 @@ export class UpdateComponent implements OnInit {
     });
   }
 
-  setFormBlog(val) {
-    this.formBlog.patchValue(
-      {
-        name: val.name,
-        category: 'Tea',
-        hashTag: '',
-        cooking_time: val.cooking_time,
-        summary: val.summary,
-        description: val.description,
-        url_video_youtube: val.cooking_time,
-        // metarial: val.cooking_time,
-        // step: val.cooking_time,
-        status: val.status
-      }
-    )
-    this.avatar = val.banner_img;
-  }
   registerFormBlog() {
     this.formBlog = this.fb.group(
       {
-        name: ['', Validators.compose([
+        name: [null, Validators.compose([
           Validators.required
         ])],
-        category: ['', Validators.compose([
+        category: [null, Validators.compose([
           Validators.required
         ])],
-        hashTag: [''],
-        cooking_time: [''],
-        summary: [''],
-        description: [''],
-        url_video_youtube: [''],
+        hashTag: [null],
+        cooking_time: [null],
+        summary: [null],
+        description: [null],
+        url_video_youtube: [null],
         status: [false],
-        unitTimeCook: ["mins"],
+        unitTimeCook: [null],
 
         metarial: this.fb.array([]),
         step: this.fb.array([]),
@@ -230,7 +214,34 @@ export class UpdateComponent implements OnInit {
     )
   }
 
+  setFormBlog(val) {
+    let unitCooking = val.cooking_time.split("mins");
+    if (unitCooking.length == 1) {
+      unitCooking = val.cooking_time.split("hours");
+      unitCooking[1] = 'hours';
+    }
+    else {
+      unitCooking[1] = 'mins';
+    }
 
+    this.formBlog.patchValue(
+      {
+        name: val.name,
+        category: val.category_id,
+        hashTag: [1],
+        cooking_time: parseInt(unitCooking[0]),
+        unitTimeCook: unitCooking[1],
+
+        summary: val.summary,
+        description: val.description,
+        url_video_youtube: val.url_video_youtube,
+        status: val.status
+      }
+    )
+    this.avatar = val.banner_img;
+    this.avatar_cover = val.cover_img;
+    console.log(this.formBlog.value)
+  }
 
   getBlog(): Promise<any> {
     return new Promise(
@@ -272,29 +283,57 @@ export class UpdateComponent implements OnInit {
     return (this.formBlog.get('step') as FormArray).controls;
   }
   addStep() {
-    return this.listStep().push(
-      this.fb.group({
-        id: [0, Validators.compose(
-          [Validators.required]
-        )],
-        name: ['', Validators.compose(
-          [Validators.required]
-        )],
-        description: ['', Validators.compose(
-          [Validators.required]
-        )],
-        avatar: ['']
-      })
-    )
+    if (this.listStep().length == 0) {
+      return this.listStep().push(
+        this.fb.group({
+          id: [0, Validators.compose(
+            [Validators.required]
+          )],
+          name: [null, Validators.compose(
+            [Validators.required]
+          )],
+          description: [null, Validators.compose(
+            [Validators.required]
+          )],
+          avatar: [null]
+        })
+      )
+    }
+    for (let i = 0; i < this.listStep().length; i++) {
+      const dt = this.listStep()[i].value;
+      if ((dt.name == null || dt.name.trim() == '') ||
+        dt.description == null || dt.name.trim() == '') {
+        this.listStep()[i].patchValue({ name: '', description: '' })
+        return
+      }
+      else {
+        if (i == this.listStep().length - 1) {
+          return this.listStep().push(
+            this.fb.group({
+              id: [0, Validators.compose(
+                [Validators.required]
+              )],
+              name: [null, Validators.compose(
+                [Validators.required]
+              )],
+              description: [null, Validators.compose(
+                [Validators.required]
+              )],
+              avatar: [null]
+            })
+          )
+        }
+      }
+    }
+
   }
   removeStep(i) {
-    console.log(i)
     if (i.id != 0) {
       this.loading = true;
       this.blogService.deleteStep(i.id).subscribe(
         dt => {
           this.loading = false;
-         return (this.formBlog.get('step') as FormArray).removeAt(i)
+          return (this.formBlog.get('step') as FormArray).removeAt(i)
         },
         err => {
           this.loading = false;
@@ -303,31 +342,52 @@ export class UpdateComponent implements OnInit {
       )
     }
     else {
-     return (this.formBlog.get('step') as FormArray).removeAt(i)
+      return (this.formBlog.get('step') as FormArray).removeAt(i)
     }
-    
+
   }
 
   listMetarial = () => {
     return (this.formBlog.get('metarial') as FormArray).controls;
   }
   addMetarial() {
-    return this.listMetarial().push(
-      this.fb.group({
-        id: [0, Validators.compose(
-          [Validators.required]
-        )],
-        name: ['', Validators.compose(
-          [Validators.required]
-        )],
-        content: [0, Validators.compose(
-          [Validators.required]
-        )],
-        unit: ['', Validators.compose(
-          [Validators.required]
-        )]
-      })
-    )
+    if (this.listMetarial().length == 0) {
+      return this.listMetarial().push(
+        this.fb.group({
+          id: [0, Validators.compose(
+            [Validators.required]
+          )],
+          name: [null, Validators.compose(
+            [Validators.required]
+          )],
+          content: [null],
+          unit: [null]
+        })
+      )
+    }
+    for (let i = 0; i < this.listMetarial().length; i++) {
+      const dt = this.listMetarial()[i].value;
+      if (dt.name == null || dt.name.trim() == '') {
+        this.listMetarial()[i].patchValue({ name: '' })
+        return
+      }
+      else {
+        if (i == this.listMetarial().length - 1) {
+          return this.listMetarial().push(
+            this.fb.group({
+              id: [0, Validators.compose(
+                [Validators.required]
+              )],
+              name: [null, Validators.compose(
+                [Validators.required]
+              )],
+              content: [null],
+              unit: [null]
+            })
+          )
+        }
+      }
+    }
   }
   removeMetarial(i) {
     if (i.id != 0) {
@@ -352,22 +412,48 @@ export class UpdateComponent implements OnInit {
     return (this.formBlog.get('content') as FormArray).controls;
   }
   addContent() {
-    return this.listContent().push(
-      this.fb.group({
-        id: [0, Validators.compose(
-          [Validators.required]
-        )],
-        title: ['', Validators.compose(
-          [Validators.required]
-        )],
-        avatar: [''],
-        avatar_cover: [''],
-        description: ['']
-      })
-    )
+    if (this.listContent().length == 0) {
+      return this.listContent().push(
+        this.fb.group({
+          id: [0, Validators.compose(
+            [Validators.required]
+          )],
+          title: [null, Validators.compose(
+            [Validators.required]
+          )],
+          avatar: [null],
+          avatar_cover: [null],
+          description: [null]
+        })
+      );
+    }
+    for (let i = 0; i < this.listContent().length; i++) {
+      const dt = this.listContent()[i].value;
+      if (dt.title == null || dt.title.trim() == '') {
+        this.listContent()[i].patchValue({ title: '' })
+        return
+      }
+      else {
+        if (i == this.listContent().length - 1) {
+          return this.listContent().push(
+            this.fb.group({
+              id: [0, Validators.compose(
+                [Validators.required]
+              )],
+              title: [null, Validators.compose(
+                [Validators.required]
+              )],
+              avatar: [null],
+              avatar_cover: [null],
+              description: [null]
+            })
+          )
+        }
+      }
+    }
+
   }
   removeContent(i) {
-    console.log(i)
     if (i.id != 0) {
       this.loading = true;
       this.blogService.deleteStep(i.id).subscribe(
@@ -384,7 +470,7 @@ export class UpdateComponent implements OnInit {
     else {
       return (this.formBlog.get('content') as FormArray).removeAt(i)
     }
-    
+
   }
   equals(objOne, objTwo) {
     if (typeof objOne !== 'undefined' && typeof objTwo !== 'undefined') {
