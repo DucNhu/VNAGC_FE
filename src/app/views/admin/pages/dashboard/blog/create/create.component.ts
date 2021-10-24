@@ -23,10 +23,10 @@ import { productContent } from 'src/app/models/listSale';
   styleUrls: ['./create.component.css']
 })
 export class CreateBlogComponent implements OnInit {
-  listCategory = [];
+  listCategory = [{id: 1, name: 'dc'}];
   time = { hour: 13, minute: 30 };
   selectedHastags: any[];
-  hastags: any[] = [];
+  hastags = [{ id: 1, name: 'dc' }];
   listUnit = productContent.listUnit;
   formBlog: FormGroup;
   isCollapsed = {
@@ -43,7 +43,7 @@ export class CreateBlogComponent implements OnInit {
 
   loading = false;
   isSuccess = false;
-  c1=false;
+  c1 = false;
   constructor(
     private fb: FormBuilder,
     private blogService: BlogService,
@@ -51,7 +51,7 @@ export class CreateBlogComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private categoryService: CategoryService,
     private hashtagService: HashtagService
-  ) { this.registerFormBlog();}
+  ) { this.registerFormBlog(); }
 
   ngOnInit(): void {
     Promise.all(
@@ -70,7 +70,7 @@ export class CreateBlogComponent implements OnInit {
         this.loading = false;
       }
     )
-    
+
   }
 
   getCategory(): Promise<any> {
@@ -93,14 +93,14 @@ export class CreateBlogComponent implements OnInit {
         name: [null, Validators.compose([
           Validators.required
         ])],
-        category: ['', Validators.compose([
+        category: [null, Validators.compose([
           Validators.required
         ])],
-        hashTag: [''],
-        cooking_time: [''],
-        summary: [''],
-        description: [''],
-        url_video_utube: [''],
+        hashTag: [null],
+        cooking_time: [null],
+        summary: [null],
+        description: [null],
+        url_video_utube: [null],
 
         metarial: this.fb.array([]),
         step: this.fb.array([]),
@@ -116,17 +116,43 @@ export class CreateBlogComponent implements OnInit {
     return (this.formBlog.get('step') as FormArray).controls;
   }
   addStep() {
-    return this.listStep().push(
-      this.fb.group({
-        name: [null, Validators.compose(
-          [Validators.required]
-        )],
-        description: ['', Validators.compose(
-          [Validators.required]
-        )],
-        avatar: ['']
-      })
-    )
+    if (this.listStep().length == 0) {
+      return this.listStep().push(
+        this.fb.group({
+          name: [null, Validators.compose(
+            [Validators.required]
+          )],
+          description: [null, Validators.compose(
+            [Validators.required]
+          )],
+          avatar: ['']
+        })
+      )
+    }
+    for (let i = 0; i < this.listStep().length; i++) {
+      const dt = this.listStep()[i].value;
+      if ((dt.name == null || dt.name.trim() == '') ||
+        dt.description == null || dt.name.trim() == '') {
+        this.listStep()[i].patchValue({ name: '', description: '' })
+        return
+      }
+      else {
+        if (i == this.listStep().length - 1) {
+          return this.listStep().push(
+            this.fb.group({
+              name: [null, Validators.compose(
+                [Validators.required]
+              )],
+              description: [null, Validators.compose(
+                [Validators.required]
+              )],
+              avatar: ['']
+            })
+          )
+        }
+      }
+    }
+
   }
   removeStep(i) {
     return (this.formBlog.get('step') as FormArray).removeAt(i)
@@ -136,7 +162,7 @@ export class CreateBlogComponent implements OnInit {
     return (this.formBlog.get('metarial') as FormArray).controls;
   }
   addMetarial() {
-    if (this.listMetarial().length==0) {
+    if (this.listMetarial().length == 0) {
       return this.listMetarial().push(
         this.fb.group({
           name: [null, Validators.compose(
@@ -150,11 +176,11 @@ export class CreateBlogComponent implements OnInit {
     for (let i = 0; i < this.listMetarial().length; i++) {
       const dt = this.listMetarial()[i].value;
       if (dt.name == null || dt.name.trim() == '') {
-        this.listMetarial()[i].patchValue({name: ''})
+        this.listMetarial()[i].patchValue({ name: '' })
         return
       }
       else {
-        if (i == this.listMetarial().length-1) {
+        if (i == this.listMetarial().length - 1) {
           return this.listMetarial().push(
             this.fb.group({
               name: [null, Validators.compose(
@@ -167,7 +193,7 @@ export class CreateBlogComponent implements OnInit {
         }
       }
     }
-    
+
   }
   removeMetarial(i) {
     return (this.formBlog.get('metarial') as FormArray).removeAt(i)
@@ -177,16 +203,40 @@ export class CreateBlogComponent implements OnInit {
     return (this.formBlog.get('content') as FormArray).controls;
   }
   addContent() {
-    return this.listContent().push(
-      this.fb.group({
-        title: [null, Validators.compose(
-          [Validators.required]
-        )],
-        avatar: [''],
-        avatar_cover: [''],
-        description: ['']
-      })
-    )
+    if (this.listContent().length == 0) {
+      return this.listContent().push(
+        this.fb.group({
+          title: [null, Validators.compose(
+            [Validators.required]
+          )],
+          avatar: [''],
+          avatar_cover: [''],
+          description: ['']
+        })
+      )
+    }
+    for (let i = 0; i < this.listContent().length; i++) {
+      const dt = this.listContent()[i].value;
+      if (dt.title == null || dt.title.trim() == '') {
+        this.listContent()[i].patchValue({ title: '' })
+        return
+      }
+      else {
+        if (i == this.listContent().length - 1) {
+          return this.listContent().push(
+            this.fb.group({
+              title: [null, Validators.compose(
+                [Validators.required]
+              )],
+              avatar: [''],
+              avatar_cover: [''],
+              description: ['']
+            })
+          )
+        }
+      }
+    }
+
   }
   removeContent(i) {
     return (this.formBlog.get('content') as FormArray).removeAt(i)
@@ -211,7 +261,7 @@ export class CreateBlogComponent implements OnInit {
   permitFile;
   indexOflist_img_feature = 0;
   isListStep = 0;
-  isAvatarCover=false;
+  isAvatarCover = false;
   updateFile(event, type) {
     let fileList: FileList = event.target.files;
     const file: File = fileList[0];
@@ -264,12 +314,17 @@ export class CreateBlogComponent implements OnInit {
       this.listStep()[this.indexOflist_img_feature].patchValue({ avatar: data })
     }
     else { // is content
-      console.log(this.isAvatarCover)
       if (!this.isAvatarCover) {
         this.listContent()[this.indexOflist_img_feature].patchValue({ avatar: data })
       }
       else {
-        this.listContent()[this.indexOflist_img_feature].patchValue({ avatar_cover: data })
+        if (this.listContent()[this.indexOflist_img_feature].get('avatar').value == '' ||
+          this.listContent()[this.indexOflist_img_feature].get('avatar').value == null) {
+          this.listContent()[this.indexOflist_img_feature].patchValue({ avatar: data })
+        }
+        else {
+          this.listContent()[this.indexOflist_img_feature].patchValue({ avatar_cover: data })
+        }
       }
     }
   }
@@ -288,6 +343,10 @@ export class CreateBlogComponent implements OnInit {
   }
   createBlog() {
     let form = this.formBlog;
+    if (form.invalid || this.avatar == null || this.avatar == '') {
+      if (this.avatar == null || this.avatar == '') {this.avatar='';}
+      return
+    }
     let nowDate = new Date();
     let nowTime = new Date().toLocaleTimeString();
     let data = {
@@ -303,8 +362,8 @@ export class CreateBlogComponent implements OnInit {
       "user_id": '1',
       "category_id": 0,
 
-      "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() ,
-      "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() ,
+      "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
+      "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
     }
     console.log(data)
     // this.loading = true;
@@ -328,7 +387,7 @@ export class CreateBlogComponent implements OnInit {
   createMetarial() {
     this.listMetarial().forEach(e => {
       console.log(e)
-      let value=e.value;
+      let value = e.value;
       let data = {
         "title": value.name,
         "unit": value.unit,
@@ -338,13 +397,13 @@ export class CreateBlogComponent implements OnInit {
       }
       console.log(data)
       this.blogService.createMetarial(data).subscribe(
-      dt => {
-        this.loading = false;
-      },
+        dt => {
+          this.loading = false;
+        },
         err => {
           this.loading = false;
         }
-    )
+      )
     })
   }
 
@@ -369,7 +428,7 @@ export class CreateBlogComponent implements OnInit {
       )
     })
   }
-  
+
   createContent() {
     this.listContent().forEach(e => {
       let value = e.value;

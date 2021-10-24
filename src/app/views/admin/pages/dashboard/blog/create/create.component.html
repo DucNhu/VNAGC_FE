@@ -116,7 +116,7 @@
                                         <input type="number" class="form-control" formControlName="cooking_time"
                                             id="cooking_time" />
                                     </div>
-                                    
+
                                     <!-- Metarial -->
                                     <fieldset>
                                         <legend (click)="metarialC.toggle()" class="h2_title_collapse"
@@ -261,6 +261,8 @@
                                                             <textarea type="text" rows="3" class="form-control"
                                                                 name="description" [id]="'step_des'+i"
                                                                 formControlName="description"></textarea>
+                                                            <p class="error" *ngIf="item.value.description==''">Field is
+                                                                required</p>
                                                         </div>
                                                         <div class="col-md-6 p-0">
                                                             <label class="form-label"
