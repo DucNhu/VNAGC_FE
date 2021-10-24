@@ -5,7 +5,7 @@ form span.error {
 
 p.error:not(input) {
   color: #ea5455;
-  margin-top: 1rem;
+  margin-block: .25rem;
   font-family: var(--bs-font-sans-serif) 
 }
 

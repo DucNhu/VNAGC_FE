@@ -18,7 +18,8 @@ export class ListBlogComponent implements OnInit {
   ngOnInit(): void {
     this.blogService.getAllBlogeres().subscribe(
       dt=> {
-        this.listBlog = dt.Data;
+        console.log(dt)
+        this.listBlog = dt.Data.Items;
         this.loading = false;
       },
       err => {

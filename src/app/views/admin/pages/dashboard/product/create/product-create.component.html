@@ -141,7 +141,7 @@
                                   <mat-form-field appearance="fill" class="w-100">
                                     <mat-label>Category</mat-label>
                                     <mat-select formControlName="category">
-                                      <mat-option *ngFor="let i of listCategory" [value]="i">{{i}}</mat-option>
+                                      <mat-option *ngFor="let i of listCategory" [value]="i.id">{{i.name}}</mat-option>
                                     </mat-select>
                                   </mat-form-field>
                                 </div>

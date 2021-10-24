@@ -58,6 +58,7 @@ export class ProductCreateComponent implements OnInit {
       ]
     ).then(
       (dt: any) => {
+        console.log(dt)
         this.listCategory = dt[0].Data;
         this.loading = false;
       },

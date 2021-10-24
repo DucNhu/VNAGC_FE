@@ -15,6 +15,7 @@ import { BlogService } from 'src/app/core/_service/blog/blog.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/app/core/_service/category/category.service';
 import { HashtagService } from 'src/app/core/_service/hashtag/hashtag.service';
+import { productContent } from 'src/app/models/listSale';
 
 @Component({
   selector: 'app-create',
@@ -25,14 +26,8 @@ export class CreateBlogComponent implements OnInit {
   listCategory = [];
   time = { hour: 13, minute: 30 };
   selectedHastags: any[];
-  hastags: any[] = [
-    { id: 1, viewValue: "material saving" },
-    { id: 2, viewValue: "easy" },
-    { id: 3, viewValue: "fast" },
-    { id: 4, viewValue: "sweet things" },
-    { id: 5, viewValue: "Appetizer" }
-  ];
-  listUnit = ["gam", "liter", "ml"]
+  hastags: any[] = [];
+  listUnit = productContent.listUnit;
   formBlog: FormGroup;
   isCollapsed = {
     metarial: false,
@@ -48,6 +43,7 @@ export class CreateBlogComponent implements OnInit {
 
   loading = false;
   isSuccess = false;
+  c1=false;
   constructor(
     private fb: FormBuilder,
     private blogService: BlogService,
@@ -94,7 +90,7 @@ export class CreateBlogComponent implements OnInit {
   registerFormBlog() {
     this.formBlog = this.fb.group(
       {
-        name: ['', Validators.compose([
+        name: [null, Validators.compose([
           Validators.required
         ])],
         category: ['', Validators.compose([
@@ -122,7 +118,7 @@ export class CreateBlogComponent implements OnInit {
   addStep() {
     return this.listStep().push(
       this.fb.group({
-        name: ['', Validators.compose(
+        name: [null, Validators.compose(
           [Validators.required]
         )],
         description: ['', Validators.compose(
@@ -140,19 +136,38 @@ export class CreateBlogComponent implements OnInit {
     return (this.formBlog.get('metarial') as FormArray).controls;
   }
   addMetarial() {
-    return this.listMetarial().push(
-      this.fb.group({
-        name: ['', Validators.compose(
-          [Validators.required]
-        )],
-        content: [0, Validators.compose(
-          [Validators.required]
-        )],
-        unit: ['', Validators.compose(
-          [Validators.required]
-        )]
-      })
-    )
+    if (this.listMetarial().length==0) {
+      return this.listMetarial().push(
+        this.fb.group({
+          name: [null, Validators.compose(
+            [Validators.required]
+          )],
+          content: [null],
+          unit: [null]
+        })
+      )
+    }
+    for (let i = 0; i < this.listMetarial().length; i++) {
+      const dt = this.listMetarial()[i].value;
+      if (dt.name == null || dt.name.trim() == '') {
+        this.listMetarial()[i].patchValue({name: ''})
+        return
+      }
+      else {
+        if (i == this.listMetarial().length-1) {
+          return this.listMetarial().push(
+            this.fb.group({
+              name: [null, Validators.compose(
+                [Validators.required]
+              )],
+              content: [null],
+              unit: [null]
+            })
+          )
+        }
+      }
+    }
+    
   }
   removeMetarial(i) {
     return (this.formBlog.get('metarial') as FormArray).removeAt(i)
@@ -164,7 +179,7 @@ export class CreateBlogComponent implements OnInit {
   addContent() {
     return this.listContent().push(
       this.fb.group({
-        title: ['', Validators.compose(
+        title: [null, Validators.compose(
           [Validators.required]
         )],
         avatar: [''],
@@ -264,7 +279,12 @@ export class CreateBlogComponent implements OnInit {
   }
   setValueAvatarCover(e) {
     let reader = e.target;
-    this.avatar_cover = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    if (this.avatar == '' || this.avatar == null) {
+      this.avatar = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    }
+    else {
+      this.avatar_cover = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    }
   }
   createBlog() {
     let form = this.formBlog;
@@ -286,23 +306,23 @@ export class CreateBlogComponent implements OnInit {
       "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() ,
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() ,
     }
-    this.loading = true;
     console.log(data)
-    this.blogService.create(data).subscribe(
-      dt => {
-        this.loading = false;
-        this.blogId = dt.id;
-        this.createMetarial();
-        this.createContent();
-        this.createStep();
-        setTimeout(() => {
-          this.route.navigate(["/admin/blog/list"]);
-        }, 1500);
-      },
-      err => {
-        this.loading = false;
-      }
-    )
+    // this.loading = true;
+    // this.blogService.create(data).subscribe(
+    //   dt => {
+    //     this.loading = false;
+    //     this.blogId = dt.id;
+    //     this.createMetarial();
+    //     this.createContent();
+    //     this.createStep();
+    //     setTimeout(() => {
+    //       this.route.navigate(["/admin/blog/list"]);
+    //     }, 1500);
+    //   },
+    //   err => {
+    //     this.loading = false;
+    //   }
+    // )
   }
 
   createMetarial() {
