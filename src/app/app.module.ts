@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { APP_BASE_HREF } from '@angular/common';
 import { ThemesModule } from './views/client/component/themes.module';
 import { AppConfig } from './app.config';
@@ -24,6 +24,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { CartComponent } from './views/client/pages/cart/cart.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ShopComponent } from './views/client/pages/shop/shop.component';
+import { JwtInterceptor } from './core/_service/authen/jwt.interceptor';
 export function initializeApp(AppConfig: AppConfig) {
   return () => AppConfig.load()
 }
@@ -53,6 +54,8 @@ export function initializeApp(AppConfig: AppConfig) {
     CarouselModule
   ],
   providers: [AppConfig,
+    JwtInterceptor,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,

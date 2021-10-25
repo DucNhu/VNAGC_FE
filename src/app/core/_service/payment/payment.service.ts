@@ -5,7 +5,7 @@ import { HelperService } from "src/app/_helpers/helper.service";
 export class PaymentService {
     constructor(private helperService: HelperService) {}
     
-    createPayment(data) {
-        return this.helperService.post("Order", data)
+    createPayment() {
+        return this.helperService.post("Payment/paypal-paymet", {})
     }
 }

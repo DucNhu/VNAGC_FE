@@ -70,8 +70,12 @@ export class LoginComponent implements OnInit {
     this.authenservice.login(data).subscribe(
       (dt: any) => {
         if (dt.Infor.Value.status) {
+          localStorage.setItem("token", dt.Token);
+          this.authenservice.currentTokenSubject.next(dt.Token);
+
           localStorage.setItem("user", JSON.stringify(dt.Infor.Value));
           this.authenservice.currentUserSubject.next(dt.Infor.Value);
+
           if (dt.Infor.Value.isAdmin) {
             this.router.navigate(["/admin"])
           }

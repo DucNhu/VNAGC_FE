@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AddToCartService } from 'src/app/core/_service/addToCart/add-to-cart.service';
 
 @Component({
@@ -9,15 +10,21 @@ import { AddToCartService } from 'src/app/core/_service/addToCart/add-to-cart.se
 export class CartComponent implements OnInit {
   listCart = [];
   constructor(
-    private addToCartService: AddToCartService
+    private addToCartService: AddToCartService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.listCart = JSON.parse(localStorage.getItem('cart'));
-    this.listCart.forEach(e => {
-      e.totalAProduct = e.price * ((100 - e.sale)/100);
-      e.subtotal = e.totalAProduct * e.quantity;
-    });
+    this.addToCartService.cartCurrent.subscribe(
+      () => {
+        this.listCart = JSON.parse(localStorage.getItem("cart"));
+        this.listCart.forEach(e => {
+          e.totalAProduct = e.price * ((100 - e.sale) / 100);
+          e.subtotal = e.totalAProduct * e.quantity;
+        });
+      }
+    );
+    
   }
 
   setQuantity(index, quantity) { 
@@ -25,6 +32,7 @@ export class CartComponent implements OnInit {
     this.listCart[index].quantity = quantity;
     this.addToCartService.setCart(this.listCart[index]);
   }
+
   deleteCartByIdProduct(id, i) {
     this.listCart.splice(i, 1)
     this.addToCartService.deleteCartByIdProduct(id)
@@ -36,5 +44,22 @@ export class CartComponent implements OnInit {
       total = e.subtotal + total;
     });
     return total
+  }
+
+  createCart() {
+    this.listCart.forEach((e, index) => {
+      let data = {
+        "product_id": e.id,
+        "quantity": e.quantity
+      }
+      this.addToCartService.createCart(data).subscribe(
+        dt => {
+          console.log(dt);
+          if (index == this.listCart.length -1) {
+            this.router.navigate(["checkout"])
+          }
+        }
+      )
+    })
   }
 }

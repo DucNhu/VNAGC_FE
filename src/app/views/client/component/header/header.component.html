@@ -39,308 +39,86 @@
                         <ng-container *ngIf="isLogin">
                             <ul class="nav navbar-nav align-items-center ms-auto d-flex flex-row justify-content-end">
                                 <li class="nav-item nav-item-cart dropdown dropdown-cart">
-                                    <div class="nav-link show box-cart" [matMenuTriggerFor]="order">
-                                        <a  routerLink="/cart"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-shopping-cart ficon">
-                                            <circle cx="9" cy="21" r="1"></circle>
-                                            <circle cx="20" cy="21" r="1"></circle>
-                                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6">
-                                            </path>
-                                        </svg></a><span
-                                            class="badge rounded-pill bg-primary badge-up cart-item-count">{{countProduct}}</span></div>
-                                    <mat-menu #order="matMenu">
-                                        <ul class="dropdown-menu dropdown-menu-media dropdown-menu-end show"
-                                            data-bs-popper="none">
-                                            <li class="dropdown-menu-header">
-                                                <div class="dropdown-header d-flex">
-                                                    <h4 class="notification-title mb-0 me-auto">My Cart</h4>
-                                                    <div class="badge rounded-pill badge-light-primary">4 Items</div>
-                                                </div>
-                                            </li>
-                                            <li class="scrollable-container media-list ps ps--active-y">
-                                                <div class="list-item align-items-center"><img
-                                                        class="d-block rounded me-1"
-                                                        src="../../../app-assets/images/pages/eCommerce/1.png"
-                                                        alt="donuts" width="62">
-                                                    <div class="list-item-body flex-grow-1"><svg
-                                                            xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="feather feather-x ficon cart-item-remove">
-                                                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                        </svg>
-                                                        <div class="media-heading">
-                                                            <h6 class="cart-item-title"><a class="text-body"
-                                                                    href="app-ecommerce-details.html"> Apple watch
-                                                                    5</a></h6><small class="cart-item-by">By
-                                                                Apple</small>
-                                                        </div>
-                                                        <div class="cart-item-qty">
-                                                            <div class="input-group bootstrap-touchspin">
-                                                                <span
-                                                                    class="input-group-btn bootstrap-touchspin-injected"><button
-                                                                        class="btn btn-primary bootstrap-touchspin-down"
-                                                                        type="button"><svg
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            width="24" height="24" viewBox="0 0 24 24"
-                                                                            fill="none" stroke="currentColor"
-                                                                            stroke-width="2" stroke-linecap="round"
-                                                                            stroke-linejoin="round"
-                                                                            class="feather feather-minus">
-                                                                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                                                                        </svg></button></span><input
-                                                                    class="touchspin-cart form-control" type="number"
-                                                                    value="1"><span
-                                                                    class="input-group-btn bootstrap-touchspin-injected"><button
-                                                                        class="btn btn-primary bootstrap-touchspin-up"
-                                                                        type="button"><svg
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            width="24" height="24" viewBox="0 0 24 24"
-                                                                            fill="none" stroke="currentColor"
-                                                                            stroke-width="2" stroke-linecap="round"
-                                                                            stroke-linejoin="round"
-                                                                            class="feather feather-plus">
-                                                                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                                                                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                                                                        </svg></button></span>
-                                                            </div>
-                                                        </div>
-                                                        <h5 class="cart-item-price">$374.90</h5>
+                                    <div class="nav-link show box-cart">
+                                        <a routerLink="/cart"><svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                                height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-shopping-cart ficon">
+                                                <circle cx="9" cy="21" r="1"></circle>
+                                                <circle cx="20" cy="21" r="1"></circle>
+                                                <path
+                                                    d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6">
+                                                </path>
+                                            </svg>
+                                        </a><span
+                                            class="badge rounded-pill bg-primary badge-up cart-item-count">{{countProduct}}</span>
+                                    </div>
+                                    <ul class="sub-menu">
+                                        <li class="scrollable-container media-list ps ps--active-y">
+                                            <div class="list-item align-items-center"
+                                                *ngFor="let item of listCart; let i = index">
+                                                <img class="d-block rounded me-1" [src]="item.banner_img" alt="donuts"
+                                                    width="62">
+                                                <div class="list-item-body flex-grow-1"><svg
+                                                        (click)="deleteCartByIdProduct(item.id, i)"
+                                                        xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-x ficon cart-item-remove">
+                                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                                    </svg>
+                                                    <div class="media-heading">
+                                                        <h6 class="cart-item-title"><a class="text-body m-0 clamp-1"
+                                                                routerLink="['/product-detail', {id: item.id}">{{item.name}}</a>
+                                                        </h6>
                                                     </div>
-                                                </div>
-                                                <div class="list-item align-items-center"><img
-                                                        class="d-block rounded me-1"
-                                                        src="../../../app-assets/images/pages/eCommerce/7.png"
-                                                        alt="donuts" width="62">
-                                                    <div class="list-item-body flex-grow-1"><svg
-                                                            xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="feather feather-x ficon cart-item-remove">
-                                                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                        </svg>
-                                                        <div class="media-heading">
-                                                            <h6 class="cart-item-title"><a class="text-body"
-                                                                    href="app-ecommerce-details.html"> Google Home
-                                                                    Mini</a></h6><small class="cart-item-by">By
-                                                                Google</small>
+                                                    <div class="cart-item-qty">
+                                                        <div class="input-group bootstrap-touchspin">
+                                                            <span class="input-group-btn bootstrap-touchspin-injected">
+                                                                <button class="btn btn-primary bootstrap-touchspin-down"
+                                                                    type="button"
+                                                                    (click)="updatetoCart(item, item.quantity-1)"><svg
+                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-minus">
+                                                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                                                    </svg>
+                                                                </button></span>
+                                                            <input class="touchspin-cart form-control" type="number"
+                                                                #quti_i
+                                                                oninput="Math.abs(this.value) > 0 ? this.value=Math.abs(this.value) : this.value=1"
+                                                                [value]="item.quantity"
+                                                                (keyup)="updatetoCart(item, quti_i.value)"><span
+                                                                class="input-group-btn bootstrap-touchspin-injected">
+                                                                <button class="btn btn-primary bootstrap-touchspin-up"
+                                                                    type="button"
+                                                                    (click)="updatetoCart(item, item.quantity+1)"><svg
+                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-plus">
+                                                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                                                    </svg>
+                                                                </button></span>
                                                         </div>
-                                                        <div class="cart-item-qty">
-                                                            <div class="input-group bootstrap-touchspin">
-                                                                <span
-                                                                    class="input-group-btn bootstrap-touchspin-injected"><button
-                                                                        class="btn btn-primary bootstrap-touchspin-down"
-                                                                        type="button"><svg
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            width="24" height="24" viewBox="0 0 24 24"
-                                                                            fill="none" stroke="currentColor"
-                                                                            stroke-width="2" stroke-linecap="round"
-                                                                            stroke-linejoin="round"
-                                                                            class="feather feather-minus">
-                                                                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                                                                        </svg></button></span><input
-                                                                    class="touchspin-cart form-control" type="number"
-                                                                    value="3"><span
-                                                                    class="input-group-btn bootstrap-touchspin-injected"><button
-                                                                        class="btn btn-primary bootstrap-touchspin-up"
-                                                                        type="button"><svg
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            width="24" height="24" viewBox="0 0 24 24"
-                                                                            fill="none" stroke="currentColor"
-                                                                            stroke-width="2" stroke-linecap="round"
-                                                                            stroke-linejoin="round"
-                                                                            class="feather feather-plus">
-                                                                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                                                                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                                                                        </svg></button></span>
-                                                            </div>
-                                                        </div>
-                                                        <h5 class="cart-item-price">$129.40</h5>
                                                     </div>
+                                                    <h5 class="cart-item-price">${{item.subtotal}}</h5>
                                                 </div>
-                                                <div class="list-item align-items-center"><img
-                                                        class="d-block rounded me-1"
-                                                        src="../../../app-assets/images/pages/eCommerce/2.png"
-                                                        alt="donuts" width="62">
-                                                    <div class="list-item-body flex-grow-1"><svg
-                                                            xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="feather feather-x ficon cart-item-remove">
-                                                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                        </svg>
-                                                        <div class="media-heading">
-                                                            <h6 class="cart-item-title"><a class="text-body"
-                                                                    href="app-ecommerce-details.html"> iPhone 11
-                                                                    Pro</a></h6><small class="cart-item-by">By
-                                                                Apple</small>
-                                                        </div>
-                                                        <div class="cart-item-qty">
-                                                            <div class="input-group bootstrap-touchspin">
-                                                                <span
-                                                                    class="input-group-btn bootstrap-touchspin-injected"><button
-                                                                        class="btn btn-primary bootstrap-touchspin-down"
-                                                                        type="button"><svg
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            width="24" height="24" viewBox="0 0 24 24"
-                                                                            fill="none" stroke="currentColor"
-                                                                            stroke-width="2" stroke-linecap="round"
-                                                                            stroke-linejoin="round"
-                                                                            class="feather feather-minus">
-                                                                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                                                                        </svg></button></span><input
-                                                                    class="touchspin-cart form-control" type="number"
-                                                                    value="2"><span
-                                                                    class="input-group-btn bootstrap-touchspin-injected"><button
-                                                                        class="btn btn-primary bootstrap-touchspin-up"
-                                                                        type="button"><svg
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            width="24" height="24" viewBox="0 0 24 24"
-                                                                            fill="none" stroke="currentColor"
-                                                                            stroke-width="2" stroke-linecap="round"
-                                                                            stroke-linejoin="round"
-                                                                            class="feather feather-plus">
-                                                                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                                                                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                                                                        </svg></button></span>
-                                                            </div>
-                                                        </div>
-                                                        <h5 class="cart-item-price">$699.00</h5>
-                                                    </div>
-                                                </div>
-                                                <div class="list-item align-items-center"><img
-                                                        class="d-block rounded me-1"
-                                                        src="../../../app-assets/images/pages/eCommerce/3.png"
-                                                        alt="donuts" width="62">
-                                                    <div class="list-item-body flex-grow-1"><svg
-                                                            xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="feather feather-x ficon cart-item-remove">
-                                                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                        </svg>
-                                                        <div class="media-heading">
-                                                            <h6 class="cart-item-title"><a class="text-body"
-                                                                    href="app-ecommerce-details.html"> iMac Pro</a>
-                                                            </h6><small class="cart-item-by">By Apple</small>
-                                                        </div>
-                                                        <div class="cart-item-qty">
-                                                            <div class="input-group bootstrap-touchspin">
-                                                                <span
-                                                                    class="input-group-btn bootstrap-touchspin-injected"><button
-                                                                        class="btn btn-primary bootstrap-touchspin-down"
-                                                                        type="button"><svg
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            width="24" height="24" viewBox="0 0 24 24"
-                                                                            fill="none" stroke="currentColor"
-                                                                            stroke-width="2" stroke-linecap="round"
-                                                                            stroke-linejoin="round"
-                                                                            class="feather feather-minus">
-                                                                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                                                                        </svg></button></span><input
-                                                                    class="touchspin-cart form-control" type="number"
-                                                                    value="1"><span
-                                                                    class="input-group-btn bootstrap-touchspin-injected"><button
-                                                                        class="btn btn-primary bootstrap-touchspin-up"
-                                                                        type="button"><svg
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            width="24" height="24" viewBox="0 0 24 24"
-                                                                            fill="none" stroke="currentColor"
-                                                                            stroke-width="2" stroke-linecap="round"
-                                                                            stroke-linejoin="round"
-                                                                            class="feather feather-plus">
-                                                                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                                                                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                                                                        </svg></button></span>
-                                                            </div>
-                                                        </div>
-                                                        <h5 class="cart-item-price">$4,999.00</h5>
-                                                    </div>
-                                                </div>
-                                                <div class="list-item align-items-center"><img
-                                                        class="d-block rounded me-1"
-                                                        src="../../../app-assets/images/pages/eCommerce/5.png"
-                                                        alt="donuts" width="62">
-                                                    <div class="list-item-body flex-grow-1"><svg
-                                                            xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="feather feather-x ficon cart-item-remove">
-                                                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                        </svg>
-                                                        <div class="media-heading">
-                                                            <h6 class="cart-item-title"><a class="text-body"
-                                                                    href="app-ecommerce-details.html"> MacBook
-                                                                    Pro</a></h6><small class="cart-item-by">By
-                                                                Apple</small>
-                                                        </div>
-                                                        <div class="cart-item-qty">
-                                                            <div class="input-group bootstrap-touchspin">
-                                                                <span
-                                                                    class="input-group-btn bootstrap-touchspin-injected"><button
-                                                                        class="btn btn-primary bootstrap-touchspin-down"
-                                                                        type="button"><svg
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            width="24" height="24" viewBox="0 0 24 24"
-                                                                            fill="none" stroke="currentColor"
-                                                                            stroke-width="2" stroke-linecap="round"
-                                                                            stroke-linejoin="round"
-                                                                            class="feather feather-minus">
-                                                                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                                                                        </svg></button></span><input
-                                                                    class="touchspin-cart form-control" type="number"
-                                                                    value="1"><span
-                                                                    class="input-group-btn bootstrap-touchspin-injected"><button
-                                                                        class="btn btn-primary bootstrap-touchspin-up"
-                                                                        type="button"><svg
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            width="24" height="24" viewBox="0 0 24 24"
-                                                                            fill="none" stroke="currentColor"
-                                                                            stroke-width="2" stroke-linecap="round"
-                                                                            stroke-linejoin="round"
-                                                                            class="feather feather-plus">
-                                                                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                                                                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                                                                        </svg></button></span>
-                                                            </div>
-                                                        </div>
-                                                        <h5 class="cart-item-price">$2,999.00</h5>
-                                                    </div>
-                                                </div>
-                                                <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-                                                    <div class="ps__thumb-x" tabindex="0"
-                                                        style="left: 0px; width: 0px;">
-                                                    </div>
-                                                </div>
-                                                <div class="ps__rail-y" style="top: 0px; right: 0px; height: 350px;">
-                                                    <div class="ps__thumb-y" tabindex="0"
-                                                        style="top: 0px; height: 315px;">
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="dropdown-menu-footer">
-                                                <div class="d-flex justify-content-between mb-1">
-                                                    <h6 class="fw-bolder mb-0">Total:</h6>
-                                                    <h6 class="text-primary fw-bolder mb-0">$10,999.00</h6>
-                                                </div><a
-                                                    class="btn btn-primary w-100 waves-effect waves-float waves-light"
-                                                    href="app-ecommerce-checkout.html">Checkout</a>
-                                            </li>
-                                        </ul>
-                                    </mat-menu>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-menu-footer">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <h6 class="fw-bolder mb-0">Total:</h6>
+                                                <h6 class="text-primary fw-bolder mb-0">${{total()}}</h6>
+                                            </div><a class="btn btn-primary w-100 waves-effect waves-float waves-light"
+                                                routerLink="/checkout">Checkout</a>
+                                        </li>
+                                    </ul>
 
                                 </li>
                                 <li class="nav-item dropdown dropdown-user">
@@ -349,14 +127,17 @@
                                                                         
                                 
                                                                     </a> -->
-                                    <div class="search-toggle-btn d-flex" aria-label="Search toggle" [matMenuTriggerFor]="menu">
+                                    <div class="search-toggle-btn d-flex" aria-label="Search toggle"
+                                        [matMenuTriggerFor]="menu">
                                         <div class="user-nav d-sm-flex d-none flex-column">
-                                            <span class="user-name fw-bolder">{{user.fullName}}</span><span class="user-status">
+                                            <span class="user-name fw-bolder">{{user.fullName}}</span><span
+                                                class="user-status">
                                                 <!-- Cooker -->
                                             </span>
                                         </div>
                                         <span class="avatar">
-                                            <img class="round" [src]="user.avatar ? user.avatar : 'assets/images/portrait/small/avatar-s-2.jpg'"
+                                            <img class="round"
+                                                [src]="user.avatar ? user.avatar : 'assets/images/portrait/small/avatar-s-2.jpg'"
                                                 alt="avatar" height="40" width="40"><span class="avatar-status-online">
                                             </span>
                                         </span>
@@ -372,8 +153,18 @@
                                                 Profile</button>
                                             <button mat-menu-item (click)="logout()">
                                                 <span>
-                            <svg _ngcontent-vpb-c150="" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path _ngcontent-vpb-c150="" d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline _ngcontent-vpb-c150="" points="16 17 21 12 16 7"></polyline><line _ngcontent-vpb-c150="" x1="21" y1="12" x2="9" y2="12"></line></svg>
-                        </span>
+                                                    <svg _ngcontent-vpb-c150="" xmlns="http://www.w3.org/2000/svg"
+                                                        width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round" class="feather feather-log-out">
+                                                        <path _ngcontent-vpb-c150=""
+                                                            d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                                        <polyline _ngcontent-vpb-c150="" points="16 17 21 12 16 7">
+                                                        </polyline>
+                                                        <line _ngcontent-vpb-c150="" x1="21" y1="12" x2="9" y2="12">
+                                                        </line>
+                                                    </svg>
+                                                </span>
                                                 Log out</button>
                                         </mat-menu>
                                     </div>
@@ -406,536 +197,10 @@
                                             routerLink="/blogs">blogs</a></li>
                                     <li id="mgt-menu-item-510"
                                         class="menu-item menu-item-type-post_type menu-item-object-page"><a
-                                            routerLink="about">About</a></li>
+                                            routerLink="/about">About</a></li>
                                     <li id="mgt-menu-item-911"
                                         class="menu-item menu-item-type-post_type menu-item-object-page"><a
                                             routerLink="/shop">Shop</a></li>
-                                    <!-- <li id="mgt-menu-item-404"
-                                        class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home current-menu-ancestor menu-item-has-children">
-                                        <a href="index.html">Demos</a>
-                                        <ul class="sub-menu  megamenu-column-1 level-0">
-                                            <li id="mgt-menu-item-666"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children">
-                                                <a href="#">Demos</a>
-                                                <ul class="sub-menu  level-1">
-                                                    <li id="mgt-menu-item-667"
-                                                        class="menu-item menu-item-type-custom menu-item-object-custom">
-                                                        <a href="https://wp.wp-preview.com/cookandmeal/cookandmeal-1/">Homepage
-                                                            1</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-668"
-                                                        class="menu-item menu-item-type-custom menu-item-object-custom">
-                                                        <a href="https://wp.wp-preview.com/cookandmeal/cookandmeal-2/">Homepage
-                                                            2</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-669"
-                                                        class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home">
-                                                        <a href="index.html">Homepage 3</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-670"
-                                                        class="menu-item menu-item-type-custom menu-item-object-custom">
-                                                        <a href="https://wp.wp-preview.com/cookandmeal/cookandmeal-3/">Homepage
-                                                            4</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-671"
-                                                        class="menu-item menu-item-type-custom menu-item-object-custom">
-                                                        <a href="https://wp.wp-preview.com/cookandmeal/cookandmeal-5/">Homepage
-                                                            5</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-672"
-                                                        class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home">
-                                                        <a href="index.html">Homepage 6</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-929"
-                                                        class="menu-item menu-item-type-custom menu-item-object-custom">
-                                                        <a href="https://wp.wp-preview.com/cookandmeal/cookandmeal-7/">Homepage
-                                                            7</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-928"
-                                                        class="menu-item menu-item-type-custom menu-item-object-custom">
-                                                        <a href="https://wp.wp-preview.com/cookandmeal/cookandmeal-8/">Homepage
-                                                            8</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li id="mgt-menu-item-683"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom"><a
-                                                    href="page/2/index6f58.html?blog_layout=large-grid">Large Post
-                                                    then Grid</a></li>
-                                            <li id="mgt-menu-item-684"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom"><a
-                                                    href="page/2/index6d0d.html?blog_layout=overlay-grid">Large
-                                                    Overlay then Grid</a></li>
-                                            <li id="mgt-menu-item-685"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom"><a
-                                                    href="page/2/indexbc09.html?blog_layout=large-list">Large Post
-                                                    then List</a></li>
-                                            <li id="mgt-menu-item-686"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom"><a
-                                                    href="page/2/index8a80.html?blog_layout=overlay-list">Overlay
-                                                    then List</a></li>
-                                            <li id="mgt-menu-item-687"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom"><a
-                                                    href="page/2/index8a80.html?blog_layout=overlay-list">Overlay
-                                                    then List</a></li>
-                                            <li id="mgt-menu-item-688"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom"><a
-                                                    href="page/2/index861a.html?blog_layout=mixed-overlays">Mixed
-                                                    Overlays</a></li>
-                                            <li id="mgt-menu-item-689"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom"><a
-                                                    href="page/2/indexe819.html?blog_layout=mixed-large-grid">Mixed
-                                                    Large then Grid</a></li>
-                                            <li id="mgt-menu-item-690"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom"><a
-                                                    href="page/2/index4b12.html?blog_layout=card">Cards</a></li>
-                                            <li id="mgt-menu-item-691"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom"><a
-                                                    href="page/2/indexc5c4.html?blog_layout=grid">Grid</a></li>
-                                            <li id="mgt-menu-item-692"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom"><a
-                                                    href="page/2/indexed65.html?blog_layout=list">List</a></li>
-                                            <li id="mgt-menu-item-693"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom"><a
-                                                    href="page/2/index9a82.html?blog_layout=standard">Classic</a>
-                                            </li>
-                                            <li id="mgt-menu-item-694"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom"><a
-                                                    href="page/2/index465f.html?blog_layout=overlay">Overlay</a>
-                                            </li>
-                                            <li id="mgt-menu-item-695"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom"><a
-                                                    href="page/2/indexb2f5.html?blog_layout=masonry">Masonry</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li id="mgt-menu-item-406"
-                                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children">
-                                        <a href="#">Features</a>
-                                        <ul class="sub-menu  megamenu-column-1 level-0">
-                                            <li id="mgt-menu-item-660"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children">
-                                                <a href="#">Gutenberg styles</a>
-                                                <ul class="sub-menu  level-1">
-                                                    <li id="mgt-menu-item-661"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                        <a href="typography/index.html">Typography</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-664"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                        <a href="misc-blocks/index.html">Misc blocks</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-675"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                        <a href="embeds/index.html">Embeds</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-703"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                        <a href="single-images/index.html">Single images</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-704"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                        <a href="galleries/index.html">Galleries</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li id="mgt-menu-item-405"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children">
-                                                <a href="#">Post layouts</a>
-                                                <ul class="sub-menu  level-1">
-                                                    <li id="mgt-menu-item-407"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-post">
-                                                        <a
-                                                            href="2021/06/08/homemade-oatmeal-chocolate-chip-cookie-crisp-cereal/index.html">Post
-                                                            style &#8211; 1</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-410"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-post">
-                                                        <a href="2021/06/07/almond-flour-pancakes/index.html">Post
-                                                            style &#8211; 2</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-418"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-post">
-                                                        <a
-                                                            href="2021/06/07/spicy-serrano-pineapple-margarita/index.html">Post
-                                                            style &#8211; 3</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-419"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-post">
-                                                        <a href="2021/05/14/the-best-baked-potato/index.html">Post
-                                                            style &#8211; 4</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-424"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-post">
-                                                        <a href="2021/06/01/taiwanese-popcorn-chicken/index.html">Post
-                                                            style &#8211; 5</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-427"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-post">
-                                                        <a
-                                                            href="2021/05/14/citrus-salad-with-fennel-avocado/index.html">Post
-                                                            style &#8211; 6</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-433"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-post">
-                                                        <a href="2021/05/10/how-to-cook-spaghetti-squash/index.html">Post
-                                                            style &#8211; 7</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-438"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-post">
-                                                        <a
-                                                            href="2021/06/07/sheet-pan-cheesy-poblano-corn-enchiladas/index.html">Post
-                                                            style
-                                                            &#8211; 8</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-439"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-post">
-                                                        <a
-                                                            href="2021/06/07/spicy-serrano-pineapple-margarita-2/index.html">Post
-                                                            style &#8211;
-                                                            9</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-447"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-post">
-                                                        <a
-                                                            href="2021/05/13/the-ultimate-guide-to-fish-sauce/index.html">Post
-                                                            layout &#8211;
-                                                            10<sup style="background-color: #5e8b7e">PARRALAX</sup></a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-456"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-post">
-                                                        <a
-                                                            href="2021/05/12/spicy-zucchini-ricotta-lasagna-with-oregano-breadcrumbs/index.html">Post
-                                                            layout &#8211; 11<sup
-                                                                style="background-color: #5e8b7e">PARRALAX</sup></a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-463"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-post">
-                                                        <a href="2021/05/10/ham-egg-and-cheese-brunch-cups/index.html">Post
-                                                            layout &#8211; 12<sup
-                                                                style="background-color: #5e8b7e">PARRALAX</sup></a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-467"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-post">
-                                                        <a
-                                                            href="2021/05/14/the-best-sesame-soy-broccoli-salad/index.html">Post
-                                                            layout &#8211;
-                                                            13<sup style="background-color: #5e8b7e">PARRALAX</sup></a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li id="mgt-menu-item-476"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children">
-                                                <a href="#">Category layouts</a>
-                                                <ul class="sub-menu  level-1">
-                                                    <li id="mgt-menu-item-481"
-                                                        class="menu-item menu-item-type-taxonomy menu-item-object-category">
-                                                        <a href="category/vegan/index.html">Grid overlay</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-480"
-                                                        class="menu-item menu-item-type-taxonomy menu-item-object-category">
-                                                        <a href="category/recipes/index.html">Mixed overlays</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-479"
-                                                        class="menu-item menu-item-type-taxonomy menu-item-object-category">
-                                                        <a href="category/basics/index.html">First large overlay
-                                                            than list</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-478"
-                                                        class="menu-item menu-item-type-taxonomy menu-item-object-category">
-                                                        <a href="category/easy/index.html">List</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-477"
-                                                        class="menu-item menu-item-type-taxonomy menu-item-object-category">
-                                                        <a href="category/chicken/index.html">Classic</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li id="mgt-menu-item-468"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children">
-                                                <a href="#">Post formats</a>
-                                                <ul class="sub-menu  level-1">
-                                                    <li id="mgt-menu-item-475"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-post">
-                                                        <a href="2021/06/01/fresh-summer-raspberry-icecream/index.html">Audio
-                                                            style</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-473"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-post">
-                                                        <a
-                                                            href="2021/05/13/3-ingredient-garlic-herb-grilled-chicken-wings/index.html">Gallery
-                                                            style</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-470"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-post">
-                                                        <a href="2021/05/14/the-best-baked-potato/index.html">Video
-                                                            style</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li id="mgt-menu-item-495"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children">
-                                                <a href="#">Pages</a>
-                                                <ul class="sub-menu  level-1">
-                                                    <li id="mgt-menu-item-498"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                        <a href="typography/index.html">Boxed page</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-511"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                        <a href="about/index.html">Fullwidth page</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-546"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                        <a href="contact/index.html">Simple page</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-512"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                        <a href="about/index.html">About</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-545"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                        <a href="contact/index.html">Contact</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-606"
-                                                        class="menu-item menu-item-type-custom menu-item-object-custom">
-                                                        <a href="404.html">404 Page</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-496"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                        <a href="typography/index.html">Typography</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-609"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                        <a href="theme-shortcodes/index.html">Theme Shortcodes</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li id="mgt-menu-item-485"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children">
-                                                <a href="#">Other archives</a>
-                                                <ul class="sub-menu  level-1">
-                                                    <li id="mgt-menu-item-487"
-                                                        class="menu-item menu-item-type-custom menu-item-object-custom">
-                                                        <a href="tag/food/index.html">Tag archive</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-490"
-                                                        class="menu-item menu-item-type-custom menu-item-object-custom">
-                                                        <a href="#">Search result</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-489"
-                                                        class="menu-item menu-item-type-custom menu-item-object-custom">
-                                                        <a href="author/cookandmeal/index.html">Author archive</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-486"
-                                                        class="menu-item menu-item-type-taxonomy menu-item-object-category">
-                                                        <a href="category/easy/index.html">Category archive</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li id="mgt-menu-item-482"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children">
-                                                <a href="#">Review post</a>
-                                                <ul class="sub-menu  level-1">
-                                                    <li id="mgt-menu-item-641"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-post">
-                                                        <a href="2021/05/10/creamy-chicken-alfredo/index.html">Review
-                                                            post &#8211; 1</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-642"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-post">
-                                                        <a href="2021/05/10/ham-egg-and-cheese-brunch-cups/index.html">Review
-                                                            post &#8211; 2</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li id="mgt-menu-item-913"
-                                                class="menu-item menu-item-type-post_type menu-item-object-post"><a
-                                                    href="2021/06/08/homemade-oatmeal-chocolate-chip-cookie-crisp-cereal/index.html">Post
-                                                    recipe</a></li>
-                                            <li id="mgt-menu-item-542"
-                                                class="menu-item menu-item-type-post_type menu-item-object-page"><a
-                                                    href="theme-shortcodes/index.html">Theme Shortcodes</a></li>
-                                            <li id="mgt-menu-item-610"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom"><a
-                                                    href="author/cookandmeal/index.html">Author page</a></li>
-                                            <li id="mgt-menu-item-611"
-                                                class="menu-item menu-item-type-taxonomy menu-item-object-category">
-                                                <a href="category/easy/index.html">Category page</a>
-                                            </li>
-                                            <li id="mgt-menu-item-898"
-                                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
-                                                <a href="shop/index.html">Shop/Woocommerce</a>
-                                                <ul class="sub-menu  level-1">
-                                                    <li id="mgt-menu-item-897"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                        <a routerLink="/shop">Shop</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-894"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                        <a href="cart/index.html">Cart</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-895"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                        <a href="checkout/index.html">Checkout</a>
-                                                    </li>
-                                                    <li id="mgt-menu-item-896"
-                                                        class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                        <a href="my-account/index.html">My account</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li id="mgt-menu-item-615"
-                                                class="menu-item menu-item-type-post_type menu-item-object-post"><a
-                                                    href="2021/05/10/strawberry-oatmeal-muffins/index.html">Sponsored
-                                                    post</a></li>
-                                            <li id="mgt-menu-item-717"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom"><a
-                                                    href="2021/06/01/10-taco-tuesday-recipes-for-you-if-you-love-tacos/amp/index.html">AMP
-                                                    post</a></li>
-                                        </ul>
-                                    </li>
-                                    <li id="mgt-menu-item-127"
-                                        class="menu-item menu-item-type-taxonomy menu-item-object-category"><a
-                                            href="category/basics/index.html">Basics</a></li>
-                                    <li id="mgt-menu-item-128"
-                                        class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children">
-                                        <a href="category/chicken/index.html">Chicken</a>
-                                        <ul class="sub-menu sidebar sidebar-inside  megamenu-column-1 level-0">
-                                            <li id="cookandmeal-list-posts-6"
-                                                class="widget widget_cookandmeal_list_entries">
-                                                <h2 class="widgettitle">Latest posts</h2>
-                                                <ul class="template-grid-short-inside">
-
-                                                    <li class="template-grid-short">
-                                                        <div
-                                                            class="cookandmeal-grid-post cookandmeal-grid-short-post cookandmeal-post format-standard">
-                                                            <div class="cookandmeal-post-image-wrapper"><a
-                                                                    href="2021/06/08/homemade-oatmeal-chocolate-chip-cookie-crisp-cereal/index.html">
-                                                                    <div class="cookandmeal-post-image"
-                                                                        style="background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/05/image-from-rawpixel-id-105386-jpeg-555x360.jpg);">
-                                                                    </div>
-                                                                </a></div>
-                                                            <div class="cookandmeal-post-details">
-                                                                <div class="post-categories"><a
-                                                                        href="category/easy/index.html"
-                                                                        style="background-color: #84a6e5;"><i
-                                                                            class="fa fa-tag cat-dot"></i><span
-                                                                            class="cat-title">Easy</span></a></div>
-                                                                <h3 class="post-title entry-title"><a
-                                                                        href="2021/06/08/homemade-oatmeal-chocolate-chip-cookie-crisp-cereal/index.html">Homemade
-                                                                        Oatmeal Chocolate Chip Cookie Crisp
-                                                                        Cereal</a></h3>
-                                                                <div class="post-date"><time
-                                                                        class="entry-date published updated"
-                                                                        datetime="2021-06-08T22:23:00+00:00">June 8,
-                                                                        2021</time></div>
-                                                                <div class="post-info-dot"></div>
-                                                                <div class="post-read-time"><i class="fa fa-clock-o"
-                                                                        aria-hidden="true"></i>75 min
-                                                                    Cook</div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="template-grid-short">
-                                                        <div
-                                                            class="cookandmeal-grid-post cookandmeal-grid-short-post cookandmeal-post format-standard">
-                                                            <div class="cookandmeal-post-image-wrapper"><a
-                                                                    href="2021/06/07/almond-flour-pancakes/index.html">
-                                                                    <div class="cookandmeal-post-image"
-                                                                        style="background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/05/qdm6-ffkp0s-555x360.jpg);">
-                                                                    </div>
-                                                                </a></div>
-                                                            <div class="cookandmeal-post-details">
-                                                                <div class="post-categories"><a
-                                                                        href="category/easy/index.html"
-                                                                        style="background-color: #84a6e5;"><i
-                                                                            class="fa fa-tag cat-dot"></i><span
-                                                                            class="cat-title">Easy</span></a></div>
-                                                                <h3 class="post-title entry-title"><a
-                                                                        href="2021/06/07/almond-flour-pancakes/index.html">Almond
-                                                                        Flour Pancakes</a></h3>
-                                                                <div class="post-date"><time
-                                                                        class="entry-date published updated"
-                                                                        datetime="2021-06-07T11:26:50+00:00">June 7,
-                                                                        2021</time></div>
-                                                                <div class="post-info-dot"></div>
-                                                                <div class="post-read-time"><i class="fa fa-clock-o"
-                                                                        aria-hidden="true"></i>23 min
-                                                                    Cook</div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="template-grid-short">
-                                                        <div
-                                                            class="cookandmeal-grid-post cookandmeal-grid-short-post cookandmeal-post format-standard">
-                                                            <div class="cookandmeal-post-image-wrapper"><a
-                                                                    href="2021/06/07/spicy-serrano-pineapple-margarita-2/index.html">
-                                                                    <div class="cookandmeal-post-image"
-                                                                        style="background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/06/jdazixxqvtc-555x360.jpg);">
-                                                                    </div>
-                                                                </a></div>
-                                                            <div class="cookandmeal-post-details">
-                                                                <div class="post-categories"><a
-                                                                        href="category/easy/index.html"
-                                                                        style="background-color: #84a6e5;"><i
-                                                                            class="fa fa-tag cat-dot"></i><span
-                                                                            class="cat-title">Easy</span></a><a
-                                                                        href="category/vegan/index.html"
-                                                                        style="background-color: #5b8559;"><i
-                                                                            class="fa fa-tag cat-dot"></i><span
-                                                                            class="cat-title">Vegan</span></a></div>
-                                                                <h3 class="post-title entry-title"><a
-                                                                        href="2021/06/07/spicy-serrano-pineapple-margarita-2/index.html">Spicy
-                                                                        Serrano
-                                                                        Pineapple Margarita.</a></h3>
-                                                                <div class="post-date"><time
-                                                                        class="entry-date published updated"
-                                                                        datetime="2021-06-07T11:03:59+00:00">June 7,
-                                                                        2021</time></div>
-                                                                <div class="post-info-dot"></div>
-                                                                <div class="post-read-time"><i class="fa fa-clock-o"
-                                                                        aria-hidden="true"></i>53 min
-                                                                    Cook</div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="template-grid-short">
-                                                        <div
-                                                            class="cookandmeal-grid-post cookandmeal-grid-short-post cookandmeal-post format-standard">
-                                                            <div class="cookandmeal-post-image-wrapper"><a
-                                                                    href="2021/06/07/spicy-serrano-pineapple-margarita/index.html">
-                                                                    <div class="cookandmeal-post-image"
-                                                                        style="background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/06/uo4r-xn3kwe-555x360.jpg);">
-                                                                    </div>
-                                                                </a></div>
-                                                            <div class="cookandmeal-post-details">
-                                                                <div class="post-categories"><a
-                                                                        href="category/pasta/index.html"
-                                                                        style="background-color: #e5a484;"><i
-                                                                            class="fa fa-tag cat-dot"></i><span
-                                                                            class="cat-title">Pasta</span></a></div>
-                                                                <h3 class="post-title entry-title"><a
-                                                                        href="2021/06/07/spicy-serrano-pineapple-margarita/index.html">Broccoli
-                                                                        Slaw</a>
-                                                                </h3>
-                                                                <div class="post-date"><time
-                                                                        class="entry-date published updated"
-                                                                        datetime="2021-06-07T11:00:10+00:00">June 7,
-                                                                        2021</time></div>
-                                                                <div class="post-info-dot"></div>
-                                                                <div class="post-read-time"><i class="fa fa-clock-o"
-                                                                        aria-hidden="true"></i>16 min
-                                                                    Cook</div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li> -->
-
                                 </ul>
                             </div>
                         </div>

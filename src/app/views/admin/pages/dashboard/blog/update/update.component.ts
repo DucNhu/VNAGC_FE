@@ -545,8 +545,8 @@ export class UpdateComponent implements OnInit {
       this.listStep()[this.indexOflist_img_feature].patchValue({ avatar: data })
     }
     else { // is content
-      console.log(this.isAvatarCover)
-      if (!this.isAvatarCover) {
+      if (this.listContent()[this.indexOflist_img_feature].get('avatar').value == '' ||
+        this.listContent()[this.indexOflist_img_feature].get('avatar').value == null) {
         this.listContent()[this.indexOflist_img_feature].patchValue({ avatar: data })
       }
       else {
@@ -629,7 +629,6 @@ export class UpdateComponent implements OnInit {
         "banner_cover": value.avatar_cover,
         "blog_id": this.blogId
       }
-      console.log(data)
       if (value.id != 0) {
         this.updateContent(data)
       }

@@ -2,3 +2,7 @@
 .delete-btn {
     width: 80px
 }
+
+.input-group .btn {
+    z-index: 3
+}

@@ -28,6 +28,7 @@
                                     <div class="position-relative">
                                         <input type="text" class="woocommerce-Input woocommerce-Input--text input-text"
                                             style="margin-bottom: 4px"
+                                            oninput="this.value.length > 50 ? this.value='' : ''"
                                             formControlName="name" id="username">
                                         <span class="errorInput"
                                             *ngIf="isInvalid('name') || errorName">This field cannot be ignored</span>
@@ -73,145 +74,13 @@
                                         class="woocommerce-button button woocommerce-form-login__submit">Sig up</button>
                                 </div>
                                 <p class="woocommerce-LostPassword lost_password" style="text-align: center">
-                                    <a href="lost-password/index.html">Lost your password?</a>
+                                    <a routerLink="/login">Or login</a>
                             </form>
                         </div>
                     </article>
                 </div>
 
             </div>
-            <!-- <div class="col-md-4 page-sidebar sidebar sidebar-right" role="complementary">
-                <ul id="page-sidebar">
-                    <li id="cookandmeal-text-5" class="widget widget_cookandmeal_text">
-                        <div class="cookandmeal-textwidget-wrapper ">
-                            <div class="cookandmeal-textwidget"><a
-                                    href="https://magniumthemes.com/go/purchase-cookandmeal/"><img
-                                        src="../../cookandmeal-1/wp-content/uploads/2021/07/promo-cookandmeal-half-page-2x.jpg"
-                                        alt=""></a></div>
-                        </div>
-                    </li>
-                    <li id="cookandmeal-list-posts-5" class="widget widget_cookandmeal_list_entries">
-                        <h2 class="widgettitle">Latest post</h2>
-                        <ul class="template-2col-inside">
-
-                            <li class="template-2col">
-                                <div
-                                    class="cookandmeal-grid-post cookandmeal-grid-short-post cookandmeal-post format-standard">
-                                    <div class="cookandmeal-post-image-wrapper"><a
-                                            href="../2021/06/08/homemade-oatmeal-chocolate-chip-cookie-crisp-cereal/index.html">
-                                            <div class="cookandmeal-post-image"
-                                                data-style="background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/05/image-from-rawpixel-id-105386-jpeg-555x360.jpg);"
-                                                style="background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/05/image-from-rawpixel-id-105386-jpeg-555x360.jpg);">
-                                            </div>
-                                        </a></div>
-                                    <div class="cookandmeal-post-details">
-                                        <div class="post-categories"><a href="../category/easy/index.html"
-                                                data-style="background-color: #84a6e5;"
-                                                style="background-color: #84a6e5;"><i
-                                                    class="fa fa-tag cat-dot"></i><span
-                                                    class="cat-title">Easy</span></a></div>
-                                        <h3 class="post-title entry-title"><a
-                                                href="../2021/06/08/homemade-oatmeal-chocolate-chip-cookie-crisp-cereal/index.html">Homemade
-                                                Oatmeal Chocolate Chip Cookie Crisp Cereal</a></h3>
-                                        <div class="post-date"><time class="entry-date published updated"
-                                                datetime="2021-06-08T22:23:00+00:00">June 8, 2021</time></div>
-                                        <div class="post-info-dot"></div>
-                                        <div class="post-read-time"><i class="fa fa-clock-o" aria-hidden="true"></i>75
-                                            min Cook</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="template-2col">
-                                <div
-                                    class="cookandmeal-grid-post cookandmeal-grid-short-post cookandmeal-post format-standard">
-                                    <div class="cookandmeal-post-image-wrapper"><a
-                                            href="../2021/06/07/almond-flour-pancakes/index.html">
-                                            <div class="cookandmeal-post-image"
-                                                data-style="background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/05/qdm6-ffkp0s-555x360.jpg);"
-                                                style="background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/05/qdm6-ffkp0s-555x360.jpg);">
-                                            </div>
-                                        </a></div>
-                                    <div class="cookandmeal-post-details">
-                                        <div class="post-categories"><a href="../category/easy/index.html"
-                                                data-style="background-color: #84a6e5;"
-                                                style="background-color: #84a6e5;"><i
-                                                    class="fa fa-tag cat-dot"></i><span
-                                                    class="cat-title">Easy</span></a></div>
-                                        <h3 class="post-title entry-title"><a
-                                                href="../2021/06/07/almond-flour-pancakes/index.html">Almond Flour
-                                                Pancakes</a></h3>
-                                        <div class="post-date"><time class="entry-date published updated"
-                                                datetime="2021-06-07T11:26:50+00:00">June 7, 2021</time></div>
-                                        <div class="post-info-dot"></div>
-                                        <div class="post-read-time"><i class="fa fa-clock-o" aria-hidden="true"></i>23
-                                            min Cook</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="template-2col">
-                                <div
-                                    class="cookandmeal-grid-post cookandmeal-grid-short-post cookandmeal-post format-standard">
-                                    <div class="cookandmeal-post-image-wrapper"><a
-                                            href="../2021/06/07/spicy-serrano-pineapple-margarita-2/index.html">
-                                            <div class="cookandmeal-post-image"
-                                                data-style="background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/06/jdazixxqvtc-555x360.jpg);"
-                                                style="background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/06/jdazixxqvtc-555x360.jpg);">
-                                            </div>
-                                        </a></div>
-                                    <div class="cookandmeal-post-details">
-                                        <div class="post-categories"><a href="../category/easy/index.html"
-                                                data-style="background-color: #84a6e5;"
-                                                style="background-color: #84a6e5;"><i
-                                                    class="fa fa-tag cat-dot"></i><span
-                                                    class="cat-title">Easy</span></a><a
-                                                href="../category/vegan/index.html"
-                                                data-style="background-color: #5b8559;"
-                                                style="background-color: #5b8559;"><i
-                                                    class="fa fa-tag cat-dot"></i><span
-                                                    class="cat-title">Vegan</span></a></div>
-                                        <h3 class="post-title entry-title"><a
-                                                href="../2021/06/07/spicy-serrano-pineapple-margarita-2/index.html">Spicy
-                                                Serrano Pineapple Margarita.</a></h3>
-                                        <div class="post-date"><time class="entry-date published updated"
-                                                datetime="2021-06-07T11:03:59+00:00">June 7, 2021</time></div>
-                                        <div class="post-info-dot"></div>
-                                        <div class="post-read-time"><i class="fa fa-clock-o" aria-hidden="true"></i>53
-                                            min Cook</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="template-2col">
-                                <div
-                                    class="cookandmeal-grid-post cookandmeal-grid-short-post cookandmeal-post format-standard">
-                                    <div class="cookandmeal-post-image-wrapper"><a
-                                            href="../2021/06/07/spicy-serrano-pineapple-margarita/index.html">
-                                            <div class="cookandmeal-post-image"
-                                                data-style="background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/06/uo4r-xn3kwe-555x360.jpg);"
-                                                style="background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/06/uo4r-xn3kwe-555x360.jpg);">
-                                            </div>
-                                        </a></div>
-                                    <div class="cookandmeal-post-details">
-                                        <div class="post-categories"><a href="../category/pasta/index.html"
-                                                data-style="background-color: #e5a484;"
-                                                style="background-color: #e5a484;"><i
-                                                    class="fa fa-tag cat-dot"></i><span
-                                                    class="cat-title">Pasta</span></a></div>
-                                        <h3 class="post-title entry-title"><a
-                                                href="../2021/06/07/spicy-serrano-pineapple-margarita/index.html">Broccoli
-                                                Slaw</a></h3>
-                                        <div class="post-date"><time class="entry-date published updated"
-                                                datetime="2021-06-07T11:00:10+00:00">June 7, 2021</time></div>
-                                        <div class="post-info-dot"></div>
-                                        <div class="post-read-time"><i class="fa fa-clock-o" aria-hidden="true"></i>16
-                                            min Cook</div>
-                                    </div>
-                                </div>
-                            </li>
-
-                        </ul>
-                    </li>
-                </ul>
-            </div> -->
         </div>
     </div>
 </div>

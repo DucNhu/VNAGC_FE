@@ -8,6 +8,6 @@ export class OrderService {
     constructor(private helperService: HelperService) { }
  
     getOrders() {
-        return this.helperService.getAll("Order");
+        return this.helperService.getAll("Order/get-order-history?pageIndex=1&pageSize=10");
     }
 }

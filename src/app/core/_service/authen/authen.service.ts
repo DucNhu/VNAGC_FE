@@ -15,8 +15,14 @@ export class AuthenService {
   public get currenUserValue(): user {
     return this.currentUserSubject.value;
   }
+
+  currentTokenSubject = new BehaviorSubject<string>(localStorage.getItem("token"));
+  currentToken = new Observable<string>();
+
+  public get currenTokenValue(): string {
+    return this.currentTokenSubject.value;
+  }
   constructor(private httpClient: HttpClient, private route: Router) { }
-  
   
   login(data) {
     return this.httpClient.post(AppConfig.settings.WhiteServer + "Authen/Login", data)

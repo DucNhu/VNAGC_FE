@@ -71,7 +71,7 @@
                                                 <div action="#" class="dropzone dropzone-area dz-clickable"
                                                     id="dpz-single-file" [ngClass]="avatar == '' ? 'error' : ''">
                                                     <label class="dz-message" for="avatar">Avatar</label>
-                                                    <input type="file" hidden id="avatar"
+                                                    <input type="file" hidden id="avatar" accept="image/*"
                                                         (change)="updateFile($event, 1)">
                                                     <img [src]="avatar" alt="avatar" *ngIf="avatar" class="img-avatar">
                                                 </div>
@@ -81,7 +81,7 @@
                                                     id="dpz-single-file-coverr">
                                                     <label class="dz-message" for="avatar_cover">Avatar
                                                         cover</label>
-                                                    <input type="file" hidden id="avatar_cover"
+                                                    <input type="file" hidden id="avatar_cover" accept="image/*"
                                                         (change)="updateFile($event, 0)">
                                                     <img [src]="avatar_cover" alt="avatar cover" *ngIf="avatar_cover"
                                                         class="img-avatar">
@@ -296,7 +296,7 @@
                                                                     <label class="dz-message notBefore"
                                                                         [for]="'step_avatar'+i">Select
                                                                         banner</label>
-                                                                    <input type="file" hidden [id]="'step_avatar'+i"
+                                                                    <input type="file" hidden [id]="'step_avatar'+i" accept="image/*"
                                                                         (change)="updateListFile($event, i, 1)">
                                                                     <img [src]="item.value.avatar" alt="avatar"
                                                                         *ngIf="item.value.avatar" class="img-avatar">
@@ -393,7 +393,7 @@
                                                                     id="dpz-single-file">
                                                                     <label class="dz-message" [for]="'content_avatar'+i"
                                                                         for="avatar">Avatar</label>
-                                                                    <input type="file" hidden [id]="'content_avatar'+i"
+                                                                    <input type="file" hidden [id]="'content_avatar'+i" accept="image/*"
                                                                         (change)="updateListFile($event, i, 0, 0)">
                                                                     <img [src]="item.value.avatar" alt="avatar"
                                                                         *ngIf="item.value.avatar" class="img-avatar">
@@ -406,7 +406,7 @@
                                                                     <label class="dz-message"
                                                                         [for]="'content_avatar_cover'+i">Avatar
                                                                         cover</label>
-                                                                    <input type="file" hidden
+                                                                    <input type="file" hidden accept="image/*"
                                                                         [id]="'content_avatar_cover'+i"
                                                                         (change)="updateListFile($event, i, 0, 1)">
                                                                     <img [src]="item.value.avatar_cover"

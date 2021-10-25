@@ -5,6 +5,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoadModule } from 'src/app/core/component/load/load.module';
 import { OrderManagerComponent } from './order-manager/order-manager.component';
 import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
+import { ProfileControllComponent } from './profile-controll/profile-controll.component';
+import { baseBlogModule } from 'src/app/views/admin/pages/dashboard/blog/base-blog.module';
+import { CreateBlogComponent } from 'src/app/views/admin/pages/dashboard/blog/create/create.component';
 
 const routes: Routes = [
   {
@@ -17,18 +20,26 @@ const routes: Routes = [
         path: 'detail', component: ProfileDetailComponent
       },
       {
+        path: 'edit', component: ProfileControllComponent
+      },
+      {
         path: 'order-manager', component: OrderManagerComponent
+      },
+      {
+        path: 'create-blog', component: CreateBlogComponent
+      
       }
     ]
   }
 ]
 
 @NgModule({
-  declarations: [ProfileComponent, OrderManagerComponent, ProfileDetailComponent],
+  declarations: [ProfileComponent, OrderManagerComponent, ProfileDetailComponent, ProfileControllComponent],
   imports: [
     CommonModule,
     LoadModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    baseBlogModule
   ]
 })
 export class ProfileModule { }
