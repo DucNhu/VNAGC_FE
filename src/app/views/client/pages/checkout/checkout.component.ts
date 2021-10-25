@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AddToCartService } from 'src/app/core/_service/addToCart/add-to-cart.service';
 import { PaymentService } from 'src/app/core/_service/payment/payment.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class CheckoutComponent implements OnInit {
 
   constructor(
     private route: Router,
-    private paymentService: PaymentService
+    private paymentService: PaymentService,
+    private addToCartService: AddToCartService
     ) { }
   ngOnInit(): void {
     this.listCart = JSON.parse(localStorage.getItem('cart'));
@@ -42,8 +44,8 @@ export class CheckoutComponent implements OnInit {
             // This function shows a transaction success message to your buyer.
             this.paymentService.createPayment().subscribe(
               data => {
+                this.addToCartService.deleteCart()
                 this.route.navigate(["/shop"])
-                localStorage.removeItem("cart")
               }
             );
             // this.userService.putUserUpgradePackageID(this.idUser, e.PackageID).subscribe(

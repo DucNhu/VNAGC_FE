@@ -52,7 +52,6 @@ export class AddToCartService {
     if (cartCurrent) {
       for (let i = 0; i < cartCurrent.length; i++) {
         const e = cartCurrent[i];
-        console.log(i==cartCurrent.length - 1)
         if (e.id == id) {
             cartCurrent.splice(i, 1);
             localStorage.setItem('cart', JSON.stringify(cartCurrent));
@@ -64,7 +63,10 @@ export class AddToCartService {
       localStorage.removeItem("cart")
     }
   }
-
+  deleteCart() {
+    localStorage.removeItem("cart");
+    this.cartCurrent.next(null);
+  }
   createCart(data) {
     return this.helperService.post("Cart/add-item", data)
   }

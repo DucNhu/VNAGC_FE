@@ -4,9 +4,8 @@
             <div class="entry-content clearfix" role="main">
                 <article>
                     <div class="woocommerce">
-                        <div class="woocommerce-notices-wrapper"></div>
                         <form class="woocommerce-cart-form"
-                            action="https://wp.wp-preview.com/cookandmeal/cookandmeal-6/cart/" method="post">
+                            *ngIf="listCart.length!=0; else noCart">
 
                             <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents"
                                 style="border: none" cellspacing="0">
@@ -21,7 +20,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     <tr class="woocommerce-cart-form__cart-item cart_item"
                                         *ngFor="let item of listCart; let i = index">
 
@@ -75,6 +73,9 @@
                             </table>
                         </form>
 
+                        <ng-template #noCart>
+                            <h2>Hllo</h2>
+                        </ng-template>
 
                         <div class="cart-collaterals d-flex">
                             <div class="cart_totals ">

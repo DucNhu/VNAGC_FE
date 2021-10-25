@@ -216,3 +216,9 @@ fieldset .box-step {
   overflow: hidden;
 }
 /* end paypal */
+
+.btn-trash {
+    padding: 6px 12px !important;
+    background-color: #fff;
+    border-radius: 4px !important;
+}

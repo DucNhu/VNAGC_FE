@@ -10,4 +10,9 @@ export class OrderService {
     getOrders() {
         return this.helperService.getAll("Order/get-order-history?pageIndex=1&pageSize=10");
     }
+
+    getOrderDetail(order_id) {
+        return this.helperService.getAll("Cart/get-cart-detail/" + order_id);
+        
+    }
 }
