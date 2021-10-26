@@ -6,9 +6,11 @@
   margin-right: 1rem !important;
 }
 
+.text-center { text-align: center;}
 /* Model */
 .modal .modal-content { transform: translateY(100%)}
 /* End Model */
+.buy-now .btn { box-shadow: none !important; border: none !important}
 
 /* /bs */
 /* Home */

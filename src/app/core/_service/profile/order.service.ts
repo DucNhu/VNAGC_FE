@@ -13,6 +13,13 @@ export class OrderService {
 
     getOrderDetail(order_id) {
         return this.helperService.getAll("Cart/get-cart-detail/" + order_id);
-        
+    }
+
+    getCards() {
+        return this.helperService.getAll("Cart/get-cart");
+    }
+
+    getAllOrder() {
+        return this.helperService.getAll("Order/get-all-order?pageIndex=1&pageSize=10");
     }
 }

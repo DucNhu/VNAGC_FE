@@ -41,11 +41,10 @@ export class UpdateProductComponent implements OnInit {
       price: [null, Validators.required],
       sale: [0],
       description: [''],
-      active: [true],
       unit: ['', Validators.required],
-      storage_instructions: [''],
-      create_at: [''],
-      update_at: [''],
+      active: [true],
+
+      storage_instructions: ['']
     });
 
     this.formImg = this.fb.group({
@@ -105,22 +104,25 @@ export class UpdateProductComponent implements OnInit {
   updateProduct() {
     let form = this.formInfor;
     let nowDate = new Date();
-    let nowTime = new Date().toLocaleTimeString();
     let data = {
       "id": this.productId,
       "name": form.get('name').value,
       "banner_img": this.avatar,
       "cover_img": this.avatar_cover,
-      "category": form.get('category').value,
+      "category_id": form.get('category').value,
       "price": form.get('price').value,
       "sale": form.get('sale').value,
       "description": form.get('description').value,
-      "unit": "boxes",
+      "unit": form.get('unit').value,
       "storage_instructions": form.get('storage_instructions').value,
-      "status": 0,
+      "status": form.get('active').value ? 1 : 0,
+      
+      "seller_id": this.product.seller_id,
       "create_at": this.product.create_at,
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() ,
     }
+   
+    console.log(data)
     this.loading = true;
     this.productService.update(data).subscribe(
       dt => {
@@ -136,15 +138,13 @@ export class UpdateProductComponent implements OnInit {
   setDataforForm(dt) {
     this.formInfor.patchValue({
       name: dt.name,
-      category: "Fruit",
+      category: dt.category_id,
       price: dt.price,
       sale: dt.sale,
       description: dt.description,
       active: dt.status,
       unit: dt.unit,
       storage_instructions: dt.storage_instructions,
-      create_at: dt.create_at,
-      update_at: dt.update_at
     })
   }
 

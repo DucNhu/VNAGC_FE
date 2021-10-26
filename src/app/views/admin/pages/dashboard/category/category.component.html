@@ -2,16 +2,17 @@
 <div class="app-content content ecommerce-application">
     <div class="content-wrapper container-xxl p-0 list-view--product">
         <mat-tab-group>
-            <mat-tab label="First">
+            <mat-tab label="Category">
                 <div class="row m-0 mb-2">
                     <div class="col-md-6">
                         <div class="demo-button-container mt-2">
                             <div class="input-group">
-                                <input (keyup)="applyFilter($event)" class="form-control border-0 outline-none" placeholder="Search name" />
+                                <input (keyup)="applyFilter($event)" class="form-control border-0 outline-none"
+                                    placeholder="Search name" />
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 pe-0">
+                    <!-- <div class="col-md-6 pe-0">
                         <div class="demo-button-container mt-2">
                             <div class="input-group">
                                 <input type="text" class="form-control border-0 outline-none" [(ngModel)]="newCategory" name="name">
@@ -21,86 +22,61 @@
                             </div>
                             <p class="error" *ngIf="newCategory==''">Field is required</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
-                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-                    <!-- id Column -->
-                    <ng-container matColumnDef="id">
-                        <th mat-header-cell *matHeaderCellDef> No. </th>
-                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-                    </ng-container>
-
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef class="width-400"> Name </th>
-                        <td mat-cell *matCellDef="let element">
-                            <ng-container *ngIf="editId!=element.id">
-                                <span class="clamp-2 pe-3">
-                                    {{element.name}}
-                                </span>
-                            </ng-container>
-                            <ng-container *ngIf="editId==element.id && isEdit">
-                                <input type="text" class="form-control" [(ngModel)]="editNameCategory" name="name">
-                            </ng-container>
-                        </td>
-                    </ng-container>
-
-                    <!-- count blg Column -->
-                    <ng-container matColumnDef="countBlog">
-                        <th mat-header-cell *matHeaderCellDef> Count Blog </th>
-                        <td mat-cell *matCellDef="let element"> 100 </td>
-                    </ng-container>
-
-                    <!-- Time Create -->
-                    <ng-container matColumnDef="createdDate">
-                        <th mat-header-cell *matHeaderCellDef> Create at </th>
-                        <td mat-cell *matCellDef="let element"> {{element.createdDate | date:"yyyy/MM/dd HH:mm"}} </td>
-                    </ng-container>
-
-                    <!-- Action -->
-                    <ng-container matColumnDef="action">
-                        <th mat-header-cell *matHeaderCellDef class="width-150">
-                            <div class="text-right pe-5">Action</div>
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            <div class="d-flex">
-                                <ng-container *ngIf="editId!=element.id">
-                                    <button class="demo-button edit-btn btn btn-outline-primary mr-3"
-                                        (click)="editCategory(element.id)">
-                                        Edit
-                                    </button>
-                                    <button class="demo-button delete-btn btn btn-outline-primary mr-3"
-                                        (click)="openModal(template, element); ">
-                                        Delete
-                                    </button>
-                                </ng-container>
-                                <ng-container *ngIf="editId==element.id && isEdit">
-                                    <button class="demo-button edit-btn btn btn-outline-primary mr-3"
-                                        (click)="saveEditCategory(element.index)">
-                                        Save
-                                    </button>
-                                    <button class="demo-button delete-btn btn btn-outline-primary mr-3"
-                                        (click)="editId=0; isEdit=false">
-                                        Close
-                                    </button>
-                                </ng-container>
-
-
+                <section id="ecommerce-products" class="grid-view">
+                    <div class="card ecommerce-card">
+                        <div action="#" class="dropzone dropzone-area dz-clickable" id="dpz-single-file-coverr">
+                            <label class="dz-message" for="avatar">Avatar
+                            </label>
+                            <input type="file" hidden id="avatar" accept="image/*" (change)="loadImg($event)">
+                            <img [src]="avatar.file_data" *ngIf="avatar" alt="avatar cover" class="img-avatar">
+                        </div>
+                        <div class="card-body position-relative">
+                            <h6 class="item-name">
+                                <input type="text" class="form-control border-0 outline-none text-center"
+                                    [(ngModel)]="newCategory" name="name" placeholder="new category">
+                            </h6>
+                            <div class="positon-absolute">
+                                <div class="d-flex justify-content-center mt-1">
+                                    <button class="btn btn-outline-primary waves-effect bg-white"
+                                        (click)="addNewCategory()">Save</button>
+                                </div>
                             </div>
-                        </td>
-                    </ng-container>
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-                    <!-- Row shown when there is no matching data. -->
-                    <tr class="mat-row" *matNoDataRow>
-                        <td class="mat-cell" colspan="4">Data not found!!! </td>
-                    </tr>
-                </table>
+                        </div>
+                    </div>
+                    <div class="card ecommerce-card" *ngFor="let item of listCategory; let i = index">
+                        <div class="item-img text-center">
+                            <a src="javascript:void(0)">
+                                <img class="img-fluid card-img-top" [src]="urlImg + item.avatar" [alt]="item.avatar">
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="item-name">
+                                <a class="text-body text-center" href="javascript:void(0)" *ngIf="editId != item.id">{{item.name}}</a>
+                                <input type="text" class="form-control border-0 outline-none text-center" [(ngModel)]="editNameCategory" name="name"
+                                    placeholder="new category" *ngIf="editId == item.id && isEdit">
+                            </h6>
+                            <div class="positon-absolute">
+                                <div class="d-flex justify-content-between mt-1 col-7 mx-auto">
+                                    <ng-container *ngIf="editId != item.id; else edited">
+                                        <button class="btn btn-danger waves-effect waves-float waves-light" (click)="editCategory(item)">Edit</button>
+                                        <button class="btn btn-danger waves-effect waves-float waves-light">Delete</button>
+                                    </ng-container>
+                                    <ng-template #edited>
+                                        <button class="btn btn-danger waves-effect waves-float waves-light" (click)="editId=0">Close</button>
+                                        <button class="btn btn-danger waves-effect waves-float waves-light" (click)="saveEditCategory(i)">Save</button>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </mat-tab>
-            <mat-tab label="Second"> <app-hashtag></app-hashtag> </mat-tab>
+            <mat-tab label="Hashtag">
+                <app-hashtag></app-hashtag>
+            </mat-tab>
         </mat-tab-group>
     </div>
 </div>

@@ -6,6 +6,8 @@ import { HelperService } from "src/app/_helpers/helper.service";
 })
 
 export class CategoryService {
+    urlImg = 'https://localhost:44320';
+
     constructor(private helperService: HelperService) {}
     
     getCategorys() {

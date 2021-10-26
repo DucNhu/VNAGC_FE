@@ -19,18 +19,20 @@ export class CategoryComponent implements OnInit {
   listCategory = [
   ];
 
+  urlImg = this.categoryService.urlImg;
   displayedColumns: string[] = ['id', 'name', 'countBlog', 'createdDate', 'action'];
   dataSource = new MatTableDataSource(this.listCategory);
 
   load = false;
   modalRef?: BsModalRef;
-  newCategory = null;
-  editNameCategory='';
+  newCategory = '';
+  editNameCategory = '';
   Category_delete = {
     id: 0,
     index: 0
   }
   editId = 0;
+  avatar;
   constructor(
     private categoryService: CategoryService,
     private modalService: BsModalService,
@@ -48,7 +50,6 @@ export class CategoryComponent implements OnInit {
         this.listCategory.forEach((e, i) => {
           this.listCategory[i].index = i;
         });
-        this.dataSource = new MatTableDataSource(this.listCategory)
         this.load = false;
       },
       err => {
@@ -56,11 +57,11 @@ export class CategoryComponent implements OnInit {
       }
     )
   }
-  isEdit=false;
-  editCategory(id) {
-    this.isEdit=true;
-    this.editId = id;
-    this.editNameCategory=''
+  isEdit = false;
+  editCategory(item) {
+    this.isEdit = true;
+    this.editId = item.id;
+    this.editNameCategory = item.name
   }
 
   getCategory(): Promise<any> {
@@ -72,12 +73,13 @@ export class CategoryComponent implements OnInit {
 
   addNewCategory() {
     let aname = this.newCategory;
-    this.newCategory = '';
-    if (aname.trim()=='') {
+    
+    if (aname.trim() == '') {
       return
     }
     let data = new FormData();
     data.append('name', aname);
+    data.append('file', this.img, this.img.name);
     this.load = true;
     this.categoryService.createCategory(data).subscribe(
       dt => {
@@ -93,7 +95,7 @@ export class CategoryComponent implements OnInit {
         this.listCategory.forEach((e, i) => {
           this.listCategory[i].index = i;
         });
-        this.dataSource = new MatTableDataSource(this.listCategory)
+        this.newCategory = '';
       },
       err => {
         this.load = false;
@@ -102,10 +104,13 @@ export class CategoryComponent implements OnInit {
   }
 
   saveEditCategory(index) {
+    if (this.editNameCategory.trim() == '') {
+      return
+    }
     this.load = true;
     let name = {
       "id": this.editId,
-      "name": this.editNameCategory
+      "name": this.editNameCategory,
     };
     this.newCategory = '';
     this.categoryService.updateCategory(name).subscribe(
@@ -149,6 +154,31 @@ export class CategoryComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  img;
+  loadImg(event) {
+    let reader = new FileReader();
+    this.img = event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+      reader.readAsDataURL(this.img);
+      reader.onload = () => {
+        const img = new Image();
+
+        img.src = reader.result as string;
+        img.onload = () => {
+          var typeFile = this.img.name.split('.').pop();
+          this.avatar = {
+            file_name: this.img.name.replaceAll(/[^a-zA-Z0-9_\-]/g, '').replaceAll(typeFile, '') + '.' + typeFile,
+            file_data: reader.result
+          }
+        }
+      }
+    }
+    else {
+      console.log("IL")
+    }
+    
+  }
+
 
   openModal(template: TemplateRef<any>, element) {
     this.Category_delete.id = element.id;
@@ -156,6 +186,7 @@ export class CategoryComponent implements OnInit {
 
     this.modalRef = this.modalService.show(template);
   }
+
   closeModal() {
     this.modalService.hide();
     this.load = false;

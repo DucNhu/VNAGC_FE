@@ -54,6 +54,7 @@ const routes: Routes = [
         loadChildren: () => import('./views/client/pages/profile/profile.module').then(m => m.ProfileModule),
       },
       {
+        canActivate: [UserGuard],
         path: 'cart',
         component: CartComponent
       },

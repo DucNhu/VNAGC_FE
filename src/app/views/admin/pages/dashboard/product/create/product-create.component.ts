@@ -70,7 +70,6 @@ export class ProductCreateComponent implements OnInit {
   createProduct() {
     let form = this.formInfor;
     let nowDate = new Date();
-    let nowTime = new Date().toLocaleTimeString();
     let data = {
       "name": form.get('name').value,
       "banner_img": this.avatar,
@@ -82,6 +81,8 @@ export class ProductCreateComponent implements OnInit {
       "unit": form.get('unit').value,
       "storage_instructions": form.get('storage_instructions').value,
       "status": form.get('active').value ? 1 : 0,
+      
+      "seller_id": JSON.parse(localStorage.getItem("user")).id,
       "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
     }

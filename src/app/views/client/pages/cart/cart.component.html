@@ -4,8 +4,7 @@
             <div class="entry-content clearfix" role="main">
                 <article>
                     <div class="woocommerce">
-                        <form class="woocommerce-cart-form"
-                            *ngIf="listCart.length!=0; else noCart">
+                        <form class="woocommerce-cart-form" *ngIf="listCart.length!=0">
 
                             <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents"
                                 style="border: none" cellspacing="0">
@@ -72,12 +71,10 @@
                                 </tbody>
                             </table>
                         </form>
-
-                        <ng-template #noCart>
-                            <h2>Hllo</h2>
-                        </ng-template>
-
-                        <div class="cart-collaterals d-flex">
+                        <h2 class="text-center" *ngIf="listCart.length==0">
+                            No orders, please order at <a routerLink="/shop">shop</a>
+                        </h2>
+                        <div class="cart-collaterals d-flex" *ngIf="listCart.length!=0">
                             <div class="cart_totals ">
 
 
@@ -107,4 +104,4 @@
                 </article>
             </div>
         </div>
-</div>
+    </div>

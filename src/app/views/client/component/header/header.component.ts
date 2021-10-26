@@ -32,8 +32,8 @@ export class HeaderComponent implements OnInit {
     )
     this.addToCartService.cartCurrent.subscribe(
       () => {
-        this.countProduct = JSON.parse(localStorage.getItem("cart")).length;
-        this.listCart = JSON.parse(localStorage.getItem("cart"));
+        this.countProduct = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")).length : 0;
+        this.listCart = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")) : [];
         this.listCart.forEach(e => {
           e.totalAProduct = e.price * ((100 - e.sale) / 100);
           e.subtotal = e.totalAProduct * e.quantity;
