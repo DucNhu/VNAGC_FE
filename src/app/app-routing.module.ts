@@ -16,62 +16,69 @@ import { testComponent } from './views/client/pages/testComponent.component';
 const routes: Routes = [
   {
     canActivate: [AuthenGuard],
-    path: 'admin',
+    path: '',
     loadChildren: () => import('./views/admin/pages/dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
-    path: '',
-    component: BaseComponent,
-    children: [
-      {
-        path: '',
-        component: HomeComponent
-      },
-      {
-        path: 'test',
-        component: testComponent
-      },
-      {
-        path: 'product-detail',
-        component: ProductDetailComponent
-      },
-      {
-        canActivate: [UserGuard],
-        path: 'checkout',
-        component: CheckoutComponent
-      },
-      {
-        path: 'shop',
-        component: ShopComponent
-      },
-      {
-        path: 'blogs',
-        loadChildren: () => import('./views/client/pages/blogs/blogs.module').then(m => m.BlogsModule),
-      },
-      {
-        canActivate: [UserGuard],
-        path: 'profile',
-        loadChildren: () => import('./views/client/pages/profile/profile.module').then(m => m.ProfileModule),
-      },
-      {
-        canActivate: [UserGuard],
-        path: 'cart',
-        component: CartComponent
-      },
-      {
-        path: 'login',
-        component: LoginComponent
-      }, {
-        path: 'register',
-        component: RegisterComponent
-      }, {
-        path: 'activeAccount/:id',
-        component: ActiveAccountComponent
-      }
-    ]
+    path: 'login',
+    component: LoginComponent
+  }, {
+    path: 'register',
+    component: RegisterComponent
   },
+  // {
+  //   path: 'user',
+  //   component: BaseComponent,
+  //   children: [
+  //     {
+  //       path: '',
+  //       component: HomeComponent
+  //     },
+  //     {
+  //       path: 'test',
+  //       component: testComponent
+  //     },
+  //     {
+  //       path: 'product-detail',
+  //       component: ProductDetailComponent
+  //     },
+  //     {
+  //       canActivate: [UserGuard],
+  //       path: 'checkout',
+  //       component: CheckoutComponent
+  //     },
+  //     {
+  //       path: 'shop',
+  //       component: ShopComponent
+  //     },
+  //     {
+  //       path: 'blogs',
+  //       loadChildren: () => import('./views/client/pages/blogs/blogs.module').then(m => m.BlogsModule),
+  //     },
+  //     {
+  //       canActivate: [UserGuard],
+  //       path: 'profile',
+  //       loadChildren: () => import('./views/client/pages/profile/profile.module').then(m => m.ProfileModule),
+  //     },
+  //     {
+  //       canActivate: [UserGuard],
+  //       path: 'cart',
+  //       component: CartComponent
+  //     },
+  //     {
+  //       path: 'login',
+  //       component: LoginComponent
+  //     }, {
+  //       path: 'register',
+  //       component: RegisterComponent
+  //     }, {
+  //       path: 'activeAccount/:id',
+  //       component: ActiveAccountComponent
+  //     }
+  //   ]
+  // },
   {
-    path: 'home',
+    path: 'admin',
     pathMatch: 'full',
     redirectTo: ''
   },

@@ -19,7 +19,7 @@
                                         <div class="mb-50">
                                             <label class="form-label" for="blogName">Food Name</label>
                                             <input type="text" class="form-control" placeholder="Blog Name"
-                                                formControlName="name" id="blogName" />
+                                                formControlName="name" id="blogName" [ngClass]="isInvalid('name') ? 'error' : ''" />
                                             <p class="error" *ngIf="formBlog.value.name==''">Field is required</p>
                                         </div>
                                     </div>

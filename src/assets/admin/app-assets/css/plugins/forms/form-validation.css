@@ -3,7 +3,7 @@ form span.error {
   font-size: 0.857rem;
 }
 
-p.error:not(input) {
+form .error:not(input) {
   color: #ea5455;
   margin-block: .25rem;
   font-family: var(--bs-font-sans-serif) 

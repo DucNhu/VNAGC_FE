@@ -16,7 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/app/core/_service/category/category.service';
 import { HashtagService } from 'src/app/core/_service/hashtag/hashtag.service';
 import { productContent } from 'src/app/models/listSale';
-
+import { CustomValidators } from 'src/app/core/validators/CustomValidators';
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -44,6 +44,7 @@ export class CreateBlogComponent implements OnInit {
   loading = false;
   isSuccess = false;
   userId;
+  
   constructor(
     private fb: FormBuilder,
     private blogService: BlogService,
@@ -93,7 +94,9 @@ export class CreateBlogComponent implements OnInit {
     this.formBlog = this.fb.group(
       {
         name: [null, Validators.compose([
-          Validators.required
+          Validators.required,
+          CustomValidators.noWhitespace(),
+          CustomValidators.byteMatch(105)
         ])],
         category: [null, Validators.compose([
           Validators.required
@@ -348,6 +351,8 @@ export class CreateBlogComponent implements OnInit {
     let form = this.formBlog;
     if (form.invalid || this.avatar == null || this.avatar == '') {
       if (this.avatar == null || this.avatar == '') {this.avatar='';}
+      this.formBlog.markAllAsTouched();
+      window.scrollTo(0, 0)
       return
     }
     let nowDate = new Date();
@@ -385,14 +390,27 @@ export class CreateBlogComponent implements OnInit {
     )
   }
 
+  f(control) {
+    return this.formBlog.controls[control]
+  }
+
+  isInvalid(controlName) {
+    if (this.formBlog) {
+      let c = this.f(controlName);
+      return c && c.invalid && (c.dirty || c.touched);
+    } else {
+      return null;
+    }
+  }
+
   createMetarial() {
-    this.listMetarial().forEach(e => {
+    this.listMetarial().forEach((e, i) => {
       let value = e.value;
       let data = {
         "title": value.name,
         "unit": value.unit,
         "mass": value.content,
-        "order": 0,
+        "order": i,
         "blog_id": this.blogId
       }
       this.blogService.createMetarial(data).subscribe(
@@ -407,13 +425,13 @@ export class CreateBlogComponent implements OnInit {
   }
 
   createStep() {
-    this.listStep().forEach(e => {
+    this.listStep().forEach((e, i) => {
       let value = e.value;
       let data = {
         "name": value.name,
         "description": value.description,
         "banner_img": value.avatar,
-        "order": 0,
+        "order": i,
         "blog_id": this.blogId
       }
       console.log(data)
@@ -429,14 +447,15 @@ export class CreateBlogComponent implements OnInit {
   }
 
   createContent() {
-    this.listContent().forEach(e => {
+    this.listContent().forEach((e, i) => {
       let value = e.value;
       let data = {
         "name": value.title,
         "content": value.description,
         "banner_img": value.avatar,
         "banner_cover": value.avatar_cover,
-        "blog_id": this.blogId
+        "blog_id": this.blogId,
+        "order": i
       }
       console.log(data)
       this.blogService.createContent(data).subscribe(
@@ -449,22 +468,6 @@ export class CreateBlogComponent implements OnInit {
       )
     })
   }
-  sendImg(val) {
-    // this.list_img_feature.forEach(item => {
-    //   let data = {
-    //     "product_id": val.id,
-    //     "avatar_feature": item.data
-    //   }
-    //   this.prductService.createImgFeature(data).subscribe(
-    //     dt => {
-    //       this.loading = false;
-    //       this.route.navigate(["/admin/product/list"])
-    //     },
-    //     err => {
-    //       this.loading = false;
-    //     }
-    //   )
-    // });
-  }
+
   // End Logic Image
 }
