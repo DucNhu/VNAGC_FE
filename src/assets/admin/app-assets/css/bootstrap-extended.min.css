@@ -1013,6 +1013,9 @@ textarea:-webkit-autofill {
     width: 1.6rem;
     font-size: 1.6rem;
 }
+.user-nav {
+    margin-right: 10px;
+}
 .header-navbar .navbar-container ul.navbar-nav li a.dropdown-user-link .user-nav {
     display: -webkit-box;
     display: -webkit-flex;

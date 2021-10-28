@@ -4230,9 +4230,10 @@ pre.wp-block-verse {
 }
 
 .quantity .qty {
-  width: 70px;
+  width: 50px;
   text-align: center;
   font-size: 16px;
+  border: none;
 }
 
 .screen-reader-text:focus {
@@ -10542,8 +10543,8 @@ html.swipebox-html.swipebox-touch {
 .woocommerce table.cart img,
 .woocommerce-page #content table.cart img,
 .woocommerce-page table.cart img {
-  height: 32px;
-  width: 32px;
+  height: 64px;
+  width: 64px;
   display: block;
   margin: auto
 }

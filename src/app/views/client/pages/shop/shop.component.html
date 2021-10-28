@@ -35,7 +35,7 @@
                         <input type="hidden" name="paged" value="1" />
                     </form>
 
-                    <ul class="products row row-cols-sm-4 justify-content-start">
+                    <ul class="products row row-cols-sm-4 d-flex">
                         <!-- <li
                             class="product type-product post-18 status-publish first instock product_cat-music has-post-thumbnail downloadable virtual purchasable product-type-simple">
                             <a href="../product/album/index.html"
@@ -55,7 +55,7 @@
                                 to cart</a>
                         </li> -->
                         <li *ngFor="let item of listProduct; let i = index"
-                            class="col m-0 my-3 product type-product post-891 status-publish instock product_cat-accessories has-post-thumbnail sale shipping-taxable purchasable product-type-simple">
+                            class="col-lg-4 m-8 my-3 product type-product post-891 status-publish instock product_cat-accessories has-post-thumbnail sale shipping-taxable purchasable product-type-simple">
                             <a [routerLink]="['/product-detail', {id: item.id}]"
                                 class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
                                 <span class="onsale" *ngIf="item.sale > 0">Sale!</span>
