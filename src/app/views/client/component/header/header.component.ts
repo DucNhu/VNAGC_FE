@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   isLogin=false;
   user: user;
   countProduct=0;
+  listCart=[];
   constructor(
     private authenSv: AuthenService,
     private addToCartService: AddToCartService
@@ -23,7 +24,6 @@ export class HeaderComponent implements OnInit {
         if (dt) {
           this.isLogin = true;
           this.user = JSON.parse(localStorage.getItem("user"));
-          console.log(this.user)
         }
         else {
           this.isLogin = false;
@@ -31,14 +31,41 @@ export class HeaderComponent implements OnInit {
       }
     )
     this.addToCartService.cartCurrent.subscribe(
-      dt => {
-        console.log(JSON.parse(localStorage.getItem("cart")))
-        this.countProduct = JSON.parse(localStorage.getItem("cart")).length;
+      () => {
+        this.countProduct = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")).length : 0;
+        this.listCart = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")) : [];
+        this.listCart.forEach(e => {
+          e.totalAProduct = e.price * ((100 - e.sale) / 100);
+          e.subtotal = e.totalAProduct * e.quantity;
+        });
       }
     );
   }
+
   logout() {
     this.authenSv.logout()
   }
 
+  updatetoCart(product, quantity) {
+    if(quantity==0) {
+      quantity=1;
+    }
+    product.quantity = quantity;
+    this.addToCartService.setCart(
+      product
+    );
+  }
+  
+  deleteCartByIdProduct(id, i) {
+    this.listCart.splice(i, 1)
+    this.addToCartService.deleteCartByIdProduct(id)
+  }
+
+  total() {
+    let total = 0;
+    this.listCart.forEach(e => {
+      total = e.subtotal + total;
+    });
+    return total
+  }
 }

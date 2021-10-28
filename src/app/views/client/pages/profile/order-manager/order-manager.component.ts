@@ -18,14 +18,23 @@ export class OrderManagerComponent implements OnInit {
   ngOnInit(): void {
     Promise.all(
       [
-        this.getProduct()
+        this.getOrders()
       ]
     ).then(
       (dt: any) => {
-        this.listOrder = dt.Data;
-        console.log(dt, this.listOrder)
-
+        this.listOrder = dt[0].Data.Items;
         this.load = false;
+        // this.listOrder.forEach((e,index) => {
+        //   this.orderService.getOrderDetail(e.id).subscribe(
+        //     dt => {
+        //       this.listOrder[index].products = dt.Data;
+        //       if (index == this.listOrder.length - 1) {
+        //         this.load = false;
+        //       }
+        //     }
+        //   )
+
+        // });
       },
       err => {
         this.load = false;
@@ -33,10 +42,11 @@ export class OrderManagerComponent implements OnInit {
     )
   }
 
-  getProduct(): Promise<any> {
+  getOrders(): Promise<any> {
     return new Promise(async (resolve) => {
       const dt = await this.orderService.getOrders().toPromise();
       resolve(dt);
     });
   }
+  
 }

@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   loginForm: FormGroup;
   errorName = false;
-
+  err_pass ='Invalid password';
   private toasterService: ToasterService;
   public toasterconfig: ToasterConfig =
     new ToasterConfig({
@@ -43,9 +43,9 @@ export class LoginComponent implements OnInit {
         Validators.pattern('[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,}')
       ])],
       password: ['', Validators.compose([
-        Validators.required,
-        Validators.pattern('[A-Za-z0-9._%-]{6,30}')
-      ])]
+        Validators.required
+      ])],
+      remember: [false]
     });
   }
   f = (controlName: string) => this.loginForm.controls[controlName];
@@ -53,8 +53,6 @@ export class LoginComponent implements OnInit {
     let c = this.f(controlName);
     return c && c.invalid && (c.dirty || c.touched);
   }
-
-
 
   submitForm() {
     if (this.loginForm.invalid) {
@@ -70,13 +68,26 @@ export class LoginComponent implements OnInit {
     this.authenservice.login(data).subscribe(
       (dt: any) => {
         if (dt.Infor.Value.status) {
-          localStorage.setItem("user", JSON.stringify(dt.Infor.Value));
-          this.authenservice.currentUserSubject.next(dt.Infor.Value);
+          if (this.loginForm.controls.remember.value) {
+            localStorage.setItem("token", dt.Token);
+            this.authenservice.currentTokenSubject.next(dt.Token);
+
+            localStorage.setItem("user", JSON.stringify(dt.Infor.Value));
+            this.authenservice.currentUserSubject.next(dt.Infor.Value);
+          }
+          else {
+            sessionStorage.setItem("token", dt.Token);
+            this.authenservice.currentTokenSubject.next(dt.Token);
+
+            sessionStorage.setItem("user", JSON.stringify(dt.Infor.Value));
+            this.authenservice.currentUserSubject.next(dt.Infor.Value);
+          }
+
           if (dt.Infor.Value.isAdmin) {
             this.router.navigate(["/admin"])
           }
           else {
-            this.router.navigate(["/"])
+            this.router.navigate(["/login"])
           }
         }
         else {

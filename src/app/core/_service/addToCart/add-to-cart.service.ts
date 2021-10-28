@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { product } from 'src/app/models/product';
+import { HelperService } from 'src/app/_helpers/helper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AddToCartService {
   listCart=[];
-  constructor() { }
+  constructor(private helperService: HelperService) { }
   cartCurrent = new BehaviorSubject<any>(localStorage.getItem("cart"));
   cartCurrentValue = this.cartCurrent.value;
   cartObservable = this.cartCurrent.asObservable();
@@ -51,7 +52,6 @@ export class AddToCartService {
     if (cartCurrent) {
       for (let i = 0; i < cartCurrent.length; i++) {
         const e = cartCurrent[i];
-        console.log(i==cartCurrent.length - 1)
         if (e.id == id) {
             cartCurrent.splice(i, 1);
             localStorage.setItem('cart', JSON.stringify(cartCurrent));
@@ -62,5 +62,12 @@ export class AddToCartService {
     if(cartCurrent.length == 0) {
       localStorage.removeItem("cart")
     }
+  }
+  deleteCart() {
+    localStorage.removeItem("cart");
+    this.cartCurrent.next(null);
+  }
+  createCart(data) {
+    return this.helperService.post("Cart/add-item", data)
   }
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { rejects } from 'assert';
+import { CategoryService } from 'src/app/core/_service/category/category.service';
 import { ProductService } from 'src/app/core/_service/product.service';
+import { productContent } from 'src/app/models/listSale';
 import { product } from 'src/app/models/product';
 
 @Component({
@@ -12,8 +13,8 @@ import { product } from 'src/app/models/product';
 })
 export class UpdateProductComponent implements OnInit {
   loading = true;
-  listSale = [10, 20, 30, 40]
-  listUnit = ["boxes", "package", "Bottle"]
+  listSale = productContent.listSale;
+  listUnit = productContent.listUnit;
   listCategory = ["Fruit", "Drink", "Cake"]
   money = 0;
   // Step bar
@@ -31,19 +32,19 @@ export class UpdateProductComponent implements OnInit {
     private fb: FormBuilder,
     private productService: ProductService,
     private route: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private categoryService: CategoryService
   ) {
     this.formInfor = this.fb.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
-      price: [0, Validators.required],
+      price: [null, Validators.required],
       sale: [0],
       description: [''],
-      active: [false],
-      unit: [''],
-      storage_instructions: [''],
-      "create_at": [''],
-      "update_at": [''],
+      unit: ['', Validators.required],
+      active: [true],
+
+      storage_instructions: ['']
     });
 
     this.formImg = this.fb.group({
@@ -56,15 +57,17 @@ export class UpdateProductComponent implements OnInit {
       [
         this.getProduct(),
         this.getProductImgFeature(),
+        this.getCategory()
       ]
     ).then(
       dt => {
+        console.log(dt[0])
         this.loading = false;
         this.setDataforForm(dt[0].Data);
         this.product = dt[0].Data;
-        console.log(this.product)
-        this.avatar = dt[0].banner_img;
-        this.avatar_cover = dt[0].cover_img;
+        this.listCategory = dt[2].Data;
+        this.avatar = this.product.banner_img;
+        this.avatar_cover = this.product.cover_img;
 
         this.list_img_feature = dt[1].map(x => {
           if (x) { x.dataByDb = true }
@@ -78,6 +81,14 @@ export class UpdateProductComponent implements OnInit {
         }
       )
   }
+
+  getCategory(): Promise<any> {
+    return new Promise(async (resolve) => {
+      const dt = await this.categoryService.getCategorys().toPromise();
+      resolve(dt);
+    });
+  }
+
   getProduct(): Promise<any> {
     return new Promise(async (resolve) => {
       const dt = await this.productService.getProduct(this.productId).toPromise();
@@ -93,22 +104,25 @@ export class UpdateProductComponent implements OnInit {
   updateProduct() {
     let form = this.formInfor;
     let nowDate = new Date();
-    let nowTime = new Date().toLocaleTimeString();
     let data = {
       "id": this.productId,
       "name": form.get('name').value,
       "banner_img": this.avatar,
       "cover_img": this.avatar_cover,
-      "category": form.get('category').value,
+      "category_id": form.get('category').value,
       "price": form.get('price').value,
       "sale": form.get('sale').value,
       "description": form.get('description').value,
-      "unit": "boxes",
+      "unit": form.get('unit').value,
       "storage_instructions": form.get('storage_instructions').value,
-      "status": 0,
+      "status": form.get('active').value ? 1 : 0,
+      
+      "seller_id": this.product.seller_id,
       "create_at": this.product.create_at,
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() ,
     }
+   
+    console.log(data)
     this.loading = true;
     this.productService.update(data).subscribe(
       dt => {
@@ -124,15 +138,13 @@ export class UpdateProductComponent implements OnInit {
   setDataforForm(dt) {
     this.formInfor.patchValue({
       name: dt.name,
-      category: "Fruit",
+      category: dt.category_id,
       price: dt.price,
       sale: dt.sale,
       description: dt.description,
       active: dt.status,
       unit: dt.unit,
       storage_instructions: dt.storage_instructions,
-      create_at: dt.create_at,
-      update_at: dt.update_at
     })
   }
 
@@ -180,7 +192,12 @@ export class UpdateProductComponent implements OnInit {
   }
   setValueAvatarCover(e) {
     let reader = e.target;
-    this.avatar_cover = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    if (this.avatar == '') {
+      this.avatar = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    }
+    else {
+      this.avatar_cover = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    }
   }
   setImgFeature(e) {
     let reader = e.target;
@@ -190,14 +207,12 @@ export class UpdateProductComponent implements OnInit {
   addSlotImgFeature() {
     if (this.list_img_feature.length != 0) {
       if (this.list_img_feature[this.list_img_feature.length - 1].avatar_feature) {
-        this.list_img_feature.push({ dataByDb: false })
+        this.list_img_feature.push({ dataByDb: false, avatar_feature: '' })
       }
     }
-    else { this.list_img_feature.push({ dataByDb: false }) }
+    else { this.list_img_feature.push({ dataByDb: false, avatar_feature: '' }) }
   }
-
   sendImg() {
-    let checkCountImg = 0;
     this.list_img_feature.forEach((item, index) => {
       let data = {
         "id": item.id,
@@ -209,10 +224,9 @@ export class UpdateProductComponent implements OnInit {
           () => {
           },
           err => {
-            this.route.navigate(["/err"])
+            this.route.navigate(["/err"]);
           }
         )
-        checkCountImg++;
       }
       else {
         delete data.id
@@ -221,12 +235,11 @@ export class UpdateProductComponent implements OnInit {
             this.list_img_feature[index].id = dt.id;
           },
           err => {
-            this.route.navigate(["/err"])
+            this.route.navigate(["/err"]);
           }
         )
-        checkCountImg++;
       }
-      if (checkCountImg == this.list_img_feature.length) {
+      if (index == this.list_img_feature.length - 1) {
         this.loading = false;
         this.route.navigate(["/admin/product/list"])
       }

@@ -6,16 +6,18 @@ import { HelperService } from "src/app/_helpers/helper.service";
 })
 
 export class CategoryService {
+    urlImg = 'https://localhost:44320';
+
     constructor(private helperService: HelperService) {}
     
     getCategorys() {
         return this.helperService.getAll("Category/get-all-category");
     }
 
-    createCategory(name) {
+    createCategory(data) {
         let param='';
-        param += '?name=' + name;
-        return this.helperService.postUrl("Category/create", name, param);
+        param += '?name=' + data.get('name');
+        return this.helperService.postUrl("Category/create", data, param);
     }
 
     updateCategory(data) {

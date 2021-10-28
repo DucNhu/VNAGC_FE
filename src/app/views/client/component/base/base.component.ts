@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RouterEvent } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-base',
@@ -6,10 +8,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./base.component.css']
 })
 export class BaseComponent implements OnInit {
+  checkAuthen = true;
 
-  constructor() { }
+  constructor(
+    private activatedRoute: Router
+  ) {
+    activatedRoute.events
+      .pipe(filter(e => e instanceof RouterEvent))
+      .subscribe(e => {
+        if (activatedRoute.url == '/login' ||
+          activatedRoute.url == '/register') {
+          this.checkAuthen = false
+        }
+        else {
+          this.checkAuthen = true
+        }
+      });
 
+  }
   ngOnInit(): void {
+
   }
 
 }

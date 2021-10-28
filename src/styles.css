@@ -1,13 +1,16 @@
 .home { background: #fff}
+
 /* bs */
 
 .mr-3 {
   margin-right: 1rem !important;
 }
 
+.text-center { text-align: center;}
 /* Model */
 .modal .modal-content { transform: translateY(100%)}
 /* End Model */
+.buy-now .btn { box-shadow: none !important; border: none !important}
 
 /* /bs */
 /* Home */
@@ -123,6 +126,9 @@
 .dropzone {
   position: relative;
 }
+.dropzone.error {
+  border-color: #ea5455 !important
+}
 .img-avatar {
   height: 100%;
   width: 100%;
@@ -212,3 +218,9 @@ fieldset .box-step {
   overflow: hidden;
 }
 /* end paypal */
+
+.btn-trash {
+    padding: 6px 12px !important;
+    background-color: #fff;
+    border-radius: 4px !important;
+}

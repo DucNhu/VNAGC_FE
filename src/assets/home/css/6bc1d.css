@@ -5992,7 +5992,7 @@ fieldset {
       line-height: 1.42857143;
       color: #555;
 }
-.home .form-control {
+/* .form-control {
       display: block;
       width: 100%;
       height: 34px;
@@ -6009,24 +6009,24 @@ fieldset {
       -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
       transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
-.home .form-control:focus {
+.form-control:focus {
       border-color: #66afe9;
       outline: 0;
       -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
       box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
 }
-.home .form-control::-moz-placeholder {
+.form-control::-moz-placeholder {
       color: #999;
       opacity: 1;
 }
-.home .form-control:-ms-input-placeholder {
+.form-control:-ms-input-placeholder {
       color: #999;
 }
-.home .form-control::-webkit-input-placeholder {
+.form-control::-webkit-input-placeholder {
       color: #999;
 }
-.home .form-control[disabled],
-.home .form-control[readonly],
+.form-control[disabled],
+.form-control[readonly], */
 .home fieldset[disabled] .form-control {
       cursor: not-allowed;
       background-color: #eee;
@@ -6041,7 +6041,7 @@ fieldset {
 .home input[type="date"] {
       line-height: 34px;
 }
-.home .form-group {
+.form-group {
       margin-bottom: 15px;
 }
 .home .radio,
@@ -6241,7 +6241,7 @@ select[multiple].input-lg {
             width: auto;
             vertical-align: middle;
       }
-      .home .form-inline .input-group > .form-control {
+      .form-inline .input-group > .form-control {
             width: 100%;
       }
       .form-inline .control-label {
@@ -10394,7 +10394,7 @@ button.close {
       --color-green: #32ad38;
       --color-red: #d33;
       --color-button: #121212;
-      --color-button-hover: #48494b;
+      --color-button-hover: #a58787;
       --color-mainmenu-link: #000;
       --color-mainmenu-link-hover: #b0bf95;
       --color-mainmenu-dark-bg: #121212;
@@ -10639,7 +10639,7 @@ select:focus:invalid:focus {
 .woocommerce-page a.added_to_cart {
       padding: 13px 30px;
       line-height: 1;
-      background: var(--color-button);
+      background: var(--color-button) !important;
       border: 1px solid var(--color-button);
       color: #fff;
       text-shadow: none;
@@ -26273,7 +26273,7 @@ header .logo-link.logo-text {
       --color-theme: #bf8686;
       --color-theme-alt: #f36;
       --color-button: #a58787;
-      --color-button-hover: #48494b;
+      --color-button-hover: #a58787;
       --color-mainmenu-dark-bg: #121212;
       --color-mainmenu-dark-bg-grad: #121212;
       --color-mainmenu-link: #000;

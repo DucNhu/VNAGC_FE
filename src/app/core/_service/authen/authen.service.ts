@@ -9,14 +9,20 @@ import { user } from 'src/app/models/user';
   providedIn: 'root'
 })
 export class AuthenService {
-  currentUserSubject = new BehaviorSubject<user>(JSON.parse(localStorage.getItem("user")));
+  currentUserSubject = new BehaviorSubject<user>(JSON.parse(localStorage.getItem("user") ? localStorage.getItem("user") : sessionStorage.getItem("user")));
   currentUser = new Observable<user>();
   
   public get currenUserValue(): user {
     return this.currentUserSubject.value;
   }
+
+  currentTokenSubject = new BehaviorSubject<string>(localStorage.getItem("token") ? localStorage.getItem("token") : sessionStorage.getItem("token"));
+  currentToken = new Observable<string>();
+
+  public get currenTokenValue(): string {
+    return this.currentTokenSubject.value;
+  }
   constructor(private httpClient: HttpClient, private route: Router) { }
-  
   
   login(data) {
     return this.httpClient.post(AppConfig.settings.WhiteServer + "Authen/Login", data)

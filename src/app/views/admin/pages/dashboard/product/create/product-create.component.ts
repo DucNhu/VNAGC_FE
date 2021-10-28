@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CategoryService } from 'src/app/core/_service/category/category.service';
 import { ProductService } from 'src/app/core/_service/product.service';
+import { productContent } from 'src/app/models/listSale';
 
 @Component({
   selector: 'app-product-create',
@@ -11,10 +13,9 @@ import { ProductService } from 'src/app/core/_service/product.service';
 export class ProductCreateComponent implements OnInit {
 
   loading = false;
-  listSale = [10, 20, 30, 40]
-  listUnit = ["boxes", "package", "Bottle"]
-  listCategory = ["Fruit", "Drink", "Cake"]
-  money = 0;
+  listSale = productContent.listSale;
+  listUnit = productContent.listUnit;
+  listCategory = ['y']
   // Step bar
   isEditable = true;
   // End Step bar
@@ -22,40 +23,53 @@ export class ProductCreateComponent implements OnInit {
   formInfor: FormGroup;
   formImg: FormGroup;
 
-  avatar;
+  avatar=null;
   avatar_cover;
   list_img_feature: any = [];
   constructor(
     private fb: FormBuilder,
     private prductService: ProductService,
-    private route: Router
+    private route: Router,
+    private categoryService: CategoryService
   ) {
     this.formInfor = this.fb.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
-      price: [0, Validators.required],
+      price: [null, Validators.required],
       sale: [0],
       description: [''],
-      unit: [''],
-      active: [false],
+      unit: ['', Validators.required],
+      active: [true],
 
       storage_instructions: [''],
     });
 
     this.formImg = this.fb.group({
-      // avatar: ['',],
+      avatar: [null, Validators.required],
       // avatar_cover: ['',],
       // listImg_feature: new FormArray([]),
     });
   }
 
   ngOnInit(): void {
-
+    Promise.all(
+      [
+        this.getCategory()
+      ]
+    ).then(
+      (dt: any) => {
+        console.log(dt)
+        this.listCategory = dt[0].Data;
+        this.loading = false;
+      },
+      err => {
+        this.loading = false;
+      }
+    )
   }
   createProduct() {
     let form = this.formInfor;
     let nowDate = new Date();
-    let nowTime = new Date().toLocaleTimeString();
     let data = {
       "name": form.get('name').value,
       "banner_img": this.avatar,
@@ -67,6 +81,8 @@ export class ProductCreateComponent implements OnInit {
       "unit": form.get('unit').value,
       "storage_instructions": form.get('storage_instructions').value,
       "status": form.get('active').value ? 1 : 0,
+      
+      "seller_id": JSON.parse(localStorage.getItem("user")).id,
       "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
     }
@@ -80,6 +96,13 @@ export class ProductCreateComponent implements OnInit {
         this.loading = false;
       }
     )
+  }
+
+  getCategory(): Promise<any> {
+    return new Promise(async (resolve) => {
+      const dt = await this.categoryService.getCategorys().toPromise();
+      resolve(dt);
+    });
   }
 
   permitFile;
@@ -126,7 +149,12 @@ export class ProductCreateComponent implements OnInit {
   }
   setValueAvatarCover(e) {
     let reader = e.target;
-    this.avatar_cover = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    if (this.avatar=='') {
+      this.avatar = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    }
+    else {
+      this.avatar_cover = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    }
   }
   setImgFeature(e) {
     let reader = e.target;

@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
   constructor(private authenSv: AuthenService) { }
 
   ngOnInit(): void {
-    this.profile = JSON.parse(localStorage.getItem("user"));
+    this.profile = JSON.parse(localStorage.getItem("user") ? localStorage.getItem("user") : sessionStorage.getItem("user"));
   }
 logout() {
     this.authenSv.logout()

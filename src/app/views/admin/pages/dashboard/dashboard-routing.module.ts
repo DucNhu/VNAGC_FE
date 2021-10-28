@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from 'src/app/views/client/pages/authen/login/login.component';
+import { RegisterComponent } from 'src/app/views/client/pages/authen/register/register.component';
 import { BaseDashboardComponent } from './base/base.component';
 
 import { DashboardComponent } from './dashboard.component';
@@ -12,7 +14,8 @@ const routes: Routes = [
       { path: 'product', loadChildren: () => import('./product/base-product.module').then(m => m.baseProductModule) },
       { path: 'blog', loadChildren: () => import('./blog/base-blog.module').then(m => m.baseBlogModule) },
       { path: 'order', loadChildren: () => import('./order-manager/order-manager.module').then(m => m.OrderManagerModule) },
-      { path: 'category', loadChildren: () => import('./category/category.module').then(m => m.CategoryModule) }
+      { path: 'category', loadChildren: () => import('./category/category.module').then(m => m.CategoryModule) },
+      
     ]
   },
 ];

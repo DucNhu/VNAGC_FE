@@ -23,7 +23,7 @@ export class HashtagComponent implements OnInit {
 
   load = false;
   modalRef?: BsModalRef;
-  newCategory = '';
+  newCategory = null;
   editNameCategory = '';
   Category_delete = {
     id: 0,
@@ -70,9 +70,12 @@ export class HashtagComponent implements OnInit {
   }
 
   addNewCategory() {
-    this.load = true;
     let name = this.newCategory;
     this.newCategory = '';
+    if (name.trim() == '') {
+      return
+    }
+    this.load = true;
     this.hashtagService.createHashtag(name).subscribe(
       dt => {
         this.load = false;

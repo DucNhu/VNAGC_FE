@@ -7,14 +7,16 @@ import { NavigationComponent } from '../../component/navigation/navigation.compo
 import { FooterComponent } from '../../component/footer/footer.component';
 import { HeaderComponent } from '../../component/header/header.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { BaseDashboardComponent } from './base/base.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
-     NavigationComponent,
-     FooterComponent,
-     HeaderComponent,
-    ],
+    NavigationComponent,
+    FooterComponent,
+    HeaderComponent,
+    BaseDashboardComponent
+  ],
   imports: [
     CommonModule,
     MatMenuModule,
