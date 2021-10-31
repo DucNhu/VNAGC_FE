@@ -40,75 +40,90 @@
                     <!-- Greetings Card ends -->
 
                     <!-- Subscribers Chart Card starts -->
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="card">
-                            <div class="card-header flex-column align-items-start pb-0">
-                                <div class="avatar bg-light-primary p-50 m-0">
-                                    <div class="avatar-content">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-users font-medium-5">
-                                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                            <circle cx="9" cy="7" r="4"></circle>
-                                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <h2 class="fw-bolder mt-1">92.6k</h2>
-                                <p class="card-text">Subscribers Gained</p>
+                    <div class="col-lg-6 col-sm-6 col-12">
+                        <div class="card card-statistics">
+                            <div class="card-header">
+                                <h4 class="card-title">Statistics</h4>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Subscribers Chart Card ends -->
-
-                    <!-- Orders Chart Card starts -->
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="card">
-                            <div class="card-header flex-column align-items-start pb-0">
-                                <div class="avatar bg-light-warning p-50 m-0">
-                                    <div class="avatar-content">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-package font-medium-5">
-                                            <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
-                                            <path
-                                                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-                                            </path>
-                                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <h2 class="fw-bolder mt-1">38.4K</h2>
-                                <p class="card-text">Orders Received</p>
-                            </div>
-                            <div id="gained-chart" style="min-height: 100px;">
-                                <div id="apexchartsfpnvbqdp"
-                                    class="apexcharts-canvas apexchartsfpnvbqdp apexcharts-theme-light"
-                                    style="width: 408px; height: 100px;">
-                                    <!-- <canvas id="myChart" width="408" height="100" #mychart></canvas> -->
-                                    <div class="apexcharts-legend" style="max-height: 50px;"></div>
-                                    <div class="apexcharts-tooltip apexcharts-theme-light">
-                                        <div class="apexcharts-tooltip-series-group" style="order: 1;"><span
-                                                class="apexcharts-tooltip-marker"
-                                                style="background-color: rgb(115, 103, 240);"></span>
-                                            <div class="apexcharts-tooltip-text"
-                                                style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;">
-                                                <div class="apexcharts-tooltip-y-group"><span
-                                                        class="apexcharts-tooltip-text-label"></span><span
-                                                        class="apexcharts-tooltip-text-value"></span></div>
-                                                <div class="apexcharts-tooltip-z-group"><span
-                                                        class="apexcharts-tooltip-text-z-label"></span><span
-                                                        class="apexcharts-tooltip-text-z-value"></span></div>
+                            <div class="card-body statistics-body">
+                                <div class="row">
+                                    <div class="col-sm-6 col-12 mb-2">
+                                        <div class="d-flex flex-row">
+                                            <div class="avatar bg-light-primary me-2">
+                                                <div class="avatar-content">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round" class="feather feather-trending-up avatar-icon">
+                                                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                                                        <polyline points="17 6 23 6 23 12"></polyline>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="my-auto">
+                                                <h4 class="fw-bolder mb-0">{{Statistics?.orders}}</h4>
+                                                <p class="card-text font-small-3 mb-0">Orders</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div
-                                        class="apexcharts-yaxistooltip apexcharts-yaxistooltip-0 apexcharts-yaxistooltip-left apexcharts-theme-light">
-                                        <div class="apexcharts-yaxistooltip-text"></div>
+                                    <div class="col-sm-6 col-12 mb-2">
+                                        <div class="d-flex flex-row">
+                                            <div class="avatar bg-light-info me-2">
+                                                <div class="avatar-content">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round" class="feather feather-user avatar-icon">
+                                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                        <circle cx="12" cy="7" r="4"></circle>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="my-auto">
+                                                <h4 class="fw-bolder mb-0">{{Statistics?.coutAccout}}</h4>
+                                                <p class="card-text font-small-3 mb-0">Customers</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-12 mb-2">
+                                        <div class="d-flex flex-row">
+                                            <div class="avatar bg-light-danger me-2">
+                                                <div class="avatar-content">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round" class="feather feather-box avatar-icon">
+                                                        <path
+                                                            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                                        </path>
+                                                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="my-auto">
+                                                <h4 class="fw-bolder mb-0">{{Statistics.countProduct}}</h4>
+                                                <p class="card-text font-small-3 mb-0">Products</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-12">
+                                        <div class="d-flex flex-row">
+                                            <div class="avatar bg-light-success me-2">
+                                                <div class="avatar-content">
+                                                    <svg _ngcontent-cau-c151="" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-file-text">
+                                                        <path _ngcontent-cau-c151="" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                                        <polyline _ngcontent-cau-c151="" points="14 2 14 8 20 8"></polyline>
+                                                        <line _ngcontent-cau-c151="" x1="16" y1="13" x2="8" y2="13"></line>
+                                                        <line _ngcontent-cau-c151="" x1="16" y1="17" x2="8" y2="17"></line>
+                                                        <polyline _ngcontent-cau-c151="" points="10 9 9 9 8 9"></polyline>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="my-auto">
+                                                <h4 class="fw-bolder mb-0">{{Statistics.countBlog}}</h4>
+                                                <p class="card-text font-small-3 mb-0">Blog</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -292,3 +307,4 @@
         </div>
     </div>
 </div>
+<app-load [isLoading]="load"></app-load>

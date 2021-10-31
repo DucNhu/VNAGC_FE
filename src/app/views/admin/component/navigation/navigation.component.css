@@ -23,8 +23,6 @@
 
 .main-menu.menu-light .navigation > li > a svg {
     top: -3px;
-}
-.navigation > li > a > svg {
     margin-right: 14px;
     float: left;
     -webkit-transition: 0.2s ease all;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DashBoard } from 'src/app/core/_service/admin/dashBoard.service';
+import { DashBoardService } from 'src/app/core/_service/admin/dashBoard.service';
 
 @Component({
   selector: 'app-member',
@@ -10,7 +10,7 @@ export class MemberComponent implements OnInit {
   listOrder = []
   load = true;
   constructor(
-    private admin: DashBoard
+    private admin: DashBoardService
   ) { }
   ngOnInit(): void {
 

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
+import { DashBoardService } from 'src/app/core/_service/admin/dashBoard.service';
 
 @Component({
   selector: 'app-base',
@@ -7,11 +8,10 @@ import { Chart } from 'chart.js';
   styleUrls: ['./base.component.css']
 })
 export class BaseDashboardComponent implements OnInit {
-  name = 'Angular   6';
   canvas: any;
   ctx: any;
   @ViewChild('mychart') mychart;
-
+  load = true;
   ngAfterViewInit() {
     this.canvas = this.mychart.nativeElement;
     this.ctx = this.canvas.getContext('2d');
@@ -93,9 +93,26 @@ export class BaseDashboardComponent implements OnInit {
   }];
   chartLegendPie = true;
   chartPluginsPie = [];
-  constructor() { }
 
+  constructor(
+    private dashBoardService: DashBoardService
+  ) { }
+
+  Statistics = {
+    "countProduct": 0,
+    "countBlog": 0,
+    "countBlogActive": 0,
+    "coutAccout": 0,
+    "orders": 0
+  };
   ngOnInit(): void {
+    this.dashBoardService.getStatistics().subscribe(
+      dt => {
+        this.Statistics = dt.Data;
+        this.load = false;
+        console.log(this.Statistics)
+      }
+    )
   }
 
 }
