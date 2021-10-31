@@ -1106,8 +1106,39 @@ p.demo_store a {
   vertical-align: middle;
   line-height: 1.5em;
 }
+.woocommerce-cart-form__cart-item {
+  border: 1px solid rgba(0,0,0,.09);
+}
+
+.woocommerce-cart-form__contents th,
+.woocommerce-cart-form__contents td{
+  text-align: center;
+}
+
 .woocommerce table.shop_table td small {
   font-weight: 400;
+}
+.product-quantity-btn {
+  outline: none;
+  cursor: pointer;
+  border: 0;
+  font-size: .875rem;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color .1s cubic-bezier(.4,0,.6,1);
+  border: 1px solid rgba(0,0,0,.09);
+  border-radius: 2px;
+  background: transparent;
+  color: rgba(0,0,0,.8);
+  width: 32px;
+  height: 32px;
+}
+.product-quantity-btn svg {
+  height:14px
 }
 .woocommerce table.shop_table td del {
   font-weight: 400;

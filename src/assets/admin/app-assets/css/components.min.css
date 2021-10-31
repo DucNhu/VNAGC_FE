@@ -867,7 +867,6 @@ footer.footer-border {
 }
 .main-menu .navbar-header {
     width: 260px;
-    height: 4.45rem;
     position: relative;
     padding: 0.35rem 1rem 0.3rem 1.64rem;
     -webkit-transition: 0.3s ease all, background 0s;

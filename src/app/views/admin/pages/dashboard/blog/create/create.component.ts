@@ -381,7 +381,7 @@ export class CreateBlogComponent implements OnInit {
         this.createContent();
         this.createStep();
         setTimeout(() => {
-          this.route.navigate(["/admin/blog/list"]);
+          this.route.navigate(["blog/list"]);
         }, 1500);
       },
       err => {

@@ -17535,6 +17535,12 @@ body #catapult-cookie-bar a {
       border-collapse: collapse;
 }
 
+.cart_totals-pay {
+      display: flex;
+      align-items:center;
+      justify-content: flex-end;
+}
+
 .shop_table td,
 .shop_table th{
       border:0
@@ -17720,7 +17726,7 @@ body.woocommerce div.product .woocommerce-tabs ul.tabs *::after {
       text-decoration: none;
 }
 .woocommerce .quantity .qty {
-      width: 70px;
+      width: 50px;
 }
 .woocommerce .woocommerce-product-gallery__wrapper img {
       border-width: 1px !important;
@@ -17940,7 +17946,7 @@ body.woocommerce div.product .woocommerce-tabs ul.tabs *::after {
 }
 
 .woocommerce-Price-amount {
-      font-size:20px;
+      font-size:16px;
       margin-right: 10px;
 }
 .amount-price {

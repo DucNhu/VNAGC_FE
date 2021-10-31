@@ -90,7 +90,7 @@ export class ProductCreateComponent implements OnInit {
     this.prductService.create(data).subscribe(
       dt => {
         this.sendImg(dt)
-        this.route.navigate(["/admin/product/list"])
+        this.route.navigate(["product/list"])
       },
       err => {
         this.loading = false;
@@ -179,7 +179,7 @@ export class ProductCreateComponent implements OnInit {
       this.prductService.createImgFeature(data).subscribe(
         dt => {
           this.loading = false;
-          if (i == this.list_img_feature - 1) { this.route.navigate(["/admin/product/list"])}
+          if (i == this.list_img_feature - 1) { this.route.navigate(["product/list"])}
         },
         err => {
           this.loading = false;

@@ -241,7 +241,7 @@ export class UpdateProductComponent implements OnInit {
       }
       if (index == this.list_img_feature.length - 1) {
         this.loading = false;
-        this.route.navigate(["/admin/product/list"])
+        this.route.navigate(["product/list"])
       }
     });
   }
