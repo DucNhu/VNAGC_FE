@@ -27,6 +27,18 @@ export class HelperService {
     )
   }
 
+  getParam(uri: string, param?) {
+    return this.http.get<any>(AppConfig.settings.WhiteServer + uri + param).pipe(
+      catchError(this.handleError),
+      map(data => {
+        if (data == null) {
+          this.router.navigateByUrl('/error-page');
+        }
+        return data;
+      })
+    )
+  }
+
   get(uri: string, id) {
     return this.http.get<any>(AppConfig.settings.WhiteServer + uri + "/" + id).pipe(
       catchError(this.handleError),

@@ -15,7 +15,8 @@ const routes: Routes = [
       { path: 'blog', loadChildren: () => import('./blog/base-blog.module').then(m => m.baseBlogModule) },
       { path: 'order', loadChildren: () => import('./order-manager/order-manager.module').then(m => m.OrderManagerModule) },
       { path: 'category', loadChildren: () => import('./category/category.module').then(m => m.CategoryModule) },
-      
+      { path: 'member', loadChildren: () => import('./member/member.module').then(m => m.MemberModule) },
+
     ]
   },
 ];

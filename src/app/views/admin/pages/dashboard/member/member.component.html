@@ -1,0 +1,63 @@
+<div class="app-content content ecommerce-application">
+    <div class="content-wrapper container-xxl p-0 list-view--product">
+        <app-load [isLoading]="load"></app-load>
+        <div class="col-12">
+            <div class="card card-company-table">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Intro</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Count Blog</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of listOrder">
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar rounded">
+                                                <div class="avatar-content">
+                                                    <img src="https://pixinvent.com/demo/vuexy-html-bootstrap-admin-template/app-assets/images/icons/toolbox.svg"
+                                                        alt="Toolbar svg">
+                                                </div>
+                                            </div>
+                                            <div class="media-body"><a 
+                                                    href="/demo/vuexy-vuejs-admin-dashboard-template/demo-5/apps/users/view/50"
+                                                    class="font-weight-bold d-block text-nowrap" target="_self"> {{item.fullName}} </a>
+                                                    <!-- <small
+                                                    class="text-muted">@bkrabbe1d</small> -->
+                                                </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                            <span class="clamp-1">{{item.email}}</span>
+                                    <td class="text-nowrap">
+                                        {{item.phoneNumber}}
+                                    </td>
+                                    <td>0</td>
+                                    <td>
+                                        <div [ngSwitch]="item.status">
+                                            <div *ngSwitchCase="true">
+                                        <span class="badge text-capitalize badge-light-success badge-pill"> active </span>
+                                                
+                                            </div>
+                                            <div *ngSwitchDefault>
+                                        <span class="badge text-capitalize badge-light-warning badge-pill"> pending </span>
+                                                
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -8,6 +8,7 @@ import { FooterComponent } from '../../component/footer/footer.component';
 import { HeaderComponent } from '../../component/header/header.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { BaseDashboardComponent } from './base/base.component';
+import { ChartsModule } from "@rinminase/ng-charts";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { BaseDashboardComponent } from './base/base.component';
     CommonModule,
     MatMenuModule,
     DashboardRoutingModule,
+    ChartsModule
   ]
 })
 export class DashboardModule { }

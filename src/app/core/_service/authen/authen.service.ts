@@ -43,6 +43,10 @@ export class AuthenService {
   logout() {
     this.currentUserSubject.next(null);
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
+
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('token');
     this.route.navigate(["/login"])
   }
 }

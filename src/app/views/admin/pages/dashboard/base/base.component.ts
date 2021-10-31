@@ -68,6 +68,31 @@ export class BaseDashboardComponent implements OnInit {
     });
   }
   
+  // Bar
+  chartOptions = {
+    responsive: true,
+  };
+  chartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  chartLegend = true;
+  chartPlugins = [];
+
+  chartData = [
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+  ];
+
+  // pie
+  chartOptionsPie = {
+    responsive: true,
+  };
+  chartLabelsPie = [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'];
+  chartDataPie = [300, 500, 100];
+  chartColorsPie = [{
+    backgroundColor: ['red', '#0F0', 'rgba(41, 182, 246,0.75)'],
+    borderColor: ['rgb(250,120,100)', 'green', '#0086c3']
+  }];
+  chartLegendPie = true;
+  chartPluginsPie = [];
   constructor() { }
 
   ngOnInit(): void {
