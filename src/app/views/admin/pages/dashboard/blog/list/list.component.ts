@@ -17,8 +17,7 @@ export class ListBlogComponent implements OnInit {
   listBlog = [];
   ngOnInit(): void {
     this.blogService.getAllBlogeres().subscribe(
-      dt=> {
-        console.log(dt)
+      dt => {
         this.listBlog = dt.Data.Items;
         this.loading = false;
       },
@@ -29,10 +28,31 @@ export class ListBlogComponent implements OnInit {
   }
 
   routerUpdate(id) {
-    this.route.navigateByUrl("/" + this.route.url.split('/')[1] + "/" + this.route.url.split('/')[2] + "/update", { state: id })
+    this.route.navigateByUrl("/" + this.route.url.split('/')[1] + "/" + "/update", { state: id })
   }
 
   routerCreateBlog() {
-    this.route.navigateByUrl("/" + this.route.url.split('/')[1] + "/" + this.route.url.split('/')[2] + "/create")
+    this.route.navigateByUrl("/" + this.route.url.split('/')[1] + "/create")
   }
+
+  activeBlog(val, status) {
+    this.loading = true;
+    let data = {
+      id: val.id,
+      status: status.checked ? 1 : 0,
+      "name": val.name,
+
+      "user_id": val.user_id
+    }
+    this.blogService.activeBlog(data).subscribe(
+      dt => {
+        this.loading = false;
+      },
+      err => {
+        this.loading = false;
+      }
+    )
+  }
+
 }
+

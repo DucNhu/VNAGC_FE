@@ -84,18 +84,7 @@ export class CategoryComponent implements OnInit {
     this.categoryService.createCategory(data).subscribe(
       dt => {
         this.load = false;
-        this.listCategory.unshift({
-          id: dt.Data.id,
-          name: dt.Data.name,
-          countBlog: null,
-          createdDate: dt.Data.createdDate,
-          action: 1,
-          index: 0
-        });
-        this.listCategory.forEach((e, i) => {
-          this.listCategory[i].index = i;
-        });
-        this.newCategory = '';
+        window.location.reload();
       },
       err => {
         this.load = false;

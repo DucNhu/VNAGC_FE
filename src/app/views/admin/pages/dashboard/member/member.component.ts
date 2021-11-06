@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashBoardService } from 'src/app/core/_service/admin/dashBoard.service';
+import { AuthenService } from 'src/app/core/_service/authen/authen.service';
 
 @Component({
   selector: 'app-member',
@@ -9,8 +10,10 @@ import { DashBoardService } from 'src/app/core/_service/admin/dashBoard.service'
 export class MemberComponent implements OnInit {
   listOrder = []
   load = true;
+  active = 0;
   constructor(
-    private admin: DashBoardService
+    private admin: DashBoardService,
+    private authenservice: AuthenService
   ) { }
   ngOnInit(): void {
 
@@ -33,4 +36,15 @@ export class MemberComponent implements OnInit {
     )
   }
 
+  publicAccount(userId, status) {
+    this.load = true
+    this.authenservice.activeAcc(userId).subscribe(
+      (dt: any) => {
+        this.load = false;
+      },
+      err => {
+        this.load = false;
+      }
+    )
+  }
 }

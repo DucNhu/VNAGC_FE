@@ -7,7 +7,13 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
-
+  isCollapsed = {
+    metarial: false,
+    step: false,
+    content: false,
+    order: false,
+    category: false
+  };
   constructor(
     private route: ActivatedRoute
   ) { }

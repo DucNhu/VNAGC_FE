@@ -26,57 +26,57 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent
   },
-  // {
-  //   path: 'user',
-  //   component: BaseComponent,
-  //   children: [
-  //     {
-  //       path: '',
-  //       component: HomeComponent
-  //     },
-  //     {
-  //       path: 'test',
-  //       component: testComponent
-  //     },
-  //     {
-  //       path: 'product-detail',
-  //       component: ProductDetailComponent
-  //     },
-  //     {
-  //       canActivate: [UserGuard],
-  //       path: 'checkout',
-  //       component: CheckoutComponent
-  //     },
-  //     {
-  //       path: 'shop',
-  //       component: ShopComponent
-  //     },
-  //     {
-  //       path: 'blogs',
-  //       loadChildren: () => import('./views/client/pages/blogs/blogs.module').then(m => m.BlogsModule),
-  //     },
-  //     {
-  //       canActivate: [UserGuard],
-  //       path: 'profile',
-  //       loadChildren: () => import('./views/client/pages/profile/profile.module').then(m => m.ProfileModule),
-  //     },
-  //     {
-  //       canActivate: [UserGuard],
-  //       path: 'cart',
-  //       component: CartComponent
-  //     },
-  //     {
-  //       path: 'login',
-  //       component: LoginComponent
-  //     }, {
-  //       path: 'register',
-  //       component: RegisterComponent
-  //     }, {
-  //       path: 'activeAccount/:id',
-  //       component: ActiveAccountComponent
-  //     }
-  //   ]
-  // },
+  {
+    path: 'user',
+    component: BaseComponent,
+    children: [
+      {
+        path: '',
+        component: HomeComponent
+      },
+      {
+        path: 'test',
+        component: testComponent
+      },
+      {
+        path: 'product-detail',
+        component: ProductDetailComponent
+      },
+      {
+        canActivate: [UserGuard],
+        path: 'checkout',
+        component: CheckoutComponent
+      },
+      {
+        path: 'shop',
+        component: ShopComponent
+      },
+      {
+        path: 'blogs',
+        loadChildren: () => import('./views/client/pages/blogs/blogs.module').then(m => m.BlogsModule),
+      },
+      {
+        canActivate: [UserGuard],
+        path: 'profile',
+        loadChildren: () => import('./views/client/pages/profile/profile.module').then(m => m.ProfileModule),
+      },
+      {
+        canActivate: [UserGuard],
+        path: 'cart',
+        component: CartComponent
+      },
+      {
+        path: 'login',
+        component: LoginComponent
+      }, {
+        path: 'register',
+        component: RegisterComponent
+      }, {
+        path: 'activeAccount/:id',
+        component: ActiveAccountComponent
+      }
+    ]
+  },
   {
     path: 'admin',
     pathMatch: 'full',

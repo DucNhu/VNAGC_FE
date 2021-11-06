@@ -8,7 +8,8 @@ import { HelperService } from "src/app/_helpers/helper.service";
 export class DashBoardService {
     constructor(private helperService: HelperService) {}
     controll = 'Dashboard/';
-    getStatistics() {
+
+    getStatistics() { 
         return this.helperService.getAll(this.controll + 'get-DashBoard');
     }
 
@@ -16,5 +17,10 @@ export class DashBoardService {
         let param = '?pageIndex=1&pageSize=10';
 
         return this.helperService.getParam(this.controll + 'get-all-user', param);
+    }
+
+    getAllOrder() {
+        let param = '?pageIndex=1&pageSize=10';
+        return this.helperService.getParam("Order/get-all-order", param);
     }
 }

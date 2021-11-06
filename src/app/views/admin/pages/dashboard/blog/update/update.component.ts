@@ -50,29 +50,26 @@ export class UpdateComponent implements OnInit {
   ) {
     this.registerFormBlog();
 
-    this.userId = JSON.parse(localStorage.getItem("user")).id;
+    this.userId = JSON.parse(sessionStorage.getItem("user")).id;
   }
   blogId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
 
   ngOnInit(): void {
     Promise.all([
       this.getBlog(),
-      this.getMetarial(),
-      this.getContents(),
-      this.getStep(),
       this.getCategory(),
       this.getHashtag()
     ]).then(
       dt => {
         this.loading = false;
         console.log(dt)
-        this.listCategory = dt[4].Data;
-        this.hastags = dt[5].Data;
+        this.listCategory = dt[1].Data;
+        this.hastags = dt[2].Data;
         this.setFormBlog(dt[0].Data)
 
-        this.setFormMetarial(dt[1])
-        this.setFormContent(dt[2])
-        this.setFormSteps(dt[3])
+        // this.setFormMetarial(dt[1])
+        // this.setFormContent(dt[2])
+        // this.setFormSteps(dt[3])
       }
     )
   }
@@ -117,7 +114,7 @@ export class UpdateComponent implements OnInit {
       dt => {
         setTimeout(() => {
           this.checkUpdateSuccess = false;
-          this.route.navigate(["/admin/blog/blog-detail", { id: this.blogId }]);
+          this.route.navigate(["/blog/blog-detail", { id: this.blogId }]);
         }, 1500);
         this.createMetarial();
         this.createContent();
@@ -215,7 +212,7 @@ export class UpdateComponent implements OnInit {
   }
 
   setFormBlog(val) {
-    let unitCooking = val.cooking_time.split("mins");
+    let unitCooking = val.cooking_time ? val.cooking_time.split("mins") : '';
     if (unitCooking.length == 1) {
       unitCooking = val.cooking_time.split("hours");
       unitCooking[1] = 'hours';

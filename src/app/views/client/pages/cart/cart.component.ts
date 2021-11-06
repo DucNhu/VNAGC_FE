@@ -17,7 +17,7 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.addToCartService.cartCurrent.subscribe(
       () => {
-        this.listCart = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")) : [];
+        this.listCart = JSON.parse(sessionStorage.getItem("cart")) ? JSON.parse(sessionStorage.getItem("cart")) : [];
         this.listCart.forEach(e => {
           e.totalAProduct = e.price * ((100 - e.sale) / 100);
           e.subtotal = e.totalAProduct * e.quantity;

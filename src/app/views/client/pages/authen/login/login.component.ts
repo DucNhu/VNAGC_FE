@@ -69,10 +69,10 @@ export class LoginComponent implements OnInit {
       (dt: any) => {
         if (dt.Infor.Value.status) {
           if (this.loginForm.controls.remember.value) {
-            localStorage.setItem("token", dt.Token);
+            sessionStorage.setItem("token", dt.Token);
             this.authenservice.currentTokenSubject.next(dt.Token);
 
-            localStorage.setItem("user", JSON.stringify(dt.Infor.Value));
+            sessionStorage.setItem("user", JSON.stringify(dt.Infor.Value));
             this.authenservice.currentUserSubject.next(dt.Infor.Value);
           }
           else {

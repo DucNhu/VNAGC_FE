@@ -213,6 +213,9 @@ export class UpdateProductComponent implements OnInit {
     else { this.list_img_feature.push({ dataByDb: false, avatar_feature: '' }) }
   }
   sendImg() {
+    if (this.list_img_feature.length == 0) {
+      this.route.navigate(["product/list"])
+    }
     this.list_img_feature.forEach((item, index) => {
       let data = {
         "id": item.id,

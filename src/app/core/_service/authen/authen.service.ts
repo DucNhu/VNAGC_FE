@@ -9,14 +9,14 @@ import { user } from 'src/app/models/user';
   providedIn: 'root'
 })
 export class AuthenService {
-  currentUserSubject = new BehaviorSubject<user>(JSON.parse(localStorage.getItem("user") ? localStorage.getItem("user") : sessionStorage.getItem("user")));
+  currentUserSubject = new BehaviorSubject<user>(JSON.parse(sessionStorage.getItem("user")));
   currentUser = new Observable<user>();
   
   public get currenUserValue(): user {
     return this.currentUserSubject.value;
   }
 
-  currentTokenSubject = new BehaviorSubject<string>(localStorage.getItem("token") ? localStorage.getItem("token") : sessionStorage.getItem("token"));
+  currentTokenSubject = new BehaviorSubject<string>( sessionStorage.getItem("token"));
   currentToken = new Observable<string>();
 
   public get currenTokenValue(): string {
@@ -42,8 +42,8 @@ export class AuthenService {
 
   logout() {
     this.currentUserSubject.next(null);
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('token');
 
     sessionStorage.removeItem('user');
     sessionStorage.removeItem('token');

@@ -82,7 +82,7 @@ export class ProductCreateComponent implements OnInit {
       "storage_instructions": form.get('storage_instructions').value,
       "status": form.get('active').value ? 1 : 0,
       
-      "seller_id": JSON.parse(localStorage.getItem("user")).id,
+      "seller_id": JSON.parse(sessionStorage.getItem("user")).id,
       "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
     }
@@ -171,6 +171,9 @@ export class ProductCreateComponent implements OnInit {
   }
 
   sendImg(val) {
+    if (this.list_img_feature.length == 0) {
+      this.route.navigate(["product/list"])
+    }
     this.list_img_feature.forEach((item, i) => {
       let data = {
         "product_id": val.id,

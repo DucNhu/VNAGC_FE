@@ -111,6 +111,9 @@ export class BaseDashboardComponent implements OnInit {
         this.Statistics = dt.Data;
         this.load = false;
         console.log(this.Statistics)
+      },
+      err => {
+        console.log(err)
       }
     )
   }

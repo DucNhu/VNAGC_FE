@@ -1,5 +1,5 @@
 <app-load [isLoading]="loading"></app-load>
-<div class="app-content content ">
+<div class="app-content content ms-0">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
@@ -74,8 +74,7 @@
                                     </div>
                                     <div class="input-group input-group-merge form-password-toggle">
                                         <input type="password" class="form-control form-control-merge"
-                                            id="login-password" name="login-password" formControlName="password"
-                                            placeholder="············" >
+                                            id="login-password" name="login-password" formControlName="password" />
                                         <span class="input-group-text cursor-pointer"><svg
                                                 xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -90,7 +89,7 @@
                                 </div>
                                 <div class="mb-1">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="remember-me" formControlName="remember">
+                                        <input class="form-check-input" type="checkbox" hidden id="remember-me" formControlName="remember">
                                         <label class="form-check-label" for="remember-me"> Remember Me </label>
                                     </div>
                                 </div>

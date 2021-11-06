@@ -53,7 +53,7 @@ export class CreateBlogComponent implements OnInit {
     private categoryService: CategoryService,
     private hashtagService: HashtagService
   ) { this.registerFormBlog();
-    this.userId = JSON.parse(localStorage.getItem("user")).id;
+    this.userId = JSON.parse(sessionStorage.getItem("user")).id;
    }
 
   ngOnInit(): void {

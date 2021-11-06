@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AddToCartService } from 'src/app/core/_service/addToCart/add-to-cart.service';
+import { DashBoardService } from 'src/app/core/_service/admin/dashBoard.service';
 import { OrderService } from 'src/app/core/_service/profile/order.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class OrderManagerComponent implements OnInit {
   listOrder: any = [];
   load = true;
   constructor(
-    private orderService: OrderService,
+    private dashBoardService: DashBoardService,
   ) { }
 
   ngOnInit(): void {
@@ -21,8 +22,7 @@ export class OrderManagerComponent implements OnInit {
       ]
     ).then(
       (dt: any) => {
-        
-        this.listOrder = dt[0].Data;
+        this.listOrder = dt[0].Data?.Items;
         this.load = false;
 
         // this.listOrder.forEach((e, index) => {
@@ -45,7 +45,7 @@ export class OrderManagerComponent implements OnInit {
 
   getAllOrder(): Promise<any> {
     return new Promise(async (resolve) => {
-      const dt = await this.orderService.getAllOrder().toPromise();
+      const dt = await this.dashBoardService.getAllOrder().toPromise();
       resolve(dt);
     });
   }

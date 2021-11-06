@@ -13,7 +13,7 @@ export class BlogService {
   GetBlogsActive() {
     return this.helperService.getAll("Blog/GetBlogsActive");
   }
-  
+
   getBlog(id) {
     return this.helperService.get("Blog/detail", id);
   }
@@ -24,6 +24,10 @@ export class BlogService {
 
   update(data) {
     return this.helperService.put("Blog/" + data.id, data);
+  }
+
+  activeBlog(data) {
+    return this.helperService.put("Blog/activeBlog", data);
   }
 
   delete(id) {
