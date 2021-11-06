@@ -67,6 +67,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authenservice.login(data).subscribe(
       (dt: any) => {
+        console.log(dt)
         if (dt.Infor.Value.status) {
           if (this.loginForm.controls.remember.value) {
             sessionStorage.setItem("token", dt.Token);
@@ -91,6 +92,12 @@ export class LoginComponent implements OnInit {
           }
         }
         else {
+          if (dt.Infor.Value.isAdmin) {
+            this.router.navigate(["/admin"])
+          }
+          else {
+            this.router.navigate(["/login"])
+          }
           this.showError("The account has not been activated, please check your email to activate the account");
           this.loading = false;
         }
@@ -105,9 +112,9 @@ export class LoginComponent implements OnInit {
   }
 
   showSuccess(mess) {
-    this.toasterService.pop('success', this.modal_info_title, mess);
+    // this.toasterService.pop('success', this.modal_info_title, mess);
   }
   showError(mess) {
-    this.toasterService.pop('error', this.modal_error_title, mess);
+    // this.toasterService.pop('error', this.modal_error_title, mess);
   }
 }
