@@ -104,6 +104,9 @@ export class UpdateComponent implements OnInit {
       "status": 1,
       "user_id": this.userId,
       "category_id": form.get('category').value,
+      "productIds": [
+        1
+      ],
 
       "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
@@ -213,13 +216,17 @@ export class UpdateComponent implements OnInit {
 
   setFormBlog(val) {
     let unitCooking = val.cooking_time ? val.cooking_time.split("mins") : '';
-    if (unitCooking.length == 1) {
-      unitCooking = val.cooking_time.split("hours");
-      unitCooking[1] = 'hours';
+    console.log(unitCooking)
+    if (unitCooking) {
+      if (unitCooking.length == 1) {
+        unitCooking = val.cooking_time.split("hours");
+        unitCooking[1] = 'hours';
+      }
+      else {
+        unitCooking[1] = 'mins';
+      }
     }
-    else {
-      unitCooking[1] = 'mins';
-    }
+    
 
     this.formBlog.patchValue(
       {

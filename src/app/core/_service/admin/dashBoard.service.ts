@@ -23,4 +23,8 @@ export class DashBoardService {
         let param = '?pageIndex=1&pageSize=10';
         return this.helperService.getParam("Order/get-all-order", param);
     }
+
+    getProductTopRating() {
+        return this.helperService.getAll("Products/get-product-top-rating");
+    }
 }

@@ -10,10 +10,14 @@
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class=" nav-item">
-                <a class="d-flex align-items-center" >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                    <span class="menu-title text-truncate"
-                        data-i18n="Dashboards">4TD
+                <a class="d-flex align-items-center" routerLink="/">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-home">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    <span class="menu-title text-truncate" >4TD
                     </span>
                     <span class="badge badge-light-warning rounded-pill ms-auto me-1">
                         2
@@ -21,26 +25,46 @@
                 </a>
 
             </li>
-            <li class=" navigation-header"  (click)="metarialC.toggle()"  [attr.aria-expanded]="!isCollapsed.metarial">
+            <li class=" navigation-header" (click)="metarialC.toggle()" [attr.aria-expanded]="!isCollapsed.metarial">
                 <span data-i18n="Apps &amp; Pages">Member manager</span>
-                
+
             </li>
-            <li class=" nav-item"  #metarialC="ngbCollapse" [(ngbCollapse)]="isCollapsed.metarial">
+            <li class=" nav-item" #metarialC="ngbCollapse" [(ngbCollapse)]="isCollapsed.metarial">
                 <a class="d-flex align-items-center" routerLink="/member">
                     <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="9" cy="7" r="4"></circle>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                    </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-users">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </span><span class="menu-title text-truncate">List</span></a>
+            </li>
+            <li class=" navigation-header" (click)="metarialO.toggle()"><span data-i18n="Apps &amp; Pages">Order
+                    manager</span>
+            </li>
+            <li class=" nav-item" #metarialO="ngbCollapse" [(ngbCollapse)]="isCollapsed.order"><a
+                    class="d-flex align-items-center" routerLink="/order">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-box">
+                            <path
+                                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                            </path>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
                     </span><span class="menu-title text-truncate">List</span></a>
             </li>
 
-            <li class=" navigation-header" (click)="metarialO.toggle()" ><span data-i18n="Apps &amp; Pages">Order manager</span>
+            <li class=" navigation-header" (click)="stepC.toggle()"><span data-i18n="Apps &amp; Pages">Product
+                    manager</span>
             </li>
-            <li class=" nav-item" #metarialO="ngbCollapse" [(ngbCollapse)]="isCollapsed.order"><a class="d-flex align-items-center" routerLink="/order">
+            <li class=" nav-item" #stepC="ngbCollapse" [(ngbCollapse)]="isCollapsed.step"><a
+                    class="d-flex align-items-center" routerLink="/product/list">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -53,22 +77,8 @@
                         </svg>
                     </span><span class="menu-title text-truncate">List</span></a>
             </li>
-            <li class=" navigation-header" (click)="stepC.toggle()"><span data-i18n="Apps &amp; Pages">Product manager</span>
-            </li>
-            <li class=" nav-item" #stepC="ngbCollapse" [(ngbCollapse)]="isCollapsed.step"><a class="d-flex align-items-center" routerLink="/product/list">
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="feather feather-box">
-                            <path
-                                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-                            </path>
-                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                        </svg>
-                    </span><span class="menu-title text-truncate">List</span></a>
-            </li>
-            <li class=" nav-item"  [(ngbCollapse)]="isCollapsed.step"><a class="d-flex align-items-center" routerLink="/product/create">
+            <li class=" nav-item" [(ngbCollapse)]="isCollapsed.step"><a class="d-flex align-items-center"
+                    routerLink="/product/create">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -85,9 +95,11 @@
                     </span><span class="menu-title text-truncate" data-i18n="edit">Create
                         new</span></a>
             </li>
-            <li class=" navigation-header" (click)="stepD.toggle()"><span data-i18n="Apps &amp; Pages">Blog manager</span>
+            <li class=" navigation-header" (click)="stepD.toggle()"><span data-i18n="Apps &amp; Pages">Blog
+                    manager</span>
             </li>
-            <li class=" nav-item" #stepD="ngbCollapse" [(ngbCollapse)]="isCollapsed.content"><a class="d-flex align-items-center" routerLink="/blog/list">
+            <li class=" nav-item" #stepD="ngbCollapse" [(ngbCollapse)]="isCollapsed.content"><a
+                    class="d-flex align-items-center" routerLink="/blog/list">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -100,7 +112,8 @@
                         </svg>
                     </span><span class="menu-title text-truncate">List</span></a>
             </li>
-            <li class=" nav-item"  #stepD="ngbCollapse" [(ngbCollapse)]="isCollapsed.content"><a class="d-flex align-items-center" routerLink="/blog/create">
+            <li class=" nav-item" #stepD="ngbCollapse" [(ngbCollapse)]="isCollapsed.content"><a
+                    class="d-flex align-items-center" routerLink="/blog/create">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -129,7 +142,7 @@
                         </svg>
                     </span><span class="menu-title text-truncate">List</span></a>
             </li>
-          
+
         </ul>
     </div>
 </div>
@@ -137,7 +150,7 @@
 <ng-template #logo>
     <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="150.000000pt" height="70.000000pt"
         viewBox="0 0 992.000000 590.000000" preserveAspectRatio="xMidYMid meet">
-    
+
         <g transform="translate(0.000000,590.000000) scale(0.100000,-0.100000)" fill="#7367F0" stroke="none">
             <path d="M3490 3637 c-64 -18 -113 -51 -142 -94 -36 -55 -39 -70 -39 -155 0
                         -94 33 -201 93 -302 47 -80 161 -203 224 -243 24 -15 43 -30 41 -33 -13 -30

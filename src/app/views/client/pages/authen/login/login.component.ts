@@ -67,37 +67,17 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authenservice.login(data).subscribe(
       (dt: any) => {
-        console.log(dt)
-        if (dt.Infor.Value.status) {
-          if (this.loginForm.controls.remember.value) {
+        if (dt.Infor.Value.isAdmin) {
             sessionStorage.setItem("token", dt.Token);
             this.authenservice.currentTokenSubject.next(dt.Token);
 
             sessionStorage.setItem("user", JSON.stringify(dt.Infor.Value));
             this.authenservice.currentUserSubject.next(dt.Infor.Value);
-          }
-          else {
-            sessionStorage.setItem("token", dt.Token);
-            this.authenservice.currentTokenSubject.next(dt.Token);
 
-            sessionStorage.setItem("user", JSON.stringify(dt.Infor.Value));
-            this.authenservice.currentUserSubject.next(dt.Infor.Value);
-          }
-
-          if (dt.Infor.Value.isAdmin) {
-            this.router.navigate(["/admin"])
-          }
-          else {
-            this.router.navigate(["/login"])
-          }
-        }
+            
+              this.router.navigate(["/admin"])
+            }
         else {
-          if (dt.Infor.Value.isAdmin) {
-            this.router.navigate(["/admin"])
-          }
-          else {
-            this.router.navigate(["/login"])
-          }
           this.showError("The account has not been activated, please check your email to activate the account");
           this.loading = false;
         }

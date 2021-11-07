@@ -29,10 +29,10 @@
                                 </div>
                                 <div class="text-center">
                                     <h1 class="mb-1 text-white">Congratulations DUCNHU</h1>
-                                    <p class="card-text m-auto w-75">
+                                    <!-- <p class="card-text m-auto w-75">
                                         You have done <strong>57.6%</strong> more sales today. Check your new badge in
                                         your profile.
-                                    </p>
+                                    </p> -->
                                 </div>
                             </div>
                         </div>
@@ -136,8 +136,33 @@
                     <!-- Avg Sessions Chart Card starts -->
                     <div class="col-lg-6 col-12">
                         <div class="card">
-                            <div class="card-body">
-                                <canvas id="myChart" width="100%" height="100" #mychart></canvas>
+                            <div class="card mb-3">
+                            
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-4">
+                                        <div class="flex-grow-1">
+                                            <h5 class="mb-1">Ranking of the highest rated products</h5>
+                                            <div class="fs-13px">Top 6 of the highest rated products</div>
+                                        </div>
+                                    </div>
+                            
+                                    <div class="d-flex align-items-center mb-1" *ngFor="let item of listProductRating; let i = index">
+                                        <div class="d-flex align-items-center justify-content-center me-3 width-50 height-50">
+                                            <img [src]="item.banner_img" alt="avatar" class="ms-100 mh-100 rounded img_product">
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div>
+                                                <div class="text-dark font-weight-bold">{{item.name}}</div>
+                                                <div class="fs-13px">{{'$' + item.price}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="ps-3 text-center">
+                                            <div class="text-dark font-weight-bold">{{item.rateAvg}}</div>
+                                            <div class="fs-13px">Rating Avg</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
                             </div>
                         </div>
                     </div>
@@ -147,18 +172,13 @@
                     <div class="col-lg-6 col-12">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between pb-0">
-                                <h4 class="card-title">Support Tracker</h4>
+                                <h4 class="card-title">List of posts with many views</h4>
                                 <div class="dropdown chart-dropdown">
                                     <button class="btn btn-sm border-0 dropdown-toggle p-50" type="button"
                                         id="dropdownItem4" data-bs-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
-                                        Last 7 Days
+                                        Last Month
                                     </button>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownItem4">
-                                        <a class="dropdown-item" href="#">Last 28 Days</a>
-                                        <a class="dropdown-item" href="#">Last Month</a>
-                                        <a class="dropdown-item" href="#">Last Year</a>
-                                    </div>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -275,32 +295,6 @@
                     </div>
                     <!--/ App Design Card -->
                 </div>
-
-                <!-- List DataTable -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card invoice-list-wrapper">
-                            <div class="card-datatable table-responsive">
-                                <table class="invoice-list-table table">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>#</th>
-                                            <th><i data-feather="trending-up"></i></th>
-                                            <th>Client</th>
-                                            <th>Total</th>
-                                            <th class="text-truncate">Issued Date</th>
-                                            <th>Balance</th>
-                                            <th>Invoice Status</th>
-                                            <th class="cell-fit">Actions</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--/ List DataTable -->
             </section>
             <!-- Dashboard Analytics end -->
 

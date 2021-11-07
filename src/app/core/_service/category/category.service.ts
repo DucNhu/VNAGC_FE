@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { AppConfig } from "src/app/app.config";
 import { HelperService } from "src/app/_helpers/helper.service";
 
 @Injectable({
@@ -6,7 +7,7 @@ import { HelperService } from "src/app/_helpers/helper.service";
 })
 
 export class CategoryService {
-    urlImg = 'https://localhost:44320';
+    urlImg = AppConfig.settings.WhiteServer.replace("/api/", "");
 
     constructor(private helperService: HelperService) {}
     

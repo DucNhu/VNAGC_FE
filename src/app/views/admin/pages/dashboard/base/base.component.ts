@@ -21,7 +21,7 @@ export class BaseDashboardComponent implements OnInit {
 
       data: {
         datasets: [{
-          label: '',   
+          label: '',
           backgroundColor: "transparent",
           borderColor: "rgba(152, 235, 246,1)",
           fill: true,
@@ -67,7 +67,7 @@ export class BaseDashboardComponent implements OnInit {
       }
     });
   }
-  
+
   // Bar
   chartOptions = {
     responsive: true,
@@ -95,7 +95,7 @@ export class BaseDashboardComponent implements OnInit {
   chartPluginsPie = [];
 
   constructor(
-    private dashBoardService: DashBoardService
+    private dashBoardService: DashBoardService,
   ) { }
 
   Statistics = {
@@ -105,17 +105,30 @@ export class BaseDashboardComponent implements OnInit {
     "coutAccout": 0,
     "orders": 0
   };
+  listProductRating;
   ngOnInit(): void {
-    this.dashBoardService.getStatistics().subscribe(
-      dt => {
-        this.Statistics = dt.Data;
-        this.load = false;
-        console.log(this.Statistics)
-      },
-      err => {
-        console.log(err)
-      }
-    )
+    Promise.all([
+      this.getStatistics(),
+      this.getProductTopRating()
+    ]).then(dt => {
+      console.log(dt)
+      this.Statistics = dt[0].Data;
+      this.listProductRating=dt[1].Data
+      this.load = false;
+    })
   }
 
+  getProductTopRating(): Promise<any> {
+    return new Promise(async (resolve) => {
+      let d = await this.dashBoardService.getProductTopRating().toPromise();
+      resolve(d)
+    })
+  }
+
+  getStatistics(): Promise<any> {
+    return new Promise(async (resolve) => {
+      let d = await this.dashBoardService.getStatistics().toPromise();
+      resolve(d)
+    })
+  }
 }

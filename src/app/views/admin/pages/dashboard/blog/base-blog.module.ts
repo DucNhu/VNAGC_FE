@@ -11,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { DragDropModule } from "@angular/cdk/drag-drop";
 // bootstr
@@ -69,6 +70,7 @@ const routes: Routes = [
         DragDropModule,
 // bootstr
         NgbModule,
+        MatAutocompleteModule
     ],
     exports: [RouterModule]
 })

@@ -19,7 +19,8 @@
                                         <div class="mb-50">
                                             <label class="form-label" for="blogName">Food Name</label>
                                             <input type="text" class="form-control" placeholder="Blog Name"
-                                                formControlName="name" id="blogName" [ngClass]="isInvalid('name') ? 'error' : ''" />
+                                                formControlName="name" id="blogName"
+                                                [ngClass]="isInvalid('name') ? 'error' : ''" />
                                             <p class="error" *ngIf="formBlog.value.name==''">Field is required</p>
                                         </div>
                                     </div>
@@ -123,7 +124,8 @@
                                                 <div class="col-6">
                                                     <mat-form-field appearance="fill" class="w-100">
                                                         <mat-label>Unit time</mat-label>
-                                                        <mat-select placeholder="Unit time cook" class="filter-select" formControlName="unitTimeCook">
+                                                        <mat-select placeholder="Unit time cook" class="filter-select"
+                                                            formControlName="unitTimeCook">
                                                             <mat-option value="mins">
                                                                 Mins
                                                             </mat-option>
@@ -136,6 +138,28 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Metarial shop -->
+                                    <fieldset>
+                                        <legend class="h2_title_collapse" [attr.aria-expanded]="!isCollapsed.metarial"
+                                            aria-controls="collapseExample">Metarial
+
+                                        </legend>
+                                        <ul class="row">
+                                            <li class="col-md-4 col-6 profile-latest-img"
+                                                *ngFor="let p of listMetarialShop; let i = index">
+                                                {{p}}
+                                            </li>
+                                        </ul>
+                                        <!-- <div class="row">
+                                            <div class="col-md-4 col-6 profile-latest-img" *ngFor="let p of listProduct; let i = index">
+                                                <a href="#">
+                                                    <img [src]="p.banner_img" class="img-fluid rounded"
+                                                        alt="avatar img">
+                                                </a>
+                                            </div>
+                                        </div> -->
+                                    </fieldset>
 
                                     <!-- Metarial -->
                                     <fieldset>
@@ -294,7 +318,8 @@
                                                                     <label class="dz-message notBefore"
                                                                         [for]="'step_avatar'+i">Select
                                                                         banner</label>
-                                                                    <input type="file" hidden [id]="'step_avatar'+i" accept="image/*"
+                                                                    <input type="file" hidden [id]="'step_avatar'+i"
+                                                                        accept="image/*"
                                                                         (change)="updateListFile($event, i, 1)">
                                                                     <img [src]="item.value.avatar" alt="avatar"
                                                                         *ngIf="item.value.avatar" class="img-avatar">
@@ -391,7 +416,8 @@
                                                                     id="dpz-single-file">
                                                                     <label class="dz-message" [for]="'content_avatar'+i"
                                                                         for="avatar">Avatar</label>
-                                                                    <input type="file" hidden [id]="'content_avatar'+i" accept="image/*"
+                                                                    <input type="file" hidden [id]="'content_avatar'+i"
+                                                                        accept="image/*"
                                                                         (change)="updateListFile($event, i, 0, 0)">
                                                                     <img [src]="item.value.avatar" alt="avatar"
                                                                         *ngIf="item.value.avatar" class="img-avatar">

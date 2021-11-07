@@ -11,7 +11,9 @@
 .modal .modal-content { transform: translateY(100%)}
 /* End Model */
 .buy-now .btn { box-shadow: none !important; border: none !important}
-
+.font-weight-bold {
+    font-weight: 600!important;
+}
 /* /bs */
 /* Home */
 #homePage .navigation {

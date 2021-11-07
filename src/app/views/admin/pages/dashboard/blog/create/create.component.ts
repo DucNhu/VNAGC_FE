@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
 import {
   CdkDrag,
@@ -17,12 +17,18 @@ import { CategoryService } from 'src/app/core/_service/category/category.service
 import { HashtagService } from 'src/app/core/_service/hashtag/hashtag.service';
 import { productContent } from 'src/app/models/listSale';
 import { CustomValidators } from 'src/app/core/validators/CustomValidators';
+import { Observable } from 'rxjs';
+import { filter, map, startWith } from 'rxjs/operators';
+import { ProductService } from 'src/app/core/_service/product.service';
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css']
 })
 export class CreateBlogComponent implements OnInit {
+  myControl: FormControl = new FormControl();
+  filteredOptions: Observable<string[]>;
+
   listCategory = [];
   time = { hour: 13, minute: 30 };
   selectedHastags: any[];
@@ -39,6 +45,8 @@ export class CreateBlogComponent implements OnInit {
   avatar_cover;
   list_img_step: any = [{ data: '' }];
   list_img_content: any = [{ data: '' }];
+  listProduct;
+  listMetarialShop;
   blogId = null;
 
   loading = false;
@@ -51,7 +59,8 @@ export class CreateBlogComponent implements OnInit {
     private route: Router,
     private activatedRoute: ActivatedRoute,
     private categoryService: CategoryService,
-    private hashtagService: HashtagService
+    private hashtagService: HashtagService,
+    private productService: ProductService
   ) { this.registerFormBlog();
     this.userId = JSON.parse(sessionStorage.getItem("user")).id;
    }
@@ -60,22 +69,25 @@ export class CreateBlogComponent implements OnInit {
     Promise.all(
       [
         this.getCategory(),
-        this.getHashtag()
+        this.getHashtag(),
+        this.getProduct()
       ]
     ).then(
       (dt: any) => {
-        console.log(dt[1])
+        console.log(dt)
         this.listCategory = dt[0].Data;
         this.hastags = dt[1].Data;
+        this.listProduct = dt[2].Data;
+        console.log(this.listProduct)
         this.loading = false;
       },
       err => {
         this.loading = false;
       }
     )
-
+    
   }
-
+ 
   getCategory(): Promise<any> {
     return new Promise(async (resolve) => {
       const dt = await this.categoryService.getCategorys().toPromise();
@@ -86,6 +98,13 @@ export class CreateBlogComponent implements OnInit {
   getHashtag(): Promise<any> {
     return new Promise(async (resolve) => {
       const dt = await this.hashtagService.getHashtags().toPromise();
+      resolve(dt);
+    });
+  }
+
+  getProduct(): Promise<any> {
+    return new Promise(async (resolve) => {
+      const dt = await this.productService.getAllProducts().toPromise();
       resolve(dt);
     });
   }
