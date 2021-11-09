@@ -21,7 +21,7 @@ export class DashBoardService {
 
     getAllOrder() {
         let param = '?pageIndex=1&pageSize=10';
-        return this.helperService.getParam("Order/get-all-order", param);
+        return this.helperService.getParam("Dashboard/get-all-order", param);
     }
 
     getProductTopRating() {

@@ -63,10 +63,11 @@
                                         <div class="col-md-6 ps-0">
                                             <label class="form-label" for="summary">Summary</label>
                                             <textarea type="text" rows="3" class="form-control"
-                                                formControlName="summary" id="summary"></textarea>
+                                                [ngClass]="isInvalid('name') ? 'error' : ''" formControlName="summary"
+                                                id="summary"></textarea>
                                         </div>
                                         <div class="col-md-6 d-flex p-0">
-                                            <div class="col-sm-6 align-self-end">
+                                            <div class="col-sm-12 align-self-end">
                                                 <div action="#" class="dropzone dropzone-area dz-clickable"
                                                     id="dpz-single-file" [ngClass]="avatar == '' ? 'error' : ''">
                                                     <label class="dz-message" for="avatar">Avatar</label>
@@ -89,7 +90,7 @@
                                         </div>
                                     </div>
                                     <div class="row mb-50">
-                                        <div class="col-md-6 pe-0">
+                                        <div class="col-md-6 pe-0" hidden>
                                             <label class="form-label" for="url_youtube">url
                                                 youtube
                                                 <span>
@@ -145,24 +146,39 @@
                                             aria-controls="collapseExample">Metarial
 
                                         </legend>
-                                        <ul class="row">
-                                            <li class="col-md-4 col-6 profile-latest-img"
-                                                *ngFor="let p of listMetarialShop; let i = index">
-                                                {{p}}
+                                        <ul class="row list-style-none">
+                                            <li class="col-1 cookandmeal-post"
+                                                *ngFor="let item of listMetarialShop; let i = index">
+                                                <div class="post-categories" (click)="unshifMetarial(i)">
+                                                    <img style="vertical-align:middle;" aria-hidden
+                                                        src="{{item.banner_img}}" height="25" />
+                                                    <span>{{ item.name }}</span>
+                                                </div>
                                             </li>
                                         </ul>
-                                        <!-- <div class="row">
-                                            <div class="col-md-4 col-6 profile-latest-img" *ngFor="let p of listProduct; let i = index">
-                                                <a href="#">
-                                                    <img [src]="p.banner_img" class="img-fluid rounded"
-                                                        alt="avatar img">
-                                                </a>
-                                            </div>
-                                        </div> -->
+                                        <input type="text" class="form-control" placeholder="Enter your metarial"
+                                            [formControl]="myControl" (keyup)="searchMetarial(myControl.value)">
+                                        <ul class="row list-style-none">
+                                            <li class="col-1 cookandmeal-post" *ngFor="let item of listProduct">
+                                                <div class="post-categories cursor-pointer"
+                                                    (click)="pushMetarial(item)">
+                                                    <img style="vertical-align:middle;" aria-hidden
+                                                        src="{{item.banner_img}}" height="25" />
+                                                    <span>{{ item.name }}</span>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </fieldset>
-
+                                    <div class="col-md-12">
+                                        <div class="mb-50">
+                                            <label class="form-label" for="des">Description</label>
+                                            <textarea type="text" rows="3" class="form-control"
+                                                [ngClass]="isInvalid('name') ? 'error' : ''"
+                                                formControlName="description" id="des"></textarea>
+                                        </div>
+                                    </div>
                                     <!-- Metarial -->
-                                    <fieldset>
+                                    <!-- <fieldset>
                                         <legend (click)="metarialC.toggle()" class="h2_title_collapse"
                                             [attr.aria-expanded]="!isCollapsed.metarial"
                                             aria-controls="collapseExample">Metarial
@@ -261,7 +277,7 @@
                                                 </div>
                                             </ng-container>
                                         </div>
-                                    </fieldset>
+                                    </fieldset> -->
 
                                     <!-- Step by Step -->
                                     <fieldset>
@@ -343,20 +359,6 @@
                                                             </svg>
                                                         </button>
                                                     </div>
-                                                </div>
-                                                <div class="mb-50">
-                                                    <button mat-stroked-button (click)="addStep()">
-                                                        Add new step <sup>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" viewBox="0 0 24 24" fill="none"
-                                                                stroke="currentColor" stroke-width="2"
-                                                                stroke-linecap="round" stroke-linejoin="round"
-                                                                class="feather feather-plus">
-                                                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                                            </svg>
-                                                        </sup>
-                                                    </button>
                                                 </div>
                                             </ng-container>
                                         </div>
@@ -458,32 +460,13 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <div class="mb-50">
-                                                    <button mat-stroked-button (click)="addContent()">
-                                                        Add new content <sup>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" viewBox="0 0 24 24" fill="none"
-                                                                stroke="currentColor" stroke-width="2"
-                                                                stroke-linecap="round" stroke-linejoin="round"
-                                                                class="feather feather-plus">
-                                                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                                            </svg>
-                                                        </sup>
-                                                    </button>
-                                                </div>
+
                                             </ng-container>
                                         </div>
 
                                     </fieldset>
 
-                                    <div class="col-md-12">
-                                        <div class="mb-50">
-                                            <label class="form-label" for="des">The end</label>
-                                            <textarea type="text" rows="3" class="form-control"
-                                                formControlName="description" id="des"></textarea>
-                                        </div>
-                                    </div>
+
 
                                     <div class="col-12 d-flex flex-sm-row flex-column mt-2">
                                         <button type="submit"

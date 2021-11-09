@@ -226,3 +226,8 @@ fieldset .box-step {
     background-color: #fff;
     border-radius: 4px !important;
 }
+
+
+.list-style-none {
+  list-style: none
+}

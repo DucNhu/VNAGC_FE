@@ -105,7 +105,7 @@ export class UpdateComponent implements OnInit {
       "user_id": this.userId,
       "category_id": form.get('category').value,
       "productIds": [
-        1
+        0
       ],
 
       "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),

@@ -46,13 +46,13 @@ export class CreateBlogComponent implements OnInit {
   list_img_step: any = [{ data: '' }];
   list_img_content: any = [{ data: '' }];
   listProduct;
-  listMetarialShop;
+  listMetarialShop = [];
   blogId = null;
 
-  loading = false;
+  loading = true;
   isSuccess = false;
   userId;
-  
+
   constructor(
     private fb: FormBuilder,
     private blogService: BlogService,
@@ -61,9 +61,10 @@ export class CreateBlogComponent implements OnInit {
     private categoryService: CategoryService,
     private hashtagService: HashtagService,
     private productService: ProductService
-  ) { this.registerFormBlog();
+  ) {
+    this.registerFormBlog();
     this.userId = JSON.parse(sessionStorage.getItem("user")).id;
-   }
+  }
 
   ngOnInit(): void {
     Promise.all(
@@ -85,9 +86,9 @@ export class CreateBlogComponent implements OnInit {
         this.loading = false;
       }
     )
-    
+
   }
- 
+
   getCategory(): Promise<any> {
     return new Promise(async (resolve) => {
       const dt = await this.categoryService.getCategorys().toPromise();
@@ -123,17 +124,21 @@ export class CreateBlogComponent implements OnInit {
         hashTag: [null],
         cooking_time: [null],
         unitTimeCook: ['mins'],
-        summary: [null],
-        description: [null],
+        summary: [null, Validators.compose([
+          Validators.required
+        ])],
+        description: [null, Validators.compose([
+          Validators.required
+        ])],
         url_video_utube: [null],
 
-        metarial: this.fb.array([]),
+        // metarial: this.fb.array([]),
         step: this.fb.array([]),
         content: this.fb.array([]),
       }
     )
     this.addContent();
-    this.addMetarial();
+    // this.addMetarial();
     this.addStep();
   }
 
@@ -369,7 +374,7 @@ export class CreateBlogComponent implements OnInit {
   createBlog() {
     let form = this.formBlog;
     if (form.invalid || this.avatar == null || this.avatar == '') {
-      if (this.avatar == null || this.avatar == '') {this.avatar='';}
+      if (this.avatar == null || this.avatar == '') { this.avatar = ''; }
       this.formBlog.markAllAsTouched();
       window.scrollTo(0, 0)
       return
@@ -387,12 +392,11 @@ export class CreateBlogComponent implements OnInit {
       "status": 1,
       "user_id": this.userId,
       "category_id": form.get('category').value,
-      "productIds": [
-        0
-      ],
+      "productIds": [],
       "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
     }
+    this.listMetarialShop.length > 0 ? data.productIds = this.listMetarialShop.map(e => e.id) : 0
     this.loading = true;
     this.blogService.create(data).subscribe(
       dt => {
@@ -491,4 +495,35 @@ export class CreateBlogComponent implements OnInit {
   }
 
   // End Logic Image
+
+  // Add metarial 
+  pushMetarial(val) {
+    if (this.listMetarialShop.length == 0) {
+      this.listMetarialShop.push(val);
+    }
+    else {
+      for (let index = 0; index < this.listMetarialShop.length; index++) {
+        let e = this.listMetarialShop[index];
+        if (val.id != e.id && (index == this.listMetarialShop.length - 1)) {
+          this.listMetarialShop.push(val);
+          break;
+        }
+        if (val.id == e.id) {
+          this.listMetarialShop.splice(index, 1);
+        }
+      }
+    }
+  }
+
+  unshifMetarial(idex) {
+    this.listMetarialShop.splice(idex, 1);
+  }
+  searchMetarial(val) {
+    this.listProduct = this.filterStates(val);
+  }
+
+  filterStates(name: string) {
+    return this.listProduct.filter(state =>
+      state.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  }
 }
