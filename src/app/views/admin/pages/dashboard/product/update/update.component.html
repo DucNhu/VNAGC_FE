@@ -4,23 +4,6 @@
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper container-xxl p-0">
         <div class="content-header row">
-            <div class="content-header-left col-md-9 col-12 mb-2">
-                <div class="row breadcrumbs-top">
-                    <div class="col-12">
-                        <h2 class="content-header-title float-start mb-0">Form Layouts</h2>
-                        <div class="breadcrumb-wrapper">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a>
-                                </li>
-                                <li class="breadcrumb-item"><a href="#">Forms</a>
-                                </li>
-                                <li class="breadcrumb-item active"><a href="#">Form Layouts</a>
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
                 <div class="mb-1 breadcrumb-right">
                     <div class="dropdown">
@@ -44,10 +27,12 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <!-- <form class="form form-horizontal"> -->
+                                <ul class="nav nav-pills" role="tablist">
+                                    <h2 class="pl-0">update Product</h2>
+                                </ul>
                                 <div class="row">
                                     <mat-horizontal-stepper linear #stepper>
-                                        
+
                                         <mat-step [stepControl]="formInfor" [editable]="isEditable">
                                             <form [formGroup]="formInfor" autocomplete="true">
                                                 <ng-template matStepLabel>Infor</ng-template>
@@ -71,7 +56,7 @@
                                                                 <mat-label>Category</mat-label>
                                                                 <mat-select formControlName="category">
                                                                     <mat-option *ngFor="let i of listCategory"
-                                                                         [value]="i.id">{{i.name}}</mat-option>
+                                                                        [value]="i.id">{{i.name}}</mat-option>
                                                                 </mat-select>
                                                             </mat-form-field>
                                                         </div>
@@ -186,19 +171,29 @@
                                                         </div>
                                                         <div class="col-sm-9 d-flex justify-content-around">
                                                             <div class="col-sm-6">
-                                                                <div action="#" class="dropzone dropzone-area dz-clickable" id="dpz-single-file">
-                                                                    <label class="dz-message" for="avatar">Avatar</label>
-                                                                    <input type="file" hidden id="avatar" (change)="updateFile($event, 1)" accept="image/*">
-                                                                    <img [src]="avatar" alt="avatar" *ngIf="avatar" class="img-avatar">
+                                                                <div action="#"
+                                                                    class="dropzone dropzone-area dz-clickable"
+                                                                    id="dpz-single-file">
+                                                                    <label class="dz-message"
+                                                                        for="avatar">Avatar</label>
+                                                                    <input type="file" hidden id="avatar"
+                                                                        (change)="updateFile($event, 1)"
+                                                                        accept="image/*">
+                                                                    <img [src]="avatar" alt="avatar" *ngIf="avatar"
+                                                                        class="img-avatar">
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                                <div action="#" class="dropzone dropzone-area dz-clickable" id="dpz-single-file-coverr">
+                                                                <div action="#"
+                                                                    class="dropzone dropzone-area dz-clickable"
+                                                                    id="dpz-single-file-coverr">
                                                                     <label class="dz-message" for="avatar_cover">Avatar
                                                                         cover</label>
-                                                                    <input type="file" hidden id="avatar_cover" (change)="updateFile($event, 0)"
+                                                                    <input type="file" hidden id="avatar_cover"
+                                                                        (change)="updateFile($event, 0)"
                                                                         accept="image/*">
-                                                                    <img [src]="avatar_cover" alt="avatar cover" *ngIf="avatar_cover" class="img-avatar">
+                                                                    <img [src]="avatar_cover" alt="avatar cover"
+                                                                        *ngIf="avatar_cover" class="img-avatar">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -211,46 +206,68 @@
                                                                 other</label>
                                                         </div>
                                                         <div class="col-sm-9 row list_img_product--feature">
-                                                            <ng-container *ngFor="let item of list_img_feature; let i = index">
+                                                            <ng-container
+                                                                *ngFor="let item of list_img_feature; let i = index">
                                                                 <div class="col-sm-4" *ngIf="item.dataByDb==true">
-                                                                    <div action="#" class="dropzone dropzone-area dz-clickable" id="dpz-single-file-feature">
-                                                                        <label class="dz-message" [for]="'feature_'+i">Avatar</label>
-                                                                        <input type="file" hidden [id]="'feature_'+i" (change)="updateListFile($event, i)"
+                                                                    <div action="#"
+                                                                        class="dropzone dropzone-area dz-clickable"
+                                                                        id="dpz-single-file-feature">
+                                                                        <label class="dz-message"
+                                                                            [for]="'feature_'+i">Avatar</label>
+                                                                        <input type="file" hidden [id]="'feature_'+i"
+                                                                            (change)="updateListFile($event, i)"
                                                                             accept="image/*">
-                                                                        <img [src]="item.avatar_feature" alt="avatar cover" *ngIf="item.avatar_feature"
+                                                                        <img [src]="item.avatar_feature"
+                                                                            alt="avatar cover"
+                                                                            *ngIf="item.avatar_feature"
                                                                             class="img-avatar">
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-4" *ngIf="item.dataByDb==false && item.avatar_feature!=''">
-                                                                    <div action="#" class="dropzone dropzone-area dz-clickable" id="dpz-single-file-feature">
-                                                                        <label class="dz-message" [for]="'feature_'+i">Avatar</label>
-                                                                        <input type="file" hidden [id]="'feature_'+i" (change)="updateListFile($event, i)"
+                                                                <div class="col-sm-4"
+                                                                    *ngIf="item.dataByDb==false && item.avatar_feature!=''">
+                                                                    <div action="#"
+                                                                        class="dropzone dropzone-area dz-clickable"
+                                                                        id="dpz-single-file-feature">
+                                                                        <label class="dz-message"
+                                                                            [for]="'feature_'+i">Avatar</label>
+                                                                        <input type="file" hidden [id]="'feature_'+i"
+                                                                            (change)="updateListFile($event, i)"
                                                                             accept="image/*">
-                                                                        <img [src]="item.avatar_feature" alt="avatar cover" *ngIf="item.avatar_feature"
+                                                                        <img [src]="item.avatar_feature"
+                                                                            alt="avatar cover"
+                                                                            *ngIf="item.avatar_feature"
                                                                             class="img-avatar">
                                                                     </div>
                                                                 </div>
                                                             </ng-container>
                                                             <div class="col-sm-4" *ngIf="list_img_feature.length <= 6">
-                                                                <div action="#" class="dropzone dropzone-area dz-clickable">
-                                                                    <label class="dz-message" for="feature" (click)="addSlotImgFeature()">
-                                                                        <svg style="transform: scale(1.5)" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle">
+                                                                <div action="#"
+                                                                    class="dropzone dropzone-area dz-clickable">
+                                                                    <label class="dz-message" for="feature"
+                                                                        (click)="addSlotImgFeature()">
+                                                                        <svg style="transform: scale(1.5)"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            width="24" height="24" viewBox="0 0 24 24"
+                                                                            fill="none" stroke="currentColor"
+                                                                            stroke-width="2" stroke-linecap="round"
+                                                                            stroke-linejoin="round"
+                                                                            class="feather feather-plus-circle">
                                                                             <circle cx="12" cy="12" r="10"></circle>
                                                                             <line x1="12" y1="8" x2="12" y2="16"></line>
                                                                             <line x1="8" y1="12" x2="16" y2="12"></line>
                                                                         </svg>
                                                                     </label>
                                                                     <input type="file" hidden id="feature"
-                                                                        (change)="updateListFile($event, list_img_feature.length-1)" accept="image/*">
+                                                                        (change)="updateListFile($event, list_img_feature.length-1)"
+                                                                        accept="image/*">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <button class="btn btn-primary me-1" matStepperPrevious>Back</button>
+                                                    <button class="btn btn-primary me-1"
+                                                        matStepperPrevious>Back</button>
                                                     <button class="btn btn-primary me-1" matStepperNext>Next</button>
                                                 </div>
                                             </div>

@@ -48,6 +48,8 @@ export class CategoryComponent implements OnInit {
       (dt: any) => {
         this.listCategory = dt[0].Data;
         this.listCategory.forEach((e, i) => {
+          this.listCategory[i].avatar = this.urlImg + this.listCategory[i].avatar;
+
           this.listCategory[i].index = i;
         });
         this.load = false;
@@ -83,7 +85,6 @@ export class CategoryComponent implements OnInit {
     this.load = true;
     this.categoryService.createCategory(data).subscribe(
       dt => {
-        this.load = false;
         window.location.reload();
       },
       err => {
@@ -96,13 +97,13 @@ export class CategoryComponent implements OnInit {
     if (this.editNameCategory.trim() == '') {
       return
     }
+    let data = new FormData();
+    data.append('id', this.editId.toString());
+    data.append('name', this.editNameCategory);
+    data.append('file', this.imgEdit, this.imgEdit.name);
     this.load = true;
-    let name = {
-      "id": this.editId,
-      "name": this.editNameCategory,
-    };
     this.newCategory = '';
-    this.categoryService.updateCategory(name).subscribe(
+    this.categoryService.updateCategory(data).subscribe(
       dt => {
         this.load = false;
         this.editId = 0; this.isEdit = false;
@@ -168,6 +169,33 @@ export class CategoryComponent implements OnInit {
     
   }
 
+
+  imgEdit;
+  this
+  loadImgEdit(event, i) {
+    let reader = new FileReader();
+    this.imgEdit = event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+      reader.readAsDataURL(this.imgEdit);
+      reader.onload = () => {
+        const img = new Image();
+
+        img.src = reader.result as string;
+        img.onload = () => {
+          var typeFile = this.imgEdit.name.split('.').pop();
+          // this.avatar = {
+          //   file_name: this.imgEdit.name.replaceAll(/[^a-zA-Z0-9_\-]/g, '').replaceAll(typeFile, '') + '.' + typeFile,
+          //   file_data: reader.result
+          // }
+          this.listCategory[i].avatar = reader.result
+        }
+      }
+    }
+    else {
+      console.log("IL")
+    }
+
+  }
 
   openModal(template: TemplateRef<any>, element) {
     this.Category_delete.id = element.id;

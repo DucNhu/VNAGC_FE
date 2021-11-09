@@ -5,7 +5,7 @@
             <mat-tab label="Category">
                 <section id="ecommerce-products" class="grid-view">
                     <div class="card ecommerce-card">
-                        <div action="#" class="dropzone dropzone-area dz-clickable" id="dpz-single-file-coverr">
+                        <div  class="dropzone dropzone-area dz-clickable" id="dpz-single-file-coverr">
                             <label class="dz-message" for="avatar">Avatar
                             </label>
                             <input type="file" hidden id="avatar" accept="image/*" (change)="loadImg($event)">
@@ -25,10 +25,15 @@
                         </div>
                     </div>
                     <div class="card ecommerce-card" *ngFor="let item of listCategory; let i = index">
-                        <div class="item-img text-center">
+                        <!-- <div class="item-img text-center">
                             <a src="javascript:void(0)">
-                                <img class="img-fluid card-img-top" [src]="urlImg + item.avatar" [alt]="item.avatar">
                             </a>
+                        </div> -->
+                        <div class="dropzone dropzone-area dz-clickable" id="dpz-single-file-coverr">
+                            <label class="dz-message" [for]="'avat_edit'+i">Avatar
+                            </label>
+                            <input type="file" hidden [id]="'avat_edit'+i" accept="image/*" *ngIf="isEdit" (change)="loadImgEdit($event, i)">
+                                <img class="img-avatar" [src]="item.avatar" [alt]="item.avatar">
                         </div>
                         <div class="card-body">
                             <h6 class="item-name">

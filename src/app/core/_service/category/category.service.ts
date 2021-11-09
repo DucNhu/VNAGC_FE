@@ -24,7 +24,7 @@ export class CategoryService {
     updateCategory(data) {
         let param = '';
         param += '?name=' + data;
-        return this.helperService.put("Category/edit", data);
+        return this.helperService.postUrl("Category/edit", data, '');
     }
 
     deleteCategory(id) {

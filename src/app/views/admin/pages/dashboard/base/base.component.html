@@ -40,7 +40,7 @@
                     <!-- Greetings Card ends -->
 
                     <!-- Subscribers Chart Card starts -->
-                    <div class="col-lg-6 col-sm-6 col-12">
+                    <div class="col-lg-6 col-sm-12 col-12">
                         <div class="card card-statistics">
                             <div class="card-header">
                                 <h4 class="card-title">Statistics</h4>
@@ -171,20 +171,32 @@
                     <!-- Support Tracker Chart Card starts -->
                     <div class="col-lg-6 col-12">
                         <div class="card">
-                            <div class="card-header d-flex justify-content-between pb-0">
-                                <h4 class="card-title">List of posts with many views</h4>
-                                <div class="dropdown chart-dropdown">
-                                    <button class="btn btn-sm border-0 dropdown-toggle p-50" type="button"
-                                        id="dropdownItem4" data-bs-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                        Last Month
-                                    </button>
+                            <div class="card mb-3">
+                        
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-4">
+                                        <div class="flex-grow-1">
+                                            <h5 class="mb-1">Top Product Popular</h5>
+                                        </div>
+                                    </div>
+                        
+                                    <div class="d-flex align-items-center mb-1" *ngFor="let item of listProductPopular; let i = index">
+                                        <div class="d-flex align-items-center justify-content-center me-3 width-50 height-50">
+                                            <img [src]="item.banner_img" alt="avatar" class="ms-100 mh-100 rounded img_product">
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div>
+                                                <div class="text-dark font-weight-bold">{{item.name}}</div>
+                                                <div class="fs-13px">{{'$' + item.price}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="ps-3 text-center">
+                                            <div class="text-dark font-weight-bold">{{item.rateAvg}}</div>
+                                            <div class="fs-13px">Rating Avg</div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                <canvas baseChart chartType="bar" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
-                                    [plugins]="chartPlugins" [legend]="chartLegend">
-                                </canvas>
+                        
                             </div>
                         </div>
                     </div>
@@ -205,35 +217,19 @@
                     <!-- Sales Stats Chart Card starts -->
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="card">
-                            <div class="card-header d-flex justify-content-between align-items-start pb-1">
-                                <div>
-                                    <h4 class="card-title mb-25">Sales</h4>
-                                    <p class="card-text">Last 6 months</p>
-                                </div>
+                            <div class="card-header d-flex justify-content-between pb-0">
+                                <h4 class="card-title">List of posts with many views</h4>
                                 <div class="dropdown chart-dropdown">
-                                    <i data-feather="more-vertical" class="font-medium-3 cursor-pointer"
-                                        data-bs-toggle="dropdown"></i>
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item" href="#">Last 28 Days</a>
-                                        <a class="dropdown-item" href="#">Last Month</a>
-                                        <a class="dropdown-item" href="#">Last Year</a>
-                                    </div>
+                                    <button class="btn btn-sm border-0 dropdown-toggle p-50" type="button" id="dropdownItem4"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Last Month
+                                    </button>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="d-inline-block me-1">
-                                    <div class="d-flex align-items-center">
-                                        <i data-feather="circle" class="font-small-3 text-primary me-50"></i>
-                                        <h6 class="mb-0">Sales</h6>
-                                    </div>
-                                </div>
-                                <div class="d-inline-block">
-                                    <div class="d-flex align-items-center">
-                                        <i data-feather="circle" class="font-small-3 text-info me-50"></i>
-                                        <h6 class="mb-0">Visits</h6>
-                                    </div>
-                                </div>
-                                <div id="sales-visit-chart" class="mt-50"></div>
+                                <canvas baseChart chartType="bar" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
+                                    [plugins]="chartPlugins" [legend]="chartLegend">
+                                </canvas>
                             </div>
                         </div>
                     </div>

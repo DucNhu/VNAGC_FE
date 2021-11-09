@@ -94,9 +94,6 @@ export class BaseDashboardComponent implements OnInit {
   chartLegendPie = true;
   chartPluginsPie = [];
 
-  constructor(
-    private dashBoardService: DashBoardService,
-  ) { }
 
   Statistics = {
     "countProduct": 0,
@@ -106,14 +103,23 @@ export class BaseDashboardComponent implements OnInit {
     "orders": 0
   };
   listProductRating;
+  listProductPopular;
+  constructor(
+    private dashBoardService: DashBoardService,
+  ) { }
+
   ngOnInit(): void {
     Promise.all([
       this.getStatistics(),
-      this.getProductTopRating()
+      this.getProductTopRating(),
+      this.getProductPopular(),
+      this.getTopBlog()
     ]).then(dt => {
       console.log(dt)
       this.Statistics = dt[0].Data;
-      this.listProductRating=dt[1].Data
+      this.listProductRating=dt[1].Data;
+      this.listProductPopular = dt[2].Data;
+      console.log(dt[3]);
       this.load = false;
     })
   }
@@ -128,6 +134,20 @@ export class BaseDashboardComponent implements OnInit {
   getStatistics(): Promise<any> {
     return new Promise(async (resolve) => {
       let d = await this.dashBoardService.getStatistics().toPromise();
+      resolve(d)
+    })
+  }
+
+  getProductPopular(): Promise<any> {
+    return new Promise(async (resolve) => {
+      let d = await this.dashBoardService.getStatistics().toPromise();
+      resolve(d)
+    })
+  }
+
+  getTopBlog() {
+    return new Promise(async (resolve) => {
+      let d = await this.dashBoardService.getTopBlog().toPromise();
       resolve(d)
     })
   }

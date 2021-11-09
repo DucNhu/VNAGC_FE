@@ -27,4 +27,13 @@ export class DashBoardService {
     getProductTopRating() {
         return this.helperService.getAll("Products/get-product-top-rating");
     }
+
+    getProductPopular() {
+        return this.helperService.getAll("Products/get-product-popular");
+    }
+    
+
+    getTopBlog() {
+        return this.helperService.getAll("Dashboard/get-Top-Blog");
+    }
 }

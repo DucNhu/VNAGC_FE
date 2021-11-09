@@ -387,7 +387,9 @@ export class CreateBlogComponent implements OnInit {
       "status": 1,
       "user_id": this.userId,
       "category_id": form.get('category').value,
-
+      "productIds": [
+        0
+      ],
       "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
     }
