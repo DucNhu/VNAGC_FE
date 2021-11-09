@@ -50,6 +50,23 @@
 .blog-posts-list .cookandmeal-post .post-read-time {
     color: var(--color-grey);
 }
+
+.cookandmeal-post-item {
+  margin-top:12px;
+}
+.post-categories-name {
+  width: 100%;
+  text-align: center;
+  display:block;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.post-categories-product {
+  flex-direction: column;
+}
 /* End Blog */
 
 /* End Home */
