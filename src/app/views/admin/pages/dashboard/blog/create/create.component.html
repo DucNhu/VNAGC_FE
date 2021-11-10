@@ -156,15 +156,15 @@
                                                 </div>
                                             </li>
                                         </ul>
-                                        <input type="text" class="form-control" placeholder="Enter your metarial"
+                                        <input type="text" class="create-input form-control" placeholder="Enter your metarial"
                                             [formControl]="myControl" (keyup)="searchMetarial(myControl.value)">
-                                        <ul class="row list-style-none">
-                                            <li class="col-1 cookandmeal-post" *ngFor="let item of listProduct">
-                                                <div class="post-categories cursor-pointer"
+                                        <ul class="row list-style-none" style="padding-left: 0">
+                                            <li class="col-2 cookandmeal-post cookandmeal-post-item" *ngFor="let item of listProduct">
+                                                <div class="post-categories post-categories-product cursor-pointer"
                                                     (click)="pushMetarial(item)">
                                                     <img style="vertical-align:middle;" aria-hidden
-                                                        src="{{item.banner_img}}" height="25" />
-                                                    <span>{{ item.name }}</span>
+                                                        src="{{item.banner_img}}" height="50" />
+                                                    <span class="post-categories-name">{{ item.name }}</span>
                                                 </div>
                                             </li>
                                         </ul>
