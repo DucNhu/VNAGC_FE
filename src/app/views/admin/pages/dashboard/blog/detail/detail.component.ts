@@ -26,7 +26,7 @@ export class DetailComponent implements OnInit {
       dt => {
 
         this.loading = false;
-        this.blog = dt[0];
+        this.blog = dt[0].Data;
         this.blog.metarial = dt[1];
         this.blog.content = dt[2];
         this.blog.step = dt[3];

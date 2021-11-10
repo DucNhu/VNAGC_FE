@@ -13,7 +13,7 @@ export class blog {
     "category_id": number;
     "create_at": string;
     "update_at": string;
-
+    hash_tags:[];
     "metarial": [{
         "id": number;
         "title": string;
