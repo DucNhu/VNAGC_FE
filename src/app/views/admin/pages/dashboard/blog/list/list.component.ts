@@ -54,5 +54,17 @@ export class ListBlogComponent implements OnInit {
     )
   }
 
+  deleteProduct(id, index) {
+    if (confirm("Delete ok?")) {
+      this.blogService.delete(id).subscribe(
+        dt => {
+          this.listBlog.splice(index, 1)
+        },
+        err => {
+          this.loading = false;
+        }
+      )
+    }
+  }
 }
 
