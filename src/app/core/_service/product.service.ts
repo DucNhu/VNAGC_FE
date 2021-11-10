@@ -28,7 +28,7 @@ export class ProductService {
   }
 
   delete(id) {
-    return this.helperService.delete("Products", id);
+    return this.helperService.delete("Products/remove", id);
   }
 
   GetImgProductFeature(id) {

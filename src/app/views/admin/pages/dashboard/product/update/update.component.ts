@@ -116,7 +116,7 @@ export class UpdateProductComponent implements OnInit {
       "unit": form.get('unit').value,
       "storage_instructions": form.get('storage_instructions').value,
       "status": form.get('active').value ? 1 : 0,
-      
+      "view": this.product.view,
       "seller_id": this.product.seller_id,
       "create_at": this.product.create_at,
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() ,

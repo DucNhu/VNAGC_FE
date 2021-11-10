@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DashBoardService } from 'src/app/core/_service/admin/dashBoard.service';
 import { AuthenService } from 'src/app/core/_service/authen/authen.service';
+import { CategoryService } from 'src/app/core/_service/category/category.service';
 
 @Component({
   selector: 'app-member',
@@ -8,10 +9,13 @@ import { AuthenService } from 'src/app/core/_service/authen/authen.service';
   styleUrls: ['./member.component.css']
 })
 export class MemberComponent implements OnInit {
-  listOrder = []
+  listMember = [];
+  urlImg = this.categoryService.urlImg;
+
   load = true;
   active = 0;
   constructor(
+    private categoryService: CategoryService,
     private admin: DashBoardService,
     private authenservice: AuthenService
   ) { }
@@ -20,9 +24,13 @@ export class MemberComponent implements OnInit {
     Promise.all(
       [this.getAllMember()]
     ).then(
-      dt => {
-        this.listOrder = dt[0].Data.Items;
+      (dt) => {
+        this.listMember = dt[0];
+        this.listMember.forEach(
+          e => e.avatar ? e.avatar = this.urlImg + e.avatar : e.avatar = 'assets/images/avatars/default-avatar.jpg'
+        )
         this.load = false;
+        console.log(this.listMember)
       }
     )
   }
@@ -36,15 +44,4 @@ export class MemberComponent implements OnInit {
     )
   }
 
-  publicAccount(userId, status) {
-    this.load = true
-    this.authenservice.activeAcc(userId).subscribe(
-      (dt: any) => {
-        this.load = false;
-      },
-      err => {
-        this.load = false;
-      }
-    )
-  }
 }
