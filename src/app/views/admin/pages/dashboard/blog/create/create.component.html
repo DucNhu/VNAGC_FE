@@ -60,13 +60,13 @@
                                         </mat-form-field>
                                     </div>
                                     <div class="mb-50 row mx-0">
-                                        <div class="col-md-6 ps-0">
+                                        <div class="col-md-4 ps-0">
                                             <label class="form-label" for="summary">Summary</label>
                                             <textarea type="text" rows="3" class="form-control"
                                                 [ngClass]="isInvalid('name') ? 'error' : ''" formControlName="summary"
                                                 id="summary"></textarea>
                                         </div>
-                                        <div class="col-md-6 d-flex p-0">
+                                        <div class="col-md-4 d-flex p-0">
                                             <div class="col-sm-12 align-self-end">
                                                 <div action="#" class="dropzone dropzone-area dz-clickable"
                                                     id="dpz-single-file" [ngClass]="avatar == '' ? 'error' : ''">
@@ -76,7 +76,7 @@
                                                     <img [src]="avatar" alt="avatar" *ngIf="avatar" class="img-avatar">
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6 align-self-end">
+                                            <div class="col-sm-12 align-self-end">
                                                 <div action="#" class="dropzone dropzone-area dz-clickable"
                                                     id="dpz-single-file-coverr">
                                                     <label class="dz-message" for="avatar_cover">Avatar
@@ -89,7 +89,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mb-50">
+                                    <div class="row mb-50" style="padding: 16px 0 0 0">
                                         <div class="col-md-6 pe-0" hidden>
                                             <label class="form-label" for="url_youtube">url
                                                 youtube
@@ -146,19 +146,20 @@
                                             aria-controls="collapseExample">Metarial
 
                                         </legend>
-                                        <ul class="row list-style-none">
-                                            <li class="col-1 cookandmeal-post"
+                                        <ul class="row list-style-none cookandmeal-post-listx scrollbar-x" style="padding-left: 0 ; margin-left: 0">
+                                            <li class="col-2 cookandmeal-post cookandmeal-post-item"
                                                 *ngFor="let item of listMetarialShop; let i = index">
-                                                <div class="post-categories" (click)="unshifMetarial(i)">
+                                                <div class="post-categories post-categories-product" 
+                                                    (click)="unshifMetarial(i)">
                                                     <img style="vertical-align:middle;" aria-hidden
-                                                        src="{{item.banner_img}}" height="25" />
-                                                    <span>{{ item.name }}</span>
+                                                        src="{{item.banner_img}}" height="50" />
+                                                    <span class="post-categories-name">{{ item.name }}</span>
                                                 </div>
                                             </li>
                                         </ul>
                                         <input type="text" class="create-input form-control" placeholder="Enter your metarial"
                                             [formControl]="myControl" (keyup)="searchMetarial(myControl.value)">
-                                        <ul class="row list-style-none" style="padding-left: 0">
+                                        <ul class="row list-style-none cookandmeal-post-list scrollbar-y" style="padding-left: 0">
                                             <li class="col-2 cookandmeal-post cookandmeal-post-item" *ngFor="let item of listProduct">
                                                 <div class="post-categories post-categories-product cursor-pointer"
                                                     (click)="pushMetarial(item)">
