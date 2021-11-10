@@ -13,7 +13,28 @@ export class blog {
     "category_id": number;
     "create_at": string;
     "update_at": string;
+    "steps":string;
     hash_tags:[];
+    "comments": [{
+        "id": number,
+        "description": string,
+        "createdDate": string,
+        "user_name": string,
+        "user_avatar": string,
+        "parent_id": number,
+        "comment_replies": []
+    }];
+    "author": {
+        "id": string,
+        "fullName": string,
+        "phoneNumber": string,
+        "email": string,
+        "avatar": string,
+        "isAdmin": boolean,
+        "type": number,
+        "status": boolean,
+        "countBlog": number
+    }
     "metarial": [{
         "id": number;
         "title": string;
