@@ -12,6 +12,7 @@ import { ChartsModule } from "@rinminase/ng-charts";
 import { LoadModule } from 'src/app/core/component/load/load.module';
 import { MatSelectModule } from '@angular/material/select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProfileModule } from 'src/app/views/client/pages/profile/profile.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ChartsModule,
     LoadModule,
     NgbModule,
-    MatSelectModule
+    MatSelectModule,
+    ProfileModule
   ]
 })
 export class DashboardModule { }

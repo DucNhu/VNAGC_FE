@@ -17,19 +17,17 @@
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Count Blog</th>
-                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of listOrder">
+                                <tr *ngFor="let item of listMember">
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="avatar rounded">
                                                 <div class="avatar-content">
-                                                    <span class="avatar"><img
-                                                            src="https://scontent.fhan2-4.fna.fbcdn.net/v/t1.6435-9/151261077_1315440518813613_5947797178231448875_n.jpg?_nc_cat=104&amp;ccb=1-5&amp;_nc_sid=09cbfe&amp;_nc_ohc=1M41Y_aHNWAAX_iGiqH&amp;_nc_ht=scontent.fhan2-4.fna&amp;oh=77074b8b06a6535b467a3b3cc65490e3&amp;oe=617D0D7F"
-                                                            alt="avatar" height="40" width="40" class="round"><span
-                                                            class="avatar-status-online"></span></span>
+                                                    <span class="avatar m-0"><img
+                                                            [src]="item.avatar"
+                                                            alt="avatar" height="40" width="40" class="rounded-circle"></span>
                                                 </div>
                                             </div>
                                             <div class="media-body"><a
@@ -42,23 +40,11 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <span class="clamp-1">{{item.email}}</span>
+                                        <span class="clamp-1">{{item.Email}}</span>
                                     <td class="text-nowrap">
-                                        {{item.phoneNumber}}
+                                        {{item.PhoneNumber}}
                                     </td>
                                     <td>{{item.countBlog}}</td>
-                                    <td>
-                                        <select class="form-select form-select-sm" #status_i
-                                            (change)="publicAccount(item.id, status_i.value)">
-                                            <option value="1" [selected]="item.status">
-                                                Active
-                                            </option>
-                                            <option value="0" [selected]="!item.status">
-                                                Pending
-                                            </option>
-                                        </select>
-                                    </td>
-
                                 </tr>
                             </tbody>
                         </table>

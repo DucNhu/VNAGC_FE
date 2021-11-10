@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BlogService } from 'src/app/core/_service/blog/blog.service';
+import { CategoryService } from 'src/app/core/_service/category/category.service';
 import { blog } from 'src/app/models/blog';
 
 @Component({
@@ -12,9 +13,11 @@ export class DetailComponent implements OnInit {
   blog: blog;
   loading=true;
   constructor(
+    private categoryService: CategoryService,
     private blogService: BlogService,
     private activatedRoute: ActivatedRoute
   ) { }
+  urlImg = this.categoryService.urlImg;
 
   ngOnInit(): void {
     Promise.all([
@@ -24,14 +27,11 @@ export class DetailComponent implements OnInit {
       this.getStep()
     ]).then(
       dt => {
-
         this.loading = false;
-        this.blog = dt[0];
+        this.blog = dt[0].Data;
         this.blog.metarial = dt[1];
         this.blog.content = dt[2];
         this.blog.step = dt[3];
-        console.log(this.blog)
-
       }
     )
   }

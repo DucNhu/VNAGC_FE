@@ -21,6 +21,7 @@ export class ListProductComponent implements OnInit {
     ).then(
       (dt: any) => {
         this.listProduct = dt[0].Data;
+
         this.load = false;
       },
       err => {
@@ -38,7 +39,7 @@ export class ListProductComponent implements OnInit {
   }
 
   deleteProduct(id) {
-    if (confirm("a u ok?")) {
+    if (confirm("Delete ok?")) {
       this.productService.delete(id).subscribe(
         dt => {
           window.location.reload()

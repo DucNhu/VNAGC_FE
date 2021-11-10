@@ -59,6 +59,7 @@
                                             </mat-select>
                                         </mat-form-field>
                                     </div>
+
                                     <div class="mb-50 row mx-0">
                                         <div class="col-md-4 ps-0">
                                             <label class="form-label" for="summary">Summary</label>
@@ -76,7 +77,11 @@
                                                     <img [src]="avatar" alt="avatar" *ngIf="avatar" class="img-avatar">
                                                 </div>
                                             </div>
+<<<<<<< HEAD
                                             <div class="col-sm-12 align-self-end">
+=======
+                                            <!-- <div class="col-sm-6 align-self-end">
+>>>>>>> 14b42eb3fc1d34d5139a81dbf9f1aa25aec4eefc
                                                 <div action="#" class="dropzone dropzone-area dz-clickable"
                                                     id="dpz-single-file-coverr">
                                                     <label class="dz-message" for="avatar_cover">Avatar
@@ -86,7 +91,7 @@
                                                     <img [src]="avatar_cover" alt="avatar cover" *ngIf="avatar_cover"
                                                         class="img-avatar">
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="row mb-50" style="padding: 16px 0 0 0">
@@ -139,7 +144,13 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div class="col-md-12">
+                                        <div class="mb-50">
+                                            <label class="form-label" for="des">Step</label>
+                                            <textarea type="text" rows="3" class="form-control" [ngClass]="isInvalid('name') ? 'error' : ''" formControlName="step"
+                                                id="des"></textarea>
+                                        </div>
+                                    </div>
                                     <!-- Metarial shop -->
                                     <fieldset>
                                         <legend class="h2_title_collapse" [attr.aria-expanded]="!isCollapsed.metarial"
@@ -157,10 +168,19 @@
                                                 </div>
                                             </li>
                                         </ul>
+<<<<<<< HEAD
                                         <input type="text" class="create-input form-control" placeholder="Enter your metarial"
                                             [formControl]="myControl" (keyup)="searchMetarial(myControl.value)">
                                         <ul class="row list-style-none cookandmeal-post-list scrollbar-y" style="padding-left: 0">
                                             <li class="col-2 cookandmeal-post cookandmeal-post-item" *ngFor="let item of listProduct">
+=======
+                                        <input type="text" class="create-input form-control"
+                                            placeholder="Enter your metarial" [formControl]="myControl"
+                                            (keyup)="searchMetarial(myControl.value)">
+                                        <ul class="row list-style-none" style="padding-left: 0">
+                                            <li class="col-2 cookandmeal-post cookandmeal-post-item"
+                                                *ngFor="let item of listProduct">
+>>>>>>> 14b42eb3fc1d34d5139a81dbf9f1aa25aec4eefc
                                                 <div class="post-categories post-categories-product cursor-pointer"
                                                     (click)="pushMetarial(item)">
                                                     <img style="vertical-align:middle;" aria-hidden
@@ -172,12 +192,13 @@
                                     </fieldset>
                                     <div class="col-md-12">
                                         <div class="mb-50">
-                                            <label class="form-label" for="des">Description</label>
+                                            <label class="form-label" for="des1">Description</label>
                                             <textarea type="text" rows="3" class="form-control"
                                                 [ngClass]="isInvalid('name') ? 'error' : ''"
-                                                formControlName="description" id="des"></textarea>
+                                                formControlName="description" id="des1"></textarea>
                                         </div>
                                     </div>
+
                                     <!-- Metarial -->
                                     <!-- <fieldset>
                                         <legend (click)="metarialC.toggle()" class="h2_title_collapse"
@@ -281,7 +302,7 @@
                                     </fieldset> -->
 
                                     <!-- Step by Step -->
-                                    <fieldset>
+                                    <!-- <fieldset>
                                         <legend (click)="stepC.toggle()" [attr.aria-expanded]="!isCollapsed.step"
                                             class="h2_title_collapse" aria-controls="collapseExample">
                                             Step
@@ -363,10 +384,10 @@
                                                 </div>
                                             </ng-container>
                                         </div>
-                                    </fieldset>
+                                    </fieldset> -->
 
                                     <!-- Content orther -->
-                                    <fieldset>
+                                    <!-- <fieldset>
                                         <legend (click)="contentC.toggle()" [attr.aria-expanded]="!isCollapsed.content"
                                             class="h2_title_collapse" aria-controls="collapseExample">Content orther
                                             <span *ngIf="!isCollapsed.content; else isCollaps">
@@ -465,7 +486,7 @@
                                             </ng-container>
                                         </div>
 
-                                    </fieldset>
+                                    </fieldset> -->
 
 
 

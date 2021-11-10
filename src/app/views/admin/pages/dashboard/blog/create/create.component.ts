@@ -131,15 +131,17 @@ export class CreateBlogComponent implements OnInit {
           Validators.required
         ])],
         url_video_utube: [null],
-
+        step: [null, Validators.compose([
+          Validators.required
+        ])],
         // metarial: this.fb.array([]),
-        step: this.fb.array([]),
-        content: this.fb.array([]),
+        // step: this.fb.array([]),
+        // content: this.fb.array([]),
       }
     )
-    this.addContent();
+    // this.addContent();
     // this.addMetarial();
-    this.addStep();
+    // this.addStep();
   }
 
   listStep = () => {
@@ -393,6 +395,7 @@ export class CreateBlogComponent implements OnInit {
       "user_id": this.userId,
       "category_id": form.get('category').value,
       "productIds": [],
+      "steps": form.get('step').value,
       "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
     }
@@ -402,12 +405,12 @@ export class CreateBlogComponent implements OnInit {
       dt => {
         this.loading = false;
         this.blogId = dt.id;
-        this.createMetarial();
-        this.createContent();
-        this.createStep();
-        setTimeout(() => {
+        // this.createMetarial();
+        // this.createContent();
+        // this.createStep();
+        // setTimeout(() => {
           this.route.navigate(["blog/list"]);
-        }, 1500);
+        // }, 1500);
       },
       err => {
         this.loading = false;

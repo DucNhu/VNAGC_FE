@@ -8,7 +8,7 @@ export class BlogService {
 
   constructor(private helperService: HelperService) { }
   getAllBlogeres() {
-    return this.helperService.getAll("Blog/get-all-blog");
+    return this.helperService.getAll("Blog/get-all-blog?pageIndex=1&pageSize=100");
   }
   GetBlogsActive() {
     return this.helperService.getAll("Blog/GetBlogsActive");

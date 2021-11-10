@@ -29,7 +29,7 @@
                                 </tr>
                                 <tr *ngFor="let i of listBlog; let id = index">
                                     <td>{{i.name}}</td>
-                                    <td>Category</td>
+                                    <td>{{i.category_name}}</td>
                                     <td>{{i.view}}</td>
                                     <td>
                                         <div class=" d-flex align-items-center">
@@ -53,8 +53,7 @@
                                                 </a>
                                             </div>
                                             <div class="nav-item">
-                                                <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
-                                                    data-bs-original-title="Delete">
+                                                <a class="nav-link" href="javascript:void(0)"  (click)="deleteProduct(i.id, id)">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                                         class="feather feather-trash-2 ficon list-status">

@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="content-detached content-right">
-      <div class="content-body">
+      <div class="content-body ms-0">
         <!-- E-commerce Content Section Starts -->
         <section id="ecommerce-header">
           <div class="row">
@@ -58,58 +58,19 @@
         <section id="ecommerce-products" class="grid-view">
           <div class="card ecommerce-card" *ngFor="let p of listProduct">
             <div class="item-img text-center">
-              <a href="app-ecommerce-details.html">
+              <a [routerLink]="['/product/update', {id: p.id}]">
                 <img class="img-fluid card-img-top"
                   [src]="p.banner_img"
                   alt="banner" /></a>
             </div>
             <div class="card-body">
               <div class="item-wrapper">
-                <div class="item-rating">
-                  <ul class="unstyled-list list-inline">
-                    <li class="ratings-list-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-star filled-star">
-                        <polygon
-                          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                        </polygon>
-                      </svg></li>
-                    <li class="ratings-list-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-star filled-star">
-                        <polygon
-                          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                        </polygon>
-                      </svg></li>
-                    <li class="ratings-list-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-star filled-star">
-                        <polygon
-                          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                        </polygon>
-                      </svg></li>
-                    <li class="ratings-list-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-star filled-star">
-                        <polygon
-                          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                        </polygon>
-                      </svg></li>
-                    <li class="ratings-list-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-star unfilled-star">
-                        <polygon
-                          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                        </polygon>
-                      </svg></li>
-                  </ul>
-                </div>
                 <div>
                   <h6 class="item-price sale">${{p.price}} <del *ngIf="p.sale || p.sale != 0">{{p.sale + '%'}}</del></h6>
                 </div>
               </div>
               <h6 class="item-name">
-                <a class="text-body" href="app-ecommerce-details.html">{{p.name}}</a>
+                <a class="text-body" [routerLink]="['/product/update', {id: p.id}]">{{p.name}}</a>
                 <span class="card-text item-company">By <a href="#" class="company-name">Apple</a></span>
               </h6>
               <ul class="card-text item-list__infor">
@@ -138,8 +99,8 @@
                 <li class="item">revenue: {{p.revenue}}</li>
                 <li class="item">status: {{p.status ? 'public' : 'pravite'}}</li>
 
-                <li class="item">update time: {{p.update_at | date:"dd/MM/yyyy HH:mm"}}</li>
-                <li class="item">create time: {{p.create_at | date:"dd/MM/yyyy HH:mm"}}</li>
+                <li class="item">update time: {{p.update_at | date:"dd/MM/yyyy"}}</li>
+                <li class="item">create time: {{p.create_at | date:"dd/MM/yyyy"}}</li>
               </ul>
             </div>
           </div>
@@ -149,108 +110,6 @@
         <!-- E-commerce Pagination Starts -->
       
         <!-- E-commerce Pagination Ends -->
-
-      </div>
-    </div>
-    <div class="sidebar-detached sidebar-left">
-      <div class="sidebar">
-        <!-- Ecommerce Sidebar Starts -->
-        <div class="sidebar-shop">
-          <div class="row">
-            <div class="col-sm-12">
-              <h6 class="filter-heading d-none d-lg-block">Filters</h6>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <!-- Price Filter starts -->
-              <div class="multi-range-price">
-                <h6 class="filter-title mt-0">Multi Range</h6>
-                <ul class="list-unstyled price-range" id="price-range">
-                  <li>
-                    <div class="form-check">
-                      <input type="radio" id="priceAll" name="price-range" class="form-check-input" checked />
-                      <label class="form-check-label" for="priceAll">All</label>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="form-check">
-                      <input type="radio" id="priceRange1" name="price-range" class="form-check-input" />
-                      <label class="form-check-label" for="priceRange1">&lt;=$10</label>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="form-check">
-                      <input type="radio" id="priceRange2" name="price-range" class="form-check-input" />
-                      <label class="form-check-label" for="priceRange2">$10 - $100</label>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="form-check">
-                      <input type="radio" id="priceARange3" name="price-range" class="form-check-input" />
-                      <label class="form-check-label" for="priceARange3">$100 - $500</label>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="form-check">
-                      <input type="radio" id="priceRange4" name="price-range" class="form-check-input" />
-                      <label class="form-check-label" for="priceRange4">&gt;= $500</label>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <!-- Price Filter ends -->
-
-              <!-- Price Slider starts -->
-              <div class="price-slider">
-                <h6 class="filter-title">Price Range</h6>
-                <div class="price-slider">
-                  <div class="range-slider mt-2" id="price-slider"></div>
-                </div>
-              </div>
-              <!-- Price Range ends -->
-
-              <!-- Categories Starts -->
-              <div id="product-categories">
-                <h6 class="filter-title">Categories</h6>
-                <ul class="list-unstyled categories-list">
-                 
-                  <li>
-                    <div class="form-check">
-                      <input type="radio" id="category7" name="category-filter" class="form-check-input" />
-                      <label class="form-check-label" for="category7">Health, Fitness & Beauty</label>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="form-check">
-                      <input type="radio" id="category8" name="category-filter" class="form-check-input" />
-                      <label class="form-check-label" for="category8">Office & School Supplies</label>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="form-check">
-                      <input type="radio" id="category9" name="category-filter" class="form-check-input" />
-                      <label class="form-check-label" for="category9">TV & Home Theater</label>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="form-check">
-                      <input type="radio" id="category10" name="category-filter" class="form-check-input" />
-                      <label class="form-check-label" for="category10">Video Games</label>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <!-- Categories Ends -->
-              <!-- Clear Filters Starts -->
-              <div id="clear-filters">
-                <button type="button" class="btn w-100 btn-primary">Clear All Filters</button>
-              </div>
-              <!-- Clear Filters Ends -->
-            </div>
-          </div>
-        </div>
-        <!-- Ecommerce Sidebar Ends -->
 
       </div>
     </div>
