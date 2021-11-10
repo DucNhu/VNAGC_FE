@@ -14,13 +14,13 @@ export class DashBoardService {
     }
 
     getAllMember() {
-        let param = '?pageIndex=1&pageSize=10';
+        let param = '?pageIndex=1&pageSize=1000';
 
         return this.helperService.getParam(this.controll + 'get-all-user', param);
     }
 
     getAllOrder() {
-        let param = '?pageIndex=1&pageSize=10';
+        let param = '?pageIndex=1&pageSize=1000';
         return this.helperService.getParam("Dashboard/get-all-order", param);
     }
 

@@ -8,7 +8,7 @@ export class OrderService {
     constructor(private helperService: HelperService) { }
  
     getOrders() {
-        return this.helperService.getAll("Order/get-order-history?pageIndex=1&pageSize=10");
+        return this.helperService.getAll("Order/get-order-history?pageIndex=1&pageSize=1000");
     }
 
     getOrderDetail(order_id) {
@@ -20,6 +20,6 @@ export class OrderService {
     }
 
     getAllOrder() {
-        return this.helperService.getAll("Order/get-all-order?pageIndex=1&pageSize=10");
+        return this.helperService.getAll("Order/get-all-order?pageIndex=1&pageSize=1000");
     }
 }
