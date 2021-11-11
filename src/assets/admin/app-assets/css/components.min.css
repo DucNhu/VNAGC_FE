@@ -934,6 +934,7 @@ footer.footer-border {
     overflow-y: visible;
     padding-bottom: 20px;
 }
+
 .navigation::-webkit-scrollbar {
     width: 5px;
     background: linear-gradient(white);

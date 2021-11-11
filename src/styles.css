@@ -51,13 +51,64 @@
     color: var(--color-grey);
 }
 
-.cookandmeal-post-item {
+.scrollbar-y::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.scrollbar-y::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+.scrollbar-y::-webkit-scrollbar-thumb
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.2);
+	background-color: #c1c1c1;
+}
+
+.scrollbar-x::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.scrollbar-x::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+.scrollbar-x::-webkit-scrollbar-thumb
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.2);
+	background-color: #c1c1c1;
+}
+
+.cookandmeal-post-listx {
+  width: 100%;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  
+}
+
+.cookandmeal-post-list {
   margin-top:12px;
+  margin-top:12px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.cookandmeal-post-item {
+  margin-bottom:12px;
 }
 .post-categories-name {
   width: 100%;
   text-align: center;
   display:block;
+  padding:10px 16px 0;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
