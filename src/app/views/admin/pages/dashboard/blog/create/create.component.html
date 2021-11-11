@@ -77,11 +77,7 @@
                                                     <img [src]="avatar" alt="avatar" *ngIf="avatar" class="img-avatar">
                                                 </div>
                                             </div>
-<<<<<<< HEAD
-                                            <div class="col-sm-12 align-self-end">
-=======
                                             <!-- <div class="col-sm-6 align-self-end">
->>>>>>> 14b42eb3fc1d34d5139a81dbf9f1aa25aec4eefc
                                                 <div action="#" class="dropzone dropzone-area dz-clickable"
                                                     id="dpz-single-file-coverr">
                                                     <label class="dz-message" for="avatar_cover">Avatar
@@ -164,23 +160,14 @@
                                                     (click)="unshifMetarial(i)">
                                                     <img style="vertical-align:middle;" aria-hidden
                                                         src="{{item.banner_img}}" height="50" />
-                                                    <span class="post-categories-name">{{ item.name }}</span>
+                                                    <span class="post-categories-name clamp-1">{{ item.name }}</span>
                                                 </div>
                                             </li>
                                         </ul>
-<<<<<<< HEAD
                                         <input type="text" class="create-input form-control" placeholder="Enter your metarial"
                                             [formControl]="myControl" (keyup)="searchMetarial(myControl.value)">
                                         <ul class="row list-style-none cookandmeal-post-list scrollbar-y" style="padding-left: 0">
                                             <li class="col-2 cookandmeal-post cookandmeal-post-item" *ngFor="let item of listProduct">
-=======
-                                        <input type="text" class="create-input form-control"
-                                            placeholder="Enter your metarial" [formControl]="myControl"
-                                            (keyup)="searchMetarial(myControl.value)">
-                                        <ul class="row list-style-none" style="padding-left: 0">
-                                            <li class="col-2 cookandmeal-post cookandmeal-post-item"
-                                                *ngFor="let item of listProduct">
->>>>>>> 14b42eb3fc1d34d5139a81dbf9f1aa25aec4eefc
                                                 <div class="post-categories post-categories-product cursor-pointer"
                                                     (click)="pushMetarial(item)">
                                                     <img style="vertical-align:middle;" aria-hidden
