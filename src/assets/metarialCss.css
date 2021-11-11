@@ -12,3 +12,5 @@ mat-form-field {
 .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
     background: #3f51b5 !important
 }
+
+ .mat-menu-panel { max-width: auto !important}

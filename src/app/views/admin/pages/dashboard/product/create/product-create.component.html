@@ -155,7 +155,7 @@
                                 <div action="#" class="dropzone dropzone-area dz-clickable" id="dpz-single-file"
                                 [ngClass]="avatar == '' ? 'error' : ''">
                                   <label class="dz-message" for="avatar">Avatar</label>
-                                  <input type="file" hidden id="avatar" (change)="updateFile($event, 1)"
+                                  <input type="file" hidden id="avatar" (change)="updateFile($event, 1); onSelectFile($event)"
                                     accept="image/*" formControlName="avatar">
                                   <img [src]="avatar" alt="avatar" *ngIf="avatar" class="img-avatar">
                                 </div>

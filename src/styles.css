@@ -236,7 +236,7 @@
   padding-left: 0px;
   padding-top: 1rem;
 }
-
+ .mat-menu-panel { max-width: auto !important}
 .item-list__infor li {
   margin-inline-end: 0.5rem;
   text-transform: capitalize;

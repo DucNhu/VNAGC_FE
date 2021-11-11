@@ -36,4 +36,8 @@ export class DashBoardService {
     getTopBlog() {
         return this.helperService.getAll("Dashboard/get-Top-Blog");
     }
+
+    getAllOrderDetail(id) {
+        return this.helperService.get("get-order-detail",  id);
+    }
 }

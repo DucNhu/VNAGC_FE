@@ -16,6 +16,123 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+                                <tr (click)="getOrderDetail(1)" class="cursor-pointer" [matMenuTriggerFor]="menu">
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar rounded">
+                                                <div class="avatar-content">
+                                                    <img src="https://pixinvent.com/demo/vuexy-html-bootstrap-admin-template/app-assets/images/icons/toolbox.svg"
+                                                        alt="Toolbar svg">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="fw-bolder">Dixons</div>
+                                                <div class="font-small-2 text-muted">meguc@ruj.io</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+
+                                            <span>$50</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-nowrap">
+                                        <div class="d-flex flex-column">
+                                            <span class="fw-bolder mb-25">23.4k</span>
+                                        </div>
+                                    </td>
+                                    <td>$891.2</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="fw-bolder me-1">68%</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr (click)="getOrderDetail(1)" class="cursor-pointer" [matMenuTriggerFor]="menu">
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar rounded">
+                                                <div class="avatar-content">
+                                                    <img src="https://pixinvent.com/demo/vuexy-html-bootstrap-admin-template/app-assets/images/icons/toolbox.svg"
+                                                        alt="Toolbar svg">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="fw-bolder">Dixons</div>
+                                                <div class="font-small-2 text-muted">meguc@ruj.io</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+
+                                            <span>$50</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-nowrap">
+                                        <div class="d-flex flex-column">
+                                            <span class="fw-bolder mb-25">23.4k</span>
+                                        </div>
+                                    </td>
+                                    <td>$891.2</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="fw-bolder me-1">68%</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <mat-menu #menu="matMenu">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>User</th>
+                                                    <th>Total</th>
+                                                    <th>Status</th>
+                                                    <th>Crate Time</th>
+                                                    <th>Update Time</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="cursor-pointer">
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="avatar rounded">
+                                                                <div class="avatar-content">
+                                                                    <img src="https://pixinvent.com/demo/vuexy-html-bootstrap-admin-template/app-assets/images/icons/toolbox.svg"
+                                                                        alt="Toolbar svg">
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <div class="fw-bolder">Dixons</div>
+                                                                <div class="font-small-2 text-muted">meguc@ruj.io</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+
+                                                            <span>$50</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap">
+                                                        <div class="d-flex flex-column">
+                                                            <span class="fw-bolder mb-25">23.4k</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>$891.2</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="fw-bolder me-1">68%</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </mat-menu>
                                 <tr *ngFor="let item of listOrder">
                                     <td>
                                         <div class="d-flex align-items-center">
@@ -33,7 +150,7 @@
                                     </td>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                           
+
                                             <span>$50</span>
                                         </div>
                                     </td>

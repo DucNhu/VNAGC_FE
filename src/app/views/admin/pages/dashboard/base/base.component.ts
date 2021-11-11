@@ -100,8 +100,10 @@ export class BaseDashboardComponent implements OnInit {
     "countBlog": 0,
     "countBlogActive": 0,
     "coutAccout": 0,
-    "orders": 0
+    "coutOrder": 0,
+    "countTotal": 0
   };
+ 
   listProductRating;
   listProductPopular;
   constructor(
