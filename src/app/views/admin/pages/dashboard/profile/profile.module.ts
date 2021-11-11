@@ -39,7 +39,6 @@ const routes: Routes = [
     CommonModule,
     LoadModule,
     RouterModule.forChild(routes),
-    baseBlogModule
   ]
 })
 export class ProfileModule { }

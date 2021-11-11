@@ -46,13 +46,14 @@ export class CreateBlogComponent implements OnInit {
   list_img_step: any = [{ data: '' }];
   list_img_content: any = [{ data: '' }];
   listProduct;
+  listProductRoot;
+
   listMetarialShop = [];
   blogId = null;
 
   loading = true;
   isSuccess = false;
   userId;
-
   constructor(
     private fb: FormBuilder,
     private blogService: BlogService,
@@ -75,11 +76,10 @@ export class CreateBlogComponent implements OnInit {
       ]
     ).then(
       (dt: any) => {
-        console.log(dt)
         this.listCategory = dt[0].Data;
         this.hastags = dt[1].Data;
         this.listProduct = dt[2].Data;
-        console.log(this.listProduct)
+        this.listProductRoot = dt[2].Data;
         this.loading = false;
       },
       err => {
@@ -522,11 +522,17 @@ export class CreateBlogComponent implements OnInit {
     this.listMetarialShop.splice(idex, 1);
   }
   searchMetarial(val) {
-    this.listProduct = this.filterStates(val);
+    if(val.trim() != '') {
+      this.listProduct = this.filterStates(val);
+    }
+    else {
+      this.listProduct = this.listProductRoot;
+    }
   }
 
   filterStates(name: string) {
     return this.listProduct.filter(state =>
       state.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
+  // End metarial 
 }

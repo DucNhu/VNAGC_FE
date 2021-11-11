@@ -55,11 +55,11 @@ const routes: Routes = [
         path: 'blogs',
         loadChildren: () => import('./views/client/pages/blogs/blogs.module').then(m => m.BlogsModule),
       },
-      {
-        canActivate: [UserGuard],
-        path: 'profile',
-        loadChildren: () => import('./views/client/pages/profile/profile.module').then(m => m.ProfileModule),
-      },
+      // {
+      //   canActivate: [UserGuard],
+      //   path: 'profile',
+      //   loadChildren: () => import('./views/client/pages/profile/profile.module').then(m => m.ProfileModule),
+      // },
       {
         canActivate: [UserGuard],
         path: 'cart',
