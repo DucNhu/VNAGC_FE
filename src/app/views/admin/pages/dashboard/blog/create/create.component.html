@@ -17,8 +17,8 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-50">
-                                            <label class="form-label" for="blogName">Food Name</label>
-                                            <input type="text" class="form-control" placeholder="Blog Name"
+                                            <label class="form-label" for="blogName">Summary</label>
+                                            <input type="text" class="form-control" 
                                                 formControlName="name" id="blogName"
                                                 [ngClass]="isInvalid('name') ? 'error' : ''" />
                                             <p class="error" *ngIf="formBlog.value.name==''">Field is required</p>
@@ -61,13 +61,37 @@
                                     </div>
 
                                     <div class="mb-50 row mx-0">
-                                        <div class="col-md-4 ps-0">
+                                        <div class="col-md-6">
+                                        
+                                            <label class="form-label ms-1" for="cooking_time">
+                                                cooking time
+                                            </label>
+                                            <div class="row mx-0">
+                                                <div class="col-6">
+                                                    <input type="number" class="form-control" formControlName="cooking_time" id="cooking_time" />
+                                                </div>
+                                                <div class="col-6">
+                                                    <mat-form-field appearance="fill" class="w-100">
+                                                        <mat-label>Unit time</mat-label>
+                                                        <mat-select placeholder="Unit time cook" class="filter-select" formControlName="unitTimeCook">
+                                                            <mat-option value="mins">
+                                                                Mins
+                                                            </mat-option>
+                                                            <mat-option value="hours">
+                                                                Hours
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-4 ps-0">
                                             <label class="form-label" for="summary">Summary</label>
                                             <textarea type="text" rows="3" class="form-control"
                                                 [ngClass]="isInvalid('name') ? 'error' : ''" formControlName="summary"
                                                 id="summary"></textarea>
-                                        </div>
-                                        <div class="col-md-4 d-flex p-0">
+                                        </div> -->
+                                        <div class="col-md-6 d-flex p-0">
                                             <div class="col-sm-12 align-self-end">
                                                 <div action="#" class="dropzone dropzone-area dz-clickable"
                                                     id="dpz-single-file" [ngClass]="avatar == '' ? 'error' : ''">
@@ -113,7 +137,7 @@
                                                     formControlName="url_video_utube" id="url_youtube" />
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <!-- <div class="col-md-6">
 
                                             <label class="form-label ms-1" for="cooking_time">
                                                 cooking time
@@ -138,7 +162,7 @@
                                                     </mat-form-field>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-50">

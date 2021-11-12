@@ -39,7 +39,11 @@ export class DashBoardService {
 
     getBlogByMonth(start, end) {
         let param = `?start=${start}&end=${end}`;
-        return this.helperService.getAll("Dashboard/get-Top-Blog-by-month"+param);
+        return this.helperService.getAll("Dashboard/get-Top-Blog-by-month" + param);
+    }
+
+    getBlogByYear() {
+        return this.helperService.getAll("Dashboard/get-Top-Blog-by-year");
     }
 
     getAllOrderDetail(id) {

@@ -73,12 +73,12 @@ export class BaseDashboardComponent implements OnInit {
   chartOptions = {
     responsive: true,
   };
-  chartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  chartLabels = [];
   chartLegend = true;
   chartPlugins = [];
 
   chartData = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Count Blog' },
     // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
   ];
 
@@ -117,13 +117,13 @@ export class BaseDashboardComponent implements OnInit {
       this.getStatistics(),
       this.getProductTopRating(),
       this.getProductPopular(),
-      this.getTopBlog()
+      this.getTopBlog(),
+      this.getTopBlogByMonth()
     ]).then(dt => {
-      console.log(dt)
+      console.log(dt);
       this.Statistics = dt[0].Data;
       this.listProductRating=dt[1].Data;
       this.listProductPopular = dt[2].Data;
-      console.log(this.listProductPopular)
       this.listTopBlogView = dt[3];
       this.load = false;
     })
@@ -161,6 +161,14 @@ export class BaseDashboardComponent implements OnInit {
     let start = 1;
     let end = 12;
     this.dashBoardService.getBlogByMonth(start, end).subscribe(
+      dt => {
+        console.log(dt)
+      }
+    )
+  }
+
+  getTopBlogByYear() {
+    this.dashBoardService.getBlogByYear().subscribe(
       dt => {
         console.log(dt)
       }
