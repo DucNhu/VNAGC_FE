@@ -25,7 +25,7 @@ export class MemberComponent implements OnInit {
       [this.getAllMember()]
     ).then(
       (dt) => {
-        this.listMember = dt[0];
+        this.listMember = dt[0].Data.Items;
         this.listMember.forEach(
           e => e.avatar ? e.avatar = this.urlImg + e.avatar : e.avatar = 'assets/images/avatars/default-avatar.jpg'
         )
