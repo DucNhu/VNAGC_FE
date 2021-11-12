@@ -28,7 +28,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <h1 class="mb-1 text-white">Congratulations DUCNHU</h1>
+                                    <h1 class="mb-1 text-white">Congratulations {{profile?.fullName}}</h1>
                                     <!-- <p class="card-text m-auto w-75">
                                         You have done <strong>57.6%</strong> more sales today. Check your new badge in
                                         your profile.
@@ -159,7 +159,7 @@
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between pb-0">
-                                <h4 class="card-title">List of posts with many views</h4>
+                                <h4 class="card-title">Orders index for the year</h4>
                                 <div class="dropdown chart-dropdown">
                                     <button class="btn btn-sm border-0 dropdown-toggle p-50" type="button"
                                         id="dropdownItem4" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -170,7 +170,7 @@
                             </div>
                             <div class="card-body">
                                 <canvas baseChart chartType="bar" [datasets]="chartData" [labels]="chartLabels"
-                                    [options]="chartOptions" [plugins]="chartPlugins" [legend]="chartLegend">
+                                    [options]="chartOptions" [plugins]="" [legend]="chartLegend">
                                 </canvas>
                             </div>
                         </div>

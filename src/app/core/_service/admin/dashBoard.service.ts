@@ -49,4 +49,13 @@ export class DashBoardService {
     getAllOrderDetail(id) {
         return this.helperService.get("get-order-detail",  id);
     }
+
+    getOrderByMonth(start, end) {
+        let param = `?start=${start}&end=${end}`;
+        return this.helperService.getAll("Dashboard/get-Top-Order-by-month" + param);
+    }
+
+    getOrderByYear() {
+        return this.helperService.getAll("Dashboard/get-Top-Order-by-year");
+    }
 }

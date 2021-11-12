@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import { DashBoardService } from 'src/app/core/_service/admin/dashBoard.service';
+import { user } from 'src/app/models/user';
 
 @Component({
   selector: 'app-base',
@@ -75,11 +76,9 @@ export class BaseDashboardComponent implements OnInit {
   };
   chartLabels = [];
   chartLegend = true;
-  chartPlugins = [];
 
   chartData = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Count Blog' },
-    // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+    { data: [0,10,20], label: 'Count Orders' }
   ];
 
   // pie
@@ -104,10 +103,13 @@ export class BaseDashboardComponent implements OnInit {
     "coutOrder": 0,
     "countTotal": 0
   };
- 
+
   listProductRating;
   listProductPopular;
+  profile: user;
   listTopBlogView;
+  datagetTopOrderByYear = [];
+
   constructor(
     private dashBoardService: DashBoardService,
   ) { }
@@ -118,13 +120,26 @@ export class BaseDashboardComponent implements OnInit {
       this.getProductTopRating(),
       this.getProductPopular(),
       this.getTopBlog(),
-      this.getTopBlogByMonth()
+      this.getTopBlogByMonth(),
+      this.getTopOrderByYear()
     ]).then(dt => {
       console.log(dt);
+      this.profile = JSON.parse(sessionStorage.getItem("user") ? sessionStorage.getItem("user") : sessionStorage.getItem("user"));
+
       this.Statistics = dt[0].Data;
-      this.listProductRating=dt[1].Data;
+      this.listProductRating = dt[1].Data;
       this.listProductPopular = dt[2].Data;
       this.listTopBlogView = dt[3];
+      let getTopOrderByYear = dt[5];
+      for (let index = 0; index < 12; index++) {
+        let x = index;
+        ++x;
+        this.chartLabels.push(x);
+        let e = getTopOrderByYear[index];
+        this.datagetTopOrderByYear.push(e[x]);
+      }
+      this.chartData[0].data = this.datagetTopOrderByYear;
+  
       this.load = false;
     })
   }
@@ -168,10 +183,15 @@ export class BaseDashboardComponent implements OnInit {
   }
 
   getTopBlogByYear() {
-    this.dashBoardService.getBlogByYear().subscribe(
-      dt => {
-        console.log(dt)
-      }
-    )
+    return new Promise(async (resolve) => {
+      let d = await this.dashBoardService.getBlogByYear().toPromise();
+      resolve(d)
+    })
+  }
+  getTopOrderByYear() {
+    return new Promise(async (resolve) => {
+      let d = await this.dashBoardService.getOrderByYear().toPromise();
+      resolve(d)
+    })
   }
 }
