@@ -46,13 +46,14 @@ export class CreateBlogComponent implements OnInit {
   list_img_step: any = [{ data: '' }];
   list_img_content: any = [{ data: '' }];
   listProduct;
+  listProductRoot;
+
   listMetarialShop = [];
   blogId = null;
 
   loading = true;
   isSuccess = false;
   userId;
-
   constructor(
     private fb: FormBuilder,
     private blogService: BlogService,
@@ -75,11 +76,10 @@ export class CreateBlogComponent implements OnInit {
       ]
     ).then(
       (dt: any) => {
-        console.log(dt)
         this.listCategory = dt[0].Data;
         this.hastags = dt[1].Data;
         this.listProduct = dt[2].Data;
-        console.log(this.listProduct)
+        this.listProductRoot = dt[2].Data;
         this.loading = false;
       },
       err => {
@@ -131,15 +131,17 @@ export class CreateBlogComponent implements OnInit {
           Validators.required
         ])],
         url_video_utube: [null],
-
+        step: [null, Validators.compose([
+          Validators.required
+        ])],
         // metarial: this.fb.array([]),
-        step: this.fb.array([]),
-        content: this.fb.array([]),
+        // step: this.fb.array([]),
+        // content: this.fb.array([]),
       }
     )
-    this.addContent();
+    // this.addContent();
     // this.addMetarial();
-    this.addStep();
+    // this.addStep();
   }
 
   listStep = () => {
@@ -393,6 +395,7 @@ export class CreateBlogComponent implements OnInit {
       "user_id": this.userId,
       "category_id": form.get('category').value,
       "productIds": [],
+      "steps": form.get('step').value,
       "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
     }
@@ -402,12 +405,12 @@ export class CreateBlogComponent implements OnInit {
       dt => {
         this.loading = false;
         this.blogId = dt.id;
-        this.createMetarial();
-        this.createContent();
-        this.createStep();
-        setTimeout(() => {
+        // this.createMetarial();
+        // this.createContent();
+        // this.createStep();
+        // setTimeout(() => {
           this.route.navigate(["blog/list"]);
-        }, 1500);
+        // }, 1500);
       },
       err => {
         this.loading = false;
@@ -519,11 +522,17 @@ export class CreateBlogComponent implements OnInit {
     this.listMetarialShop.splice(idex, 1);
   }
   searchMetarial(val) {
-    this.listProduct = this.filterStates(val);
+    if(val.trim() != '') {
+      this.listProduct = this.filterStates(val);
+    }
+    else {
+      this.listProduct = this.listProductRoot;
+    }
   }
 
   filterStates(name: string) {
     return this.listProduct.filter(state =>
       state.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
+  // End metarial 
 }

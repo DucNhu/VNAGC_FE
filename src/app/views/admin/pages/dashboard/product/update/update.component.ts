@@ -101,13 +101,14 @@ export class UpdateProductComponent implements OnInit {
       resolve(dt);
     });
   }
+  checkUpdateBannr = false;
   updateProduct() {
     let form = this.formInfor;
     let nowDate = new Date();
     let data = {
       "id": this.productId,
       "name": form.get('name').value,
-      "banner_img": this.avatar,
+      "banner_img": this.checkUpdateBannr ? this.avatarName : this.avatar,
       "cover_img": this.avatar_cover,
       "category_id": form.get('category').value,
       "price": form.get('price').value,
@@ -124,17 +125,50 @@ export class UpdateProductComponent implements OnInit {
    
     console.log(data)
     this.loading = true;
-    this.productService.update(data).subscribe(
-      dt => {
-        this.sendImg()
-      },
-      err => {
-        this.loading = false;
-        console.log(err)
-      }
-    )
+    // if (this.checkUpdateBannr && this.upPhoto()) {
+      this.productService.update(data).subscribe(
+        dt => {
+          this.sendImg()
+        },
+        err => {
+          this.loading = false;
+          console.log(err)
+        }
+      )
+    // }
+    
   }
+  dataImage;
+  data_avatar;
+  avatarName;
+  onSelectFile(e) {
+    this.dataImage = e.target.files.item(0);
+    let dateNow = new Date();
 
+    if (e.target.files) { // Check File true : false
+      var reader = new FileReader(); // DOM
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = (event: any) => {
+        this.checkUpdateBannr = true;
+
+        this.avatarName = dateNow.getTime() + this.dataImage.name;
+        this.data_avatar = event.target.result;
+      }
+    }
+  }
+  upPhoto() {
+    const formData: FormData = new FormData();
+
+    try {
+      formData.append('ImageFile', this.dataImage, this.avatarName);
+      this.productService.UpdateAvatar(formData).subscribe(() => {
+      });
+    }
+    catch (e) {
+      return false;
+    }
+    return true;
+  }
   setDataforForm(dt) {
     this.formInfor.patchValue({
       name: dt.name,

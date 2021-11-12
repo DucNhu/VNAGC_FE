@@ -1,3 +1,7 @@
 {
+<<<<<<< HEAD
   "WhiteServer": "http://192.168.20.105:8888/api/"
+=======
+  "WhiteServer": "https://localhost:44320/api/"
+>>>>>>> 018fd123d7e6bee73e411a2413f9880497f66764
 }

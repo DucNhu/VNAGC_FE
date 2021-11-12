@@ -20,18 +20,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of listMember">
+                                <tr *ngFor="let item of listMember"  [routerLink]="['/page-profile', {id: item.id}]">
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="avatar rounded">
                                                 <div class="avatar-content">
                                                     <span class="avatar m-0"><img
+                                                        
                                                             [src]="item.avatar"
                                                             alt="avatar" height="40" width="40" class="rounded-circle"></span>
                                                 </div>
                                             </div>
                                             <div class="media-body"><a
-                                                    href="/demo/vuexy-vuejs-admin-dashboard-template/demo-5/apps/users/view/50"
+                                                    href="javascript:void(0)"
                                                     class="font-weight-bold d-block text-nowrap" target="_self">
                                                     {{item.fullName}} </a>
                                                 <!-- <small
@@ -40,9 +41,9 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <span class="clamp-1">{{item.Email}}</span>
+                                        <span class="clamp-1">{{item.email}}</span>
                                     <td class="text-nowrap">
-                                        {{item.PhoneNumber}}
+                                        {{item.phoneNumber}}
                                     </td>
                                     <td>{{item.countBlog}}</td>
                                 </tr>

@@ -10,63 +10,64 @@ import { DashBoardService } from 'src/app/core/_service/admin/dashBoard.service'
 export class BaseDashboardComponent implements OnInit {
   canvas: any;
   ctx: any;
-  @ViewChild('mychart') mychart;
   load = true;
-  ngAfterViewInit() {
-    this.canvas = this.mychart.nativeElement;
-    this.ctx = this.canvas.getContext('2d');
+  // @ViewChild('mychart') mychart;
 
-    let myChart = new Chart(this.ctx, {
-      type: 'line',
+  // ngAfterViewInit() {
+  //   this.canvas = this.mychart.nativeElement;
+  //   this.ctx = this.canvas.getContext('2d');
 
-      data: {
-        datasets: [{
-          label: '',
-          backgroundColor: "transparent",
-          borderColor: "rgba(152, 235, 246,1)",
-          fill: true,
-          data: [
-            { x: 1, y: 2 },
-            { x: 2500, y: 2.5 },
-            { x: 3000, y: 5 },
-            { x: 3400, y: 4.75 },
-            { x: 3600, y: 4.75 },
-            { x: 5200, y: 6 },
-            { x: 6000, y: 9 },
-            { x: 7100, y: 6 },
-          ],
-        }]
-      },
-      options: {
-        responsive: true,
-        title: {
-          display: false,
-          text: ''
-        },
-        scales: {
-          xAxes: [{
-            type: 'linear',
-            position: 'bottom',
-            ticks: {
-            },
-            scaleLabel: {
-              labelString: '',
-              display: false,
-            }
-          }],
-          yAxes: [{
-            type: 'linear',
-            ticks: {
-            },
-            scaleLabel: {
-              labelString: '',
-              display: false
-            }
-          }]
-        }
-      }
-    });
-  }
+  //   let myChart = new Chart(this.ctx, {
+  //     type: 'line',
+
+  //     data: {
+  //       datasets: [{
+  //         label: '',
+  //         backgroundColor: "transparent",
+  //         borderColor: "rgba(152, 235, 246,1)",
+  //         fill: true,
+  //         data: [
+  //           { x: 1, y: 2 },
+  //           { x: 2500, y: 2.5 },
+  //           { x: 3000, y: 5 },
+  //           { x: 3400, y: 4.75 },
+  //           { x: 3600, y: 4.75 },
+  //           { x: 5200, y: 6 },
+  //           { x: 6000, y: 9 },
+  //           { x: 7100, y: 6 },
+  //         ],
+  //       }]
+  //     },
+  //     options: {
+  //       responsive: true,
+  //       title: {
+  //         display: false,
+  //         text: ''
+  //       },
+  //       scales: {
+  //         xAxes: [{
+  //           type: 'linear',
+  //           position: 'bottom',
+  //           ticks: {
+  //           },
+  //           scaleLabel: {
+  //             labelString: '',
+  //             display: false,
+  //           }
+  //         }],
+  //         yAxes: [{
+  //           type: 'linear',
+  //           ticks: {
+  //           },
+  //           scaleLabel: {
+  //             labelString: '',
+  //             display: false
+  //           }
+  //         }]
+  //       }
+  //     }
+  //   });
+  // }
 
   // Bar
   chartOptions = {
@@ -78,7 +79,7 @@ export class BaseDashboardComponent implements OnInit {
 
   chartData = [
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+    // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
   ];
 
   // pie
@@ -100,10 +101,13 @@ export class BaseDashboardComponent implements OnInit {
     "countBlog": 0,
     "countBlogActive": 0,
     "coutAccout": 0,
-    "orders": 0
+    "coutOrder": 0,
+    "countTotal": 0
   };
+ 
   listProductRating;
   listProductPopular;
+  listTopBlogView;
   constructor(
     private dashBoardService: DashBoardService,
   ) { }
@@ -119,7 +123,8 @@ export class BaseDashboardComponent implements OnInit {
       this.Statistics = dt[0].Data;
       this.listProductRating=dt[1].Data;
       this.listProductPopular = dt[2].Data;
-      console.log(dt[3]);
+      console.log(this.listProductPopular)
+      this.listTopBlogView = dt[3];
       this.load = false;
     })
   }
@@ -140,7 +145,7 @@ export class BaseDashboardComponent implements OnInit {
 
   getProductPopular(): Promise<any> {
     return new Promise(async (resolve) => {
-      let d = await this.dashBoardService.getStatistics().toPromise();
+      let d = await this.dashBoardService.getProductPopular().toPromise();
       resolve(d)
     })
   }
@@ -150,5 +155,15 @@ export class BaseDashboardComponent implements OnInit {
       let d = await this.dashBoardService.getTopBlog().toPromise();
       resolve(d)
     })
+  }
+
+  getTopBlogByMonth() {
+    let start = 1;
+    let end = 12;
+    this.dashBoardService.getBlogByMonth(start, end).subscribe(
+      dt => {
+        console.log(dt)
+      }
+    )
   }
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { CustomValidators } from 'src/app/core/validators/CustomValidators';
 import { BlogService } from 'src/app/core/_service/blog/blog.service';
 import { CategoryService } from 'src/app/core/_service/category/category.service';
 import { HashtagService } from 'src/app/core/_service/hashtag/hashtag.service';
@@ -39,14 +41,21 @@ export class UpdateComponent implements OnInit {
   loading = true;
   isSuccess = false;
   checkUpdateSuccess = false;
-  userId
+  userId;
+  listProduct;
+  listProductRoot;
+  listMetarialShop = [];
+  myControl: FormControl = new FormControl();
+  filteredOptions: Observable<string[]>;
+
   constructor(
     private fb: FormBuilder,
     private blogService: BlogService,
     private route: Router,
     private activatedRoute: ActivatedRoute,
     private categoryService: CategoryService,
-    private hashtagService: HashtagService
+    private hashtagService: HashtagService,
+    private productService: ProductService
   ) {
     this.registerFormBlog();
 
@@ -58,21 +67,79 @@ export class UpdateComponent implements OnInit {
     Promise.all([
       this.getBlog(),
       this.getCategory(),
-      this.getHashtag()
+      this.getHashtag(),
+      this.getProduct()
     ]).then(
       dt => {
         this.loading = false;
-        console.log(dt)
         this.listCategory = dt[1].Data;
         this.hastags = dt[2].Data;
         this.setFormBlog(dt[0].Data)
-
+        this.listProduct = dt[3].Data;
+        this.listProductRoot = dt[3].Data;
         // this.setFormMetarial(dt[1])
         // this.setFormContent(dt[2])
         // this.setFormSteps(dt[3])
       }
     )
   }
+
+    f(control) {
+    return this.formBlog.controls[control]
+  }
+
+  isInvalid(controlName) {
+    if (this.formBlog) {
+      let c = this.f(controlName);
+      return c && c.invalid && (c.dirty || c.touched);
+    } else {
+      return null;
+    }
+  }
+
+   getProduct(): Promise<any> {
+    return new Promise(async (resolve) => {
+      const dt = await this.productService.getAllProducts().toPromise();
+      resolve(dt);
+    });
+  }
+
+  // Add metarial 
+  pushMetarial(val) {
+    if (this.listMetarialShop.length == 0) {
+      this.listMetarialShop.push(val);
+    }
+    else {
+      for (let index = 0; index < this.listMetarialShop.length; index++) {
+        let e = this.listMetarialShop[index];
+        if (val.id != e.id && (index == this.listMetarialShop.length - 1)) {
+          this.listMetarialShop.push(val);
+          break;
+        }
+        if (val.id == e.id) {
+          this.listMetarialShop.splice(index, 1);
+        }
+      }
+    }
+  }
+
+  unshifMetarial(idex) {
+    this.listMetarialShop.splice(idex, 1);
+  }
+  searchMetarial(val) {
+    if (val.trim() != '') {
+      this.listProduct = this.filterStates(val);
+    }
+    else {
+      this.listProduct = this.listProductRoot;
+    }
+  }
+
+  filterStates(name: string) {
+    return this.listProduct.filter(state =>
+      state.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  }
+  // End metarial
 
   getCategory(): Promise<any> {
     return new Promise(async (resolve) => {
@@ -90,6 +157,12 @@ export class UpdateComponent implements OnInit {
 
   createBlog() {
     let form = this.formBlog;
+    if (form.invalid || this.avatar == null || this.avatar == '') {
+      if (this.avatar == null || this.avatar == '') { this.avatar = ''; }
+      this.formBlog.markAllAsTouched();
+      window.scrollTo(0, 0)
+      return
+    }
     let nowDate = new Date();
     let data = {
       "id": this.blogId,
@@ -105,13 +178,13 @@ export class UpdateComponent implements OnInit {
       "user_id": this.userId,
       "category_id": form.get('category').value,
       "productIds": [
-        0
+        
       ],
 
       "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
     }
-
+    this.listMetarialShop.length > 0 ? data.productIds = this.listMetarialShop.map(e => e.id) : 0
     this.loading = true;
     this.blogService.update(data).subscribe(
       dt => {
@@ -194,29 +267,50 @@ export class UpdateComponent implements OnInit {
     this.formBlog = this.fb.group(
       {
         name: [null, Validators.compose([
-          Validators.required
+          Validators.required,
+          CustomValidators.noWhitespace(),
+          CustomValidators.byteMatch(105)
         ])],
         category: [null, Validators.compose([
           Validators.required
         ])],
         hashTag: [null],
         cooking_time: [null],
-        summary: [null],
-        description: [null],
+        unitTimeCook: ['mins'],
+        summary: [null, Validators.compose([
+          Validators.required
+        ])],
+        description: [null, Validators.compose([
+          Validators.required
+        ])],
         url_video_youtube: [null],
-        status: [false],
-        unitTimeCook: [null],
+        step: [null, Validators.compose([
+          Validators.required
+        ])],
+        // name: [null, Validators.compose([
+        //   Validators.required
+        // ])],
+        // category: [null, Validators.compose([
+        //   Validators.required
+        // ])],
+        // hashTag: [null],
+        // cooking_time: [null],
+        // summary: [null],
+        // description: [null],
+        // url_video_youtube: [null],
+        // status: [false],
+        // unitTimeCook: [null],
 
-        metarial: this.fb.array([]),
-        step: this.fb.array([]),
-        content: this.fb.array([])
+
+        // metarial: this.fb.array([]),
+        // step: this.fb.array([]),
+        // content: this.fb.array([])
       }
     )
   }
 
   setFormBlog(val) {
     let unitCooking = val.cooking_time ? val.cooking_time.split("mins") : '';
-    console.log(unitCooking)
     if (unitCooking) {
       if (unitCooking.length == 1) {
         unitCooking = val.cooking_time.split("hours");
@@ -226,8 +320,9 @@ export class UpdateComponent implements OnInit {
         unitCooking[1] = 'mins';
       }
     }
-    
-
+    val.materials.forEach((e, indexProduct) => {
+      this.pushMetarial(e);
+    });
     this.formBlog.patchValue(
       {
         name: val.name,
@@ -239,12 +334,12 @@ export class UpdateComponent implements OnInit {
         summary: val.summary,
         description: val.description,
         url_video_youtube: val.url_video_youtube,
-        status: val.status
+        status: val.status,
+        step: val.steps
       }
     )
     this.avatar = val.banner_img;
     this.avatar_cover = val.cover_img;
-    console.log(this.formBlog.value)
   }
 
   getBlog(): Promise<any> {

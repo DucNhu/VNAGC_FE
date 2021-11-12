@@ -36,4 +36,13 @@ export class DashBoardService {
     getTopBlog() {
         return this.helperService.getAll("Dashboard/get-Top-Blog");
     }
+
+    getBlogByMonth(start, end) {
+        let param = `?start=${start}&end=${end}`;
+        return this.helperService.getAll("Dashboard/get-Top-Blog-by-month"+param);
+    }
+
+    getAllOrderDetail(id) {
+        return this.helperService.get("get-order-detail",  id);
+    }
 }

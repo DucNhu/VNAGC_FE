@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AppConfig } from 'src/app/app.config';
 import { HelperService } from 'src/app/_helpers/helper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-
+  urlImg = AppConfig.settings.WhiteServer.replace("api/", "Uploads/Product/");
   constructor(
     private helperService: HelperService
   ) { }
@@ -28,7 +29,7 @@ export class ProductService {
   }
 
   delete(id) {
-    return this.helperService.delete("Products/remove", id);
+    return this.helperService.post("Products/remove/"+id, id);
   }
 
   GetImgProductFeature(id) {
@@ -43,4 +44,9 @@ export class ProductService {
     console.log("ImgProductFeatures/" + data.id)
     return this.helperService.put("ImgProductFeatures/" + data.id, data);
   }
+
+  UpdateAvatar(val) {
+    return this.helperService.post("Products/savefile", val)
+  }
+
 }

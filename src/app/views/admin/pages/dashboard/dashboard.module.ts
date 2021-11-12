@@ -28,7 +28,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ChartsModule,
     LoadModule,
     NgbModule,
-    MatSelectModule
+    MatSelectModule,
   ]
 })
 export class DashboardModule { }

@@ -11,7 +11,7 @@ import { productContent } from 'src/app/models/listSale';
   styleUrls: ['./product-create.component.css']
 })
 export class ProductCreateComponent implements OnInit {
-
+  urlImg = this.prductService.urlImg;
   loading = false;
   listSale = productContent.listSale;
   listUnit = productContent.listUnit;
@@ -26,6 +26,9 @@ export class ProductCreateComponent implements OnInit {
   avatar=null;
   avatar_cover;
   list_img_feature: any = [];
+  dataImage;
+  data_avatar;
+  avatarName;
   constructor(
     private fb: FormBuilder,
     private prductService: ProductService,
@@ -72,7 +75,7 @@ export class ProductCreateComponent implements OnInit {
     let nowDate = new Date();
     let data = {
       "name": form.get('name').value,
-      "banner_img": this.avatar,
+      "banner_img": this.urlImg + this.avatarName,
       "cover_img": this.avatar_cover,
       "category": form.get('category').value,
       "price": form.get('price').value,
@@ -87,15 +90,47 @@ export class ProductCreateComponent implements OnInit {
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
     }
     this.loading = true;
-    this.prductService.create(data).subscribe(
-      dt => {
-        this.sendImg(dt)
-        this.route.navigate(["product/list"])
-      },
-      err => {
-        this.loading = false;
+    if (this.upPhoto()) {
+      this.prductService.create(data).subscribe(
+        dt => {
+          this.sendImg(dt)
+          this.route.navigate(["product/list"])
+        },
+        err => {
+          this.loading = false;
+        }
+      )
+    }
+    else {
+      
+    }
+  }
+
+  onSelectFile(e) {
+    this.dataImage = e.target.files.item(0);
+    let dateNow = new Date();
+
+    if (e.target.files) { // Check File true : false
+      var reader = new FileReader(); // DOM
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = (event: any) => {
+        this.avatarName = dateNow.getTime() + this.dataImage.name;
+        this.data_avatar = event.target.result;
       }
-    )
+    }
+  }
+  upPhoto() {
+    const formData: FormData = new FormData();
+
+    try {
+      formData.append('ImageFile', this.dataImage, this.avatarName);
+      this.prductService.UpdateAvatar(formData).subscribe(() => {
+      });
+    }
+    catch (e) {
+      return false;
+    }
+    return true;
   }
 
   getCategory(): Promise<any> {

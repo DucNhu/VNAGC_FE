@@ -49,4 +49,12 @@ export class OrderManagerComponent implements OnInit {
       resolve(dt);
     });
   }
+  
+  getOrderDetail(id) {
+      this.dashBoardService.getAllOrderDetail(id).subscribe(
+        (dt)=> {
+          console.log(dt)
+        }
+      )
+  }
 }
