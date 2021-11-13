@@ -61,7 +61,6 @@ export class UpdateProductComponent implements OnInit {
       ]
     ).then(
       dt => {
-        console.log(dt[0])
         this.loading = false;
         this.setDataforForm(dt[0].Data);
         this.product = dt[0].Data;
@@ -222,20 +221,20 @@ export class UpdateProductComponent implements OnInit {
   }
   setValueAvatar(e) {
     let reader = e.target;
-    this.avatar = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    this.avatar = '' + reader.result.substr(reader.result.indexOf(',') + 1);
   }
   setValueAvatarCover(e) {
     let reader = e.target;
     if (this.avatar == '') {
-      this.avatar = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+      this.avatar = '' + reader.result.substr(reader.result.indexOf(',') + 1);
     }
     else {
-      this.avatar_cover = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+      this.avatar_cover = '' + reader.result.substr(reader.result.indexOf(',') + 1);
     }
   }
   setImgFeature(e) {
     let reader = e.target;
-    this.list_img_feature[this.indexOflist_img_feature].avatar_feature = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    this.list_img_feature[this.indexOflist_img_feature].avatar_feature = '' + reader.result.substr(reader.result.indexOf(',') + 1);
   }
 
   addSlotImgFeature() {

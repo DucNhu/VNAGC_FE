@@ -13,4 +13,5 @@ mat-form-field {
     background: #3f51b5 !important
 }
 
- .mat-menu-panel { max-width: auto !important}
+.cdk-overlay-connected-position-bounding-box .mat-menu-panel { 
+    max-width: initial !important}

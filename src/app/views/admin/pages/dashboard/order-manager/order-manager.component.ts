@@ -24,18 +24,6 @@ export class OrderManagerComponent implements OnInit {
       (dt: any) => {
         this.listOrder = dt[0].Data?.Items;
         this.load = false;
-
-        // this.listOrder.forEach((e, index) => {
-        //   this.orderService.getOrderDetail(e.id).subscribe(
-        //     dt => {
-        //       this.listOrder[index].products = dt.Data;
-        //       if (index == this.listOrder.length - 1) {
-        //         this.load = false;
-        //       }
-        //     }
-        //   )
-        // });
-        console.log(dt)
       },
       err => {
         this.load = false;
@@ -49,12 +37,56 @@ export class OrderManagerComponent implements OnInit {
       resolve(dt);
     });
   }
-  
+
+  reset() {
+    Promise.all(
+      [
+        this.getAllOrder()
+      ]
+    ).then(
+      (dt: any) => {
+        this.listOrder = dt[0].Data?.Items;
+        this.load = false;
+      },
+      err => {
+        this.load = false;
+      }
+    )
+  }
+  OrderDetail = [];
   getOrderDetail(id) {
-      this.dashBoardService.getAllOrderDetail(id).subscribe(
-        (dt)=> {
-          console.log(dt)
-        }
-      )
+    this.OrderDetail = this.listOrder[id].items;
+  }
+
+  getOrderBlogByMonth(type) {
+    let start = "01";
+    let end = "12";
+    switch (type) {
+      case 1:
+        console.log("quý1");
+        start = "01";
+        end = "03"
+        break;
+      case 2:
+        start = "04";
+        end = "06"
+        break;
+      case 3:
+        start = "07";
+        end = "09"
+        break;
+      case 4:
+        start = "10";
+        end = "12"
+        break;
+      default:
+        break;
+    }
+    this.dashBoardService.getOrderByMonth(start, end).subscribe(
+      dt => {
+        this.OrderDetail = [];
+        this.listOrder = dt;
+      }
+    )
   }
 }

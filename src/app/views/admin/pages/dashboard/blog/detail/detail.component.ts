@@ -32,6 +32,7 @@ export class DetailComponent implements OnInit {
         this.blog.metarial = dt[1];
         this.blog.content = dt[2];
         this.blog.step = dt[3];
+        console.log(this.blog)
       }
     )
   }

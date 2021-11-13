@@ -123,10 +123,10 @@ export class CreateBlogComponent implements OnInit {
         ])],
         hashTag: [null],
         cooking_time: [null],
-        unitTimeCook: ['mins'],
-        summary: [null, Validators.compose([
-          Validators.required
-        ])],
+        // unitTimeCook: ['mins'],
+        // summary: [null, Validators.compose([
+        //   Validators.required
+        // ])],
         description: [null, Validators.compose([
           Validators.required
         ])],
@@ -341,7 +341,7 @@ export class CreateBlogComponent implements OnInit {
   }
   setImgListAvatar(e) {
     let reader = e.target;
-    let data = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    let data = '' + reader.result.substr(reader.result.indexOf(',') + 1);
     if (this.isListStep) { // is step
       this.listStep()[this.indexOflist_img_feature].patchValue({ avatar: data })
     }
@@ -362,15 +362,15 @@ export class CreateBlogComponent implements OnInit {
   }
   setValueAvatar(e) {
     let reader = e.target;
-    this.avatar = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    this.avatar = '' + reader.result.substr(reader.result.indexOf(',') + 1);
   }
   setValueAvatarCover(e) {
     let reader = e.target;
     if (this.avatar == '' || this.avatar == null) {
-      this.avatar = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+      this.avatar = '' + reader.result.substr(reader.result.indexOf(',') + 1);
     }
     else {
-      this.avatar_cover = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+      this.avatar_cover = '' + reader.result.substr(reader.result.indexOf(',') + 1);
     }
   }
   createBlog() {
@@ -386,8 +386,8 @@ export class CreateBlogComponent implements OnInit {
       "name": form.get('name').value,
       "banner_img": this.avatar,
       "cover_img": this.avatar_cover,
-      "cooking_time": form.get('cooking_time').value + form.get('unitTimeCook').value,
-      "summary": form.get('summary').value,
+      "cooking_time": form.get('cooking_time').value,
+      "summary": form.get('name').value,
       "description": form.get('description').value,
       "url_video_utube": form.get('url_video_utube').value,
       "view": 0,
@@ -513,6 +513,7 @@ export class CreateBlogComponent implements OnInit {
         }
         if (val.id == e.id) {
           this.listMetarialShop.splice(index, 1);
+          break;
         }
       }
     }

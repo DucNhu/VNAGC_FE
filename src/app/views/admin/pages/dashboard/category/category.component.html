@@ -8,8 +8,8 @@
                         <div  class="dropzone dropzone-area dz-clickable" id="dpz-single-file-coverr">
                             <label class="dz-message" for="avatar">Avatar
                             </label>
-                            <input type="file" hidden id="avatar" accept="image/*" (change)="loadImg($event)">
-                            <img [src]="avatar.file_data" *ngIf="avatar" alt="avatar cover" class="img-avatar">
+                            <input type="file" hidden id="avatar" accept="image/*" (change)="updateFile($event, 1)">
+                            <img [src]="'data:image/png;base64,' + avatar" *ngIf="avatar" alt="avatar cover" class="img-avatar">
                         </div>
                         <div class="card-body position-relative">
                             <h6 class="item-name">
@@ -32,8 +32,8 @@
                         <div class="dropzone dropzone-area dz-clickable" id="dpz-single-file-coverr">
                             <label class="dz-message" [for]="'avat_edit'+i">Avatar
                             </label>
-                            <input type="file" hidden [id]="'avat_edit'+i" accept="image/*" *ngIf="isEdit" (change)="loadImgEdit($event, i)">
-                                <img class="img-avatar" [src]="item.avatar" [alt]="item.avatar">
+                            <input type="file" hidden [id]="'avat_edit'+i" accept="image/*" *ngIf="isEdit" (change)="updateFileEdit($event, i)">
+                                <img class="img-avatar" [src]="'data:image/png;base64,' + item.avatar" [alt]="item.avatar">
                         </div>
                         <div class="card-body">
                             <h6 class="item-name">
