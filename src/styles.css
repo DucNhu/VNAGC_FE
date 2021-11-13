@@ -299,3 +299,5 @@ fieldset .box-step {
 .list-style-none {
   list-style: none
 }
+.w-400 { width: 400px}
+.cdk-overlay-connected-position-bounding-box .mat-menu-panel { max-width: initial !important}

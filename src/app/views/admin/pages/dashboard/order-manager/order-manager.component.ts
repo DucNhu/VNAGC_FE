@@ -24,7 +24,6 @@ export class OrderManagerComponent implements OnInit {
       (dt: any) => {
         this.listOrder = dt[0].Data?.Items;
         this.load = false;
-        console.log(dt)
       },
       err => {
         this.load = false;
@@ -38,12 +37,9 @@ export class OrderManagerComponent implements OnInit {
       resolve(dt);
     });
   }
-  
+
+  OrderDetail=[];
   getOrderDetail(id) {
-      this.dashBoardService.getAllOrderDetail(id).subscribe(
-        (dt)=> {
-          console.log(dt)
-        }
-      )
+    this.OrderDetail = this.listOrder[id].items;
   }
 }

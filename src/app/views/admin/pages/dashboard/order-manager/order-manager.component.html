@@ -8,164 +8,82 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>User</th>
+                                    <th>product</th>
                                     <th>Total</th>
                                     <th>Status</th>
-                                    <th>Crate Time</th>
-                                    <th>Update Time</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                <tr (click)="getOrderDetail(1)" class="cursor-pointer" [matMenuTriggerFor]="menu">
+                                <tr *ngFor="let item of listOrder; let ind = index" (click)="getOrderDetail(ind)"
+                                    class="cursor-pointer" [matMenuTriggerFor]="menu">
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <div class="avatar rounded">
-                                                <div class="avatar-content">
-                                                    <img src="https://pixinvent.com/demo/vuexy-html-bootstrap-admin-template/app-assets/images/icons/toolbox.svg"
-                                                        alt="Toolbar svg">
+                                            <div class="profile-img-container d-flex align-items-center avatar rounded">
+                                                <div class="profile-img">
+                                                    <img [src]="user?.avatar ? user?.avatar : 'assets/images/avatars/default-avatar.jpg'"
+                                                        class="rounded img-fluid" alt="avatar" width="50px" />
                                                 </div>
                                             </div>
                                             <div>
-                                                <div class="fw-bolder">Dixons</div>
-                                                <div class="font-small-2 text-muted">meguc@ruj.io</div>
+                                                <div class="fw-bolder">{{item?.user_detail?.fullName}}</div>
+                                                <div class="font-small-2 text-muted">{{item?.user_detail?.email}}</div>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="d-flex align-items-center">
 
-                                            <span>$50</span>
+                                            <span>${{item.total}}</span>
                                         </div>
                                     </td>
                                     <td class="text-nowrap">
                                         <div class="d-flex flex-column">
-                                            <span class="fw-bolder mb-25">23.4k</span>
+                                            <span class="fw-bolder mb-25">{{item.status ? 'paid' : 'unpaid'}}</span>
                                         </div>
                                     </td>
-                                    <td>$891.2</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <span class="fw-bolder me-1">68%</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr (click)="getOrderDetail(1)" class="cursor-pointer" [matMenuTriggerFor]="menu">
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="avatar rounded">
-                                                <div class="avatar-content">
-                                                    <img src="https://pixinvent.com/demo/vuexy-html-bootstrap-admin-template/app-assets/images/icons/toolbox.svg"
-                                                        alt="Toolbar svg">
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div class="fw-bolder">Dixons</div>
-                                                <div class="font-small-2 text-muted">meguc@ruj.io</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-
-                                            <span>$50</span>
-                                        </div>
-                                    </td>
-                                    <td class="text-nowrap">
-                                        <div class="d-flex flex-column">
-                                            <span class="fw-bolder mb-25">23.4k</span>
-                                        </div>
-                                    </td>
-                                    <td>$891.2</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <span class="fw-bolder me-1">68%</span>
-                                        </div>
-                                    </td>
+                                    
                                 </tr>
                                 <mat-menu #menu="matMenu">
                                     <div class="table-responsive">
-                                        <table class="table">
+                                        <div *ngIf="OrderDetail.length == 0">Not Data</div>
+
+                                        <table class="table w-400" *ngIf="OrderDetail.length > 0">
                                             <thead>
                                                 <tr>
                                                     <th>User</th>
+                                                    <th>Quantity</th>
                                                     <th>Total</th>
-                                                    <th>Status</th>
-                                                    <th>Crate Time</th>
-                                                    <th>Update Time</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr class="cursor-pointer">
+                                                <tr class="cursor-pointer" *ngFor="let item of OrderDetail">
                                                     <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="avatar rounded">
-                                                                <div class="avatar-content">
-                                                                    <img src="https://pixinvent.com/demo/vuexy-html-bootstrap-admin-template/app-assets/images/icons/toolbox.svg"
-                                                                        alt="Toolbar svg">
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                                <div class="fw-bolder">Dixons</div>
-                                                                <div class="font-small-2 text-muted">meguc@ruj.io</div>
+                                                        <div class="profile-img-container d-flex align-items-center avatar rounded bg-transparent">
+                                                            <div class="profile-img">
+                                                                <img [src]="user?.bannerImg ? user?.bannerImg : 'assets/images/avatars/default-avatar.jpg'" class="rounded img-fluid"
+                                                                    alt="avatar" width="40px" />
                                                             </div>
                                                         </div>
+                                                        <div>
+                                                            <div class="fw-bolder">{{item?.name}}</div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        {{item.quantity}}
                                                     </td>
                                                     <td>
                                                         <div class="d-flex align-items-center">
 
-                                                            <span>$50</span>
+                                                            <span>${{item.total}}</span>
                                                         </div>
                                                     </td>
-                                                    <td class="text-nowrap">
-                                                        <div class="d-flex flex-column">
-                                                            <span class="fw-bolder mb-25">23.4k</span>
-                                                        </div>
-                                                    </td>
-                                                    <td>$891.2</td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <span class="fw-bolder me-1">68%</span>
-                                                        </div>
-                                                    </td>
+                                                    
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </mat-menu>
-                                <tr *ngFor="let item of listOrder">
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="avatar rounded">
-                                                <div class="avatar-content">
-                                                    <img src="https://pixinvent.com/demo/vuexy-html-bootstrap-admin-template/app-assets/images/icons/toolbox.svg"
-                                                        alt="Toolbar svg">
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div class="fw-bolder">Dixons</div>
-                                                <div class="font-small-2 text-muted">meguc@ruj.io</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-
-                                            <span>$50</span>
-                                        </div>
-                                    </td>
-                                    <td class="text-nowrap">
-                                        <div class="d-flex flex-column">
-                                            <span class="fw-bolder mb-25">23.4k</span>
-                                        </div>
-                                    </td>
-                                    <td>$891.2</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <span class="fw-bolder me-1">68%</span>
-                                        </div>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
