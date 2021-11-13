@@ -38,8 +38,55 @@ export class OrderManagerComponent implements OnInit {
     });
   }
 
-  OrderDetail=[];
+  reset() {
+    Promise.all(
+      [
+        this.getAllOrder()
+      ]
+    ).then(
+      (dt: any) => {
+        this.listOrder = dt[0].Data?.Items;
+        this.load = false;
+      },
+      err => {
+        this.load = false;
+      }
+    )
+  }
+  OrderDetail = [];
   getOrderDetail(id) {
     this.OrderDetail = this.listOrder[id].items;
+  }
+
+  getOrderBlogByMonth(type) {
+    let start = "01";
+    let end = "12";
+    switch (type) {
+      case 1:
+        console.log("quý1");
+        start = "01";
+        end = "03"
+        break;
+      case 2:
+        start = "04";
+        end = "06"
+        break;
+      case 3:
+        start = "07";
+        end = "09"
+        break;
+      case 4:
+        start = "10";
+        end = "12"
+        break;
+      default:
+        break;
+    }
+    this.dashBoardService.getOrderByMonth(start, end).subscribe(
+      dt => {
+        this.OrderDetail = [];
+        this.listOrder = dt;
+      }
+    )
   }
 }

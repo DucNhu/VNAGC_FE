@@ -23,7 +23,7 @@ export class CategoryComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'countBlog', 'createdDate', 'action'];
   dataSource = new MatTableDataSource(this.listCategory);
 
-  load = false;
+  load = true;
   modalRef?: BsModalRef;
   newCategory = '';
   editNameCategory = '';
@@ -48,8 +48,6 @@ export class CategoryComponent implements OnInit {
       (dt: any) => {
         this.listCategory = dt[0].Data;
         this.listCategory.forEach((e, i) => {
-          this.listCategory[i].avatar = this.urlImg + this.listCategory[i].avatar;
-
           this.listCategory[i].index = i;
         });
         this.load = false;
@@ -75,17 +73,20 @@ export class CategoryComponent implements OnInit {
 
   addNewCategory() {
     let aname = this.newCategory;
-    
+
     if (aname.trim() == '') {
       return
     }
-    let data = new FormData();
-    data.append('name', aname);
-    data.append('file', this.img, this.img.name);
+    let nowDate = new Date();
+    let data = {
+      "name": aname,
+      "createdDate": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
+      "avatar": this.avatar
+    }
     this.load = true;
     this.categoryService.createCategory(data).subscribe(
       dt => {
-        window.location.reload();
+        // window.location.reload();
       },
       err => {
         this.load = false;
@@ -97,10 +98,13 @@ export class CategoryComponent implements OnInit {
     if (this.editNameCategory.trim() == '') {
       return
     }
-    let data = new FormData();
-    data.append('id', this.editId.toString());
-    data.append('name', this.editNameCategory);
-    data.append('file', this.imgEdit, this.imgEdit.name);
+    let nowDate = new Date();
+    let data = {
+      "id": this.listCategory[index].id,
+      "name": this.editNameCategory,
+      "createdDate": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
+      "avatar": this.listCategory[index].avatar
+    }
     this.load = true;
     this.newCategory = '';
     this.categoryService.updateCategory(data).subscribe(
@@ -144,59 +148,58 @@ export class CategoryComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  img;
-  loadImg(event) {
-    let reader = new FileReader();
-    this.img = event.target.files[0];
-    if (event.target.files && event.target.files[0]) {
-      reader.readAsDataURL(this.img);
-      reader.onload = () => {
-        const img = new Image();
-
-        img.src = reader.result as string;
-        img.onload = () => {
-          var typeFile = this.img.name.split('.').pop();
-          this.avatar = {
-            file_name: this.img.name.replaceAll(/[^a-zA-Z0-9_\-]/g, '').replaceAll(typeFile, '') + '.' + typeFile,
-            file_data: reader.result
-          }
-        }
-      }
-    }
-    else {
-      console.log("IL")
-    }
-    
+  permitFile;
+  indexOflist_img_feature = 0;
+  isListStep = 0;
+  isAvatarCover = false;
+  updateFile(event, type) {
+    let fileList: FileList = event.target.files;
+    const file: File = fileList[0];
+    this.permitFile = file;
+    this.handleAvatarBlog(file, type); //turn into base64
   }
 
+  handleAvatarBlog(files, type) {
+    var file = files;
+    var pattern = /image-*/;
+    var reader = new FileReader();
+    if (!file.type.match(pattern)) {
+      alert('invalid format');
+      return;
+    }
+    reader.onloadend = this.setValueAvatar.bind(this);
+
+    reader.readAsDataURL(file);
+  }
+  setValueAvatar(e) {
+    let reader = e.target;
+    this.avatar = '' + reader.result.substr(reader.result.indexOf(',') + 1);
+  }
 
   imgEdit;
-  this
-  loadImgEdit(event, i) {
-    let reader = new FileReader();
-    this.imgEdit = event.target.files[0];
-    if (event.target.files && event.target.files[0]) {
-      reader.readAsDataURL(this.imgEdit);
-      reader.onload = () => {
-        const img = new Image();
-
-        img.src = reader.result as string;
-        img.onload = () => {
-          var typeFile = this.imgEdit.name.split('.').pop();
-          // this.avatar = {
-          //   file_name: this.imgEdit.name.replaceAll(/[^a-zA-Z0-9_\-]/g, '').replaceAll(typeFile, '') + '.' + typeFile,
-          //   file_data: reader.result
-          // }
-          this.listCategory[i].avatar = reader.result
-        }
-      }
-    }
-    else {
-      console.log("IL")
-    }
-
+  imgEditIndex = 0;
+  updateFileEdit(event, index) {
+    let fileList: FileList = event.target.files;
+    const file: File = fileList[0];
+    this.permitFile = file;
+    this.handleAvatarBlogEdit(file, index); //turn into base64
   }
+  handleAvatarBlogEdit(files, index) {
+    var file = files;
+    var pattern = /image-*/;
+    var reader = new FileReader();
+    if (!file.type.match(pattern)) {
+      alert('invalid format');
+      return;
+    }
+    reader.onloadend = this.setValueAvatarEdit.bind(this);
 
+    reader.readAsDataURL(file);
+  }
+  setValueAvatarEdit(e) {
+    let reader = e.target;
+    this.listCategory[this.imgEditIndex].avatar = '' + reader.result.substr(reader.result.indexOf(',') + 1);
+  }
   openModal(template: TemplateRef<any>, element) {
     this.Category_delete.id = element.id;
     this.Category_delete.index = element.index;

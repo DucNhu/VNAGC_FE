@@ -75,7 +75,7 @@ export class ProductCreateComponent implements OnInit {
     let nowDate = new Date();
     let data = {
       "name": form.get('name').value,
-      "banner_img": this.urlImg + this.avatarName,
+      "banner_img": this.avatar,
       "cover_img": this.avatar_cover,
       "category": form.get('category').value,
       "price": form.get('price').value,
@@ -90,7 +90,6 @@ export class ProductCreateComponent implements OnInit {
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
     }
     this.loading = true;
-    if (this.upPhoto()) {
       this.prductService.create(data).subscribe(
         dt => {
           this.sendImg(dt)
@@ -100,10 +99,7 @@ export class ProductCreateComponent implements OnInit {
           this.loading = false;
         }
       )
-    }
-    else {
-      
-    }
+    
   }
 
   onSelectFile(e) {
@@ -180,20 +176,20 @@ export class ProductCreateComponent implements OnInit {
   }
   setValueAvatar(e) {
     let reader = e.target;
-    this.avatar = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    this.avatar = '' + reader.result.substr(reader.result.indexOf(',') + 1);
   }
   setValueAvatarCover(e) {
     let reader = e.target;
     if (this.avatar=='') {
-      this.avatar = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+      this.avatar = '' + reader.result.substr(reader.result.indexOf(',') + 1);
     }
     else {
-      this.avatar_cover = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+      this.avatar_cover = '' + reader.result.substr(reader.result.indexOf(',') + 1);
     }
   }
   setImgFeature(e) {
     let reader = e.target;
-    this.list_img_feature[this.indexOflist_img_feature].data = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    this.list_img_feature[this.indexOflist_img_feature].data = '' + reader.result.substr(reader.result.indexOf(',') + 1);
   }
 
   addSlotImgFeature() {

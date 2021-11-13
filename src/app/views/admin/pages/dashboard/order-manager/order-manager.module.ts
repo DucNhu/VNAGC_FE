@@ -4,6 +4,7 @@ import { OrderManagerComponent } from './order-manager.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LoadModule } from 'src/app/core/component/load/load.module';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 
 const routers:Routes = [
   { path: '', component: OrderManagerComponent}
@@ -15,7 +16,8 @@ const routers:Routes = [
     CommonModule,
     RouterModule.forChild(routers),
     LoadModule,
-    MatMenuModule
+    MatMenuModule,
+    MatButtonModule
   ]
 })
 export class OrderManagerModule { }

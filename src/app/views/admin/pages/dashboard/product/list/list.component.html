@@ -60,7 +60,7 @@
             <div class="item-img text-center">
               <a [routerLink]="['/product/update', {id: p.id}]">
                 <img class="img-fluid card-img-top"
-                  [src]="p.banner_img"
+                  [src]="'data:image/png;base64,' + p.banner_img"
                   alt="banner" /></a>
             </div>
             <div class="card-body">

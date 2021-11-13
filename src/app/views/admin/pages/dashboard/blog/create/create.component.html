@@ -18,8 +18,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-50">
                                             <label class="form-label" for="blogName">Summary</label>
-                                            <input type="text" class="form-control" 
-                                                formControlName="name" id="blogName"
+                                            <input type="text" class="form-control" formControlName="name" id="blogName"
                                                 [ngClass]="isInvalid('name') ? 'error' : ''" />
                                             <p class="error" *ngIf="formBlog.value.name==''">Field is required</p>
                                         </div>
@@ -61,27 +60,62 @@
                                     </div>
 
                                     <div class="mb-50 row mx-0">
-                                        <div class="col-md-6">
-                                        
+                                        <div class="col-md-6 d-flex p-0">
+                                            <div class="col-sm-12 ps-0 align-self-end">
+                                                <div action="#" class="dropzone dropzone-area dz-clickable"
+                                                    id="dpz-single-file" [ngClass]="avatar == '' ? 'error' : ''">
+                                                    <label class="dz-message" for="avatar">Avatar</label>
+                                                    <input type="file" hidden id="avatar" accept="image/*"
+                                                        (change)="updateFile($event, 1)">
+                                                    <img [src]="'data:image/png;base64,' + avatar" alt="avatar"
+                                                        *ngIf="avatar" class="img-avatar">
+                                                </div>
+                                            </div>
+                                            <!-- <div class="col-sm-6 align-self-end">
+                                                                                        <div action="#" class="dropzone dropzone-area dz-clickable"
+                                                                                            id="dpz-single-file-coverr">
+                                                                                            <label class="dz-message" for="avatar_cover">Avatar
+                                                                                                cover</label>
+                                                                                            <input type="file" hidden id="avatar_cover" accept="image/*"
+                                                                                                (change)="updateFile($event, 0)">
+                                                                                            <img [src]="avatar_cover" alt="avatar cover" *ngIf="avatar_cover"
+                                                                                                class="img-avatar">
+                                                                                        </div>
+                                                                                    </div> -->
+                                        </div>
+                                        <div class="col-md-6 px-0">
                                             <label class="form-label ms-1" for="cooking_time">
                                                 cooking time
                                             </label>
                                             <div class="row mx-0">
-                                                <div class="col-6">
-                                                    <input type="number" class="form-control" formControlName="cooking_time" id="cooking_time" />
+                                                <div class="col-12">
+                                                    <input type="text" class="form-control"
+                                                        formControlName="cooking_time" id="cooking_time" />
                                                 </div>
-                                                <div class="col-6">
-                                                    <mat-form-field appearance="fill" class="w-100">
-                                                        <mat-label>Unit time</mat-label>
-                                                        <mat-select placeholder="Unit time cook" class="filter-select" formControlName="unitTimeCook">
-                                                            <mat-option value="mins">
-                                                                Mins
-                                                            </mat-option>
-                                                            <mat-option value="hours">
-                                                                Hours
-                                                            </mat-option>
-                                                        </mat-select>
-                                                    </mat-form-field>
+                                               
+                                                <div class="col-md-12 pe-0">
+                                                    <label class="form-label" for="url_youtube">url
+                                                        youtube
+                                                        <span>
+                                                            <a href="https://www.youtube.com/" target="_blank">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    class="feather feather-link-2">
+                                                                    <path
+                                                                        d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3">
+                                                                    </path>
+                                                                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                                </svg>
+                                                            </a>
+                                                        </span>
+                                                    </label>
+                                                    <div class="row mx-0">
+                                                        <input type="text" class="form-control"
+                                                            placeholder="url youtube" formControlName="url_video_utube"
+                                                            id="url_youtube" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -91,31 +125,10 @@
                                                 [ngClass]="isInvalid('name') ? 'error' : ''" formControlName="summary"
                                                 id="summary"></textarea>
                                         </div> -->
-                                        <div class="col-md-6 d-flex p-0">
-                                            <div class="col-sm-12 align-self-end">
-                                                <div action="#" class="dropzone dropzone-area dz-clickable"
-                                                    id="dpz-single-file" [ngClass]="avatar == '' ? 'error' : ''">
-                                                    <label class="dz-message" for="avatar">Avatar</label>
-                                                    <input type="file" hidden id="avatar" accept="image/*"
-                                                        (change)="updateFile($event, 1)">
-                                                    <img [src]="avatar" alt="avatar" *ngIf="avatar" class="img-avatar">
-                                                </div>
-                                            </div>
-                                            <!-- <div class="col-sm-6 align-self-end">
-                                                <div action="#" class="dropzone dropzone-area dz-clickable"
-                                                    id="dpz-single-file-coverr">
-                                                    <label class="dz-message" for="avatar_cover">Avatar
-                                                        cover</label>
-                                                    <input type="file" hidden id="avatar_cover" accept="image/*"
-                                                        (change)="updateFile($event, 0)">
-                                                    <img [src]="avatar_cover" alt="avatar cover" *ngIf="avatar_cover"
-                                                        class="img-avatar">
-                                                </div>
-                                            </div> -->
-                                        </div>
+
                                     </div>
-                                    <div class="row mb-50" style="padding: 16px 0 0 0">
-                                        <div class="col-md-6 pe-0" hidden>
+                                    <div class="row mb-50" hidden style="padding: 16px 0 0 0">
+                                        <!-- <div class="col-md-6 pe-0">
                                             <label class="form-label" for="url_youtube">url
                                                 youtube
                                                 <span>
@@ -136,7 +149,7 @@
                                                 <input type="text" class="form-control" placeholder="url youtube"
                                                     formControlName="url_video_utube" id="url_youtube" />
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <!-- <div class="col-md-6">
 
                                             <label class="form-label ms-1" for="cooking_time">
@@ -167,7 +180,8 @@
                                     <div class="col-md-12">
                                         <div class="mb-50">
                                             <label class="form-label" for="des">Step</label>
-                                            <textarea type="text" rows="3" class="form-control" [ngClass]="isInvalid('name') ? 'error' : ''" formControlName="step"
+                                            <textarea type="text" rows="3" class="form-control"
+                                                [ngClass]="isInvalid('step') ? 'error' : ''" formControlName="step"
                                                 id="des"></textarea>
                                         </div>
                                     </div>
@@ -177,10 +191,11 @@
                                             aria-controls="collapseExample">Metarial
 
                                         </legend>
-                                        <ul class="row list-style-none cookandmeal-post-listx scrollbar-x" style="padding-left: 0 ; margin-left: 0">
+                                        <ul class="row list-style-none cookandmeal-post-listx scrollbar-x"
+                                            style="padding-left: 0 ; margin-left: 0">
                                             <li class="col-2 cookandmeal-post cookandmeal-post-item"
                                                 *ngFor="let item of listMetarialShop; let i = index">
-                                                <div class="post-categories post-categories-product" 
+                                                <div class="post-categories post-categories-product"
                                                     (click)="unshifMetarial(i)">
                                                     <img style="vertical-align:middle;" aria-hidden
                                                         src="{{item.banner_img}}" height="50" />
@@ -188,10 +203,13 @@
                                                 </div>
                                             </li>
                                         </ul>
-                                        <input type="text" class="create-input form-control" placeholder="Enter your metarial"
-                                            [formControl]="myControl" (keyup)="searchMetarial(myControl.value)">
-                                        <ul class="row list-style-none cookandmeal-post-list scrollbar-y" style="padding-left: 0">
-                                            <li class="col-2 cookandmeal-post cookandmeal-post-item" *ngFor="let item of listProduct">
+                                        <input type="text" class="create-input form-control"
+                                            placeholder="Select your metarial" [formControl]="myControl"
+                                            (keyup)="searchMetarial(myControl.value)">
+                                        <ul class="row list-style-none cookandmeal-post-list scrollbar-y"
+                                            style="padding-left: 0">
+                                            <li class="col-2 cookandmeal-post cookandmeal-post-item"
+                                                *ngFor="let item of listProduct">
                                                 <div class="post-categories post-categories-product cursor-pointer"
                                                     (click)="pushMetarial(item)">
                                                     <img style="vertical-align:middle;" aria-hidden
