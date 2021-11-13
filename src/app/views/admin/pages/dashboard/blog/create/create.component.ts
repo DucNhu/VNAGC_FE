@@ -124,9 +124,9 @@ export class CreateBlogComponent implements OnInit {
         hashTag: [null],
         cooking_time: [null],
         unitTimeCook: ['mins'],
-        summary: [null, Validators.compose([
-          Validators.required
-        ])],
+        // summary: [null, Validators.compose([
+        //   Validators.required
+        // ])],
         description: [null, Validators.compose([
           Validators.required
         ])],
@@ -387,7 +387,7 @@ export class CreateBlogComponent implements OnInit {
       "banner_img": this.avatar,
       "cover_img": this.avatar_cover,
       "cooking_time": form.get('cooking_time').value + form.get('unitTimeCook').value,
-      "summary": form.get('summary').value,
+      "summary": form.get('name').value,
       "description": form.get('description').value,
       "url_video_utube": form.get('url_video_utube').value,
       "view": 0,

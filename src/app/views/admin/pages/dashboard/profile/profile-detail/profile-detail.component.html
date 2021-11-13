@@ -44,7 +44,7 @@
                     <!--/ avatar -->
                     <div class="profile-user-info" [routerLink]="['/page-profile', {id: userId}]">
                         <h6 class="mb-0">{{item.author.fullName}}</h6>
-                        <small class="text-muted">Create at {{item.create_at | date:"yyyy-MM-dd"}}</small>
+                        <small class="text-muted">Create {{item.create_at | date:"yyyy-MM-dd"}} at {{item.create_at | date:"HH:mm"}}</small>
                     </div>
                 </div>
                 <p class="card-text">
@@ -52,7 +52,7 @@
                 <!-- post img -->
                 <div class="ecommerce-card">
                     <div class="item-img">
-                        <a [routerLink]="['blog/blog-detail', {id: item.id}]">
+                        <a [routerLink]="['/blog/blog-detail', {id: item.id}]">
                             <img class="img-fluid card-img-top rounded mb-75" [src]="item.banner_img" alt="avatar img">
 
                         </a>

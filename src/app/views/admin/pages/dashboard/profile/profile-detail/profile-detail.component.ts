@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from 'src/app/core/_service/category/category.service';
 import { ProfileService } from 'src/app/core/_service/profile/profileService..service';
 
@@ -13,9 +14,10 @@ export class ProfileDetailComponent implements OnInit {
   listBlog;
   constructor(
     private categoryService: CategoryService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private activatedRoute: ActivatedRoute
   ) {
-    this.userId = JSON.parse(sessionStorage.getItem("user")).id;
+    this.userId = activatedRoute.snapshot.paramMap.get("id");
    }
 
   ngOnInit(): void {

@@ -38,7 +38,7 @@ export class MemberComponent implements OnInit {
   getAllMember(): Promise<any> {
     return new Promise(
       async (resolve) => {
-        let dt = await this.admin.getOrderByYear().toPromise();
+        let dt = await this.admin.getAllMember().toPromise();
         return resolve(dt)
       }
     )

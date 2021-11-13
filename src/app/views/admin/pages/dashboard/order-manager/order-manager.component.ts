@@ -24,17 +24,6 @@ export class OrderManagerComponent implements OnInit {
       (dt: any) => {
         this.listOrder = dt[0].Data?.Items;
         this.load = false;
-
-        // this.listOrder.forEach((e, index) => {
-        //   this.orderService.getOrderDetail(e.id).subscribe(
-        //     dt => {
-        //       this.listOrder[index].products = dt.Data;
-        //       if (index == this.listOrder.length - 1) {
-        //         this.load = false;
-        //       }
-        //     }
-        //   )
-        // });
         console.log(dt)
       },
       err => {
