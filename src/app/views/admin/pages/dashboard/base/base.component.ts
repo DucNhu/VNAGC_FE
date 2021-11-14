@@ -51,18 +51,24 @@ export class BaseDashboardComponent implements OnInit {
   listTopBlogView;
   datagetTopOrderByYear = [];
   datagetTopBlogByYear = []
+
+  orderInDay;
+  blogInDay;
   constructor(
     private dashBoardService: DashBoardService,
   ) { }
 
   ngOnInit(): void {
+    let nowDate = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
     Promise.all([
       this.getStatistics(),
       this.getProductTopRating(),
       this.getProductPopular(),
       this.getTopBlog(),
       this.getTopBlogByYear(),
-      this.getTopOrderByYear()
+      this.getTopOrderByYear(),
+      this.GetTopOrderByDay(nowDate),
+      this.GetTopBlogByDay(nowDate)
     ]).then(dt => {
       console.log(dt);
       this.profile = JSON.parse(sessionStorage.getItem("user") ? sessionStorage.getItem("user") : sessionStorage.getItem("user"));
@@ -74,7 +80,23 @@ export class BaseDashboardComponent implements OnInit {
       this.setDataOrderByYear(dt[5])
 
       this.setDataBlogByYear(dt[4]);
+      this.orderInDay = dt[6];
+      this.blogInDay = dt[7];
       this.load = false;
+    })
+  }
+
+  GetTopOrderByDay(date) {
+    return new Promise(async (resolve) => {
+      let d = await this.dashBoardService.GetTopOrderByDay(date).toPromise();
+      resolve(d)
+    })
+  }
+
+  GetTopBlogByDay(date) {
+    return new Promise(async (resolve) => {
+      let d = await this.dashBoardService.GetTopBlogByDay(date).toPromise();
+      resolve(d)
     })
   }
 
@@ -154,4 +176,6 @@ export class BaseDashboardComponent implements OnInit {
       resolve(d)
     })
   }
+
+
 }

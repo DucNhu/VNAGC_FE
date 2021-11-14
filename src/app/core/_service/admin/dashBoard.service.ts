@@ -58,4 +58,12 @@ export class DashBoardService {
     getOrderByYear() {
         return this.helperService.getAll("Dashboard/get-Top-Order-by-year");
     }
+
+    GetTopOrderByDay(date) {
+        return this.helperService.get("Dashboard/get-All-Order-by-day", date);
+    }
+
+    GetTopBlogByDay(date) {
+        return this.helperService.get("Dashboard/get-All-Blog-by-day", date);
+    }
 }

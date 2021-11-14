@@ -27,7 +27,7 @@ export class BlogService {
   }
 
   activeBlog(data) {
-    return this.helperService.put("Blog/activeBlog", data);
+    return this.helperService.post("Blog/activeBlog", data);
   }
 
   delete(id) {

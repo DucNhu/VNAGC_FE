@@ -179,7 +179,7 @@
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between pb-0">
-                                <h4 class="card-title">Blogs index in 12 months</h4>
+                                <h4 class="card-title">Statistics by day</h4>
                                 <div class="dropdown chart-dropdown">
                                     <button class="btn btn-sm border-0 dropdown-toggle p-50" type="button"
                                         id="dropdownItem4" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -189,10 +189,36 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <canvas baseChart chartType="bar" [colors]="chartColors_blog"
-                                    [datasets]="chartData_blog" [labels]="chartLabels_blog"
-                                    [options]="chartOptions_blog" [plugins]="" [legend]="chartLegend_blog">
-                                </canvas>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Type</th>
+                                            <th>Count Order</th>
+                                            <th>Total</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>
+                                                Order
+                                            </th>
+                                            <td>
+                                                {{orderInDay?.countOrderInDay}}
+                                            </td>
+                                            <td>{{orderInDay?.countOrderInDay}}</td>
+                                            <td>{{orderInDay?.countOrderInDay}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Blog</th>
+                                            <td>
+                                                {{blogInDay.Blog}}
+                                            </td>
+                                            <td></td>
+                                            <td>20/20/2001</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -201,10 +227,27 @@
                     <!--/ App Design Card -->
                 </div>
                 <div class="row match-height">
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between pb-0">
+                                <h4 class="card-title">Blogs index in 12 months</h4>
+                                <div class="dropdown chart-dropdown">
+                                    <button class="btn btn-sm border-0 dropdown-toggle p-50" type="button" id="dropdownItem4"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        In year
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas baseChart chartType="bar" [colors]="chartColors_blog" [datasets]="chartData_blog"
+                                    [labels]="chartLabels_blog" [options]="chartOptions_blog" [plugins]="" [legend]="chartLegend_blog">
+                                </canvas>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-lg-6 col-12">
                         <div class="card">
                             <div class="card mb-3">
-
                                 <div class="card-body">
                                     <div class="d-flex align-items-center mb-4">
                                         <div class="flex-grow-1">

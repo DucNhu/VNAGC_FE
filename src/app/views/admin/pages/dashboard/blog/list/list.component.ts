@@ -39,10 +39,7 @@ export class ListBlogComponent implements OnInit {
     this.loading = true;
     let data = {
       id: val.id,
-      status: status.checked ? 1 : 0,
-      "name": val.name,
-
-      "user_id": val.user_id
+      status: status.checked ? 1 : 0
     }
     this.blogService.activeBlog(data).subscribe(
       dt => {

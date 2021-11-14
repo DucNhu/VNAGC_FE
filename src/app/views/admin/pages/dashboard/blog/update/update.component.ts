@@ -82,6 +82,7 @@ export class UpdateComponent implements OnInit {
         // this.setFormSteps(dt[3])
         this.setFormBlog(dt[0].Data)
         this.blogDetail = dt[0].Data;
+        console.log(dt[0].Data)
       }
     )
   }
@@ -190,6 +191,7 @@ export class UpdateComponent implements OnInit {
       "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
     }
+    console.log(data)
     this.listMetarialShop.length > 0 ? data.productIds = this.listMetarialShop.map(e => e.id) : 0
     this.loading = true;
     this.blogService.update(data).subscribe(
@@ -281,7 +283,7 @@ export class UpdateComponent implements OnInit {
         ])],
         hashTag: [null],
         cooking_time: [null],
-        unitTimeCook: ['mins'],
+        // unitTimeCook: ['mins'],
         // summary: [null, Validators.compose([
         //   Validators.required
         // ])],
