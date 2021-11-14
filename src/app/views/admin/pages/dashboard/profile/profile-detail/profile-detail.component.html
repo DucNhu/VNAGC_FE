@@ -1,3 +1,5 @@
+<app-load [isLoading]="load"></app-load>
+
 <div class="row">
     <!-- left profile info section -->
     <!-- <div class="col-lg-3 col-12 order-2 order-lg-1">
@@ -37,7 +39,7 @@
                 <div class="d-flex justify-content-start align-items-center mb-1">
                     <!-- avatar -->
                     <div class="avatar me-1">
-                        <img [src]="item.author.avatar ? urlImg + item.author.avatar : 'assets/images/avatars/default-avatar.jpg'"
+                        <img [src]="item.author.avatar ? 'data:image/png;base64,' + item.author.avatar : 'assets/images/avatars/default-avatar.jpg'"
                         [routerLink]="['/page-profile', {id: userId}]"
                             alt="avatar img" height="50" width="50">
                     </div>
@@ -53,7 +55,7 @@
                 <div class="ecommerce-card">
                     <div class="item-img">
                         <a [routerLink]="['/blog/blog-detail', {id: item.id}]">
-                            <img class="img-fluid card-img-top rounded mb-75" [src]="item.banner_img" alt="avatar img">
+                            <img class="img-fluid card-img-top rounded mb-75" [src]="'data:image/png;base64,' + item.banner_img" alt="avatar img">
 
                         </a>
                     </div>

@@ -12,6 +12,7 @@ import { ChartsModule } from "@rinminase/ng-charts";
 import { LoadModule } from 'src/app/core/component/load/load.module';
 import { MatSelectModule } from '@angular/material/select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LoadModule,
     NgbModule,
     MatSelectModule,
+    MatDatepickerModule
   ]
 })
 export class DashboardModule { }

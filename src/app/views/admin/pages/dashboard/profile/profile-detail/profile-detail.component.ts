@@ -12,6 +12,7 @@ export class ProfileDetailComponent implements OnInit {
   urlImg = this.categoryService.urlImg;
   userId;
   listBlog;
+  load = true;
   constructor(
     private categoryService: CategoryService,
     private profileService: ProfileService,
@@ -25,15 +26,15 @@ export class ProfileDetailComponent implements OnInit {
       this.getBlogById()
     ]).then(
       dt => {
-        this.listBlog = dt[0].Data;
-        console.log(this.listBlog)
+        this.load = false
+        this.listBlog = dt[0].Data.Items;
       }
     )
   }
 
   getBlogById():Promise<any> {
     return new Promise(async (resolve)=> {
-      let dt = await this.profileService.getBlogById(this.userId).toPromise();
+      let dt = await this.profileService.getBlogById().toPromise();
       resolve(dt)
     })
   }

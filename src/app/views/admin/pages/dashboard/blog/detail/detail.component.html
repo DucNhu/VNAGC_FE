@@ -15,8 +15,8 @@
                                                 class="fa fa-tag cat-dot"></i><span
                                                 class="cat-title">{{item}}</span></a></div>
                                     <div class="cookandmeal-post-details">
-
-                                        <h1 class="post-title entry-title">{{blog?.name}}</h1>
+                                        
+                                        <h1 class="post-title entry-title">{{blog?.summary}}</h1>
                                         <div class="post-date"><span class="entry-date published updated">{{
                                                 blog?.create_at | date:"yyyy/MM/dd"}}</span></div>
                                         <div class="post-read-time" *ngIf="blog?.cooking_time"><i class="fa fa-clock-o"
@@ -79,8 +79,11 @@
                             <div class="post-content clearfix">
 
                                 <div class="entry-content">
-                                    <p class="has-medium-font-size">{{blog?.summary}}</p>
+                                    <h2><strong>Summary</strong></h2>
+                                    <!-- <p class="has-medium-font-size">{{blog?.summary}}</p> -->
+                                    <h2><strong>Description</strong></h2>
                                     <p class="has-medium-font-size">{{blog?.description}}</p>
+                                    <h2><strong>Step by step</strong></h2>
                                     <p>{{blog?.steps}}</p>
                                     <!-- <ng-container *ngFor="let item of blog?.content">
                                         <h2>{{item.name}}</h2>

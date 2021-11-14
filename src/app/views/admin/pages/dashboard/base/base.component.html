@@ -180,12 +180,9 @@
                         <div class="card">
                             <div class="card-header d-flex justify-content-between pb-0">
                                 <h4 class="card-title">Statistics by day</h4>
-                                <div class="dropdown chart-dropdown">
-                                    <button class="btn btn-sm border-0 dropdown-toggle p-50" type="button"
-                                        id="dropdownItem4" data-bs-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                        In year
-                                    </button>
+                                <div class="">
+                                    <input type="date" #dateSelect id="fp-SelectTime" class="form-control border-0 flatpickr-basic flatpickr-input active"
+                                        (change)="fGetTopOrderByDay(dateSelect.value); fGetTopBlogByDay(dateSelect.value)" [max]="nowDate" >
                                 </div>
                             </div>
                             <div class="card-body">
@@ -206,16 +203,16 @@
                                             <td>
                                                 {{orderInDay?.countOrderInDay}}
                                             </td>
-                                            <td>{{orderInDay?.countOrderInDay}}</td>
-                                            <td>{{orderInDay?.countOrderInDay}}</td>
+                                            <td>{{orderInDay?.totalInDay}}</td>
+                                            <td>{{timeSelect}}</td>
                                         </tr>
                                         <tr>
                                             <th>Blog</th>
                                             <td>
-                                                {{blogInDay.Blog}}
+                                                {{blogInDay?.Blog}}
                                             </td>
                                             <td></td>
-                                            <td>20/20/2001</td>
+                                            <td>{{timeSelect}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

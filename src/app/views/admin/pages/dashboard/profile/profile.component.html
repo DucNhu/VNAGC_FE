@@ -17,11 +17,11 @@
                     <!-- profile picture -->
                     <div class="profile-img-container d-flex align-items-center">
                       <div class="profile-img">
-                        <img [src]="user.avatar ? user.avatar : 'assets/images/avatars/default-avatar.jpg'" class="rounded img-fluid" alt="avatar" />
+                        <img [src]="user?.avatar ? 'data:image/png;base64,' + user?.avatar : 'assets/images/avatars/default-avatar.jpg'" class="rounded img-fluid" alt="avatar" />
                       </div>
                       <!-- profile title -->
                       <div class="profile-title ms-3">
-                        <h2 class="text-white">{{user.fullName}}</h2>
+                        <h2 class="text-white">{{user?.fullName}}</h2>
                         <p class="text-white">Blogger</p>
                       </div>
                     </div>

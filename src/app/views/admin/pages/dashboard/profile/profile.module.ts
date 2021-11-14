@@ -8,6 +8,7 @@ import { ProfileDetailComponent } from './profile-detail/profile-detail.componen
 import { ProfileControllComponent } from './profile-controll/profile-controll.component';
 import { baseBlogModule } from 'src/app/views/admin/pages/dashboard/blog/base-blog.module';
 import { CreateBlogComponent } from 'src/app/views/admin/pages/dashboard/blog/create/create.component';
+import { MatButtonModule } from '@angular/material/button';
 
 const routes: Routes = [
   {
@@ -38,6 +39,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     LoadModule,
+    MatButtonModule, 
     RouterModule.forChild(routes),
   ]
 })

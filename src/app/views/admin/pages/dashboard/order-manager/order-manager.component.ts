@@ -63,7 +63,6 @@ export class OrderManagerComponent implements OnInit {
     let end = "12";
     switch (type) {
       case 1:
-        console.log("quý1");
         start = "01";
         end = "03"
         break;
@@ -82,8 +81,10 @@ export class OrderManagerComponent implements OnInit {
       default:
         break;
     }
+    this.load = true;
     this.dashBoardService.getOrderByMonth(start, end).subscribe(
       dt => {
+        this.load = false;
         this.OrderDetail = [];
         this.listOrder = dt;
       }

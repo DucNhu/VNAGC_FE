@@ -22,8 +22,9 @@ export class OrderManagerComponent implements OnInit {
       ]
     ).then(
       (dt: any) => {
-        this.listOrder = dt[0].Data.Items;
+        this.listOrder = dt[0].Data;
         this.load = false;
+        console.log(dt[0].Data)
         // this.listOrder.forEach((e,index) => {
         //   this.orderService.getOrderDetail(e.id).subscribe(
         //     dt => {
@@ -48,5 +49,8 @@ export class OrderManagerComponent implements OnInit {
       resolve(dt);
     });
   }
-  
+  OrderDetail = [];
+  getOrderDetail(id) {
+    this.OrderDetail = this.listOrder[id].items;
+  }
 }

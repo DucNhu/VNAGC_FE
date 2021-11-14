@@ -20,7 +20,6 @@ export class ProfileComponent implements OnInit {
     this.profileService.getProfile(this.activatedRoute.snapshot.paramMap.get("id")).subscribe(
       dt => {
         this.user = dt.Data[0];
-        console.log(this.user)
       }
     )
   }

@@ -8,7 +8,7 @@ import { HelperService } from "src/app/_helpers/helper.service";
 export class DashBoardService {
     constructor(private helperService: HelperService) {}
     controll = 'Dashboard/';
-
+ 
     getStatistics() { 
         return this.helperService.getAll(this.controll + 'get-DashBoard');
     }
@@ -63,7 +63,11 @@ export class DashBoardService {
         return this.helperService.get("Dashboard/get-All-Order-by-day", date);
     }
 
+    GetCountBlogByDay(date) {
+        return this.helperService.get("Dashboard/get-count-Blog-by-day", date);
+    }
+
     GetTopBlogByDay(date) {
-        return this.helperService.get("Dashboard/get-All-Blog-by-day", date);
+        return this.helperService.get("Dashboard/get-count-Blog-by-day", date);
     }
 }

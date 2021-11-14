@@ -11,7 +11,8 @@ export class ProfileService {
         return this.helperService.getAll("Dashboard/get-user-detail/"+id);
     }
 
-    getBlogById(id) {
-        return this.helperService.getAll("Dashboard/get-all-blog-by-user?user_id="+id);
+    getBlogById() {
+        let param = '?pageIndex=1&pageSize=10';
+        return this.helperService.getParam("Blog/get-all-blog-by-user", param);
     }
 }

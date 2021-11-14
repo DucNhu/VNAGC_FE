@@ -1,6 +1,5 @@
 <div class="app-content content ecommerce-application">
     <div class="content-wrapper container-xxl p-0 list-view--product">
-        <app-load [isLoading]="load"></app-load>
         <div class="col-12">
             <div class="card">
                 <div class="d-flex justify-content-between align-items-center pt-0">
@@ -27,7 +26,7 @@
                                                 <div class="avatar-content">
                                                     <span class="avatar m-0"><img
                                                         
-                                                            [src]="item.avatar"
+                                                            [src]="'data:image/png;base64,' + item.avatar"
                                                             alt="avatar" height="40" width="40" class="rounded-circle"></span>
                                                 </div>
                                             </div>
@@ -55,3 +54,4 @@
         </div>
     </div>
 </div>
+        <app-load [isLoading]="load"></app-load>

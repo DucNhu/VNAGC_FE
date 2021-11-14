@@ -12,10 +12,13 @@
                             <button type="button" class="btn btn-outline-primary waves-effect me-2" (click)="routerCreateBlog()">
                                 <span>Create blog</span>
                             </button>
-                            <button mat-button [matMenuTriggerFor]="menu" class="me-2">Menu</button>
+                            <button mat-raised-button [matMenuTriggerFor]="menu" class="me-2">Display type</button>
                             <mat-menu #menu="matMenu">
-                                <button mat-menu-item>Item 1</button>
-                                <button mat-menu-item>Item 2</button>
+                                <button mat-menu-item (click)="reset()">Get All</button>
+                                <button mat-menu-item (click)="getOrderBlogByMonth(1)">Select date</button>
+                                <button mat-menu-item (click)="getOrderBlogByMonth(2)">2st quarter</button>
+                                <button mat-menu-item (click)="getOrderBlogByMonth(3)">3st quarter</button>
+                                <button mat-menu-item (click)="getOrderBlogByMonth(4)">4st quarter</button>
                             </mat-menu>
                         </div>
                     </div>

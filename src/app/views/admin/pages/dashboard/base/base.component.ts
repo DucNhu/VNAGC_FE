@@ -54,12 +54,14 @@ export class BaseDashboardComponent implements OnInit {
 
   orderInDay;
   blogInDay;
+  timeSelect = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
+  nowDate = this.timeSelect;
   constructor(
     private dashBoardService: DashBoardService,
-  ) { }
+  ) {
+   }
 
   ngOnInit(): void {
-    let nowDate = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
     Promise.all([
       this.getStatistics(),
       this.getProductTopRating(),
@@ -67,10 +69,9 @@ export class BaseDashboardComponent implements OnInit {
       this.getTopBlog(),
       this.getTopBlogByYear(),
       this.getTopOrderByYear(),
-      this.GetTopOrderByDay(nowDate),
-      this.GetTopBlogByDay(nowDate)
+      this.GetTopOrderByDay(),
+      this.GetCountBlogByDay()
     ]).then(dt => {
-      console.log(dt);
       this.profile = JSON.parse(sessionStorage.getItem("user") ? sessionStorage.getItem("user") : sessionStorage.getItem("user"));
 
       this.Statistics = dt[0].Data;
@@ -86,16 +87,34 @@ export class BaseDashboardComponent implements OnInit {
     })
   }
 
-  GetTopOrderByDay(date) {
-    return new Promise(async (resolve) => {
-      let d = await this.dashBoardService.GetTopOrderByDay(date).toPromise();
-      resolve(d)
-    })
+  GetTopOrderByDay() {
+    this.dashBoardService.GetTopOrderByDay(this.timeSelect).subscribe(
+      dt => {
+        this.orderInDay = dt[0];
+      }
+    )
   }
 
-  GetTopBlogByDay(date) {
+  fGetTopOrderByDay(value) {
+    this.timeSelect = value;
+    this.dashBoardService.GetTopOrderByDay(value).subscribe(
+      dt => {
+        this.orderInDay = dt[0];
+      }
+    )
+  }
+
+  fGetTopBlogByDay(date) {
+    this.timeSelect = date;
+    this.dashBoardService.GetTopBlogByDay(date).subscribe(
+      dt => {
+        this.blogInDay = dt[0];
+      })
+  }
+
+  GetCountBlogByDay() {
     return new Promise(async (resolve) => {
-      let d = await this.dashBoardService.GetTopBlogByDay(date).toPromise();
+      let d = await this.dashBoardService.GetTopBlogByDay(this.timeSelect).toPromise();
       resolve(d)
     })
   }
@@ -120,7 +139,6 @@ export class BaseDashboardComponent implements OnInit {
       ++x;
       this.chartLabels_blog.push(x);
       let e = getTopBlogByYear[index];
-      console.log(e[x])
       this.datagetTopBlogByYear.push(e[x]);
     }
     this.chartData_blog[0].data = this.datagetTopBlogByYear;
