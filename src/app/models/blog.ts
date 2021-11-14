@@ -7,6 +7,7 @@ export class blog {
     "summary": string;
     "description": string;
     "url_video_utube": string;
+    "url_video_youtube": string;
     "view": number;
     "status": number;
     "user_id": string;

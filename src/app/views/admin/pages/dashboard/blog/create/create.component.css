@@ -27,9 +27,9 @@
     display: none;
 }
 
-.dropzone {
+/* .dropzone {
     min-height: 150px;
-}
+} */
 
 input {
     border-radius: 0px !important;

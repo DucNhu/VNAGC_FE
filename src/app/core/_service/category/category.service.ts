@@ -9,26 +9,22 @@ import { HelperService } from "src/app/_helpers/helper.service";
 export class CategoryService {
     urlImg = AppConfig.settings.WhiteServer.replace("/api/", "");
 
-    constructor(private helperService: HelperService) {}
-    
+    constructor(private helperService: HelperService) { }
+
     getCategorys() {
         return this.helperService.getAll("Category/get-all-category");
     }
 
     createCategory(data) {
-        let param='';
-        param += '?name=' + data.get('name');
-        return this.helperService.postUrl("Category/create", data, param);
+        return this.helperService.post("Category/create", data);
     }
 
     updateCategory(data) {
-        let param = '';
-        param += '?name=' + data;
-        return this.helperService.postUrl("Category/edit", data, '');
+        return this.helperService.post("Category/edit/" + data.id, data);
     }
 
     deleteCategory(id) {
         return this.helperService.delete("Category/remove", id);
-        
+
     }
 }

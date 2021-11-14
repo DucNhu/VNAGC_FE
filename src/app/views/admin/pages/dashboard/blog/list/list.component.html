@@ -32,10 +32,10 @@
                                     <th>Category</th>
                                     <th>View</th>
                                     <th>Options</th>
-                                    <th>Status</th>
+                                    <th class="text-center">Status</th>
                                 </tr>
                                 <tr *ngFor="let i of listBlog; let id = index">
-                                    <td>{{i.name}}</td>
+                                    <td>{{i.summary}}</td>
                                     <td>{{i.category_name}}</td>
                                     <td>{{i.view}}</td>
                                     <td>

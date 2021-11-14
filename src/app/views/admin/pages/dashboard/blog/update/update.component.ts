@@ -8,6 +8,7 @@ import { BlogService } from 'src/app/core/_service/blog/blog.service';
 import { CategoryService } from 'src/app/core/_service/category/category.service';
 import { HashtagService } from 'src/app/core/_service/hashtag/hashtag.service';
 import { ProductService } from 'src/app/core/_service/product.service';
+import { blog } from 'src/app/models/blog';
 
 @Component({
   selector: 'app-update',
@@ -47,7 +48,7 @@ export class UpdateComponent implements OnInit {
   listMetarialShop = [];
   myControl: FormControl = new FormControl();
   filteredOptions: Observable<string[]>;
-
+  blogDetail:blog;
   constructor(
     private fb: FormBuilder,
     private blogService: BlogService,
@@ -74,12 +75,13 @@ export class UpdateComponent implements OnInit {
         this.loading = false;
         this.listCategory = dt[1].Data;
         this.hastags = dt[2].Data;
-        this.setFormBlog(dt[0].Data)
         this.listProduct = dt[3].Data;
         this.listProductRoot = dt[3].Data;
         // this.setFormMetarial(dt[1])
         // this.setFormContent(dt[2])
         // this.setFormSteps(dt[3])
+        this.setFormBlog(dt[0].Data)
+        this.blogDetail = dt[0].Data;
       }
     )
   }
@@ -112,12 +114,15 @@ export class UpdateComponent implements OnInit {
     else {
       for (let index = 0; index < this.listMetarialShop.length; index++) {
         let e = this.listMetarialShop[index];
-        if (val.id != e.id && (index == this.listMetarialShop.length - 1)) {
-          this.listMetarialShop.push(val);
-          break;
+        if (val.id != e.id) {
+          if ((index == this.listMetarialShop.length - 1)){
+            this.listMetarialShop.push(val);
+            break;
+          }
         }
         if (val.id == e.id) {
           this.listMetarialShop.splice(index, 1);
+          break;
         }
       }
     }
@@ -169,11 +174,12 @@ export class UpdateComponent implements OnInit {
       "name": form.get('name').value,
       "banner_img": this.avatar,
       "cover_img": this.avatar_cover,
-      "cooking_time": form.get('cooking_time').value + form.get('unitTimeCook').value,
+      "cooking_time": form.get('cooking_time').value,
       "summary": form.get('name').value,
       "description": form.get('description').value,
       "url_video_youtube": form.get('url_video_youtube').value,
-      "view": 0,
+      "view": this.blogDetail.view,
+      "steps": form.get('step').value,
       "status": 1,
       "user_id": this.userId,
       "category_id": form.get('category').value,
@@ -188,13 +194,12 @@ export class UpdateComponent implements OnInit {
     this.loading = true;
     this.blogService.update(data).subscribe(
       dt => {
-        setTimeout(() => {
-          this.checkUpdateSuccess = false;
+        // setTimeout(() => {
           this.route.navigate(["/blog/blog-detail", { id: this.blogId }]);
-        }, 1500);
-        this.createMetarial();
-        this.createContent();
-        this.createStep()
+        // }, 1500);
+        // this.createMetarial();
+        // this.createContent();
+        // this.createStep()
       },
       err => {
         this.loading = false;
@@ -310,26 +315,22 @@ export class UpdateComponent implements OnInit {
   }
 
   setFormBlog(val) {
-    let unitCooking = val.cooking_time ? val.cooking_time.split("mins") : '';
-    if (unitCooking) {
-      if (unitCooking.length == 1) {
-        unitCooking = val.cooking_time.split("hours");
-        unitCooking[1] = 'hours';
-      }
-      else {
-        unitCooking[1] = 'mins';
-      }
-    }
+   
     val.materials.forEach((e, indexProduct) => {
-      this.pushMetarial(e);
+      for (let index = 0; index < this.listProduct.length; index++) {
+        let ei = this.listProduct[index];
+        if (e.productId == ei.id) {
+          this.listMetarialShop.push(ei);
+          break;
+        }
+      }
     });
     this.formBlog.patchValue(
       {
         name: val.name,
         category: val.category_id,
         hashTag: [1],
-        cooking_time: parseInt(unitCooking[0]),
-        unitTimeCook: unitCooking[1],
+        cooking_time: val.cooking_time,
 
         summary: val.summary,
         description: val.description,
@@ -639,7 +640,7 @@ export class UpdateComponent implements OnInit {
   }
   setImgListAvatar(e) {
     let reader = e.target;
-    let data = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    let data = '' + reader.result.substr(reader.result.indexOf(',') + 1);
     if (this.isListStep) { // is step
       this.listStep()[this.indexOflist_img_feature].patchValue({ avatar: data })
     }
@@ -655,11 +656,11 @@ export class UpdateComponent implements OnInit {
   }
   setValueAvatar(e) {
     let reader = e.target;
-    this.avatar = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    this.avatar = '' + reader.result.substr(reader.result.indexOf(',') + 1);
   }
   setValueAvatarCover(e) {
     let reader = e.target;
-    this.avatar_cover = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
+    this.avatar_cover = '' + reader.result.substr(reader.result.indexOf(',') + 1);
   }
 
   createMetarial() {

@@ -15,7 +15,7 @@ export class BlogService {
   }
 
   getBlog(id) {
-    return this.helperService.get("Blog/detail", id);
+    return this.helperService.get("Blog/detail-edit", id);
   }
 
   create(data) {
