@@ -11,37 +11,50 @@ import { CategoryService } from 'src/app/core/_service/category/category.service
 export class MemberComponent implements OnInit {
   listMember = [];
   urlImg = this.categoryService.urlImg;
+  listMonth = ['01', '02', '03', '04', '05', '06', '07', '08', '09', 11, 12]
 
   load = true;
   active = 0;
+  isGetAll = true;
   constructor(
     private categoryService: CategoryService,
-    private admin: DashBoardService,
+    private dashBoardService: DashBoardService,
     private authenservice: AuthenService
   ) { }
   ngOnInit(): void {
 
+    this.getAll();
+  }
+  getAll() {
+    this.isGetAll = true;
     Promise.all(
       [this.getAllMember()]
     ).then(
       (dt) => {
         this.listMember = dt[0].Data.Items;
-        this.listMember.forEach(
-          e => e.avatar ? e.avatar = this.urlImg + e.avatar : e.avatar = 'assets/images/avatars/default-avatar.jpg'
-        )
         this.load = false;
         console.log(this.listMember)
       }
     )
   }
-
   getAllMember(): Promise<any> {
     return new Promise(
       async (resolve) => {
-        let dt = await this.admin.getAllMember().toPromise();
+        let dt = await this.dashBoardService.getAllMember().toPromise();
         return resolve(dt)
       }
     )
   }
 
+  getMemberInMonth(month) {
+    this.isGetAll = false;
+    this.load = true;
+    this.active = month;
+    this.dashBoardService.getTopMemberInMonth(`2021-${month}-01`).subscribe(
+      dt => {
+        this.load = false;
+        this.listMember = dt;
+      }
+    )
+  }
 }

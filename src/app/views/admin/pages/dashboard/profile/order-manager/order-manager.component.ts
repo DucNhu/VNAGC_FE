@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AddToCartService } from 'src/app/core/_service/addToCart/add-to-cart.service';
 import { OrderService } from 'src/app/core/_service/profile/order.service';
 
@@ -12,8 +13,8 @@ export class OrderManagerComponent implements OnInit {
   load = true;
   constructor(
     private orderService: OrderService,
-    private addToCart: AddToCartService
-  ) { }
+    private activatedRoute: ActivatedRoute
+      ) { }
 
   ngOnInit(): void {
     Promise.all(
@@ -25,17 +26,6 @@ export class OrderManagerComponent implements OnInit {
         this.listOrder = dt[0].Data;
         this.load = false;
         console.log(dt[0].Data)
-        // this.listOrder.forEach((e,index) => {
-        //   this.orderService.getOrderDetail(e.id).subscribe(
-        //     dt => {
-        //       this.listOrder[index].products = dt.Data;
-        //       if (index == this.listOrder.length - 1) {
-        //         this.load = false;
-        //       }
-        //     }
-        //   )
-
-        // });
       },
       err => {
         this.load = false;
@@ -45,7 +35,7 @@ export class OrderManagerComponent implements OnInit {
 
   getOrders(): Promise<any> {
     return new Promise(async (resolve) => {
-      const dt = await this.orderService.getOrders().toPromise();
+      const dt = await this.orderService.getOrderByUser(this.activatedRoute.snapshot.paramMap.get("id")).toPromise();
       resolve(dt);
     });
   }

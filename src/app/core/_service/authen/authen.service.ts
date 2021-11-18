@@ -25,7 +25,7 @@ export class AuthenService {
   constructor(private httpClient: HttpClient, private route: Router) { }
   
   login(data) {
-    return this.httpClient.post(AppConfig.settings.WhiteServer + "Authen/Login", data)
+    return this.httpClient.post(AppConfig.settings.WhiteServer + "Authen/Login-admin", data)
   }
 
   register(data) {

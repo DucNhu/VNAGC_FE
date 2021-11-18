@@ -254,7 +254,7 @@
                     <div class="user-nav d-sm-flex d-none"><span
                             class="user-name fw-bolder">{{profile.fullName}}</span><span
                             class="user-status">Admin</span></div><span class="avatar"><img class="round"
-                            [src]="profile.avatar ? urlImg + profile.avatar : 'assets/images/avatars/default-avatar.jpg'"
+                            [src]="profile.avatar ? 'data:image/png;base64,' + profile.avatar : 'assets/images/avatars/default-avatar.jpg'"
                             alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span>
                 </a>
                 <mat-menu #menu="matMenu">

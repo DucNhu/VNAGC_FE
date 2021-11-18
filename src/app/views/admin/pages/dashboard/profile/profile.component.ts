@@ -9,15 +9,16 @@ import { user } from 'src/app/models/user';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  user:user;
+  user: user; userId;
   constructor(
     private profileService: ProfileService,
     private activatedRoute: ActivatedRoute
   ) {
+    this.userId = this.activatedRoute.snapshot.paramMap.get("id");
    }
 
   ngOnInit(): void {
-    this.profileService.getProfile(this.activatedRoute.snapshot.paramMap.get("id")).subscribe(
+    this.profileService.getProfile(this.userId).subscribe(
       dt => {
         this.user = dt.Data[0];
       }

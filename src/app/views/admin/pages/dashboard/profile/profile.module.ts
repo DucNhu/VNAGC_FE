@@ -9,6 +9,7 @@ import { ProfileControllComponent } from './profile-controll/profile-controll.co
 import { baseBlogModule } from 'src/app/views/admin/pages/dashboard/blog/base-blog.module';
 import { CreateBlogComponent } from 'src/app/views/admin/pages/dashboard/blog/create/create.component';
 import { MatButtonModule } from '@angular/material/button';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -18,17 +19,13 @@ const routes: Routes = [
         path: '', component: ProfileDetailComponent
       },
       {
-        path: 'detail', component: ProfileDetailComponent
+        path: 'detail/:id', component: ProfileDetailComponent
       },
       {
-        path: 'edit', component: ProfileControllComponent
+        path: 'edit/:id', component: ProfileControllComponent
       },
       {
-        path: 'order-manager', component: OrderManagerComponent
-      },
-      {
-        path: 'create-blog', component: CreateBlogComponent
-      
+        path: 'order-manager/:id', component: OrderManagerComponent
       }
     ]
   }
@@ -39,7 +36,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     LoadModule,
-    MatButtonModule, 
+    MatButtonModule,
+    ReactiveFormsModule, FormsModule,
     RouterModule.forChild(routes),
   ]
 })

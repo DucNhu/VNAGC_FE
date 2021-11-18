@@ -18,23 +18,25 @@ export class ProfileDetailComponent implements OnInit {
     private profileService: ProfileService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.userId = activatedRoute.snapshot.paramMap.get("id");
-   }
+    this.userId = this.activatedRoute.snapshot.paramMap.get("id");
+   } 
 
   ngOnInit(): void {
     Promise.all([
       this.getBlogById()
     ]).then(
       dt => {
+        console.log(dt)
         this.load = false
-        this.listBlog = dt[0].Data.Items;
+        this.listBlog = dt[0].Data;
+
       }
     )
   }
 
   getBlogById():Promise<any> {
     return new Promise(async (resolve)=> {
-      let dt = await this.profileService.getBlogById().toPromise();
+      let dt = await this.profileService.getBlogById(this.userId).toPromise();
       resolve(dt)
     })
   }

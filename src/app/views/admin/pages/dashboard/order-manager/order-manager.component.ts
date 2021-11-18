@@ -11,6 +11,8 @@ import { OrderService } from 'src/app/core/_service/profile/order.service';
 export class OrderManagerComponent implements OnInit {
   listOrder: any = [];
   load = true;
+  active = 0;
+  listMonth = [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12]
   constructor(
     private dashBoardService: DashBoardService,
   ) { }
@@ -39,6 +41,7 @@ export class OrderManagerComponent implements OnInit {
   }
 
   reset() {
+    this.load = true;
     Promise.all(
       [
         this.getAllOrder()
@@ -59,30 +62,46 @@ export class OrderManagerComponent implements OnInit {
   }
 
   getOrderBlogByMonth(type) {
+    this.load = true;
     let start = "01";
     let end = "12";
     switch (type) {
       case 1:
         start = "01";
-        end = "03"
+        end = "03";
+        this.active = 13;
         break;
       case 2:
         start = "04";
-        end = "06"
+        end = "06";
+        this.active = 22
         break;
       case 3:
         start = "07";
-        end = "09"
+        end = "09";
+        this.active = 33
         break;
       case 4:
         start = "10";
-        end = "12"
+        end = "12";
+        this.active = 44
         break;
       default:
         break;
     }
-    this.load = true;
     this.dashBoardService.getOrderByMonth(start, end).subscribe(
+      dt => {
+        this.load = false;
+        this.OrderDetail = [];
+        this.listOrder = dt;
+      }
+    )
+  }
+
+  getOrderBlogInMonth(month) {
+    this.load = true;
+    this.active = month;
+    this.dashBoardService.GetTopOrderInMonth(`2021-${month}-01`).subscribe(
       dt => {
         this.load = false;
         this.OrderDetail = [];

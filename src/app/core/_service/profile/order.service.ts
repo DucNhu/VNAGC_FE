@@ -6,7 +6,7 @@ import { HelperService } from "src/app/_helpers/helper.service";
 })
 export class OrderService {
     constructor(private helperService: HelperService) { }
- 
+
     getOrders() {
         return this.helperService.getAll("Order/get-order-history?pageIndex=1&pageSize=1000");
     }
@@ -15,6 +15,10 @@ export class OrderService {
         return this.helperService.getAll("Cart/get-cart-detail/" + order_id);
     }
 
+    getOrderByUser(id) {
+        let param = "?user_id="+id;
+        return this.helperService.getAll("Dashboard/get-order-by-user" + param)
+    }
     getCards() {
         return this.helperService.getAll("Cart/get-cart");
     }
