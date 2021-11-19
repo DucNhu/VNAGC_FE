@@ -55,7 +55,8 @@ export class CreateBlogComponent implements OnInit {
     private productService: ProductService
   ) {
     this.registerFormBlog();
-    this.userId = JSON.parse(sessionStorage.getItem("user")).id;
+    this.userId = JSON.parse(sessionStorage.getItem("user")).Id;
+    console.log(this.userId)
   }
 
   ngOnInit(): void {

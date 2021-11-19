@@ -198,7 +198,7 @@
                                                 <div class="post-categories post-categories-product"
                                                     (click)="unshifMetarial(i)">
                                                     <img style="vertical-align:middle;" aria-hidden
-                                                        src="{{item.banner_img}}" height="50" />
+                                                        src="{{'data:image/png;base64,' + item.banner_img}}" height="50" />
                                                     <span class="post-categories-name clamp-1">{{ item.name }}</span>
                                                 </div>
                                             </li>
@@ -213,7 +213,7 @@
                                                 <div class="post-categories post-categories-product cursor-pointer"
                                                     (click)="pushMetarial(item)">
                                                     <img style="vertical-align:middle;" aria-hidden
-                                                        src="{{item.banner_img}}" height="50" />
+                                                        src="{{'data:image/png;base64,' + item.banner_img}}" height="50" />
                                                     <span class="post-categories-name">{{ item.name }}</span>
                                                 </div>
                                             </li>
@@ -223,7 +223,7 @@
                                         <div class="mb-50">
                                             <label class="form-label" for="des1">Description</label>
                                             <textarea type="text" rows="3" class="form-control"
-                                                [ngClass]="isInvalid('name') ? 'error' : ''"
+                                                [ngClass]="isInvalid('description') ? 'error' : ''"
                                                 formControlName="description" id="des1"></textarea>
                                         </div>
                                     </div>
