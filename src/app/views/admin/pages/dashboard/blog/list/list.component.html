@@ -34,7 +34,7 @@
                                     <div class="card">
                                         <a [routerLink]="['/blog/blog-detail/', {id: i.id}]">
                                             <img class="card-img-top img-fluid"
-                                                [src]="'data:image/png;base64,' + i.banner_img" alt="Blog Post pic">
+                                                [src]="i.banner_img" alt="Blog Post pic">
                                         </a>
                                         <div class="card-body">
                                             <h4 class="card-title">
@@ -45,7 +45,7 @@
                                             </h4>
                                             <div class="d-flex">
                                                 <div class="avatar me-50">
-                                                    <img [src]="i.author.avatar ? 'data:image/png;base64,' + i.author.avatar : 'assets/images/avatars/default-avatar.jpg'"
+                                                    <img [src]="i?.author?.avatar ? 'data:image/png;base64,' + i?.author?.avatar : 'assets/images/avatars/default-avatar.jpg'"
                                                         alt="Avatar" width="24" height="24">
                                                 </div>
                                                 <div class="author-info">

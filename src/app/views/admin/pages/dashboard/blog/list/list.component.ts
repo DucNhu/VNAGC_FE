@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DashBoardService } from 'src/app/core/_service/admin/dashBoard.service';
 import { BlogService } from 'src/app/core/_service/blog/blog.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-list',
@@ -13,7 +14,8 @@ export class ListBlogComponent implements OnInit {
   constructor(
     private blogService: BlogService,
     private route: Router,
-    private dashBoardService: DashBoardService
+    private dashBoardService: DashBoardService,
+    private domSanitizer: DomSanitizer
   ) { }
 
   listBlog = [];
@@ -21,6 +23,11 @@ export class ListBlogComponent implements OnInit {
     this.blogService.getAllBlogeres().subscribe(
       dt => {
         this.listBlog = dt.Data.Items;
+        this.listBlog.forEach(
+          e => {
+            let img = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${e.banner_img}`);
+            e.banner_img = e.banner_img ? img : 'assets/images/avatars/default-avatar.jpg';
+          }        )
         this.loading = false;
       },
       err => {
