@@ -30,8 +30,9 @@
                 <li class="list-group-item">
                     <button mat-menu-item [matMenuTriggerFor]="query">Get by month</button>
                     <mat-menu #query="matMenu">
-                        <button mat-menu-item *ngFor="let i of listMonth" (click)="getOrderBlogInMonth(i)"
-                            [class]="active == i ? 'btn btn-outline-primary waves-effect' : ''">Month {{i}}</button>
+                        <span mat-menu-item *ngFor="let i of listMonth" (click)="getOrderBlogInMonth(i)"
+                            class="d-inline"
+                            [class]="active == i ? 'btn btn-outline-primary waves-effect' : ''">{{i}}</span>
                     </mat-menu>
                 </li>
             </ul>

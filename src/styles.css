@@ -301,3 +301,12 @@ fieldset .box-step {
 }
 .w-400 { width: 400px}
 .cdk-overlay-connected-position-bounding-box .mat-menu-panel { max-width: initial !important}
+ul.list-group {
+  flex-wrap: wrap;
+}
+ul.list-group li {
+  margin-bottom: 5px;
+  height: 55px
+}
+
+ul.list-group li button { height: 100%}
