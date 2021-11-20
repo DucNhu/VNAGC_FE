@@ -1,0 +1,15 @@
+img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    border-radius: 10% !important;
+    left: 0;
+    object-fit: contain;
+}
+
+.frame-img {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+}

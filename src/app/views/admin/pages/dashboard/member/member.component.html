@@ -9,9 +9,14 @@
             <ul class="list-group list-group-horizontal-sm">
                 <li class="list-group-item" [class]="active == 0 ? 'btn btn-outline-primary waves-effect' : ''"><button
                         mat-menu-item (click)="getAll()">All</button>
-                <li class="list-group-item" *ngFor="let i of listMonth">
-                    <button mat-menu-item (click)="getMemberInMonth(i)"
-                        [class]="active == i ? 'btn btn-outline-primary waves-effect' : ''">Month {{i}}</button>
+                <li class="list-group-item">
+                    <button mat-menu-item [matMenuTriggerFor]="query">Get by month</button>
+                    <mat-menu #query="matMenu">
+                        <span mat-menu-item *ngFor="let i of listMonth" (click)="getMemberInMonth(i)"
+                        class="d-inline"
+                            [class]="active == i ? 'btn btn-outline-primary waves-effect' : ''">{{i}}</span>
+                    </mat-menu>
+                    
                 </li>
             </ul>
             <div class="card card-company-table">

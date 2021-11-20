@@ -20,6 +20,7 @@ export class ListBlogComponent implements OnInit {
   ngOnInit(): void {
     this.blogService.getAllBlogeres().subscribe(
       dt => {
+        console.log(dt.Data)
         this.listBlog = dt.Data.Items;
         this.loading = false;
       },
