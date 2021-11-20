@@ -9,7 +9,7 @@ import { DashBoardService } from 'src/app/core/_service/admin/dashBoard.service'
 })
 export class ReportManagerComponent implements OnInit {
   listReport;
-
+  loading = true;
   constructor(
     private dashBoardService: DashBoardService,
     private activatedRoute: ActivatedRoute
@@ -17,10 +17,21 @@ export class ReportManagerComponent implements OnInit {
   ngOnInit(): void {
     this.dashBoardService.getAllReport(this.activatedRoute.snapshot.paramMap.get("id")).subscribe(
       dt => {
+        this.loading = false;
         this.listReport = dt.Data;
-        console.log(this.listReport)
       }
     )
   }
 
+  removeReport(id, index) {
+    if (confirm('delete report?')) {
+      this.loading = true;
+      this.dashBoardService.removeReport(id).subscribe(
+        dt => {
+          this.loading = false;
+          this.listReport.splice(index, 1)
+        }
+      )
+    }
+  }
 }

@@ -83,4 +83,8 @@ export class DashBoardService {
         let param = "?blog_id=" + id;
         return this.helperService.getAll("Dashboard/get-report-blog" + param);
     }
+
+    removeReport(id) {
+        return this.helperService.post("Dashboard/remove-report/" + id, id);
+    }
 }
