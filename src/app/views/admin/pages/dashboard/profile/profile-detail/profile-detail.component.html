@@ -55,7 +55,7 @@
                 <div class="ecommerce-card">
                     <div class="item-img">
                         <a [routerLink]="['/blog/blog-detail', {id: item.id}]">
-                            <img class="img-fluid card-img-top rounded mb-75" [src]="'data:image/png;base64,' + item.banner_img" alt="avatar img">
+                            <img class="img-fluid card-img-top rounded mb-75" [src]="item.banner_img ? 'data:image/png;base64,' + item.banner_img : 'assets/images/avatars/default-avatar.jpg'" alt="avatar img">
 
                         </a>
                     </div>

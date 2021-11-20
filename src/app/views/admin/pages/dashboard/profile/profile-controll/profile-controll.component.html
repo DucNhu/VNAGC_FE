@@ -36,7 +36,7 @@
     <div class="col-lg-6 col-md-12 mb-1 mb-sm-0">
       <label for="formFile" class="form-label cursor-pointer">
         Avatar
-        <img [src]="'data:image/png;base64,' + avatar"
+        <img [src]="avatar ? 'data:image/png;base64,' + avatar : 'assets/images/avatars/default-avatar.jpg'"
              alt="avatar" class="img-fluid rounded-circle">
       </label>
       

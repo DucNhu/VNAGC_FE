@@ -4,7 +4,7 @@ export class user {
   "isShipper": boolean;
   "type": number;
   "status": true;
-  "id": string;
+  "Id": string;
   "email": string;
   "phoneNumber": string;
   "avatar": string;

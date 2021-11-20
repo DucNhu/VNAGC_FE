@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
     private profileService: ProfileService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.userId = this.activatedRoute.snapshot.paramMap.get("id");
+    this.userId = window.location.href.split("/")[window.location.href.split("/").length-1];
    }
 
   ngOnInit(): void {

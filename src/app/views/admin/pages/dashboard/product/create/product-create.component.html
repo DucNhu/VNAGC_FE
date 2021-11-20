@@ -157,7 +157,7 @@
                                   <label class="dz-message" for="avatar">Avatar</label>
                                   <input type="file" hidden id="avatar" (change)="updateFile($event, 1); onSelectFile($event)"
                                     accept="image/*" formControlName="avatar">
-                                  <img [src]="'data:image/png;base64,' + avatar" alt="avatar" *ngIf="avatar" class="img-avatar">
+                                  <img [src]="avatar ? 'data:image/png;base64,' + avatar : 'assets/images/avatars/default-avatar.jpg'" alt="avatar" *ngIf="avatar" class="img-avatar">
                                 </div>
                               </div>
                               <div class="col-sm-6">
@@ -165,7 +165,7 @@
                                   <label class="dz-message" for="avatar_cover">Avatar cover</label>
                                   <input type="file" hidden id="avatar_cover" (change)="updateFile($event, 0)"
                                     accept="image/*">
-                                  <img [src]="'data:image/png;base64,' + avatar_cover" alt="avatar cover" *ngIf="avatar_cover" class="img-avatar">
+                                  <img [src]="avatar_cover ? 'data:image/png;base64,' + avatar_cover : 'assets/images/avatars/default-avatar.jpg'" alt="avatar cover" *ngIf="avatar_cover" class="img-avatar">
                                 </div>
                               </div>
                             </div>
@@ -184,7 +184,8 @@
                                     <label class="dz-message" [for]="'feature_'+i">Avatar</label>
                                     <input type="file" hidden [id]="'feature_'+i" (change)="updateListFile($event, i)"
                                       accept="image/*">
-                                    <img [src]="'data:image/png;base64,' + item.data" alt="avatar feature" *ngIf="item.data" class="img-avatar">
+                                      
+                                    <img [src]="item.data ? 'data:image/png;base64,' + item.data : 'assets/images/avatars/default-avatar.jpg'" alt="avatar feature" *ngIf="item.data" class="img-avatar">
                                   </div>
                                 </div>
                               </ng-container>

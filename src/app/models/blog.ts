@@ -14,16 +14,16 @@ export class blog {
     "category_id": number;
     "create_at": string;
     "update_at": string;
-    "steps":string;
-    hash_tags:[];
+    "steps": string;
+    hash_tags: [];
     "comments": [{
-        "id": number,
-        "description": string,
-        "createdDate": string,
-        "user_name": string,
-        "user_avatar": string,
-        "parent_id": number,
-        "comment_replies": []
+
+        createdDate: string;
+        description: string;
+        id: number;
+        parent_id: number;
+        user_avatar: string;
+        user_name: string;
     }];
     "author": {
         "id": string,

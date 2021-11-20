@@ -21,7 +21,7 @@ export class ProfileControllComponent implements OnInit {
     private profileService: ProfileService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.userId = this.activatedRoute.snapshot.paramMap.get("id");
+    this.userId = window.location.href.split("/")[window.location.href.split("/").length - 1];
     this.res();
   }
 
@@ -30,6 +30,7 @@ export class ProfileControllComponent implements OnInit {
     this.profileService.getProfile(this.userId).subscribe(
       dt => {
         this.load = false;
+        console.log(dt)
         this.user = dt.Data[0];
         this.avatar = this.user.avatar;
         this.formInfor.patchValue({
@@ -107,7 +108,7 @@ export class ProfileControllComponent implements OnInit {
       return
     }
     let data = {
-      "id": this.user.id,
+      "id": this.userId,
       "fullName": this.formInfor.controls['fname'].value,
       "phoneNumber": this.formInfor.controls['phone'].value,
       "address": this.formInfor.controls['address'].value,
@@ -117,7 +118,8 @@ export class ProfileControllComponent implements OnInit {
     this.load = true;
     this.profileService.updateProfile(data).subscribe(
       dt => {
-        window.location.reload();
+        console.log(dt)
+        // window.location.reload();
       })
   }
 }

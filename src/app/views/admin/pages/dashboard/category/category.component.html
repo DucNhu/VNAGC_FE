@@ -9,7 +9,7 @@
                             <label class="dz-message" for="avatar">Avatar
                             </label>
                             <input type="file" hidden id="avatar" accept="image/*" (change)="updateFile($event, 1)">
-                            <img [src]="'data:image/png;base64,' + avatar" *ngIf="avatar" alt="avatar cover" class="img-avatar">
+                            <img [src]="avatar ? 'data:image/png;base64,' + avatar : 'assets/images/avatars/default-avatar.jpg'" *ngIf="avatar" alt="avatar cover" class="img-avatar">
                         </div>
                         <div class="card-body position-relative">
                             <h6 class="item-name">
@@ -33,7 +33,7 @@
                             <label class="dz-message" [for]="'avat_edit'+i">Avatar
                             </label>
                             <input type="file" hidden [id]="'avat_edit'+i" accept="image/*" *ngIf="isEdit" (change)="updateFileEdit($event, i)">
-                                <img class="img-avatar" [src]="'data:image/png;base64,' + item.avatar" [alt]="item.avatar">
+                                <img class="img-avatar" [src]="item.avatar ? 'data:image/png;base64,' + item.avatar : 'assets/images/avatars/default-avatar.jpg'" [alt]="item.avatar">
                         </div>
                         <div class="card-body">
                             <h6 class="item-name">

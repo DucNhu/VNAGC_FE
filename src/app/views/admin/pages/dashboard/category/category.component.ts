@@ -86,7 +86,7 @@ export class CategoryComponent implements OnInit {
     this.load = true;
     this.categoryService.createCategory(data).subscribe(
       dt => {
-        // window.location.reload();
+        window.location.reload();
       },
       err => {
         this.load = false;

@@ -15,9 +15,9 @@
                                                 class="fa fa-tag cat-dot"></i><span
                                                 class="cat-title">{{item}}</span></a></div>
                                     <div class="cookandmeal-post-details">
-                                        
+
                                         <h1 class="post-title entry-title">{{blog?.summary}}</h1>
-                                        <div class="post-date"><span class="entry-date published updated">{{
+                                        <div class="post-date"><span class="entry-date published updated mr-2">{{
                                                 blog?.create_at | date:"yyyy/MM/dd"}}</span></div>
                                         <div class="post-read-time" *ngIf="blog?.cooking_time"><i class="fa fa-clock-o"
                                                 aria-hidden="true"></i>{{blog?.cooking_time}}
@@ -80,7 +80,7 @@
 
                                 <div class="entry-content">
                                     <h2><strong>Summary</strong></h2>
-                                    <!-- <p class="has-medium-font-size">{{blog?.summary}}</p> -->
+                                    <p class="has-medium-font-size">{{blog?.summary}}</p>
                                     <h2><strong>Description</strong></h2>
                                     <p class="has-medium-font-size">{{blog?.description}}</p>
                                     <h2><strong>Step by step</strong></h2>
@@ -104,7 +104,7 @@
 
                                     <p>Once you prep your ingredients, you’re ready to bake! Here’s what you need to do:
                                     </p> -->
-                                    
+
                                 </div>
 
                                 <div class="cookandmeal-social-share-fixed sidebar-position-disable"
@@ -123,7 +123,7 @@
                     </article>
                     <!-- <div class="post-recipe-block with-bg" id="post-recipe-block" vocab="https://schema.org/"
                         typeof="Recipe"> -->
-                        <!-- <div class="post-recipe-details">
+                    <!-- <div class="post-recipe-details">
                             <div class="post-recipe-details-column">
                                 <h4>Ingredients</h4>
                                 <ul>
@@ -137,10 +137,10 @@
                             </div>
                         </div> -->
 
-                        <!-- <div class="post-recipe-instructions-group">
+                    <!-- <div class="post-recipe-instructions-group">
                             <h4>Instructions</h4>
                             <p>{{blog?.steps}}</p> -->
-                            <!-- <div class="post-recipe-instruction" *ngFor="let item of blog?.step; let i = index">
+                    <!-- <div class="post-recipe-instruction" *ngFor="let item of blog?.step; let i = index">
                                 <div class="post-recipe-step">{{i + 1}}</div>
                                 <div class="post-recipe-instruction-content">
                                     <div class="post-recipe-instruction-title">
@@ -150,7 +150,7 @@
                                         {{item.description}}</div>
                                 </div>
                             </div> -->
-                            <!-- <div class="post-recipe-instruction">
+                    <!-- <div class="post-recipe-instruction">
                                 <div class="post-recipe-step">2</div>
                                 <div class="post-recipe-instruction-content">
                                     <div class="post-recipe-instruction-title">
@@ -190,9 +190,9 @@
                                     </div>
                                 </div>
                             </div> -->
-                        <!-- </div> -->
+                    <!-- </div> -->
 
-                        <!-- <div class="post-recipe-notes">
+                    <!-- <div class="post-recipe-notes">
                             <h4>Notes</h4>
                             Kid-Friendly Adaptation: Cook the chicken in broth instead of buffalo sauce. Shred and drain
                             off excess liquid. Put some of the chicken aside for the kiddos (plain, no sauce) and toss
@@ -201,7 +201,8 @@
                     <!-- </div> -->
 
                     <!-- <hr class="wp-block-separator is-style-wide"> -->
-                    <a href="{{blog?.url_video_youtube}}" target="_blank" *ngIf="blog?.url_video_youtube">Watch tutorials on youtube</a>
+                    <a href="{{blog?.url_video_youtube}}" target="_blank" *ngIf="blog?.url_video_youtube">Watch
+                        tutorials on youtube</a>
                     <div class="cookandmeal-post cookandmeal-post-bottom">
                         <div class="post-details-bottom post-details-bottom-single">
 
@@ -226,5 +227,25 @@
             <div class="nav-post-button-title me-1">Visit the author<i class="fa fa-arrow-right" aria-hidden="true"></i>
             </div>
         </a>
+    </div>
+    <div class="col-12 mt-1" id="blogComment">
+        <h6 class="section-label mt-25">Comment</h6>
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-start mb-2" *ngFor="let item of blog?.comments; let i = index">
+                    <div class="avatar me-75">
+                        <img [src]="item.user_avatar ? 'data:image/png;base64,' + item.user_avatar : 'assets/images/avatars/default-avatar.jpg'"
+                            alt="avatar" width="38" height="38" alt="Avatar">
+                    </div>
+                    <div class="author-info">
+                        <h6 class="fw-bolder mb-25">{{item.user_name}}</h6>
+                        <p class="card-text">{{item.createdDate | date:"yyyy-MM-dd"}}</p>
+                        <p class="card-text">
+                           {{item.description}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

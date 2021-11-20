@@ -20,7 +20,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     NavigationComponent,
     FooterComponent,
     HeaderComponent,
-    BaseDashboardComponent
+    BaseDashboardComponent,
   ],
   imports: [
     CommonModule,

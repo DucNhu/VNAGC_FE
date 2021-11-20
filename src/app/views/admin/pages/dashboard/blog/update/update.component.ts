@@ -59,8 +59,6 @@ export class UpdateComponent implements OnInit {
     private productService: ProductService
   ) {
     this.registerFormBlog();
-
-    this.userId = JSON.parse(sessionStorage.getItem("user")).id;
   }
   blogId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
 
@@ -82,7 +80,6 @@ export class UpdateComponent implements OnInit {
         // this.setFormSteps(dt[3])
         this.setFormBlog(dt[0].Data)
         this.blogDetail = dt[0].Data;
-        console.log(dt[0].Data)
       }
     )
   }
@@ -182,7 +179,7 @@ export class UpdateComponent implements OnInit {
       "view": this.blogDetail.view,
       "steps": form.get('step').value,
       "status": 1,
-      "user_id": this.userId,
+      "user_id": this.blogDetail.user_id,
       "category_id": form.get('category').value,
       "productIds": [
         

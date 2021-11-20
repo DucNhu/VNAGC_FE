@@ -71,7 +71,7 @@
                                                     [ngClass]="avatar == '' ? 'error' : ''">
                                                     <label class="dz-message" for="avatar">Avatar</label>
                                                     <input type="file" hidden id="avatar" accept="image/*" (change)="updateFile($event, 1)">
-                                                    <img [src]="'data:image/png;base64,' + avatar" alt="avatar" *ngIf="avatar" class="img-avatar">
+                                                    <img [src]="avatar ? 'data:image/png;base64,' + avatar : 'assets/images/avatars/default-avatar.jpg'" alt="avatar" *ngIf="avatar" class="img-avatar">
                                                 </div>
                                             </div>
                                             <!-- <div class="col-sm-6 align-self-end">

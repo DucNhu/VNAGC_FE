@@ -3,89 +3,195 @@
 <div class=" ecommerce-application">
     <div class="content-wrapper container-xxl p-0 list-view--product">
         <div class="content-detached content-right">
-                <!-- users list start -->
-                <!-- users filter start -->
-                <div class="card">
-                    <div class="d-flex justify-content-between align-items-center pt-0">
-                        <h2 class="card-header w-auto">Blog List</h2>
-                        <div>
-                            <button type="button" class="btn btn-outline-primary waves-effect me-2" (click)="routerCreateBlog()">
-                                <span>Create blog</span>
-                            </button>
-                            <button mat-raised-button [matMenuTriggerFor]="menu" class="me-2">Display type</button>
-                            <mat-menu #menu="matMenu">
-                                <button mat-menu-item (click)="reset()">Get All</button>
-                                <button mat-menu-item (click)="getBlogNotActive()">Get blog not active</button>
-                            </mat-menu>
+            <!-- users list start -->
+            <!-- users filter start -->
+            <div class="card">
+                <div class="d-flex justify-content-between align-items-center pt-0">
+                    <h2 class="card-header w-auto">Blog List</h2>
+                    <div>
+                        <button type="button" class="btn btn-outline-primary waves-effect me-2"
+                            (click)="routerCreateBlog()">
+                            <span>Create blog</span>
+                        </button>
+                        <button mat-raised-button [matMenuTriggerFor]="menu" class="me-2">Display type</button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="reset()">Get All</button>
+                            <button mat-menu-item (click)="getBlogNotActive()">Get blog not active</button>
+                        </mat-menu>
+                    </div>
+                </div>
+            </div>
+            <!-- users filter end -->
+            <!-- list section start -->
+            <div class="card">
+                <div class="content-detached content-left">
+                    <div class="content-body mx-0">
+                        <!-- Blog List -->
+                        <div class="blog-list-wrapper">
+                            <!-- Blog List Items -->
+                            <div class="row p-1">
+                                <div class="col-md-4 col-12 mb-2" *ngFor="let i of listBlog; let id = index">
+                                    <div class="card">
+                                        <a [routerLink]="['/blog/blog-detail/', {id: i.id}]">
+                                            <img class="card-img-top img-fluid"
+                                                [src]="'data:image/png;base64,' + i.banner_img" alt="Blog Post pic">
+                                        </a>
+                                        <div class="card-body">
+                                            <h4 class="card-title">
+                                                <a [routerLink]="['/blog/blog-detail/', {id: i.id}]"
+                                                    class="blog-title-truncate text-body-heading">
+                                                    {{i.summary}}
+                                                </a>
+                                            </h4>
+                                            <div class="d-flex">
+                                                <div class="avatar me-50">
+                                                    <img [src]="i.author.avatar ? 'data:image/png;base64,' + i.author.avatar : 'assets/images/avatars/default-avatar.jpg'"
+                                                        alt="Avatar" width="24" height="24">
+                                                </div>
+                                                <div class="author-info">
+                                                    <small class="text-muted me-25">by</small>
+                                                    <small><a href="#"
+                                                            class="text-body">{{i?.author?.fullName}}</a></small>
+                                                    <span class="text-muted ms-50 me-25">|</span>
+                                                    <small class="text-muted">{{i.update_at |
+                                                        date:"yyyy-MM-dd"}}</small>
+                                                </div>
+                                            </div>
+                                            <p class="card-text blog-content-truncate">
+                                                {{i.description}}
+                                            </p>
+                                            <hr>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <a href="javascript:void(0)">
+                                                    <div class="d-flex align-items-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye ficon list-status"
+                                                            style="margin-right: 10px;">
+                                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
+                                                            </path>
+                                                            <circle cx="12" cy="12" r="3"></circle>
+                                                        </svg>
+                                                        <span class="text-body fw-bold d-block">{{i.view + '
+                                                            Views'}}</span>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="feather feather-message-square font-medium-1 text-body me-50">
+                                                            <path
+                                                                d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z">
+                                                            </path>
+                                                        </svg>
+                                                        <span class="text-body fw-bold d-block">{{i.countComment + '
+                                                            Comments'}}</span>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="feather feather-message-square font-medium-1 text-body me-50">
+                                                            <path
+                                                                d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z">
+                                                            </path>
+                                                        </svg>
+
+                                                        <span class="text-body fw-bold">{{i.countReport + '
+                                                            Report'}}</span>
+                                                    </div>
+                                                </a>
+                                                <button mat-button [matMenuTriggerFor]="menu">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-menu">
+                                                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                                                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                                                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                                                    </svg>
+                                                </button>
+                                                <mat-menu #menu="matMenu">
+                                                    <button mat-menu-item>
+                                                        <a class="nav-link"
+                                                            [routerLink]="['/blog/blog-detail/', {id: i.id}]">
+                                                            <span>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye ficon list-status"
+                                                                    style="margin-right: 10px;">
+                                                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
+                                                                    </path>
+                                                                    <circle cx="12" cy="12" r="3"></circle>
+                                                                </svg>
+                                                            </span>
+                                                            View
+                                                        </a>
+                                                    </button>
+                                                    <button mat-menu-item>
+                                                        <a class="nav-link"
+                                                            [routerLink]="['/blog/update/', {id: i.id}]">
+                                                            <span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                style="margin-right: 10px;" height="24"
+                                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                                stroke-width="2" stroke-linecap="round"
+                                                                stroke-linejoin="round" class="feather feather-edit-2">
+                                                                <path
+                                                                    d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
+                                                                </path>
+                                                            </svg>
+                                                            </span>
+                                                            Edit
+                                                        </a>
+                                                    </button>
+                                                    <button mat-menu-item>
+                                                        <a class="nav-link" href="javascript:void(0)"
+                                                            (click)="deleteProduct(i.id, id)">
+                                                            <span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                                                height="14" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="feather feather-trash-2 ficon list-status">
+                                                                <polyline points="3 6 5 6 21 6"></polyline>
+                                                                <path
+                                                                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                                </path>
+                                                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                            </svg>
+                                                            </span>
+                                                            Delete
+                                                        </a>
+                                                    </button>
+                                                    <button mat-menu-item>
+                                                        <a class="nav-link" routerLink="/blog/list-report/{{i.id}}">
+                                                            <span>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus-square">
+                                                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                                                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                                </svg>
+                                                            </span>
+                                                            List Report
+                                                        </a>
+                                                    </button>
+                                                </mat-menu>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/ Blog List Items -->
+
                         </div>
+                        <!--/ Blog List -->
                     </div>
                 </div>
-                <!-- users filter end -->
-                <!-- list section start -->
-                <div class="card">
-                    <!-- </div> -->
-                    <div class="card-datatable table-responsive pt-0">
-                        <table class="table">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Category</th>
-                                    <th>View</th>
-                                    <th>Options</th>
-                                    <th class="text-center">Status</th>
-                                </tr>
-                                <tr *ngFor="let i of listBlog; let id = index">
-                                    <td>{{i.summary}}</td>
-                                    <td>{{i.category_name}}</td>
-                                    <td>{{i.view}}</td>
-                                    <td>
-                                        <div class=" d-flex align-items-center">
-                                            <div class="nav-item">
-                                                <a class="nav-link" [routerLink]="['/blog/blog-detail/', {id: i.id}]">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-eye ficon list-status" style="margin-right: 10px;">
-                                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
-                                                        </path>
-                                                        <circle cx="12" cy="12" r="3"></circle>
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                            <div class="nav-item">
-                                                <a class="nav-link" [routerLink]="['/blog/update/', {id: i.id}]">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" style="margin-right: 10px;" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2">
-                                                        <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                            <div class="nav-item">
-                                                <a class="nav-link" href="javascript:void(0)"  (click)="deleteProduct(i.id, id)">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-trash-2 ficon list-status">
-                                                        <polyline points="3 6 5 6 21 6"></polyline>
-                                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                                        </path>
-                                                        <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                        <line x1="14" y1="11" x2="14" y2="17"></line>
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-check form-check-primary form-switch">
-                                            <mat-slide-toggle (change)="activeBlog(i, $event)" [checked]="i.status == 0 ? false : true"></mat-slide-toggle>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-                <!-- list section end -->
-                <!-- users list ends -->
+            </div>
+            <!-- list section end -->
+            <!-- users list ends -->
 
         </div>
     </div>

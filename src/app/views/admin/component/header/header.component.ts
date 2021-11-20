@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
     private categoryService: CategoryService,) { }
 
   ngOnInit(): void {
-    this.profile = JSON.parse(sessionStorage.getItem("user") ? sessionStorage.getItem("user") : sessionStorage.getItem("user"));
+    this.profile = JSON.parse(sessionStorage.getItem("user"));
   }
   logout() {
     this.authenSv.logout()

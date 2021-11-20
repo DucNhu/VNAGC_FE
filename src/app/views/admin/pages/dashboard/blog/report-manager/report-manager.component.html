@@ -1,0 +1,32 @@
+<div role="tabpanel" class="tab-pane active" id="faq-payment" aria-labelledby="payment" aria-expanded="true">
+    <!-- icon and header -->
+    <div class="card">
+        <div class="d-flex justify-content-between align-items-center pt-0">
+            <h2 class="card-header w-auto">List report</h2>
+        </div>
+    </div>
+
+    <!-- frequent answer and question  collapse  -->
+    <div class="accordion accordion-margin mt-2" id="faq-payment-qna">
+        <div class="col-12 mt-1" id="blogComment">
+            <h6 class="section-label mt-25">Report</h6>
+            <div class="card">
+                <div class="card-body" *ngFor="let item of listReport">
+                    <div class="d-flex align-items-start">
+                        <div class="avatar me-75">
+                            <img [src]="item.userProfile.avatar ? 'data:image/png;base64,' + item.userProfile.avatar : 'assets/images/avatars/default-avatar.jpg'" alt="avatar" width="38" height="38"
+                                alt="Avatar">
+                        </div>
+                        <div class="author-info">
+                            <h6 class="fw-bolder mb-25">{{item.userProfile.fullName}}</h6>
+                            <p class="card-text">{{item.createDate | date:"yyyy-MM-dd"}}</p>
+                            <p class="card-text">
+                                {{item.reason}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

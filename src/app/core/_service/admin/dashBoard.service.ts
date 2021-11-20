@@ -79,4 +79,8 @@ export class DashBoardService {
         return this.helperService.getParam("Dashboard/get-All-Blog-by-day", param);
     }
 
+    getAllReport(id) {
+        let param = "?blog_id=" + id;
+        return this.helperService.getAll("Dashboard/get-report-blog" + param);
+    }
 }

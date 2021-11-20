@@ -24,6 +24,7 @@ import { ListBlogComponent } from './list/list.component';
 import { CreateBlogComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
 import { DetailComponent } from './detail/detail.component';
+import { ReportManagerComponent } from './report-manager/report-manager.component';
 
 const routes: Routes = [
   {
@@ -38,11 +39,14 @@ const routes: Routes = [
       {
         path: 'update',
         component: UpdateComponent
-      }
-      ,
+      },
       {
         path: 'blog-detail',
         component: DetailComponent
+      },
+      {
+        path: 'list-report/:id',
+        component: ReportManagerComponent
       }
     ]
   },
@@ -53,7 +57,8 @@ const routes: Routes = [
     BlogComponent,
     CreateBlogComponent,
     UpdateComponent,
-    DetailComponent
+    DetailComponent,
+    ReportManagerComponent
   ],
   imports: [
     CommonModule,
