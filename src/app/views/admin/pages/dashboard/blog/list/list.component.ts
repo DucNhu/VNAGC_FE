@@ -73,7 +73,7 @@ export class ListBlogComponent implements OnInit {
     this.listBlog = [];
     this.listBlognotActive.forEach(e => {
       if (e.status == false) {
-        this.listBlog.push(e)
+        this.listBlog.push(e);
       }
     })
   }
@@ -83,6 +83,7 @@ export class ListBlogComponent implements OnInit {
     this.blogService.getAllBlogeres(1).subscribe(
       dt => {
         this.listBlog = dt.Data.Items;
+        
         this.loading = false;
       },
       err => {
@@ -100,12 +101,20 @@ export class ListBlogComponent implements OnInit {
         for (let i = 0; i < this.data.PageCount;) {
           this.PageCount.push(++i);
         }
-        console.log(this.data);
         this.listBlog = this.data.Items;
         this.listBlog.forEach(
           e => {
             let img = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${e.banner_img}`);
             e.banner_img = e.banner_img ? img : 'assets/images/avatars/default-avatar.jpg';
+            let avt = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${e.author.avatar}`);
+            if (e.author.avatar) {
+              e.author.avatar = avt;
+              e.author.avatar = e.author.avatar.changingThisBreaksApplicationSecurity
+            }
+            else {
+              e.author.avatar = 'assets/images/avatars/default-avatar.jpg';
+            }
+            
           })
         this.loading = false;
       },

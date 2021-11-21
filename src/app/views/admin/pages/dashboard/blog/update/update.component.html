@@ -65,37 +65,36 @@
                                             <textarea type="text" rows="3" class="form-control" [ngClass]="isInvalid('name') ? 'error' : ''"
                                                 formControlName="summary" id="summary"></textarea>
                                         </div> -->
-                                        <div class="col-md-6 d-flex p-0">
-                                            <div class="col-sm-12 align-self-end ps-0">
+                                        <div class="col-md-12 d-flex p-0 mb-50">
+                                            <div class="col-sm-6 ps-0 align-self-end">
                                                 <div action="#" class="dropzone dropzone-area dz-clickable" id="dpz-single-file"
                                                     [ngClass]="avatar == '' ? 'error' : ''">
                                                     <label class="dz-message" for="avatar">Avatar</label>
                                                     <input type="file" hidden id="avatar" accept="image/*" (change)="updateFile($event, 1)">
-                                                    <img [src]="avatar ? 'data:image/png;base64,' + avatar : 'assets/images/avatars/default-avatar.jpg'" alt="avatar" *ngIf="avatar" class="img-avatar">
+                                                    <img [src]="avatar"
+                                                        *ngIf="avatar" class="img-avatar">
                                                 </div>
                                             </div>
-                                            <!-- <div class="col-sm-6 align-self-end">
-                                                                                    <div action="#" class="dropzone dropzone-area dz-clickable"
-                                                                                        id="dpz-single-file-coverr">
-                                                                                        <label class="dz-message" for="avatar_cover">Avatar
-                                                                                            cover</label>
-                                                                                        <input type="file" hidden id="avatar_cover" accept="image/*"
-                                                                                            (change)="updateFile($event, 0)">
-                                                                                        <img [src]="avatar_cover" alt="avatar cover" *ngIf="avatar_cover"
-                                                                                            class="img-avatar">
-                                                                                    </div>
-                                                                                </div> -->
+                                            <div class="col-sm-6 align-self-end">
+                                                <div action="#" class="dropzone dropzone-area dz-clickable" id="dpz-single-file-coverr">
+                                                    <label class="dz-message" for="avatar_cover">Avatar
+                                                        cover</label>
+                                                    <input type="file" hidden id="avatar_cover" accept="image/*" (change)="updateFile($event, 0)">
+                                                    <img [src]="avatar_cover" alt="avatar cover" *ngIf="avatar_cover" class="img-avatar">
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-md-6 px-0">
-                                            <label class="form-label ms-1" for="cooking_time">
-                                                cooking time
-                                            </label>
+                                           
                                             <div class="row mx-0">
-                                                <div class="col-12">
+                                                <div class="col-6 ps-0">
+                                                    <label class="form-label ms-1" for="cooking_time">
+                                                        cooking time
+                                                    </label>
                                                     <input type="text" class="form-control" formControlName="cooking_time" id="cooking_time" />
                                                 </div>
                                              
-                                                <div class="col-md-12 pe-0">
+                                                <div class="col-6 pe-0">
                                                     <label class="form-label" for="url_youtube">url
                                                         youtube
                                                         <span>

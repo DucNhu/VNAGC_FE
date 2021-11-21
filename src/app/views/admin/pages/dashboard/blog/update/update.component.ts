@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CustomValidators } from 'src/app/core/validators/CustomValidators';
@@ -51,6 +52,7 @@ export class UpdateComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   blogDetail: blog;
   constructor(
+    private domSanitizer: DomSanitizer,
     private fb: FormBuilder,
     private blogService: BlogService,
     private route: Router,
@@ -75,6 +77,11 @@ export class UpdateComponent implements OnInit {
         this.listCategory = dt[1].Data;
         this.hastags = dt[2].Data;
         this.listProduct = dt[3].Data;
+        this.listProduct.forEach(
+          e => {
+            e.banner_img = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${e.banner_img}`);
+            e.banner_img = e.banner_img.changingThisBreaksApplicationSecurity;
+          })
         this.listProductRoot = dt[3].Data;
         this.setFormMetarial(dt[0].Data)
         // this.setFormContent(dt[2])
@@ -168,6 +175,18 @@ export class UpdateComponent implements OnInit {
       return
     }
     let nowDate = new Date();
+    if (this.changeAvatar) {
+      this.avatar = this.avatar.split('data:image/png;base64,')[1];
+    }else {
+      this.avatar = this.avatar.changingThisBreaksApplicationSecurity.split('data:image/png;base64,')[1];
+    }
+    if (this.changeAvatar_cover) {
+      this.avatar_cover = this.avatar_cover.split('data:image/png;base64,')[1];
+    }
+    else {
+      this.avatar_cover = this.avatar_cover.changingThisBreaksApplicationSecurity.split('data:image/png;base64,')[1];
+    }
+
     let data = {
       "id": this.blogId,
       "name": form.get('name').value,
@@ -309,7 +328,6 @@ export class UpdateComponent implements OnInit {
   }
 
   setFormBlog(val) {
-
     val.materials.forEach((e, indexProduct) => {
       for (let index = 0; index < this.listProduct.length; index++) {
         let ei = this.listProduct[index];
@@ -336,8 +354,8 @@ export class UpdateComponent implements OnInit {
         step: val.steps
       }
     )
-    this.avatar = val.banner_img;
-    this.avatar_cover = val.cover_img;
+    this.avatar_cover = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${val.banner_img}`);
+    this.avatar = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${val.cover_img}`);
   }
 
   getBlog(): Promise<any> {
@@ -605,6 +623,19 @@ export class UpdateComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
+  changeAvatar = false;
+  setValueAvatar(e) {
+    this.changeAvatar = true;
+    let reader = e.target;
+    this.avatar = `data:image/png;base64,${reader.result.substr(reader.result.indexOf(',') + 1)}`;
+  }
+  changeAvatar_cover = false;
+  setValueAvatarCover(e) {
+    this.changeAvatar_cover = true;
+    let reader = e.target;
+    this.avatar_cover = `data:image/png;base64,${reader.result.substr(reader.result.indexOf(',') + 1)}`;
+  }
+
   updateListFile(event, index, type, isAvatarCover?) {
     let fileList: FileList = event.target.files;
     const file: File = fileList[0];
@@ -628,7 +659,7 @@ export class UpdateComponent implements OnInit {
   }
   setImgListAvatar(e) {
     let reader = e.target;
-    let data = '' + reader.result.substr(reader.result.indexOf(',') + 1);
+    let data = 'data:image/png;base64,' + reader.result.substr(reader.result.indexOf(',') + 1);
     if (this.isListStep) { // is step
       this.listStep()[this.indexOflist_img_feature].patchValue({ avatar: data })
     }
@@ -642,15 +673,6 @@ export class UpdateComponent implements OnInit {
       }
     }
   }
-  setValueAvatar(e) {
-    let reader = e.target;
-    this.avatar = '' + reader.result.substr(reader.result.indexOf(',') + 1);
-  }
-  setValueAvatarCover(e) {
-    let reader = e.target;
-    this.avatar_cover = '' + reader.result.substr(reader.result.indexOf(',') + 1);
-  }
-
   createMetarial() {
     this.listMetarial().forEach(e => {
       let value = e.value;

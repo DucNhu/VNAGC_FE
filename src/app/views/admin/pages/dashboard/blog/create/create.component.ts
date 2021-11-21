@@ -56,7 +56,6 @@ export class CreateBlogComponent implements OnInit {
   ) {
     this.registerFormBlog();
     this.userId = JSON.parse(sessionStorage.getItem("user")).Id;
-    console.log(this.userId)
   }
 
   ngOnInit(): void {
@@ -371,8 +370,8 @@ export class CreateBlogComponent implements OnInit {
     let nowDate = new Date();
     let data = {
       "name": form.get('name').value,
-      "banner_img": this.avatar,
-      "cover_img": this.avatar_cover,
+      "banner_img": this.avatar_cover,
+      "cover_img": this.avatar,
       "cooking_time": form.get('cooking_time').value,
       "summary": form.get('name').value,
       "description": form.get('description').value,
