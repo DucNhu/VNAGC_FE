@@ -33,7 +33,7 @@
                                 <div class="col-md-4 col-12 mb-2" *ngFor="let i of listBlog; let id = index">
                                     <div class="card">
                                         <a [routerLink]="['/blog/blog-detail/', {id: i.id}]">
-                                            <img class="card-img-top img-fluid" [src]="i.banner_img"
+                                            <img class="card-img-top img-fluid" [src]="i.cover_img"
                                                 alt="Blog Post pic">
                                         </a>
                                         <div class="card-body">
