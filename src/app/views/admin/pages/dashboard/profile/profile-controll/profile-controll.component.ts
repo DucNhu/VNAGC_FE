@@ -16,6 +16,7 @@ export class ProfileControllComponent implements OnInit {
   user: user;
   load = true;
   avatar;
+  idCurren = JSON.parse(sessionStorage.getItem("user")).Id;
   constructor(
     private fb: FormBuilder,
     private profileService: ProfileService,
@@ -118,7 +119,9 @@ export class ProfileControllComponent implements OnInit {
     this.load = true;
     this.profileService.updateProfile(data).subscribe(
       dt => {
-        sessionStorage.setItem("user", JSON.stringify(dt.Data));
+        if (dt.Data.Id == this.idCurren) {
+          sessionStorage.setItem("user", JSON.stringify(dt.Data));
+        }
         window.location.reload();
       })
   }
