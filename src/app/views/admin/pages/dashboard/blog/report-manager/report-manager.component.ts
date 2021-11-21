@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { DashBoardService } from 'src/app/core/_service/admin/dashBoard.service';
 
@@ -12,13 +13,20 @@ export class ReportManagerComponent implements OnInit {
   loading = true;
   constructor(
     private dashBoardService: DashBoardService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private domSanitizer: DomSanitizer
   ) { }
   ngOnInit(): void {
     this.dashBoardService.getAllReport(this.activatedRoute.snapshot.paramMap.get("id")).subscribe(
       dt => {
         this.loading = false;
         this.listReport = dt.Data;
+        console.log(this.listReport)
+        this.listReport.forEach(
+          e => {
+            let img = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${e.userProfile.avatar}`);
+            e.userProfile.avatar = e.userProfile.avatar ? img : 'assets/images/avatars/default-avatar.jpg';
+          })
       }
     )
   }

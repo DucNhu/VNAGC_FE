@@ -7,8 +7,9 @@ import { HelperService } from 'src/app/_helpers/helper.service';
 export class BlogService {
 
   constructor(private helperService: HelperService) { }
-  getAllBlogeres() {
-    return this.helperService.getAll("Blog/get-all-blog?pageIndex=1&pageSize=100");
+  getAllBlogeres(pageIndex) {
+    let param = `?pageIndex=${pageIndex}&pageSize=9`;
+    return this.helperService.getAll("Blog/get-all-blog"+param);
   }
   GetBlogsActive() {
     return this.helperService.getAll("Blog/GetBlogsActive");

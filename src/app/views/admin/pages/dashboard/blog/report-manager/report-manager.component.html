@@ -15,7 +15,7 @@
                 <div class="card-body" *ngFor="let item of listReport; let i = index">
                     <div class="d-flex align-items-start position-relative">
                         <div class="avatar me-75">
-                            <img [src]="item.userProfile.avatar ? 'data:image/png;base64,' + item.userProfile.avatar : 'assets/images/avatars/default-avatar.jpg'" alt="avatar" width="38" height="38"
+                            <img [src]="item.userProfile.avatar" alt="avatar" width="38" height="38"
                                 alt="Avatar">
                         </div>
                         <div class="author-info">

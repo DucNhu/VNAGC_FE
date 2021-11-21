@@ -1,3 +1,26 @@
 .content-detached {
     background: #f2f2f2;
 }
+
+.pagination {
+    display: flex !important;
+    padding-left: 0 !important;
+    margin: 20px 0 !important;
+    margin-top: 1.5rem !important;
+    border-radius: 0px !important;
+}
+
+.pagination li .page-link {
+    border: none;
+    background: transparent;
+}
+.pagination li.active a {
+    background: #7367F0;
+}
+.page-item.active .page-link {
+    z-index: 3;
+    border-radius: 5rem;
+    background-color: #7367f0;
+    color: #fff !important;
+    font-weight: 600;
+}

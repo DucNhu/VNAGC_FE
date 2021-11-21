@@ -39,7 +39,7 @@
              alt="avatar" class="img-fluid rounded-circle">
       </label>
       
-      <input class="form-control" hidden type="file" id="formFile" (change)="updateFile($event, 1)">
+      <input class="form-control" hidden type="file" id="formFile" (change)="updateFile($event, 1)" accept="image/*">
     </div>
     <div class="col-12">
       <button class="btn btn-primary waves-effect waves-float waves-light mt-1" type="submit">Submit</button>

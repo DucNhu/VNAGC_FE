@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DashBoardService } from 'src/app/core/_service/admin/dashBoard.service';
 import { BlogService } from 'src/app/core/_service/blog/blog.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Data } from 'src/app/models/pagination';
 
 @Component({
   selector: 'app-list',
@@ -19,22 +20,11 @@ export class ListBlogComponent implements OnInit {
   ) { }
 
   listBlog = [];
+  data: Data;
+  PageCount=[];
   ngOnInit(): void {
-    this.blogService.getAllBlogeres().subscribe(
-      dt => {
-        console.log(dt.Data)
-        this.listBlog = dt.Data.Items;
-        this.listBlog.forEach(
-          e => {
-            let img = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${e.banner_img}`);
-            e.banner_img = e.banner_img ? img : 'assets/images/avatars/default-avatar.jpg';
-          }        )
-        this.loading = false;
-      },
-      err => {
-        this.loading = false;
-      }
-    )
+    this.getAllBlogeres(1);
+
   }
 
   routerUpdate(id) {
@@ -76,7 +66,7 @@ export class ListBlogComponent implements OnInit {
 
   timeSelect = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
   newDate = this.timeSelect;
- 
+
   listBlognotActive;
   getBlogNotActive() {
     this.listBlognotActive = this.listBlog;
@@ -90,9 +80,33 @@ export class ListBlogComponent implements OnInit {
 
   reset() {
     this.loading = true;
-    this.blogService.getAllBlogeres().subscribe(
+    this.blogService.getAllBlogeres(1).subscribe(
       dt => {
         this.listBlog = dt.Data.Items;
+        this.loading = false;
+      },
+      err => {
+        this.loading = false;
+      }
+    )
+  }
+
+  getAllBlogeres(pageIndex) {
+    this.loading = true;
+    this.blogService.getAllBlogeres(pageIndex).subscribe(
+      dt => {
+        this.data = dt.Data;
+        this.PageCount = [];
+        for (let i = 0; i < this.data.PageCount;) {
+          this.PageCount.push(++i);
+        }
+        console.log(this.data);
+        this.listBlog = this.data.Items;
+        this.listBlog.forEach(
+          e => {
+            let img = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${e.banner_img}`);
+            e.banner_img = e.banner_img ? img : 'assets/images/avatars/default-avatar.jpg';
+          })
         this.loading = false;
       },
       err => {
