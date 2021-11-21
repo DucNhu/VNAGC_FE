@@ -106,6 +106,11 @@ export class ListBlogComponent implements OnInit {
           e => {
             let img = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${e.banner_img}`);
             e.banner_img = e.banner_img ? img : 'assets/images/avatars/default-avatar.jpg';
+            
+            let imgCover = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${e.cover_img}`);
+            e.cover_img = e.cover_img ? imgCover : 'assets/images/avatars/default-avatar.jpg';
+
+
             let avt = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${e.author.avatar}`);
             if (e.author.avatar) {
               e.author.avatar = avt;
