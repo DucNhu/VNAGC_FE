@@ -104,6 +104,10 @@
                                                         <span class="text-body fw-bold">{{i.countReport + '
                                                             Report'}}</span>
                                                     </div>
+                                                    <div class="form-check form-check-primary form-switch">
+                                                        <mat-slide-toggle (change)="activeBlog(i, $event)" [checked]="i.status == 0 ? false : true"></mat-slide-toggle>
+                                                    </div>
+
                                                 </a>
                                                 <button mat-button [matMenuTriggerFor]="menu">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"

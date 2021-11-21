@@ -181,10 +181,8 @@ export class UpdateComponent implements OnInit {
       "status": 1,
       "user_id": this.blogDetail.user_id,
       "category_id": form.get('category').value,
-      "productIds": [
-        
-      ],
-
+      "productIds": [],
+      "otherMaterials": [],
       "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
     }

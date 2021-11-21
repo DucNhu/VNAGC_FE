@@ -126,13 +126,13 @@ export class CreateBlogComponent implements OnInit {
         step: [null, Validators.compose([
           Validators.required
         ])],
-        // metarial: this.fb.array([]),
+        metarial: this.fb.array([]),
         // step: this.fb.array([]),
         // content: this.fb.array([]),
       }
     )
     // this.addContent();
-    // this.addMetarial();
+    this.addMetarial();
     // this.addStep();
   }
 
@@ -189,11 +189,9 @@ export class CreateBlogComponent implements OnInit {
     if (this.listMetarial().length == 0) {
       return this.listMetarial().push(
         this.fb.group({
-          name: [null, Validators.compose(
-            [Validators.required]
-          )],
-          content: [null],
-          unit: [null]
+          name: [null],
+          // content: [null],
+          // unit: [null]
         })
       )
     }
@@ -207,17 +205,14 @@ export class CreateBlogComponent implements OnInit {
         if (i == this.listMetarial().length - 1) {
           return this.listMetarial().push(
             this.fb.group({
-              name: [null, Validators.compose(
-                [Validators.required]
-              )],
-              content: [null],
-              unit: [null]
+              name: [null],
+              // content: [null],
+              // unit: [null]
             })
           )
         }
       }
     }
-
   }
   removeMetarial(i) {
     return (this.formBlog.get('metarial') as FormArray).removeAt(i)
@@ -387,11 +382,13 @@ export class CreateBlogComponent implements OnInit {
       "user_id": this.userId,
       "category_id": form.get('category').value,
       "productIds": [],
+      "otherMaterials": [],
       "steps": form.get('step').value,
       "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
     }
     this.listMetarialShop.length > 0 ? data.productIds = this.listMetarialShop.map(e => e.id) : 0
+    this.listMetarial().length > 0 ? data.otherMaterials = this.listMetarial().map(e => e.value.name) : 0
     this.loading = true;
     this.blogService.create(data).subscribe(
       dt => {

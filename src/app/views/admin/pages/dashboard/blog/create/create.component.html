@@ -229,10 +229,10 @@
                                     </div>
 
                                     <!-- Metarial -->
-                                    <!-- <fieldset>
+                                    <fieldset>
                                         <legend (click)="metarialC.toggle()" class="h2_title_collapse"
                                             [attr.aria-expanded]="!isCollapsed.metarial"
-                                            aria-controls="collapseExample">Metarial
+                                            aria-controls="collapseExample">Metarial Orther
                                             <span *ngIf="!isCollapsed.metarial; else isCollaps">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -257,19 +257,18 @@
                                                 <div class="col-12 p-0 box-metarial"
                                                     *ngFor="let item of listMetarial(); let i = index"
                                                     [formGroupName]="i">
-                                                    <div class="row m-0 pt-1">
-                                                        <div class="col-md-6">
+                                                    <div class="row m-0 py-1">
+                                                        <div class="col-md-12">
                                                             <div class="">
                                                                 <label class="form-label"
                                                                     [for]="'metarial_name'+i">Name</label>
                                                                 <input type="text" class="form-control"
                                                                     placeholder="milk" formControlName="name"
                                                                     [id]="'metarial_name'+i" />
-                                                                <p class="error" *ngIf="item.value.name==''">Field is
-                                                                    required</p>
+                                                               
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6 d-flex position-relative">
+                                                        <!-- <div class="col-md-6 d-flex position-relative">
                                                             <div class="col-6 px-2">
                                                                 <label class="form-label"
                                                                     [for]="'metarial_mass'+i">Mass</label>
@@ -309,7 +308,7 @@
                                                                     </svg>
                                                                 </button>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                 </div>
                                                 <div class="mb-50">
@@ -328,7 +327,7 @@
                                                 </div>
                                             </ng-container>
                                         </div>
-                                    </fieldset> -->
+                                    </fieldset>
 
                                     <!-- Step by Step -->
                                     <!-- <fieldset>

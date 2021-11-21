@@ -21,7 +21,6 @@ export class ReportManagerComponent implements OnInit {
       dt => {
         this.loading = false;
         this.listReport = dt.Data;
-        console.log(this.listReport)
         this.listReport.forEach(
           e => {
             let img = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${e.userProfile.avatar}`);

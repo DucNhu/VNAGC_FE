@@ -24,3 +24,12 @@
     color: #fff !important;
     font-weight: 600;
 }
+
+.form-switch {
+    padding: 0px !important
+}
+
+.card-img-top {
+    height: 20rem;
+    object-fit: cover;
+}
