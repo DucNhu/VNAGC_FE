@@ -354,8 +354,8 @@ export class UpdateComponent implements OnInit {
         step: val.steps
       }
     )
-    this.avatar = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${val.banner_img}`);
-    this.avatar_cover = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${val.cover_img}`);
+    this.avatar = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${val.cover_img}`);
+    this.avatar_cover = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${val.banner_img}`);
   }
 
   getBlog(): Promise<any> {
