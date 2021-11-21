@@ -190,8 +190,8 @@ export class UpdateComponent implements OnInit {
     let data = {
       "id": this.blogId,
       "name": form.get('name').value,
-      "banner_img": this.avatar,
-      "cover_img": this.avatar_cover,
+      "banner_img": this.avatar_cover,
+      "cover_img": this.avatar,
       "cooking_time": form.get('cooking_time').value,
       "summary": form.get('name').value,
       "description": form.get('description').value,
@@ -354,8 +354,8 @@ export class UpdateComponent implements OnInit {
         step: val.steps
       }
     )
-    this.avatar_cover = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${val.banner_img}`);
-    this.avatar = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${val.cover_img}`);
+    this.avatar = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${val.banner_img}`);
+    this.avatar_cover = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${val.cover_img}`);
   }
 
   getBlog(): Promise<any> {
