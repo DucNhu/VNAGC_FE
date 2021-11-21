@@ -223,7 +223,8 @@
         </div>
     </div>
     <div class="nav-post nav-post-next cookandmeal-post">
-        <a [routerLink]="['/page-profile', blog?.user_id]">
+        <a
+        [routerLink]="['/page-profile/detail/' + blog?.user_id]">
             <div class="nav-post-button-title me-1">Visit the author<i class="fa fa-arrow-right" aria-hidden="true"></i>
             </div>
         </a>

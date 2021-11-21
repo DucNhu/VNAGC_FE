@@ -10,9 +10,9 @@
                 <li class="list-group-item" [class]="active == 0 ? 'btn btn-outline-primary waves-effect' : ''"><button
                         mat-menu-item (click)="getAll()">All</button>
                 <li class="list-group-item">
-                    <button mat-menu-item [matMenuTriggerFor]="query">Get by month</button>
+                    <button mat-menu-item [matMenuTriggerFor]="query">Show users who already have monthly payments</button>
                     <mat-menu #query="matMenu">
-                        <span mat-menu-item *ngFor="let i of listMonth" (click)="getMemberInMonth(i)"
+                        <span mat-menu-item *ngFor="let i of listMonth; let id = index" (click)="getMemberInMonth(id)"
                         class="d-inline"
                             [class]="active == i ? 'btn btn-outline-primary waves-effect' : ''">{{i}}</span>
                     </mat-menu>
@@ -33,13 +33,13 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let item of listMember" class="cursor-pointer"
-                                    [routerLink]="['/page-profile', {id: item.id}]">
+                                    [routerLink]="['/page-profile/detail/' + item.id]">
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="avatar rounded">
                                                 <div class="avatar-content">
                                                     <span class="avatar m-0"><img
-                                                            [src]="item.avatar ? 'data:image/png;base64,' + item.avatar : 'assets/images/avatars/default-avatar.jpg'" alt="avatar"
+                                                            [src]="item.avatar" alt="avatar"
                                                             height="40" width="40" class="rounded-circle"></span>
                                                 </div>
                                             </div>
@@ -71,7 +71,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let item of listMember" class="cursor-pointer" [routerLink]="['/page-profile', {id: item.Id}]">
+                                    <tr *ngFor="let item of listMember" class="cursor-pointer"
+                                    [routerLink]="['/page-profile/detail/' + item.Id]">
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <div class="avatar rounded">

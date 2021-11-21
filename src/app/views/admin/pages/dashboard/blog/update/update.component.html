@@ -182,7 +182,7 @@
                                                 formControlName="description" id="des1"></textarea>
                                         </div>
                                     </div>
-                                    <!-- <fieldset>
+                                    <fieldset>
                                         <legend (click)="metarialC.toggle()" class="h2_title_collapse"
                                             [attr.aria-expanded]="!isCollapsed.metarial"
                                             aria-controls="collapseExample">Metarial
@@ -210,19 +210,33 @@
                                                 <div class="col-12 p-0 box-metarial"
                                                     *ngFor="let item of listMetarial(); let i = index"
                                                     [formGroupName]="i">
-                                                    <div class="row m-0 pt-1">
-                                                        <div class="col-md-6">
+                                                    <div class="row m-0 py-1">
+                                                        <div class="col-md-12  position-relative">
                                                             <div class="">
                                                                 <label class="form-label"
                                                                     [for]="'metarial_name'+i">Name</label>
                                                                 <input type="text" class="form-control"
                                                                     placeholder="milk" formControlName="name"
                                                                     [id]="'metarial_name'+i" />
-                                                                <p class="error" *ngIf="item.value.name==''">Field is
-                                                                    required</p>
+                                                                <!-- <p class="error" *ngIf="item.value.name==''">Field is
+                                                                    required</p> -->
+                                                            </div>
+                                                            <div class="box-trash">
+                                                                <button class="btn btn-trash" (click)="removeMetarial(i)">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-trash-2">
+                                                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                                        </path>
+                                                                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                                    </svg>
+                                                                </button>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6 d-flex position-relative">
+                                                       
+                                                        <!-- <div class="col-md-6 d-flex position-relative">
                                                             <div class="col-6 px-2">
                                                                 <label class="form-label"
                                                                     [for]="'metarial_mass'+i">Mass</label>
@@ -245,24 +259,8 @@
                                                                 <p class="error" *ngIf="item.value.unit==''">Field is
                                                                     required</p>
                                                             </div>
-                                                            <div class="box-trash">
-                                                                <button class="btn btn-trash"
-                                                                    (click)="removeMetarial(i)">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-trash-2">
-                                                                        <polyline points="3 6 5 6 21 6"></polyline>
-                                                                        <path
-                                                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                                                        </path>
-                                                                        <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                                        <line x1="14" y1="11" x2="14" y2="17"></line>
-                                                                    </svg>
-                                                                </button>
-                                                            </div>
-                                                        </div>
+                                                            
+                                                        </div> -->
                                                     </div>
                                                 </div>
                                                 <div class="mb-50">
@@ -281,7 +279,7 @@
                                                 </div>
                                             </ng-container>
                                         </div>
-                                    </fieldset> -->
+                                    </fieldset>
 
                                     <!-- Step by Step -->
                                     <!-- <fieldset>

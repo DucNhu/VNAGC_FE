@@ -46,9 +46,10 @@ export class UpdateComponent implements OnInit {
   listProduct;
   listProductRoot;
   listMetarialShop = [];
+  listMetarialOther = [];
   myControl: FormControl = new FormControl();
   filteredOptions: Observable<string[]>;
-  blogDetail:blog;
+  blogDetail: blog;
   constructor(
     private fb: FormBuilder,
     private blogService: BlogService,
@@ -75,7 +76,7 @@ export class UpdateComponent implements OnInit {
         this.hastags = dt[2].Data;
         this.listProduct = dt[3].Data;
         this.listProductRoot = dt[3].Data;
-        // this.setFormMetarial(dt[1])
+        this.setFormMetarial(dt[0].Data)
         // this.setFormContent(dt[2])
         // this.setFormSteps(dt[3])
         this.setFormBlog(dt[0].Data)
@@ -84,7 +85,7 @@ export class UpdateComponent implements OnInit {
     )
   }
 
-    f(control) {
+  f(control) {
     return this.formBlog.controls[control]
   }
 
@@ -97,7 +98,7 @@ export class UpdateComponent implements OnInit {
     }
   }
 
-   getProduct(): Promise<any> {
+  getProduct(): Promise<any> {
     return new Promise(async (resolve) => {
       const dt = await this.productService.getAllProducts().toPromise();
       resolve(dt);
@@ -113,7 +114,7 @@ export class UpdateComponent implements OnInit {
       for (let index = 0; index < this.listMetarialShop.length; index++) {
         let e = this.listMetarialShop[index];
         if (val.id != e.id) {
-          if ((index == this.listMetarialShop.length - 1)){
+          if ((index == this.listMetarialShop.length - 1)) {
             this.listMetarialShop.push(val);
             break;
           }
@@ -186,13 +187,13 @@ export class UpdateComponent implements OnInit {
       "create_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(),
     }
-    console.log(data)
     this.listMetarialShop.length > 0 ? data.productIds = this.listMetarialShop.map(e => e.id) : 0
+    this.listMetarial().length > 0 ? data.otherMaterials = this.listMetarial().map(e => e.value.name) : 0
     this.loading = true;
     this.blogService.update(data).subscribe(
       dt => {
         // setTimeout(() => {
-          this.route.navigate(["/blog/blog-detail", { id: this.blogId }]);
+        this.route.navigate(["/blog/blog-detail", { id: this.blogId }]);
         // }, 1500);
         // this.createMetarial();
         // this.createContent();
@@ -245,26 +246,22 @@ export class UpdateComponent implements OnInit {
   }
 
   setFormMetarial(val) {
-    val.forEach(e => {
-      this.listMetarial().push(
-        this.fb.group({
-          id: [e.id, Validators.compose(
-            [Validators.required]
-          )],
-          name: [e.title, Validators.compose(
-            [Validators.required]
-          )],
-          content: [e.mass, Validators.compose(
-            [Validators.required]
-          )],
-          unit: [e.unit, Validators.compose(
-            [Validators.required]
-          )]
-        })
-      )
-    });
+    if (val.otherMaterials.length != 0) {
+      val.otherMaterials.forEach(e => {
+        this.listMetarial().push(
+          this.fb.group({
+            name: [e],
+            // content: [e.mass, Validators.compose(
+            //   [Validators.required]
+            // )],
+            // unit: [e.unit, Validators.compose(
+            //   [Validators.required]
+            // )]
+          })
+        )
+      });
+    }
   }
-
   registerFormBlog() {
     this.formBlog = this.fb.group(
       {
@@ -304,7 +301,7 @@ export class UpdateComponent implements OnInit {
         // unitTimeCook: [null],
 
 
-        // metarial: this.fb.array([]),
+        metarial: this.fb.array([]),
         // step: this.fb.array([]),
         // content: this.fb.array([])
       }
@@ -312,7 +309,7 @@ export class UpdateComponent implements OnInit {
   }
 
   setFormBlog(val) {
-   
+
     val.materials.forEach((e, indexProduct) => {
       for (let index = 0; index < this.listProduct.length; index++) {
         let ei = this.listProduct[index];
@@ -322,6 +319,9 @@ export class UpdateComponent implements OnInit {
         }
       }
     });
+    // val.otherMaterials.forEach((e, indexProduct) => {
+    //       this.listMetarialOther.push(e);        
+    // });
     this.formBlog.patchValue(
       {
         name: val.name,
@@ -451,14 +451,9 @@ export class UpdateComponent implements OnInit {
     if (this.listMetarial().length == 0) {
       return this.listMetarial().push(
         this.fb.group({
-          id: [0, Validators.compose(
-            [Validators.required]
-          )],
-          name: [null, Validators.compose(
-            [Validators.required]
-          )],
-          content: [null],
-          unit: [null]
+          name: [null],
+          // content: [null],
+          // unit: [null]
         })
       )
     }
@@ -472,14 +467,9 @@ export class UpdateComponent implements OnInit {
         if (i == this.listMetarial().length - 1) {
           return this.listMetarial().push(
             this.fb.group({
-              id: [0, Validators.compose(
-                [Validators.required]
-              )],
-              name: [null, Validators.compose(
-                [Validators.required]
-              )],
-              content: [null],
-              unit: [null]
+              name: [null],
+              // content: [null],
+              // unit: [null]
             })
           )
         }
@@ -487,22 +477,23 @@ export class UpdateComponent implements OnInit {
     }
   }
   removeMetarial(i) {
-    if (i.id != 0) {
-      this.loading = true;
-      this.blogService.deleteMetarial(i.id).subscribe(
-        dt => {
-          this.loading = false;
-          return (this.formBlog.get('metarial') as FormArray).removeAt(i)
-        },
-        err => {
-          this.loading = false;
-          return false
-        }
-      )
-    }
-    else {
-      return (this.formBlog.get('metarial') as FormArray).removeAt(i)
-    }
+    return (this.formBlog.get('metarial') as FormArray).removeAt(i)
+    // if (i.id != 0) {
+    //   this.loading = true;
+    //   this.blogService.deleteMetarial(i.id).subscribe(
+    //     dt => {
+    //       this.loading = false;
+    //       return (this.formBlog.get('metarial') as FormArray).removeAt(i)
+    //     },
+    //     err => {
+    //       this.loading = false;
+    //       return false
+    //     }
+    //   )
+    // }
+    // else {
+    //   return (this.formBlog.get('metarial') as FormArray).removeAt(i)
+    // }
   }
 
   listContent = () => {

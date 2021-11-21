@@ -17,7 +17,7 @@ export class BaseDashboardComponent implements OnInit {
   chartOptions = {
     responsive: true,
   };
-  chartLabels = [];
+  chartLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   chartLegend = true;
 
   chartData = [
@@ -27,7 +27,7 @@ export class BaseDashboardComponent implements OnInit {
   chartOptions_blog = {
     responsive: true,
   };
-  chartLabels_blog = [];
+  chartLabels_blog = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   chartLegend_blog = true;
   chartColors_blog = [{
     backgroundColor: ['#e5e5e5', '#e5e5e5', '#e5e5e5'],
@@ -59,7 +59,7 @@ export class BaseDashboardComponent implements OnInit {
   constructor(
     private dashBoardService: DashBoardService,
   ) {
-   }
+  }
 
   ngOnInit(): void {
     Promise.all([
@@ -124,7 +124,6 @@ export class BaseDashboardComponent implements OnInit {
     for (let index = 0; index < 12; index++) {
       let x = index;
       ++x;
-      this.chartLabels.push(x);
       let e = getTopOrderByYear[index];
       this.datagetTopOrderByYear.push(e[x]);
     }
@@ -137,12 +136,11 @@ export class BaseDashboardComponent implements OnInit {
     for (let index = 0; index < 12; index++) {
       let x = index;
       ++x;
-      this.chartLabels_blog.push(x);
       let e = getTopBlogByYear[index];
+      console.log(e[x])
       this.datagetTopBlogByYear.push(e[x]);
     }
     this.chartData_blog[0].data = this.datagetTopBlogByYear;
-
   }
   getProductTopRating(): Promise<any> {
     return new Promise(async (resolve) => {

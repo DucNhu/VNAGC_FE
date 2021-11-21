@@ -161,15 +161,11 @@
                             <div class="card-header d-flex justify-content-between pb-0">
                                 <h4 class="card-title">Orders index for the year</h4>
                                 <div class="dropdown chart-dropdown">
-                                    <button class="btn btn-sm border-0 dropdown-toggle p-50" type="button"
-                                        id="dropdownItem4" data-bs-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                        In year
-                                    </button>
+                                    In year
                                 </div>
                             </div>
                             <div class="card-body">
-                                <canvas baseChart chartType="bar" [datasets]="chartData" [labels]="chartLabels"
+                                <canvas baseChart chartType="bar" [datasets]="chartData" [labels]="chartLabels" class="cursor-pointer" routerLink="/order"
                                     [options]="chartOptions" [plugins]="" [legend]="chartLegend">
                                 </canvas>
                             </div>
@@ -181,8 +177,10 @@
                             <div class="card-header d-flex justify-content-between pb-0">
                                 <h4 class="card-title">Statistics by day</h4>
                                 <div class="">
-                                    <input type="date" #dateSelect id="fp-SelectTime" class="form-control border-0 flatpickr-basic flatpickr-input active"
-                                        (change)="fGetTopOrderByDay(dateSelect.value); fGetTopBlogByDay(dateSelect.value)" [max]="nowDate" >
+                                    <input type="date" lang="en"  #dateSelect id="fp-SelectTime"
+                                        class="form-control border-0 flatpickr-basic flatpickr-input active"
+                                        (change)="fGetTopOrderByDay(dateSelect.value); fGetTopBlogByDay(dateSelect.value)"
+                                        [max]="nowDate">
                                 </div>
                             </div>
                             <div class="card-body">
@@ -229,15 +227,18 @@
                             <div class="card-header d-flex justify-content-between pb-0">
                                 <h4 class="card-title">Blogs index in 12 months</h4>
                                 <div class="dropdown chart-dropdown">
-                                    <button class="btn btn-sm border-0 dropdown-toggle p-50" type="button" id="dropdownItem4"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button class="btn btn-sm border-0 dropdown-toggle p-50" type="button"
+                                        id="dropdownItem4" data-bs-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
                                         In year
                                     </button>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <canvas baseChart chartType="bar" [colors]="chartColors_blog" [datasets]="chartData_blog"
-                                    [labels]="chartLabels_blog" [options]="chartOptions_blog" [plugins]="" [legend]="chartLegend_blog">
+                                <canvas baseChart chartType="bar" [colors]="chartColors_blog"
+                                 class="cursor-pointer" routerLink="/blog/list"
+                                    [datasets]="chartData_blog" [labels]="chartLabels_blog"
+                                    [options]="chartOptions_blog" [plugins]="" [legend]="chartLegend_blog">
                                 </canvas>
                             </div>
                         </div>
@@ -245,19 +246,21 @@
                     <div class="col-lg-6 col-12">
                         <div class="card">
                             <div class="card mb-3">
-                    
+
                                 <div class="card-body">
                                     <div class="d-flex align-items-center mb-4">
                                         <div class="flex-grow-1">
                                             <h5 class="mb-1">List of posts with the most views</h5>
                                         </div>
                                     </div>
-                    
+
                                     <div class="d-flex align-items-center mb-1 cursor-pointer"
                                         *ngFor="let item of listTopBlogView; let i = index"
                                         [routerLink]="['/blog/blog-detail/', {id: i.id}]">
-                                        <div class="d-flex align-items-center justify-content-center me-3 width-50 height-50">
-                                            <img [src]="item.banner_img" alt="avatar" class="ms-100 mh-100 rounded img_product">
+                                        <div
+                                            class="d-flex align-items-center justify-content-center me-3 width-50 height-50">
+                                            <img [src]="item.banner_img" alt="avatar"
+                                                class="ms-100 mh-100 rounded img_product">
                                         </div>
                                         <div class="flex-grow-1">
                                             <div>
@@ -268,9 +271,10 @@
                                         <div class="ps-3 text-center">
                                             <div class="text-dark font-weight-bold">
                                                 <span>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" class="feather feather-eye">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-eye">
                                                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                                         <circle cx="12" cy="12" r="3"></circle>
                                                     </svg>
@@ -280,7 +284,7 @@
                                         </div>
                                     </div>
                                 </div>
-                    
+
                             </div>
                         </div>
                     </div>
@@ -318,7 +322,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6 col-12">
                         <div class="card card-app-design">
                             <div class="card-body">

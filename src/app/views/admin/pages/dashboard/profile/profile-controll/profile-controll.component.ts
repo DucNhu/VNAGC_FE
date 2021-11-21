@@ -118,8 +118,7 @@ export class ProfileControllComponent implements OnInit {
     this.load = true;
     this.profileService.updateProfile(data).subscribe(
       dt => {
-        console.log(dt)
-        // window.location.reload();
+        window.location.reload();
       })
   }
 }

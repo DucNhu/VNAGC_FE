@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { AddToCartService } from 'src/app/core/_service/addToCart/add-to-cart.service';
 import { DashBoardService } from 'src/app/core/_service/admin/dashBoard.service';
 import { OrderService } from 'src/app/core/_service/profile/order.service';
@@ -15,6 +16,7 @@ export class OrderManagerComponent implements OnInit {
   listMonth = [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12]
   constructor(
     private dashBoardService: DashBoardService,
+    private domSanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -25,6 +27,10 @@ export class OrderManagerComponent implements OnInit {
     ).then(
       (dt: any) => {
         this.listOrder = dt[0].Data?.Items;
+        this.listOrder.forEach(
+          e => {
+            e.user_detail.avatar = e.user_detail.avatar ? this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${e.user_detail.avatar}`) : 'assets/images/avatars/default-avatar.jpg';
+          })
         this.load = false;
       },
       err => {
@@ -59,6 +65,11 @@ export class OrderManagerComponent implements OnInit {
   OrderDetail = [];
   getOrderDetail(id) {
     this.OrderDetail = this.listOrder[id].items;
+    this.OrderDetail.forEach(
+      e => {
+        console.log(e)
+        e.bannerImg = e.bannerImg ? this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${e.bannerImg}`) : 'assets/images/avatars/default-avatar.jpg';
+      })
   }
 
   getOrderBlogByMonth(type) {

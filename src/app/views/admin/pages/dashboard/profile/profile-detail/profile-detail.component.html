@@ -40,13 +40,13 @@
                     <!-- avatar -->
                     <div class="avatar me-1">
                         <img [src]="item.author.avatar ? 'data:image/png;base64,' + item.author.avatar : 'assets/images/avatars/default-avatar.jpg'"
-                        [routerLink]="['/page-profile', {id: userId}]"
-                            alt="avatar img" height="50" width="50">
+                            [routerLink]="['/page-profile/detail/' + userId]" alt="avatar img" height="50" width="50">
                     </div>
                     <!--/ avatar -->
-                    <div class="profile-user-info" [routerLink]="['/page-profile', {id: userId}]">
+                    <div class="profile-user-info" [routerLink]="['/page-profile/detail/' + userId]">
                         <h6 class="mb-0">{{item.author.fullName}}</h6>
-                        <small class="text-muted">Create {{item.create_at | date:"yyyy-MM-dd"}} at {{item.create_at | date:"HH:mm"}}</small>
+                        <small class="text-muted">Create {{item.create_at | date:"yyyy-MM-dd"}} at {{item.create_at |
+                            date:"HH:mm"}}</small>
                     </div>
                 </div>
                 <p class="card-text">
@@ -55,7 +55,9 @@
                 <div class="ecommerce-card">
                     <div class="item-img">
                         <a [routerLink]="['/blog/blog-detail', {id: item.id}]">
-                            <img class="img-fluid card-img-top rounded mb-75" [src]="item.banner_img ? 'data:image/png;base64,' + item.banner_img : 'assets/images/avatars/default-avatar.jpg'" alt="avatar img">
+                            <img class="img-fluid card-img-top rounded mb-75"
+                                [src]="item.banner_img ? 'data:image/png;base64,' + item.banner_img : 'assets/images/avatars/default-avatar.jpg'"
+                                alt="avatar img">
 
                         </a>
                     </div>
