@@ -59,6 +59,7 @@ export class CategoryComponent implements OnInit {
   }
   isEdit = false;
   editCategory(item) {
+    console.log(this.listCategory[item.index])
     this.isEdit = true;
     this.editId = item.id;
     this.editNameCategory = item.name
@@ -179,12 +180,14 @@ export class CategoryComponent implements OnInit {
   imgEdit;
   imgEditIndex = 0;
   updateFileEdit(event, index) {
+    
     let fileList: FileList = event.target.files;
     const file: File = fileList[0];
     this.permitFile = file;
     this.handleAvatarBlogEdit(file, index); //turn into base64
   }
   handleAvatarBlogEdit(files, index) {
+    this.imgEditIndex = index;
     var file = files;
     var pattern = /image-*/;
     var reader = new FileReader();

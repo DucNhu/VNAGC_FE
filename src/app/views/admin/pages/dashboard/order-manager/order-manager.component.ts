@@ -13,7 +13,9 @@ export class OrderManagerComponent implements OnInit {
   listOrder: any = [];
   load = true;
   active = 0;
-  listMonth = [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12]
+  listMonth = [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12];
+  status = 0;
+
   constructor(
     private dashBoardService: DashBoardService,
     private domSanitizer: DomSanitizer
@@ -54,6 +56,8 @@ export class OrderManagerComponent implements OnInit {
       ]
     ).then(
       (dt: any) => {
+        this.status = 0;
+
         this.listOrder = dt[0].Data?.Items;
         this.load = false;
       },
@@ -67,7 +71,6 @@ export class OrderManagerComponent implements OnInit {
     this.OrderDetail = this.listOrder[id].items;
     this.OrderDetail.forEach(
       e => {
-        console.log(e)
         e.bannerImg = e.bannerImg ? this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${e.bannerImg}`) : 'assets/images/avatars/default-avatar.jpg';
       })
   }
@@ -102,21 +105,31 @@ export class OrderManagerComponent implements OnInit {
     }
     this.dashBoardService.getOrderByMonth(start, end).subscribe(
       dt => {
+        this.status = 1;
         this.load = false;
         this.OrderDetail = [];
         this.listOrder = dt;
+        this.listOrder.forEach(
+          e => {
+            e.avatar = e.avatar ? this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${e.avatar}`) : 'assets/images/avatars/default-avatar.jpg';
+          })
       }
     )
   }
-
   getOrderBlogInMonth(month) {
     this.load = true;
     this.active = month;
     this.dashBoardService.GetTopOrderInMonth(`2021-${month}-01`).subscribe(
       dt => {
+        this.status = 1;
+
         this.load = false;
         this.OrderDetail = [];
         this.listOrder = dt;
+        this.listOrder.forEach(
+          e => {
+            e.avatar = e.avatar ? this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${e.avatar}`) : 'assets/images/avatars/default-avatar.jpg';
+          })
       }
     )
   }

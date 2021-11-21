@@ -66,7 +66,7 @@
             <div class="card-body">
               <div class="item-wrapper">
                 <div>
-                  <h6 class="item-price sale">${{p.price}} <del *ngIf="p.sale || p.sale != 0">{{p.sale + '%'}}</del></h6>
+                  <h6 class="item-price sale">${{p.price}} <span class="ml-3" *ngIf="p.sale || p.sale != 0">{{'Sale ' + p.sale + '%'}}</span></h6>
                 </div>
               </div>
               <h6 class="item-name">
@@ -95,8 +95,7 @@
                     <button mat-menu-item (click)="deleteProduct(p.id)">Delete</button>
                   </mat-menu>
                 </li>
-                <li class="item">revenue: {{p.revenue}}</li>
-                <li class="item">status: {{p.status ? 'public' : 'pravite'}}</li>
+                <li class="item">Number of purchases: {{p.revenue}}</li>
 
                 <li class="item">update time: {{p.update_at | date:"dd/MM/yyyy"}}</li>
                 <li class="item">create time: {{p.create_at | date:"dd/MM/yyyy"}}</li>

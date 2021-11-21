@@ -20,7 +20,7 @@ export class CategoryService {
     }
 
     updateCategory(data) {
-        return this.helperService.post("Category/edit/" + data.id, data);
+        return this.helperService.putpost("Category/edit/" + data.id, data);
     }
 
     deleteCategory(id) {

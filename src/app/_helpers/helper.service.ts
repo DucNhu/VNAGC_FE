@@ -66,7 +66,7 @@ export class HelperService {
       catchError(this.handleError),
       map(data => {
         if (data==null) {
-          this.router.navigateByUrl('/error-page');
+          this.router.navigateByUrl('/');
         }
         return data;
       })
@@ -99,7 +99,17 @@ export class HelperService {
     )
   }
 
-
+  putpost(uri: string, data) {
+    return this.http.post<any>(AppConfig.settings.WhiteServer + uri, data).pipe(
+      catchError(this.handleError),
+      map(data => {
+        // if (data==null) {
+        //   this.router.navigateByUrl('/error-page');
+        // }
+        return data;
+      })
+    )
+  }
   delete(uri: string, id) {
     return this.http.delete<any>(AppConfig.settings.WhiteServer + uri + "/" + id).pipe(
       catchError(this.handleError),

@@ -45,7 +45,7 @@
                                 <div class="d-flex justify-content-between mt-1 col-7 mx-auto">
                                     <ng-container *ngIf="editId != item.id; else edited">
                                         <button class="btn btn-danger waves-effect waves-float waves-light" (click)="editCategory(item)">Edit</button>
-                                        <button class="btn btn-danger waves-effect waves-float waves-light">Delete</button>
+                                        <button class="btn btn-danger waves-effect waves-float waves-light" disabled>Delete</button>
                                     </ng-container>
                                     <ng-template #edited>
                                         <button class="btn btn-danger waves-effect waves-float waves-light" (click)="editId=0">Close</button>
