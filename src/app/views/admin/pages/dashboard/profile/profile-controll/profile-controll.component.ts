@@ -118,6 +118,7 @@ export class ProfileControllComponent implements OnInit {
     this.load = true;
     this.profileService.updateProfile(data).subscribe(
       dt => {
+        sessionStorage.setItem("user", JSON.stringify(dt.Data));
         window.location.reload();
       })
   }

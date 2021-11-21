@@ -37,27 +37,32 @@
                                                 alt="Blog Post pic">
                                         </a>
                                         <div class="card-body">
-                                            <h4 class="card-title">
-                                                <a [routerLink]="['/blog/blog-detail/', {id: i.id}]"
-                                                    class="blog-title-truncate text-body-heading">
-                                                    {{i.summary}}
-                                                </a>
-                                            </h4>
+                                            <div class="row">
+                                                <h4 class="card-title col-10 clamp-2">
+                                                    <a [routerLink]="['/blog/blog-detail/', {id: i.id}]"
+                                                        class="blog-title-truncate text-body-heading">
+                                                        {{i.summary}}
+                                                    </a>
+                                                </h4>
+                                                <div class="col-2">
+                                                    <mat-slide-toggle (change)="activeBlog(i, $event)"
+                                                        [checked]="i.status == 0 ? false : true"></mat-slide-toggle>
+                                                </div>
+                                            </div>
                                             <div class="d-flex">
                                                 <div class="avatar me-50">
-                                                    <img [src]="i?.author?.avatar ? 'data:image/png;base64,' + i?.author?.avatar : 'assets/images/avatars/default-avatar.jpg'"
-                                                        alt="Avatar" width="24" height="24">
+                                                    <img [src]="i?.author?.avatar" alt="Avatar" width="24" height="24">
                                                 </div>
                                                 <div class="author-info">
                                                     <small class="text-muted me-25">by</small>
-                                                    <small><a href="#"
-                                                            class="text-body">{{i?.author?.fullName}}</a></small>
+                                                    <small><a href="#" class="text-body">{{i?.author?.fullName |
+                                                            slice:0:15}}</a></small>
                                                     <span class="text-muted ms-50 me-25">|</span>
                                                     <small class="text-muted">{{i.update_at |
                                                         date:"yyyy-MM-dd"}}</small>
                                                 </div>
                                             </div>
-                                            <p class="card-text blog-content-truncate">
+                                            <p class="card-text blog-content-truncate clamp-3">
                                                 {{i.description}}
                                             </p>
                                             <hr>
@@ -104,9 +109,7 @@
                                                         <span class="text-body fw-bold">{{i.countReport + '
                                                             Report'}}</span>
                                                     </div>
-                                                    <div class="form-check form-check-primary form-switch">
-                                                        <mat-slide-toggle (change)="activeBlog(i, $event)" [checked]="i.status == 0 ? false : true"></mat-slide-toggle>
-                                                    </div>
+
 
                                                 </a>
                                                 <button mat-button [matMenuTriggerFor]="menu">
@@ -120,78 +123,14 @@
                                                     </svg>
                                                 </button>
                                                 <mat-menu #menu="matMenu">
-                                                    <button mat-menu-item>
-                                                        <a class="nav-link"
-                                                            [routerLink]="['/blog/blog-detail/', {id: i.id}]">
-                                                            <span>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="14"
-                                                                    height="14" viewBox="0 0 24 24" fill="none"
-                                                                    stroke="currentColor" stroke-width="2"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="feather feather-eye ficon list-status"
-                                                                    style="margin-right: 10px;">
-                                                                    <path
-                                                                        d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
-                                                                    </path>
-                                                                    <circle cx="12" cy="12" r="3"></circle>
-                                                                </svg>
-                                                            </span>
-                                                            View
-                                                        </a>
+                                                    <button mat-menu-item [routerLink]="['/blog/update/', {id: i.id}]">
+                                                        Edit
                                                     </button>
-                                                    <button mat-menu-item>
-                                                        <a class="nav-link"
-                                                            [routerLink]="['/blog/update/', {id: i.id}]">
-                                                            <span>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                    style="margin-right: 10px;" height="24"
-                                                                    viewBox="0 0 24 24" fill="none"
-                                                                    stroke="currentColor" stroke-width="2"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="feather feather-edit-2">
-                                                                    <path
-                                                                        d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
-                                                                    </path>
-                                                                </svg>
-                                                            </span>
-                                                            Edit
-                                                        </a>
+                                                    <button mat-menu-item (click)="deleteProduct(i.id, id)">
+                                                        Delete
                                                     </button>
-                                                    <button mat-menu-item>
-                                                        <a class="nav-link" href="javascript:void(0)"
-                                                            (click)="deleteProduct(i.id, id)">
-                                                            <span>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="14"
-                                                                    height="14" viewBox="0 0 24 24" fill="none"
-                                                                    stroke="currentColor" stroke-width="2"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="feather feather-trash-2 ficon list-status">
-                                                                    <polyline points="3 6 5 6 21 6"></polyline>
-                                                                    <path
-                                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                                                    </path>
-                                                                    <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                                    <line x1="14" y1="11" x2="14" y2="17"></line>
-                                                                </svg>
-                                                            </span>
-                                                            Delete
-                                                        </a>
-                                                    </button>
-                                                    <button mat-menu-item>
-                                                        <a class="nav-link" routerLink="/blog/list-report/{{i.id}}">
-                                                            <span>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                    height="24" viewBox="0 0 24 24" fill="none"
-                                                                    stroke="currentColor" stroke-width="2"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="feather feather-minus-square">
-                                                                    <rect x="3" y="3" width="18" height="18" rx="2"
-                                                                        ry="2"></rect>
-                                                                    <line x1="8" y1="12" x2="16" y2="12"></line>
-                                                                </svg>
-                                                            </span>
-                                                            List Report
-                                                        </a>
+                                                    <button mat-menu-item routerLink="/blog/list-report/{{i.id}}">
+                                                        List Report
                                                     </button>
                                                 </mat-menu>
                                             </div>
