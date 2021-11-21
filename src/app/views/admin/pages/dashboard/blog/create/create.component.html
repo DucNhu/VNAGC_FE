@@ -67,7 +67,7 @@
                                                     <label class="dz-message" for="avatar">Avatar</label>
                                                     <input type="file" hidden id="avatar" accept="image/*"
                                                         (change)="updateFile($event, 1)">
-                                                    <img [src]="avatar ? 'data:image/png;base64,' + avatar : 'assets/images/avatars/default-avatar.jpg'"
+                                                    <img [src]="'data:image/png;base64,' + avatar"
                                                         *ngIf="avatar" class="img-avatar">
                                                 </div>
                                             </div>
@@ -78,7 +78,7 @@
                                                         cover</label>
                                                     <input type="file" hidden id="avatar_cover" accept="image/*"
                                                         (change)="updateFile($event, 0)">
-                                                    <img [src]="avatar_cover" alt="avatar cover" *ngIf="avatar_cover"
+                                                    <img [src]="'data:image/png;base64,' + avatar_cover" alt="avatar cover" *ngIf="avatar_cover"
                                                         class="img-avatar">
                                                 </div>
                                             </div>
