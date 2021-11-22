@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Chart } from 'chart.js';
 import { DashBoardService } from 'src/app/core/_service/admin/dashBoard.service';
 import { user } from 'src/app/models/user';
@@ -58,6 +59,7 @@ export class BaseDashboardComponent implements OnInit {
   nowDate = this.timeSelect;
   constructor(
     private dashBoardService: DashBoardService,
+    private domSanitizer: DomSanitizer
   ) {
   }
 
@@ -76,9 +78,23 @@ export class BaseDashboardComponent implements OnInit {
 
       this.Statistics = dt[0].Data;
       this.listProductRating = dt[1].Data;
+      this.listProductRating.forEach(
+        e => {
+          let img = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${e.banner_img}`);
+          e.banner_img = e.banner_img ? img : 'assets/images/avatars/default-avatar.jpg';
+        })
       this.listProductPopular = dt[2];
-      console.log(dt[2])
+      this.listProductPopular.forEach(
+        e => {
+          let img = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${e.banner_img}`);
+          e.banner_img = e.banner_img ? img : 'assets/images/avatars/default-avatar.jpg';
+        })
       this.listTopBlogView = dt[3];
+      this.listTopBlogView.forEach(
+        e => {
+          let img = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${e.banner_img}`);
+          e.banner_img = e.banner_img ? img : 'assets/images/avatars/default-avatar.jpg';
+        })
       this.setDataOrderByYear(dt[5])
 
       this.setDataBlogByYear(dt[4]);
