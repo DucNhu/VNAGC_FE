@@ -2,7 +2,7 @@
 
 <div class="content-block post-header-inheader post-sidebar-disable mb-5">
     <div class="container w-100 container-page-item-title with-bg"
-        [ngStyle]="{'background-image': 'url(' + 'data:image/png;base64,' + blog?.banner_img + ')'}">
+        [ngStyle]="{'background-image': 'url(' + 'data:image/png;base64,' + blog?.cover_img + ')'}">
         <div class="row">
             <div class="col-md-12 col-overlay">
                 <div class="container">
@@ -81,7 +81,7 @@
                                 <div class="entry-content">
                                     <h2><strong>Summary</strong></h2>
                                     <div class="avatar me-50">
-                                        <img [src]="'data:image/png;base64,' + blog?.cover_img" alt="Avatar" width="24" height="24">
+                                        <img [src]="'data:image/png;base64,' + blog?.banner_img" alt="Avatar" width="24" height="24">
                                     </div>
                                     <p class="has-medium-font-size">{{blog?.summary}}</p>
                                     <h2><strong>Description</strong></h2>
