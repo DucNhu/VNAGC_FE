@@ -7,4 +7,20 @@
     margin-bottom: 4rem !important;
 }
 
-#blogComment {background: #f8f8f8}
+#blogComment {
+    background: #f8f8f8;
+}
+
+.avatar {
+    position: relative;
+    width: 100%;
+    padding-bottom: 50%;
+    background: transparent !important;
+}
+.avatar img {
+    position: absolute;
+    width: 100%;
+    border-radius: 0%;
+    height: 100%;
+    object-fit: contain;
+}
