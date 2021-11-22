@@ -76,7 +76,8 @@ export class BaseDashboardComponent implements OnInit {
 
       this.Statistics = dt[0].Data;
       this.listProductRating = dt[1].Data;
-      this.listProductPopular = dt[2].Data;
+      this.listProductPopular = dt[2];
+      console.log(dt[2])
       this.listTopBlogView = dt[3];
       this.setDataOrderByYear(dt[5])
 
