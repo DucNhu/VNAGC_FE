@@ -1,3 +1,3 @@
 {
-  "WhiteServer": "http://192.168.20.104:8888/api/"
+  "WhiteServer": "https://localhost:44320/api/"
 }

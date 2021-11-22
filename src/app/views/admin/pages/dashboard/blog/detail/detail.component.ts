@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { BlogService } from 'src/app/core/_service/blog/blog.service';
 import { CategoryService } from 'src/app/core/_service/category/category.service';
@@ -15,7 +16,8 @@ export class DetailComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     private blogService: BlogService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private domSanitizer: DomSanitizer
   ) { }
   urlImg = this.categoryService.urlImg;
 
@@ -32,6 +34,11 @@ export class DetailComponent implements OnInit {
         this.blog.metarial = dt[1];
         this.blog.content = dt[2];
         this.blog.step = dt[3];
+        this.blog?.materials.forEach(e => {
+          let img = this.domSanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${e.banner_img}`);
+          e.banner_img = img;
+          e.banner_img = e?.banner_img?.changingThisBreaksApplicationSecurity;
+        })
         console.log(this.blog)
       }
     )
