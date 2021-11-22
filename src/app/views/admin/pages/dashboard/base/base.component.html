@@ -165,8 +165,9 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <canvas baseChart chartType="bar" [datasets]="chartData" [labels]="chartLabels" class="cursor-pointer" routerLink="/order"
-                                    [options]="chartOptions" [plugins]="" [legend]="chartLegend">
+                                <canvas baseChart chartType="bar" [datasets]="chartData" [labels]="chartLabels"
+                                    class="cursor-pointer" routerLink="/order" [options]="chartOptions" [plugins]=""
+                                    [legend]="chartLegend">
                                 </canvas>
                             </div>
                         </div>
@@ -177,7 +178,7 @@
                             <div class="card-header d-flex justify-content-between pb-0">
                                 <h4 class="card-title">Statistics by day</h4>
                                 <div class="">
-                                    <input type="date" lang="en"  #dateSelect id="fp-SelectTime"
+                                    <input type="date" lang="en" #dateSelect id="fp-SelectTime"
                                         class="form-control border-0 flatpickr-basic flatpickr-input active"
                                         (change)="fGetTopOrderByDay(dateSelect.value); fGetTopBlogByDay(dateSelect.value)"
                                         [max]="nowDate">
@@ -235,9 +236,8 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <canvas baseChart chartType="bar" [colors]="chartColors_blog"
-                                 class="cursor-pointer" routerLink="/blog/list"
-                                    [datasets]="chartData_blog" [labels]="chartLabels_blog"
+                                <canvas baseChart chartType="bar" [colors]="chartColors_blog" class="cursor-pointer"
+                                    routerLink="/blog/list" [datasets]="chartData_blog" [labels]="chartLabels_blog"
                                     [options]="chartOptions_blog" [plugins]="" [legend]="chartLegend_blog">
                                 </canvas>
                             </div>
@@ -246,7 +246,6 @@
                     <div class="col-lg-6 col-12">
                         <div class="card">
                             <div class="card mb-3">
-
                                 <div class="card-body">
                                     <div class="d-flex align-items-center mb-4">
                                         <div class="flex-grow-1">
@@ -324,91 +323,92 @@
                     </div>
 
                     <div class="col-md-6 col-12">
-                        <div class="card card-app-design">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-4">
-                                    <div class="flex-grow-1">
-                                        <h5 class="mb-1">Top product popular</h5>
+                        <div class="card">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1">
+                                            <h5 class="mb-1">List of posts with the most views</h5>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-1 cursor-pointer">
+                                        <div class="flex-grow-1">
+                                            <div>
+                                                <div class="text-dark font-weight-bold clamp-1">Avatar</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div>
+                                                <div class="text-dark font-weight-bold clamp-1">Name</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div>
+                                                <div class="text-dark font-weight-bold clamp-1">View</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div>
+                                                <div class="text-dark font-weight-bold clamp-1">Revenue</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div>
+                                                <div class="text-dark font-weight-bold clamp-1">sale</div>
+                                            </div>
+                                        </div>
+                                        <div class="ps-3 text-center">
+                                            <div class="text-dark font-weight-bold">
+                                                View
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-1 cursor-pointer"
+                                        *ngFor="let item of listProductPopular; let i = index">
+                                        <div
+                                            class="d-flex align-items-center justify-content-center me-3 width-50 height-50">
+                                            <img [src]="item.banner_img" alt="avatar"
+                                                class="ms-100 mh-100 rounded img_product">
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div>
+                                                <div class="text-dark font-weight-bold clamp-1">{{item.name}}</div>
+                                                <div class="fs-13px">{{'$: ' + item.price}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div>
+                                                <div class="text-dark font-weight-bold clamp-1">{{item.view}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div>
+                                                <div class="text-dark font-weight-bold clamp-1">{{item.revenue}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div>
+                                                <div class="text-dark font-weight-bold clamp-1">{{item.sale + '%'}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ps-3 text-center">
+                                            <div class="text-dark font-weight-bold">
+                                                <span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-eye">
+                                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                        <circle cx="12" cy="12" r="3"></circle>
+                                                    </svg>
+                                                </span>
+                                                {{item.view}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card-body p-0">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th colspan="2">Product</th>
-                                                    <th>Views</th>
-                                                    <th>Revenue</th>
-                                                    <th>Sales</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr *ngFor="let item of listProductPopular; let i = index">
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="avatar rounded">
-                                                                <div class="avatar-content">
-                                                                    <img [src]="item.banner_img" alt="Toolbar svg">
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                                <div class="fw-bolder">{{item.name}}</div>
-                                                                <div class="font-small-2 text-muted">{{'$: ' +
-                                                                    item.price}}</div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
 
-                                                    <td class="text-nowrap">
-                                                        <div class="d-flex flex-column">
-                                                            <span class="fw-bolder mb-25">{{item.view}}</span>
-                                                        </div>
-                                                    </td>
-                                                    <td>{{item.revenue}}</td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <span class="fw-bolder me-1">{{item.sale}}</span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14"
-                                                                height="14" viewBox="0 0 24 24" fill="none"
-                                                                stroke="currentColor" stroke-width="2"
-                                                                stroke-linecap="round" stroke-linejoin="round"
-                                                                class="feather feather-trending-down text-danger font-medium-1">
-                                                                <polyline points="23 18 13.5 8.5 8.5 13.5 1 6">
-                                                                </polyline>
-                                                                <polyline points="17 18 23 18 23 12"></polyline>
-                                                            </svg>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- <div class="d-flex align-items-center mb-1" *ngFor="let item of listProductPopular; let i = index"
-                                   >
-                                    <div class="d-flex align-items-center justify-content-center me-3 width-50 height-50">
-                                        <img [src]="item.banner_img" alt="avatar" class="ms-100 mh-100 rounded img_product">
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <div>
-                                            <div class="text-dark font-weight-bold clamp-1">{{item.name}}</div>
-                                            <div class="fs-13px">{{'$: ' + item.price}}</div>
-                                        </div>
-                                    </div>
-                                    <div class="ps-3 text-center">
-                                        <div class="text-dark font-weight-bold">
-                                            <span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="feather feather-eye">
-                                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                                    <circle cx="12" cy="12" r="3"></circle>
-                                                </svg>
-                                            </span>
-                                            {{item.view}}
-                                        </div>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                     </div>
