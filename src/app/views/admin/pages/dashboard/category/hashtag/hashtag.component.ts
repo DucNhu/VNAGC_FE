@@ -136,7 +136,6 @@ export class HashtagComponent implements OnInit {
       },
       err => {
         this.load = false;
-        console.log(err)
       }
     )
   }

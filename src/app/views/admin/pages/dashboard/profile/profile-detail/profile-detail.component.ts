@@ -26,7 +26,6 @@ export class ProfileDetailComponent implements OnInit {
       this.getBlogById()
     ]).then(
       dt => {
-        console.log(dt)
         this.load = false
         this.listBlog = dt[0].Data;
 

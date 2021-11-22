@@ -41,7 +41,6 @@ export class ProductService {
   }
 
   updateImgFeature(data) {
-    console.log("ImgProductFeatures/" + data.id)
     return this.helperService.put("ImgProductFeatures/" + data.id, data);
   }
 

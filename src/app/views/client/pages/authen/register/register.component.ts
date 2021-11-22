@@ -87,7 +87,6 @@ export class RegisterComponent implements OnInit {
     this.loading = true;
     this.authenservice.register(data).subscribe(
       (dt: any) => {
-        console.log(data, dt)
         this.sendMaillaAccNotActive(data, dt.Infor.Value.Id);
       },
       err => {

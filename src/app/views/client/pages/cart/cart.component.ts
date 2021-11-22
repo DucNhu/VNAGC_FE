@@ -54,7 +54,6 @@ export class CartComponent implements OnInit {
       }
       this.addToCartService.createCart(data).subscribe(
         dt => {
-          console.log(dt);
           if (index == this.listCart.length -1) {
             this.router.navigate(["checkout"])
           }

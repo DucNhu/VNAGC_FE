@@ -39,7 +39,6 @@ export class DetailComponent implements OnInit {
           e.banner_img = img;
           e.banner_img = e?.banner_img?.changingThisBreaksApplicationSecurity;
         })
-        console.log(this.blog)
       }
     )
   }

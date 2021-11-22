@@ -450,7 +450,6 @@ export class CreateBlogComponent implements OnInit {
         "order": i,
         "blog_id": this.blogId
       }
-      console.log(data)
       this.blogService.createStep(data).subscribe(
         dt => {
           this.loading = false;
@@ -473,7 +472,6 @@ export class CreateBlogComponent implements OnInit {
         "blog_id": this.blogId,
         "order": i
       }
-      console.log(data)
       this.blogService.createContent(data).subscribe(
         dt => {
           this.loading = false;

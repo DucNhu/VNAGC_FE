@@ -25,7 +25,6 @@ export class OrderManagerComponent implements OnInit {
       (dt: any) => {
         this.listOrder = dt[0].Data;
         this.load = false;
-        console.log(dt[0].Data)
       },
       err => {
         this.load = false;

@@ -27,11 +27,9 @@ export class ProfileControllComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.userId)
     this.profileService.getProfile(this.userId).subscribe(
       dt => {
         this.load = false;
-        console.log(dt)
         this.user = dt.Data[0];
         this.avatar = this.user.avatar;
         this.formInfor.patchValue({

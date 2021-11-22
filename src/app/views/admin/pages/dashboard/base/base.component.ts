@@ -154,7 +154,6 @@ export class BaseDashboardComponent implements OnInit {
       let x = index;
       ++x;
       let e = getTopBlogByYear[index];
-      console.log(e[x])
       this.datagetTopBlogByYear.push(e[x]);
     }
     this.chartData_blog[0].data = this.datagetTopBlogByYear;
@@ -192,7 +191,6 @@ export class BaseDashboardComponent implements OnInit {
     let end = 12;
     this.dashBoardService.getBlogByMonth(start, end).subscribe(
       dt => {
-        console.log(dt)
       }
     )
   }

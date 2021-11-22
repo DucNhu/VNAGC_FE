@@ -225,7 +225,6 @@ export class UpdateComponent implements OnInit {
   }
 
   setFormContent(val) {
-    console.log(val)
     val.forEach(e => {
       this.listContent().push(
         this.fb.group({
@@ -692,7 +691,6 @@ export class UpdateComponent implements OnInit {
         this.blogService.createMetarial(data).subscribe(
           dt => {
             // this.loading = false;
-            console.log(dt)
           },
           err => {
             // this.loading = false;
@@ -719,7 +717,6 @@ export class UpdateComponent implements OnInit {
       else {
         this.blogService.createStep(data).subscribe(
           dt => {
-            console.log(dt)
           },
           err => {
           }
@@ -745,7 +742,6 @@ export class UpdateComponent implements OnInit {
       else {
         this.blogService.createContent(data).subscribe(
           dt => {
-            console.log(dt)
           },
           err => {
           }
@@ -759,7 +755,6 @@ export class UpdateComponent implements OnInit {
   updatMetarial(data) {
     this.blogService.updateMetarial(data).subscribe(
       dt => {
-        console.log(dt)
       },
       err => {
       }
@@ -768,7 +763,6 @@ export class UpdateComponent implements OnInit {
   updateContent(data) {
     this.blogService.updateContent(data).subscribe(
       dt => {
-        console.log(dt)
       },
       err => {
       }

@@ -114,7 +114,6 @@ export class HelperService {
     return this.http.delete<any>(AppConfig.settings.WhiteServer + uri + "/" + id).pipe(
       catchError(this.handleError),
       map(data => {
-        console.log(data)
         // if (data==null) {
         //   this.router.navigateByUrl('/error-page');
         // }

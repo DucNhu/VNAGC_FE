@@ -59,7 +59,6 @@ export class CategoryComponent implements OnInit {
   }
   isEdit = false;
   editCategory(item) {
-    console.log(this.listCategory[item.index])
     this.isEdit = true;
     this.editId = item.id;
     this.editNameCategory = item.name
@@ -139,7 +138,6 @@ export class CategoryComponent implements OnInit {
       },
       err => {
         this.load = false;
-        console.log(err)
       }
     )
   }

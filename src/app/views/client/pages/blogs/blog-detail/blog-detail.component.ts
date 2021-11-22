@@ -25,13 +25,11 @@ export class BlogDetailComponent implements OnInit {
       this.getStep()
     ]).then(
       dt => {
-        console.log(dt)
         this.loading= false;
         this.blog=dt[0].Data;
         this.blog.metarial = dt[1];
         this.blog.content = dt[2];
         this.blog.step = dt[3];
-        console.log(this.blog)
       }
     )
   }

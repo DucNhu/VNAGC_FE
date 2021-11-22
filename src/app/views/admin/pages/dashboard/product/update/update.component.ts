@@ -122,7 +122,6 @@ export class UpdateProductComponent implements OnInit {
       "update_at": nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() ,
     }
    
-    console.log(data)
     this.loading = true;
     // if (this.checkUpdateBannr && this.upPhoto()) {
       this.productService.update(data).subscribe(

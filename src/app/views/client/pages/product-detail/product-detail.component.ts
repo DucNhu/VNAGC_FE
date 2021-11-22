@@ -70,7 +70,6 @@ export class ProductDetailComponent implements OnInit {
     ).then(
       dt => {
         this.load = false;
-        console.log(dt)
         let data = dt[0].Data;
         this.product = data;
         this.avatar = data.banner_img;
