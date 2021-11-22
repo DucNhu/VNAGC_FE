@@ -2,7 +2,7 @@
 
 <div class="content-block post-header-inheader post-sidebar-disable mb-5">
   <div class="container w-100 container-page-item-title with-bg"
-       [ngStyle]="{'background-image': 'url(' + 'data:image/png;base64,' + blog?.cover_img + ')'}">
+    [ngStyle]="{'background-image': 'url(' + 'data:image/png;base64,' + blog?.cover_img + ')'}">
     <div class="row">
       <div class="col-md-12 col-overlay">
         <div class="container">
@@ -11,8 +11,8 @@
               <div class="page-item-title-single">
                 <div class="cookandmeal-post-single cookandmeal-post">
                   <div class="post-categories">
-                    <a *ngFor="let item of blog?.hash_tags"
-                       href="javascript:void(0)" style="background-color: #e5a484;">
+                    <a *ngFor="let item of blog?.hash_tags" href="javascript:void(0)"
+                      style="background-color: #e5a484;">
                       <i class="fa fa-tag cat-dot"></i><span class="cat-title">{{item}}</span>
                     </a>
                   </div>
@@ -22,31 +22,26 @@
                     <div class="post-date">
                       <span class="entry-date published updated mr-2">
                         {{
-                                                blog?.create_at | date:"yyyy/MM/dd"
+                        blog?.create_at | date:"yyyy/MM/dd"
                         }}
                       </span>
                     </div>
                     <div class="post-read-time" *ngIf="blog?.cooking_time">
-                      <i class="fa fa-clock-o"
-                         aria-hidden="true"></i>{{blog?.cooking_time}}
+                      <i class="fa fa-clock-o" aria-hidden="true"></i>{{blog?.cooking_time}}
                     </div>
                     <div class="post-details-bottom post-details-bottom-inline">
 
                       <div class="post-info-wrapper">
                         <div class="post-info-comments">
-                          <i class="fa fa-comment-o"
-                             aria-hidden="true"></i><a href="javascript:void(0)">0</a>
+                          <i class="fa fa-comment-o" aria-hidden="true"></i><a href="javascript:void(0)">0</a>
                         </div>
 
                         <div class="post-info-views">
-                          <i class="fa fa-eye"
-                             aria-hidden="true"></i>{{blog?.view}}
+                          <i class="fa fa-eye" aria-hidden="true"></i>{{blog?.view}}
                         </div>
                         <div class="post-info-likes">
-                          <a href="javascript:void(0)"
-                             class="post-like-button" data-id="378">
-                            <i class="fa fa-heart-o"
-                               aria-hidden="true"></i>
+                          <a href="javascript:void(0)" class="post-like-button" data-id="378">
+                            <i class="fa fa-heart-o" aria-hidden="true"></i>
                           </a>
                         </div>
                       </div>
@@ -58,17 +53,13 @@
                           </div>
                           <div class="post-social-frame">
                             <div class="post-social">
-                              <a title="Share with Facebook" href="https://facebook.com/"
-                                 class="facebook-share">
+                              <a title="Share with Facebook" href="https://facebook.com/" class="facebook-share">
                                 <i class="fa fa-facebook"></i>
-                              </a><a title="Tweet this"
-                                     href="https://facebook.com/" class="twitter-share">
+                              </a><a title="Tweet this" href="https://facebook.com/" class="twitter-share">
                                 <i class="fa fa-twitter"></i>
-                              </a><a title="Share with LinkedIn" href="https://facebook.com/"
-                                     class="linkedin-share">
+                              </a><a title="Share with LinkedIn" href="https://facebook.com/" class="linkedin-share">
                                 <i class="fa fa-linkedin"></i>
-                              </a><a title="Pin this"
-                                     href="https://facebook.com/" class="pinterest-share">
+                              </a><a title="Pin this" href="https://facebook.com/" class="pinterest-share">
                                 <i class="fa fa-pinterest"></i>
                               </a>
                             </div>
@@ -92,8 +83,8 @@
       <div class="col-md-12 post-single-content">
         <div class="blog-post blog-post-single hentry clearfix">
           <article id="post-378"
-                   class="post-378 post type-post status-publish format-standard has-post-thumbnail category-pasta tag-baking tag-easy tag-food tag-recipe"
-                   role="main">
+            class="post-378 post type-post status-publish format-standard has-post-thumbnail category-pasta tag-baking tag-easy tag-food tag-recipe"
+            role="main">
             <div class="post-content-wrapper">
               <div class="post-content clearfix">
 
@@ -107,57 +98,33 @@
                   <p class="has-medium-font-size">{{blog?.description}}</p>
                   <h2><strong>Step by step</strong></h2>
                   <p>{{blog?.steps}}</p>
-                  <h2><strong>Metarial</strong></h2>
-                  <div class="ecommerce-application">
-                    <section id="ecommerce-products" class="grid-view">
-                      <div class="card ecommerce-card" *ngFor="let p of blog?.materials">
-                        <div class="item-img text-center">
-                          <a [routerLink]="['/product/update', {id: p.id}]">
-                            <img class="img-fluid card-img-top"
-                                 [src]="p.banner_img"
-                                 alt="banner" />
-                          </a>
-                        </div>
-                        <div class="card-body">
-                          <div class="item-wrapper">
-                            <div>
-                              <h6 class="item-price sale">${{p.price}} <span class="ml-3" *ngIf="p.sale || p.sale != 0">{{'Sale ' + p.sale + '%'}}</span></h6>
+                  <ng-container *ngIf="blog?.materials.length > 0">
+                    <h2><strong>Metarial</strong></h2>
+                    <div class="ecommerce-application">
+                      <section id="ecommerce-products" class="grid-view">
+                        <div class="card ecommerce-card" *ngFor="let p of blog?.materials">
+                          <div class="item-img text-center">
+                            <a [routerLink]="['/product/update', {id: p.productId}]">
+                              <img class="img-fluid card-img-top" [src]="p.banner_img" alt="banner" />
+                            </a>
+                          </div>
+                          <div class="card-body">
+                            <h6 class="item-name">
+                              <a class="text-body" [routerLink]="['/product/update', {id: p.productId}]">{{p.productName}}</a>
+                            </h6>
+                            <div class="item-wrapper">
+                              <div>
+                                <h6 class="item-price sale my-0">${{p.price}} <span class="ml-3"
+                                    *ngIf="p.sale">{{'Sale ' + p.sale
+                                    + '%'}}</span></h6>
+                              </div>
                             </div>
                           </div>
-                          <h6 class="item-name">
-                            <a class="text-body" [routerLink]="['/product/update', {id: p.id}]">{{p.name}}</a>
-                          </h6>
-                          <ul class="card-text item-list__infor">
-                            <li class="item">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye"
-                                   viewBox="0 0 16 16">
-                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
-                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
-                              </svg>
-                              {{p.view}}
-                              <span class="icon-menu__box float-end" [matMenuTriggerFor]="menu">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                     class="feather feather-more-vertical">
-                                  <circle cx="12" cy="12" r="1"></circle>
-                                  <circle cx="12" cy="5" r="1"></circle>
-                                  <circle cx="12" cy="19" r="1"></circle>
-                                </svg>
-                              </span>
-                              <mat-menu #menu="matMenu">
-                                <a mat-menu-item [routerLink]="['/product/update/', {id: p.id}]">Update</a>
-                                <button mat-menu-item (click)="deleteProduct(p.id)">Delete</button>
-                              </mat-menu>
-                            </li>
-                            <li class="item">Number of purchases: {{p.revenue}}</li>
-
-                            <li class="item">update time: {{p.update_at | date:"dd/MM/yyyy"}}</li>
-                            <li class="item">create time: {{p.create_at | date:"dd/MM/yyyy"}}</li>
-                          </ul>
                         </div>
-                      </div>
-                    </section>
-                  </div>
+                      </section>
+                    </div>
+                  </ng-container>
+
                   <h2><strong>Metarial Orther</strong></h2>
                   <ul clsas="list-style-none">
                     <li *ngFor="let item of blog?.otherMaterials">
@@ -188,7 +155,7 @@
                 </div>
 
                 <div class="cookandmeal-social-share-fixed sidebar-position-disable"
-                     style="position: absolute; bottom: auto; top: 0px; margin-top: 0px; opacity: 1;">
+                  style="position: absolute; bottom: auto; top: 0px; margin-top: 0px; opacity: 1;">
                   <div class="post-social-wrapper">
                     <div class="post-social-title">
                       <span class="post-social-title-text">Share</span>
@@ -207,13 +174,11 @@
 
                   <div class="post-info-wrapper">
                     <div class="post-info-comments">
-                      <i class="fa fa-comment-o"
-                         aria-hidden="true"></i><a href="javascript:void(0)">0</a>
+                      <i class="fa fa-comment-o" aria-hidden="true"></i><a href="javascript:void(0)">0</a>
                     </div>
 
                     <div class="post-info-views">
-                      <i class="fa fa-eye"
-                         aria-hidden="true"></i>{{blog?.view}}
+                      <i class="fa fa-eye" aria-hidden="true"></i>{{blog?.view}}
                     </div>
                   </div>
                 </div>
@@ -318,8 +283,9 @@
       <div class="card-body">
         <div class="d-flex align-items-start mb-2" *ngFor="let item of blog?.comments; let i = index">
           <div class="avatar me-75">
-            <img [src]="item.user_avatar ? 'data:image/png;base64,' + item.user_avatar : 'assets/images/avatars/default-avatar.jpg'"
-                 alt="avatar" width="38" height="38" alt="Avatar">
+            <img
+              [src]="item.user_avatar ? 'data:image/png;base64,' + item.user_avatar : 'assets/images/avatars/default-avatar.jpg'"
+              alt="avatar" width="38" height="38" alt="Avatar">
           </div>
           <div class="author-info">
             <h6 class="fw-bolder mb-25">{{item.user_name}}</h6>
